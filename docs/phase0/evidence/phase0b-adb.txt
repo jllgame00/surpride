@@ -1,0 +1,20 @@
+Phase 0B final verification after isolated rebuild (2026-11-09)
+TARGET=emulator-5554; SDK=34; MODEL=Connect on x86_64 emulator; PACKAGE=com.surpride.app
+FOREGROUND_USER=10
+APK_SHA256=7A66EA21635AEEFAD73D45CD5952371B9039404559914D557AAB0BD31BB4A2FF
+COMMAND: adb -s emulator-5554 install --user <foreground-user> -r <PROJECT>/app/build/outputs/apk/debug/app-debug.apk
+Performing Streamed Install
+Success
+COMMAND: adb -s emulator-5554 shell am start --user <foreground-user> -W -n com.surpride.app/.MainActivity
+Starting: Intent { cmp=com.surpride.app/.MainActivity }
+Status: ok
+LaunchState: COLD
+Activity: com.surpride.app/.MainActivity
+TotalTime: 403
+WaitTime: 408
+Complete
+APP_PID=5708
+topResumedActivity=ActivityRecord{6f1661a u10 com.surpride.app/.MainActivity t1000011}
+APP_FATAL_OR_ANR_MATCHES=0
+UI_TITLE_PRESENT=True
+UI_TAGLINE_PRESENT=True

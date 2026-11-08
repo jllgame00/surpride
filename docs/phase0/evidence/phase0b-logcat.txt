@@ -1,0 +1,32 @@
+--------- beginning of main
+11-08 12:31:57.706  5708  5708 I flags_health_check: ServerConfigurableFlagsReset reset_mode value: 1
+11-08 12:31:57.707  5708  5708 I flags_health_check: ServerConfigurableFlagsReset updatable crashing detected, resetting flags.
+11-08 12:40:01.907  5708  5708 I om.surpride.app: Late-enabling -Xcheck:jni
+11-08 12:40:01.920  5708  5708 I om.surpride.app: Using CollectorTypeCC GC.
+11-08 12:40:01.921  5708  5708 W om.surpride.app: Unexpected CPU variant for x86: x86_64.
+11-08 12:40:01.921  5708  5708 W om.surpride.app: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, tremont, kabylake, default
+11-08 12:40:01.953  5708  5708 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 1010175; state: ENABLED
+11-08 12:40:01.953  5708  5708 D CompatibilityChangeReporter: Compat change id reported: 242716250; UID 1010175; state: ENABLED
+11-08 12:40:01.959  5708  5708 W ziparchive: Unable to open '/data/app/~~Xbs2SaA02SZGbxIcJ-7x1w==/com.surpride.app-DUmirI4RvoWNa4ggjgqJhw==/base.dm': No such file or directory
+11-08 12:40:01.959  5708  5708 W ziparchive: Unable to open '/data/app/~~Xbs2SaA02SZGbxIcJ-7x1w==/com.surpride.app-DUmirI4RvoWNa4ggjgqJhw==/base.dm': No such file or directory
+11-08 12:40:01.991  5708  5708 D nativeloader: Configuring clns-6 for other apk /data/app/~~Xbs2SaA02SZGbxIcJ-7x1w==/com.surpride.app-DUmirI4RvoWNa4ggjgqJhw==/base.apk. target_sdk_version=37, uses_libraries=, library_path=/data/app/~~Xbs2SaA02SZGbxIcJ-7x1w==/com.surpride.app-DUmirI4RvoWNa4ggjgqJhw==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/10/com.surpride.app
+11-08 12:40:01.999  5708  5708 V GraphicsEnvironment: Currently set values for:
+11-08 12:40:01.999  5708  5708 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-08 12:40:01.999  5708  5708 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-08 12:40:01.999  5708  5708 V GraphicsEnvironment: ANGLE GameManagerService for com.surpride.app: false
+11-08 12:40:01.999  5708  5708 V GraphicsEnvironment: com.surpride.app is not listed in per-application setting
+11-08 12:40:01.999  5708  5708 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-08 12:40:02.024  5708  5762 D libEGL  : loaded /vendor/lib64/egl/libEGL_emulation.so
+11-08 12:40:02.027  5708  5762 D libEGL  : loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+11-08 12:40:02.036  5708  5762 D libEGL  : loaded /vendor/lib64/egl/libGLESv2_emulation.so
+11-08 12:40:02.047  5708  5708 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
+11-08 12:40:02.106  5708  5708 W om.surpride.app: Accessing hidden method Landroid/view/View;->computeFitSystemWindows(Landroid/graphics/Rect;Landroid/graphics/Rect;)Z (unsupported, reflection, allowed)
+11-08 12:40:02.106  5708  5708 W om.surpride.app: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (unsupported, reflection, allowed)
+11-08 12:40:02.109  5708  5708 D CompatibilityChangeReporter: Compat change id reported: 210923482; UID 1010175; state: ENABLED
+11-08 12:40:02.122  5708  5708 D CompatibilityChangeReporter: Compat change id reported: 237531167; UID 1010175; state: DISABLED
+11-08 12:40:02.123  5708  5708 W OpenGLRenderer: Unknown dataspace 0
+11-08 12:40:02.166  5708  5760 W OpenGLRenderer: Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+11-08 12:40:02.166  5708  5760 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-08 12:40:02.199  5708  5760 I Gralloc4: mapper 4.x is not supported
+11-08 12:40:02.214  5708  5760 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-08 12:40:02.244  5708  5708 D VRI[MainActivity]: Cancelling draw. cancelDueToPreDrawListener=false cancelDueToSync=true

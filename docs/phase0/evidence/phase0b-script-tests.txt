@@ -1,0 +1,9 @@
+Using project-local Gradle User Home: .gradle/codex-user-home
+PASS: root detection, local cache, optional tests, and environment restoration
+Using project-local Gradle User Home: .gradle/codex-user-home
+Gradle failed (exit 37).
+PASS: build-only mode and native failure propagation
+Using project-local Gradle User Home: .gradle/codex-user-home
+PASS: initially unset environment restoration
+Codex build setup failed: JDK not found. Set JAVA_HOME or pass -JdkHome with a compatible installed JDK.
+PASS: setup failure exit and environment restoration
