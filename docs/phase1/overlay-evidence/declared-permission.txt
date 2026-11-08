@@ -1,0 +1,2 @@
+android.permission.SYSTEM_ALERT_WINDOW
+android.permission.SYSTEM_ALERT_WINDOW: granted=false

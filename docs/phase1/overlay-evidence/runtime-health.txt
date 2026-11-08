@@ -1,0 +1,3 @@
+Available crash buffer SURPRIDE Process records=0
+Available ActivityManager buffer SURPRIDE ANR records=0
+Scope=available emulator log buffers only

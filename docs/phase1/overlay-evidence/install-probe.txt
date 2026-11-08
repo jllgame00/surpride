@@ -1,0 +1,9 @@
+Performing Streamed Install
+Success
+Starting: Intent { cmp=com.surpride.app/.overlay.OverlayPermissionProbeActivity }
+Status: ok
+LaunchState: COLD
+Activity: com.surpride.app/.overlay.OverlayPermissionProbeActivity
+TotalTime: 381
+WaitTime: 384
+Complete

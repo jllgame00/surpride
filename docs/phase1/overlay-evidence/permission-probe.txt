@@ -1,0 +1,8 @@
+SURPRIDE · Phase 1C-1 권한 진단
+Android API: 34
+TYPE_APPLICATION_OVERLAY: 2038
+SYSTEM_ALERT_WINDOW: debug Manifest 선언
+Settings.canDrawOverlays: false
+권한 설정 요청: SETTINGS_UNAVAILABLE
+오버레이 생성: 미실시 · 권한 확인 전 실험 중단
+주행 검증/목적지 비공개 성공을 뜻하지 않습니다.
