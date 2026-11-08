@@ -1,0 +1,13 @@
+Performing Streamed Install
+Success
+1 services found:
+  Service #0:
+    priority=0 preferredOrder=0 match=0x108000 specificIndex=-1 isDefault=false
+    com.surpride.navhostpoc/.MockNavigationService
+Starting: Intent { cmp=com.surpride.navhostpoc/androidx.car.app.activity.CarAppActivity }
+Status: ok
+LaunchState: COLD
+Activity: com.surpride.navhostpoc/androidx.car.app.activity.CarAppActivity
+TotalTime: 349
+WaitTime: 353
+Complete

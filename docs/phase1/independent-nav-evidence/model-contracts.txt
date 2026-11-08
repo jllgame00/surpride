@@ -1,0 +1,47 @@
+Compiled from "RoutingInfo.java"
+public final class androidx.car.app.navigation.model.RoutingInfo$Builder {
+  androidx.car.app.navigation.model.Step mCurrentStep;
+  androidx.car.app.model.Distance mCurrentDistance;
+  androidx.car.app.navigation.model.Step mNextStep;
+  androidx.car.app.model.CarIcon mJunctionImage;
+  boolean mIsLoading;
+  public androidx.car.app.navigation.model.RoutingInfo$Builder setCurrentStep(androidx.car.app.navigation.model.Step, androidx.car.app.model.Distance);
+  public androidx.car.app.navigation.model.RoutingInfo$Builder setNextStep(androidx.car.app.navigation.model.Step);
+  public androidx.car.app.navigation.model.RoutingInfo$Builder setJunctionImage(androidx.car.app.model.CarIcon);
+  public androidx.car.app.navigation.model.RoutingInfo$Builder setLoading(boolean);
+  public androidx.car.app.navigation.model.RoutingInfo build();
+  public androidx.car.app.navigation.model.RoutingInfo$Builder();
+}
+Compiled from "TravelEstimate.java"
+public final class androidx.car.app.navigation.model.TravelEstimate$Builder {
+  final androidx.car.app.model.Distance mRemainingDistance;
+  long mRemainingTimeSeconds;
+  final androidx.car.app.model.DateTimeWithZone mArrivalTimeAtDestination;
+  androidx.car.app.model.CarColor mRemainingTimeColor;
+  androidx.car.app.model.CarColor mRemainingDistanceColor;
+  androidx.car.app.model.CarText mTripText;
+  androidx.car.app.model.CarIcon mTripIcon;
+  public androidx.car.app.navigation.model.TravelEstimate$Builder(androidx.car.app.model.Distance, androidx.car.app.model.DateTimeWithZone);
+  public androidx.car.app.navigation.model.TravelEstimate$Builder(androidx.car.app.model.Distance, java.time.ZonedDateTime);
+  public androidx.car.app.navigation.model.TravelEstimate$Builder setRemainingTimeSeconds(long);
+  public androidx.car.app.navigation.model.TravelEstimate$Builder setRemainingTime(java.time.Duration);
+  public androidx.car.app.navigation.model.TravelEstimate$Builder setRemainingTimeColor(androidx.car.app.model.CarColor);
+  public androidx.car.app.navigation.model.TravelEstimate$Builder setRemainingDistanceColor(androidx.car.app.model.CarColor);
+  public androidx.car.app.navigation.model.TravelEstimate$Builder setTripText(androidx.car.app.model.CarText);
+  public androidx.car.app.navigation.model.TravelEstimate$Builder setTripIcon(androidx.car.app.model.CarIcon);
+  public androidx.car.app.navigation.model.TravelEstimate build();
+  static long validateRemainingTime(long);
+}
+Compiled from "DateTimeWithZone.java"
+public final class androidx.car.app.model.DateTimeWithZone {
+  public long getTimeSinceEpochMillis();
+  public int getZoneOffsetSeconds();
+  public java.lang.String getZoneShortName();
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public static androidx.car.app.model.DateTimeWithZone create(long, int, java.lang.String);
+  public static androidx.car.app.model.DateTimeWithZone create(long, java.util.TimeZone);
+  public static androidx.car.app.model.DateTimeWithZone create(java.time.ZonedDateTime);
+  static {};
+}

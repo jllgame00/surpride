@@ -1,0 +1,9 @@
+Performing Streamed Install
+Success
+Starting: Intent { cmp=com.surpride.navhostpoc/androidx.car.app.activity.CarAppActivity }
+Status: ok
+LaunchState: COLD
+Activity: com.surpride.navhostpoc/androidx.car.app.activity.CarAppActivity
+TotalTime: 377
+WaitTime: 386
+Complete

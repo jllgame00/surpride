@@ -1,0 +1,53 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.6.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+Reusing configuration cache.
+> Task :nav-host-poc:preBuild UP-TO-DATE
+> Task :nav-host-poc:generateDebugAssets UP-TO-DATE
+> Task :nav-host-poc:preDebugBuild UP-TO-DATE
+> Task :nav-host-poc:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :nav-host-poc:mapDebugSourceSetPaths UP-TO-DATE
+> Task :nav-host-poc:javaPreCompileDebug UP-TO-DATE
+> Task :nav-host-poc:generateDebugResources UP-TO-DATE
+> Task :nav-host-poc:writeDebugAppMetadata UP-TO-DATE
+> Task :nav-host-poc:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :nav-host-poc:validateSigningDebug UP-TO-DATE
+> Task :nav-host-poc:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :nav-host-poc:mergeDebugJniLibFolders UP-TO-DATE
+> Task :nav-host-poc:desugarDebugFileDependencies UP-TO-DATE
+> Task :nav-host-poc:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :nav-host-poc:extractDeepLinksDebug UP-TO-DATE
+> Task :nav-host-poc:packageDebugResources UP-TO-DATE
+> Task :nav-host-poc:checkDebugDuplicateClasses UP-TO-DATE
+> Task :nav-host-poc:processDebugNavigationResources UP-TO-DATE
+> Task :nav-host-poc:compileDebugNavigationResources UP-TO-DATE
+> Task :nav-host-poc:mergeDebugAssets UP-TO-DATE
+> Task :nav-host-poc:checkDebugAarMetadata UP-TO-DATE
+> Task :nav-host-poc:mergeLibDexDebug UP-TO-DATE
+> Task :nav-host-poc:parseDebugLocalResources UP-TO-DATE
+> Task :nav-host-poc:compressDebugAssets UP-TO-DATE
+> Task :nav-host-poc:generateDebugRFile UP-TO-DATE
+> Task :nav-host-poc:mergeDebugNativeLibs NO-SOURCE
+> Task :nav-host-poc:stripDebugDebugSymbols NO-SOURCE
+> Task :nav-host-poc:processDebugMainManifest UP-TO-DATE
+> Task :nav-host-poc:mergeDebugResources UP-TO-DATE
+> Task :nav-host-poc:mergeExtDexDebug UP-TO-DATE
+> Task :nav-host-poc:processDebugManifest UP-TO-DATE
+> Task :nav-host-poc:processDebugManifestForPackage UP-TO-DATE
+> Task :nav-host-poc:processDebugResources UP-TO-DATE
+
+> Task :nav-host-poc:compileDebugKotlin
+w: file:///<PROJECT>/nav-host-poc/src/main/java/com/surpride/navhostpoc/MockNavigationService.kt:81:18 'fun setHeaderAction(p0: @NonNull() Action): @NonNull() MessageTemplate.Builder' is deprecated. Deprecated in Java.
+w: file:///<PROJECT>/nav-host-poc/src/main/java/com/surpride/navhostpoc/MockNavigationService.kt:108:14 'fun setHeaderAction(p0: @NonNull() Action): @NonNull() MessageTemplate.Builder' is deprecated. Deprecated in Java.
+
+> Task :nav-host-poc:compressDebugJavaRes UP-TO-DATE
+> Task :nav-host-poc:compileDebugJavaWithJavac NO-SOURCE
+> Task :nav-host-poc:mergeDebugJavaResource UP-TO-DATE
+> Task :nav-host-poc:dexBuilderDebug
+> Task :nav-host-poc:mergeProjectDexDebug
+> Task :nav-host-poc:packageDebug
+> Task :nav-host-poc:assembleDebug
+> Task :nav-host-poc:createDebugApkListingFileRedirect UP-TO-DATE
+
+BUILD SUCCESSFUL in 14s
+34 actionable tasks: 4 executed, 30 up-to-date
+Configuration cache entry reused.

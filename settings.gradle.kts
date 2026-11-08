@@ -28,3 +28,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Surpride"
 include(":app")
+// Phase 1C-2: explicit opt-in keeps the normal SURPRIDE build unchanged.
+if (providers.gradleProperty("navHostPoc").orNull == "true") {
+    include(":nav-host-poc")
+}

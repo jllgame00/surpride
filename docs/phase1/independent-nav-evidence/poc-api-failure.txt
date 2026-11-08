@@ -1,0 +1,56 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.6.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+Calculating task graph as no cached configuration is available for tasks: :nav-host-poc:assembleDebug
+> Task :nav-host-poc:generateDebugAssets UP-TO-DATE
+> Task :nav-host-poc:preBuild UP-TO-DATE
+> Task :nav-host-poc:preDebugBuild UP-TO-DATE
+> Task :nav-host-poc:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :nav-host-poc:mapDebugSourceSetPaths
+> Task :nav-host-poc:createDebugCompatibleScreenManifests
+> Task :nav-host-poc:extractDeepLinksDebug
+> Task :nav-host-poc:desugarDebugFileDependencies
+> Task :nav-host-poc:writeDebugAppMetadata
+> Task :nav-host-poc:javaPreCompileDebug
+> Task :nav-host-poc:generateDebugResources
+> Task :nav-host-poc:writeDebugSigningConfigVersions
+> Task :nav-host-poc:mergeDebugJniLibFolders
+> Task :nav-host-poc:validateSigningDebug
+> Task :nav-host-poc:packageDebugResources
+> Task :nav-host-poc:checkDebugDuplicateClasses
+> Task :nav-host-poc:generateDebugGlobalSynthetics
+> Task :nav-host-poc:mergeLibDexDebug
+> Task :nav-host-poc:mergeDebugAssets
+> Task :nav-host-poc:processDebugNavigationResources
+> Task :nav-host-poc:mergeDebugNativeLibs NO-SOURCE
+> Task :nav-host-poc:compressDebugAssets
+> Task :nav-host-poc:stripDebugDebugSymbols NO-SOURCE
+> Task :nav-host-poc:checkDebugAarMetadata
+> Task :nav-host-poc:compileDebugNavigationResources
+> Task :nav-host-poc:parseDebugLocalResources
+> Task :nav-host-poc:generateDebugRFile
+> Task :nav-host-poc:processDebugMainManifest
+> Task :nav-host-poc:processDebugManifest
+> Task :nav-host-poc:processDebugManifestForPackage
+> Task :nav-host-poc:mergeDebugResources
+> Task :nav-host-poc:processDebugResources
+> Task :nav-host-poc:mergeExtDexDebug
+
+> Task :nav-host-poc:compileDebugKotlin FAILED
+e: file:///<PROJECT>/nav-host-poc/src/main/java/com/surpride/navhostpoc/MockNavigationService.kt:93:54 Unresolved reference 'setStep'.
+System.Management.Automation.RemoteException
+FAILURE: Build failed with an exception.
+System.Management.Automation.RemoteException
+* What went wrong:
+Execution failed for task ':nav-host-poc:compileDebugKotlin' (registered by plugin 'com.android.internal.application').
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+System.Management.Automation.RemoteException
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+System.Management.Automation.RemoteException
+BUILD FAILED in 38s
+28 actionable tasks: 28 executed
+Configuration cache entry stored.

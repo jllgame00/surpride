@@ -1,0 +1,23 @@
+[
+    {
+        "Name":  "com.surpride.app.ExampleUnitTest",
+        "Tests":  1,
+        "Failures":  0,
+        "Errors":  0,
+        "Skipped":  0
+    },
+    {
+        "Name":  "com.surpride.app.navigation.NavigationSessionTest",
+        "Tests":  13,
+        "Failures":  0,
+        "Errors":  0,
+        "Skipped":  0
+    },
+    {
+        "Name":  "com.surpride.app.vehicle.VehicleSessionTest",
+        "Tests":  14,
+        "Failures":  0,
+        "Errors":  0,
+        "Skipped":  0
+    }
+]

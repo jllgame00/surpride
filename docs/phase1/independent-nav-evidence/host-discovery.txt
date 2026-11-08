@@ -1,0 +1,6 @@
+android.software.car.templates_host=true
+Host=com.android.car.templates.host
+Version=1.0 / code 1
+Renderer action=android.car.template.host.RendererService
+User 10 installed=true, hidden=false, suspended=false
+android.car.permission.TEMPLATE_RENDERER=granted

@@ -1,0 +1,2 @@
+      androidx.car.app.ACCESS_SURFACE: granted=true
+      androidx.car.app.NAVIGATION_TEMPLATES: granted=true

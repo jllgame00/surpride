@@ -1,0 +1,4 @@
+PoC crash Process records=0
+PoC ANR records=0
+Template host crash Process records=0
+Scope=available log buffers, not long-drive validation
