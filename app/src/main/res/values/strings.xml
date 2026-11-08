@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">SURPRIDE</string>
     <string name="start_tagline">목적지는 몰라도, 가는 길은 즐겁게.</string>
+    <string name="vehicle_panel_title">개발용 차량 데이터 · 조회 전용</string>
+    <string name="vehicle_refresh">연결 / 새로고침</string>
+    <string name="vehicle_stop">구독 중지 / 연결 해제</string>
 </resources>

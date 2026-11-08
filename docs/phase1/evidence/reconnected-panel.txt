@@ -1,0 +1,23 @@
+실제 Pleos SDK · 에뮬레이터/차량 서비스
+SDK 2.3.2 · 연결: RESPONDING
+INITIALIZED는 서비스 연결 확인 아님
+구독 2 · 수신 콜백 2 · 정리 오류 0
+마지막 SDK 응답: 오후 2:07:09
+
+배터리 SOC (%): 100.0 · AVAILABLE
+Capability: READ
+
+연료 (%): — · UNSUPPORTED
+Capability: 조회 실패 · ERROR_NOT_SUPPORTED_PROPERTY
+
+누적 주행거리 (SDK 원시 단위): 0.0 · AVAILABLE
+Capability: READ
+
+주행 가능 거리: — · NOT_QUERIED
+Capability: 공개 SDK 조회 계약 미확인 · 비공개·문서 제외 API는 호출하지 않음
+
+기어: — · NOT_QUERIED
+Capability: 공개 SDK 조회 계약 미확인 · 비공개·문서 제외 API는 호출하지 않음
+
+정차 / 주행: — · NOT_QUERIED
+Capability: 공개 SDK 조회 계약 미확인 · 기어·속도 미조회: 정차/주행 판정 안 함

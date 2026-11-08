@@ -1,0 +1,12 @@
+Git start: main e8e1925e627eb24cbec51f76c7b7253fc9230a6d; tracked/untracked worktree clean
+Vehicle SDK: ai.pleos.playground:Vehicle:2.3.2 resolved from official Maven
+versionCode=74 minSdk=31 targetSdk=34
+versionName=2.3.22
+pleos.car.permission.CAR_ENERGY
+pleos.car.permission.CAR_DRIVE
+ai.pleos.playground.service.vehicle.VEHICLE_BINDING
+ai.pleos.playground.service.vehicle.VEHICLE_BINDING: granted=true
+pleos.car.permission.CAR_ENERGY: granted=true
+pleos.car.permission.CAR_DRIVE: granted=true
+Virtual Console: adb forward 8088 established, HTTP 200; browser host unavailable and native launch approval timed out; no state changes; task-created forwarding removed
+Phase0 reports, Phase0B scripts and toolchain versions preserved; no commits/push

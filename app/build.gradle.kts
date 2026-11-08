@@ -33,6 +33,7 @@ android {
 }
 
 dependencies {
+    implementation("ai.pleos.playground:Vehicle:2.3.2")
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)

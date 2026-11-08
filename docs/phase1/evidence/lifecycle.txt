@@ -1,0 +1,15 @@
+STOPPED_PANEL_UNCHANGED=True
+RECONNECTED=True
+Starting: Intent { cmp=com.surpride.app/.MainActivity }
+Warning: Activity not started, intent has been delivered to currently running top-most instance.
+Status: ok
+LaunchState: UNKNOWN (0)
+Activity: com.surpride.app/.MainActivity
+TotalTime: 0
+WaitTime: 5
+Complete
+REOPEN_INTENT_RESPONDING=True
+FATAL_OR_ANR_MATCHES=0
+SDK_REMOVE_LISTENER_LOGS=2
+SDK_RELEASE_LOGS=1
+CLEANUP_ZERO_LOGS=1

@@ -9,8 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical"
-        android:padding="32dp">
+        android:orientation="horizontal"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,5 +38,52 @@
             android:text="@string/start_tagline"
             android:textColor="@color/white"
             android:textSize="28sp" />
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/vehicle_panel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fillViewport="true"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:accessibilityHeading="true"
+                    android:text="@string/vehicle_panel_title"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/vehicle_diagnostics"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/vehicle_refresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vehicle_refresh" />
+
+                <Button
+                    android:id="@+id/vehicle_stop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vehicle_stop" />
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </FrameLayout>

@@ -1,0 +1,102 @@
+--------- beginning of main
+11-08 14:06:07.018  9353  9353 I om.surpride.app: Late-enabling -Xcheck:jni
+11-08 14:06:07.032  9353  9353 I om.surpride.app: Using CollectorTypeCC GC.
+11-08 14:06:07.034  9353  9353 W om.surpride.app: Unexpected CPU variant for x86: x86_64.
+11-08 14:06:07.034  9353  9353 W om.surpride.app: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, tremont, kabylake, default
+11-08 14:06:07.084  9353  9353 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 1010175; state: ENABLED
+11-08 14:06:07.084  9353  9353 D CompatibilityChangeReporter: Compat change id reported: 242716250; UID 1010175; state: ENABLED
+11-08 14:06:07.092  9353  9353 W ziparchive: Unable to open '/data/app/~~nSZElBURjnYT9Jm0axha5A==/com.surpride.app-rWHWBHJQOLNzV5gDeAZhGw==/base.dm': No such file or directory
+11-08 14:06:07.092  9353  9353 W ziparchive: Unable to open '/data/app/~~nSZElBURjnYT9Jm0axha5A==/com.surpride.app-rWHWBHJQOLNzV5gDeAZhGw==/base.dm': No such file or directory
+11-08 14:06:07.139  9353  9353 D nativeloader: Configuring clns-6 for other apk /data/app/~~nSZElBURjnYT9Jm0axha5A==/com.surpride.app-rWHWBHJQOLNzV5gDeAZhGw==/base.apk. target_sdk_version=37, uses_libraries=, library_path=/data/app/~~nSZElBURjnYT9Jm0axha5A==/com.surpride.app-rWHWBHJQOLNzV5gDeAZhGw==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/10/com.surpride.app
+11-08 14:06:07.144  9353  9353 V GraphicsEnvironment: Currently set values for:
+11-08 14:06:07.144  9353  9353 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-08 14:06:07.144  9353  9353 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-08 14:06:07.144  9353  9353 V GraphicsEnvironment: ANGLE GameManagerService for com.surpride.app: false
+11-08 14:06:07.144  9353  9353 V GraphicsEnvironment: com.surpride.app is not listed in per-application setting
+11-08 14:06:07.145  9353  9353 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-08 14:06:07.170  9353  9406 D libEGL  : loaded /vendor/lib64/egl/libEGL_emulation.so
+11-08 14:06:07.175  9353  9406 D libEGL  : loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+11-08 14:06:07.179  9353  9406 D libEGL  : loaded /vendor/lib64/egl/libGLESv2_emulation.so
+11-08 14:06:07.188  9353  9353 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
+11-08 14:06:07.214  9353  9353 W om.surpride.app: Accessing hidden method Landroid/view/View;->computeFitSystemWindows(Landroid/graphics/Rect;Landroid/graphics/Rect;)Z (unsupported, reflection, allowed)
+11-08 14:06:07.215  9353  9353 W om.surpride.app: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (unsupported, reflection, allowed)
+11-08 14:06:07.218  9353  9353 D CompatibilityChangeReporter: Compat change id reported: 210923482; UID 1010175; state: ENABLED
+11-08 14:06:07.224  9353  9353 D CompatibilityChangeReporter: Compat change id reported: 171228096; UID 1010175; state: ENABLED
+11-08 14:06:07.259  9353  9353 D [Pleos][SDK]Vehicle: [main]initialize
+11-08 14:06:07.259  9353  9353 D [Pleos][SDK]b: [main]connectService
+11-08 14:06:07.259  9353  9353 D [Pleos][SDK]b: [main]Service Connect Api called Intent { act=ai.pleos.playground.vehicle.VEHICLE_START cmp=ai.pleos.playground.service.vehicle/.VehicleService }
+11-08 14:06:07.267  9353  9353 I [Pleos][SDK]b: [main]getCapabilityConfig instance ai.pleos.playground.vehicle.api.implement.EvBatteryImpl@8013de9 , propId EV_BATTERY_SOC
+11-08 14:06:07.630  9353  9353 I [Pleos][SDK]b: [main]getCapabilityConfig request
+11-08 14:06:07.631  9353  9353 I [Pleos][SDK]b: [main]getCapabilityConfig instance ai.pleos.playground.vehicle.api.implement.FuelImpl@2ea4011 , propId FUEL_PERCENT
+11-08 14:06:07.702  9353  9353 I [Pleos][SDK]b: [main]getCapabilityConfig request
+11-08 14:06:07.703  9353  9353 I [Pleos][SDK]b: [main]getCapabilityConfig instance ai.pleos.playground.vehicle.api.implement.OdometerImpl@4345fe , propId PERF_ODOMETER
+11-08 14:06:07.828  9353  9353 I [Pleos][SDK]b: [main]getCapabilityConfig request
+11-08 14:06:07.832  9353  9353 D CompatibilityChangeReporter: Compat change id reported: 237531167; UID 1010175; state: DISABLED
+11-08 14:06:07.833  9353  9353 W OpenGLRenderer: Unknown dataspace 0
+11-08 14:06:07.840  9353  9353 I Choreographer: Skipped 40 frames!  The application may be doing too much work on its main thread.
+11-08 14:06:07.880  9353  9404 W OpenGLRenderer: Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+11-08 14:06:07.880  9353  9404 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-08 14:06:07.908  9353  9404 I Gralloc4: mapper 4.x is not supported
+11-08 14:06:07.922  9353  9404 E OpenGLRenderer: Unable to match the desired swap behavior.
+11-08 14:06:07.956  9353  9353 I [Pleos][SDK]b: [main]ServiceConnected call
+11-08 14:06:07.966  9353  9378 I OpenGLRenderer: Davey! duration=795ms; Flags=1, FrameTimelineVsyncId=11226359, IntendedVsync=8115161218771, Vsync=8115827885411, InputEventId=0, HandleInputStart=8115840705004, AnimationStart=8115840707555, PerformTraversalsStart=8115840823806, DrawStart=8115922510990, FrameDeadline=8115177885437, FrameInterval=8115840472684, FrameStartTime=16666666, SyncQueued=8115934479093, SyncStart=8115939978085, IssueDrawCommandsStart=8115940531904, SwapBuffers=8115953708970, FrameCompleted=8115962475896, DequeueBufferDuration=5405, QueueBufferDuration=192911, GpuCompleted=8115962475896, SwapBuffersCompleted=8115955797056, DisplayPresentTime=0, CommandSubmissionCompleted=8115953708970, 
+11-08 14:06:08.064  9353  9378 I [Pleos][SDK]b: [binder:9353_2]getCapabilityConfig propId EV_BATTERY_SOC
+11-08 14:06:08.068  9353  9378 I [Pleos][SDK]b: [binder:9353_2]getCapabilityConfig propId FUEL_PERCENT
+11-08 14:06:08.069  9353  9378 I [Pleos][SDK]b: [binder:9353_2]getCapabilityConfig propId PERF_ODOMETER
+11-08 14:06:08.090  9353  9353 D [Pleos][SDK]a: [main]hasPropertyIdCount : 0
+11-08 14:06:08.090  9353  9353 D [Pleos][SDK]a: [main]addListener: com.surpride.app.vehicle.PleosReadClient$subscribe$listener$1@63c362a
+11-08 14:06:08.090  9353  9353 D [Pleos][SDK]a: [main]hasPropertyIdCount : 0
+11-08 14:06:08.090  9353  9353 D [Pleos][SDK]a: [main]saveRequest() called with: propIdName = EV_BATTERY_SOC, areaType = 0
+11-08 14:06:08.099  9353  9353 D [Pleos][SDK]a: [main]hasPropertyIdCount : 0
+11-08 14:06:08.099  9353  9353 D [Pleos][SDK]a: [main]addListener: com.surpride.app.vehicle.PleosReadClient$subscribe$listener$3@ea00c1b
+11-08 14:06:08.100  9353  9353 D [Pleos][SDK]a: [main]hasPropertyIdCount : 0
+11-08 14:06:08.100  9353  9353 D [Pleos][SDK]a: [main]saveRequest() called with: propIdName = PERF_ODOMETER, areaType = 0
+11-08 14:06:08.115  9353  9563 D [Pleos][SDK]a: [binder:9353_4]onChangeEvent() called with: propIdName = EV_BATTERY_SOC, areaId = 0, value = 100
+11-08 14:06:08.121  9353  9378 D [Pleos][SDK]a: [binder:9353_2]onChangeEvent() called with: propIdName = EV_BATTERY_SOC, areaId = 0, value = 100
+11-08 14:06:08.121  9353  9563 I [Pleos][SDK]b: [binder:9353_4]getProperty_onResult eventPropKey EV_BATTERY_SOC eventAreaId 0 eventValue 100
+11-08 14:06:08.123  9353  9563 D [Pleos][SDK]a: [binder:9353_4]onChangeEvent() called with: propIdName = PERF_ODOMETER, areaId = 0, value = 0.0
+11-08 14:06:08.129  9353  9563 D [Pleos][SDK]a: [binder:9353_4]onChangeEvent() called with: propIdName = PERF_ODOMETER, areaId = 0, value = 0.0
+11-08 14:06:08.140  9353  9563 I [Pleos][SDK]b: [binder:9353_4]getProperty_onResult eventPropKey PERF_ODOMETER eventAreaId 0 eventValue 0.0
+11-08 14:06:09.450  9353  9404 D EGL_emulation: app_time_stats: avg=96.16ms min=1.02ms max=1269.95ms count=14
+11-08 14:06:10.755  9353  9353 D [Pleos][SDK]a: [main]removeListener: com.surpride.app.vehicle.PleosReadClient$subscribe$listener$1@63c362a
+11-08 14:06:10.755  9353  9353 D [Pleos][SDK]a: [main]hasPropertyIdCount : 0
+11-08 14:06:10.755  9353  9353 D [Pleos][SDK]a: [main]removeRequest() called with: propIdName = EV_BATTERY_SOC, areaType = 0
+11-08 14:06:10.757  9353  9404 D EGL_emulation: app_time_stats: avg=76.85ms min=13.90ms max=1042.17ms count=17
+11-08 14:06:10.758  9353  9353 D [Pleos][SDK]a: [main]removeListener: com.surpride.app.vehicle.PleosReadClient$subscribe$listener$3@ea00c1b
+11-08 14:06:10.758  9353  9353 D [Pleos][SDK]a: [main]hasPropertyIdCount : 0
+11-08 14:06:10.758  9353  9353 D [Pleos][SDK]a: [main]removeRequest() called with: propIdName = PERF_ODOMETER, areaType = 0
+11-08 14:06:10.758  9353  9353 D [Pleos][SDK]Vehicle: [main]release
+11-08 14:06:10.758  9353  9353 D [Pleos][SDK]b: [main]disconnectService --> clear
+11-08 14:06:10.758  9353  9353 D [Pleos][SDK]b: [main]disconnectService() called with: service = ai.pleos.playground.vehicle.IVehicleService$Stub$Proxy@7a94ef7
+11-08 14:06:10.758  9353  9353 D [Pleos][SDK]a: [main]clearAllListeners() called
+11-08 14:06:10.768  9353  9353 I SurprideVehicle: STOPPED subscriptions=0 cleanupErrors=0
+11-08 14:06:13.174  9353 10577 D ProfileInstaller: Installing profile for com.surpride.app
+11-08 14:07:09.550  9353  9404 D EGL_emulation: app_time_stats: avg=1109.18ms min=10.28ms max=57934.24ms count=53
+11-08 14:07:09.552  9353  9353 D [Pleos][SDK]Vehicle: [main]initialize
+11-08 14:07:09.552  9353  9353 D [Pleos][SDK]b: [main]connectService
+11-08 14:07:09.552  9353  9353 D [Pleos][SDK]b: [main]Service Connect Api called Intent { act=ai.pleos.playground.vehicle.VEHICLE_START cmp=ai.pleos.playground.service.vehicle/.VehicleService }
+11-08 14:07:09.561  9353  9353 I [Pleos][SDK]b: [main]getCapabilityConfig instance ai.pleos.playground.vehicle.api.implement.EvBatteryImpl@9f525ef , propId EV_BATTERY_SOC
+11-08 14:07:09.561  9353  9353 I [Pleos][SDK]b: [main]getCapabilityConfig request
+11-08 14:07:09.564  9353  9353 I [Pleos][SDK]b: [main]getCapabilityConfig instance ai.pleos.playground.vehicle.api.implement.FuelImpl@4ca28fc , propId FUEL_PERCENT
+11-08 14:07:09.564  9353  9353 I [Pleos][SDK]b: [main]getCapabilityConfig request
+11-08 14:07:09.567  9353  9353 I [Pleos][SDK]b: [main]getCapabilityConfig instance ai.pleos.playground.vehicle.api.implement.OdometerImpl@1786b85 , propId PERF_ODOMETER
+11-08 14:07:09.568  9353  9353 I [Pleos][SDK]b: [main]getCapabilityConfig request
+11-08 14:07:09.576  9353  9353 I [Pleos][SDK]b: [main]ServiceConnected call
+11-08 14:07:09.620  9353  9578 I [Pleos][SDK]b: [binder:9353_5]getCapabilityConfig propId EV_BATTERY_SOC
+11-08 14:07:09.620  9353  9578 I [Pleos][SDK]b: [binder:9353_5]getCapabilityConfig propId FUEL_PERCENT
+11-08 14:07:09.620  9353  9578 I [Pleos][SDK]b: [binder:9353_5]getCapabilityConfig propId PERF_ODOMETER
+11-08 14:07:09.638  9353  9353 D [Pleos][SDK]a: [main]hasPropertyIdCount : 0
+11-08 14:07:09.638  9353  9353 D [Pleos][SDK]a: [main]addListener: com.surpride.app.vehicle.PleosReadClient$subscribe$listener$1@ed8e8
+11-08 14:07:09.638  9353  9353 D [Pleos][SDK]a: [main]hasPropertyIdCount : 0
+11-08 14:07:09.638  9353  9353 D [Pleos][SDK]a: [main]saveRequest() called with: propIdName = EV_BATTERY_SOC, areaType = 0
+11-08 14:07:09.649  9353  9353 D [Pleos][SDK]a: [main]hasPropertyIdCount : 0
+11-08 14:07:09.649  9353  9353 D [Pleos][SDK]a: [main]addListener: com.surpride.app.vehicle.PleosReadClient$subscribe$listener$3@7d93b01
+11-08 14:07:09.649  9353  9353 D [Pleos][SDK]a: [main]hasPropertyIdCount : 0
+11-08 14:07:09.649  9353  9353 D [Pleos][SDK]a: [main]saveRequest() called with: propIdName = PERF_ODOMETER, areaType = 0
+11-08 14:07:09.653  9353  9377 D [Pleos][SDK]a: [binder:9353_1]onChangeEvent() called with: propIdName = EV_BATTERY_SOC, areaId = 0, value = 100
+11-08 14:07:09.657  9353  9377 I [Pleos][SDK]b: [binder:9353_1]getProperty_onResult eventPropKey EV_BATTERY_SOC eventAreaId 0 eventValue 100
+11-08 14:07:09.659  9353  9377 I [Pleos][SDK]b: [binder:9353_1]getProperty_onResult eventPropKey PERF_ODOMETER eventAreaId 0 eventValue 0.0
+11-08 14:07:09.671  9353  9578 D [Pleos][SDK]a: [binder:9353_5]onChangeEvent() called with: propIdName = PERF_ODOMETER, areaId = 0, value = 0.0
+11-08 14:07:11.784  9353  9404 D EGL_emulation: app_time_stats: avg=42.05ms min=10.54ms max=1369.66ms count=53
+11-08 14:07:13.003  9353  9563 D [Pleos][SDK]a: [binder:9353_4]onChangeEvent() called with: propIdName = PERF_ODOMETER, areaId = 0, value = 0.0
+11-08 14:07:13.031  9353  9404 D EGL_emulation: app_time_stats: avg=178.06ms min=15.05ms max=1148.63ms count=7

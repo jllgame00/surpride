@@ -1,0 +1,25 @@
+Compiled from "SourceFile"
+public interface ai.pleos.playground.vehicle.listener.EvBatteryStateOfChargeListener extends ai.pleos.playground.vehicle.listener.VehicleListener {
+  public abstract void onEvBatteryStateOfChargeUpdated(java.lang.Integer);
+}
+Compiled from "SourceFile"
+public interface ai.pleos.playground.vehicle.listener.FuelPercentListener extends ai.pleos.playground.vehicle.listener.VehicleListener {
+  public abstract void onFuelPercentUpdated(java.lang.Integer);
+}
+Compiled from "SourceFile"
+public interface ai.pleos.playground.vehicle.listener.DistanceDrivenListener extends ai.pleos.playground.vehicle.listener.VehicleListener {
+  public abstract void onDistanceDrivenUpdated(java.lang.Float);
+}
+Compiled from "SourceFile"
+public final class ai.pleos.playground.vehicle.api.model.capability.AccessType extends java.lang.Enum<ai.pleos.playground.vehicle.api.model.capability.AccessType> {
+  public static final ai.pleos.playground.vehicle.api.model.capability.AccessType$Companion Companion;
+  public static final ai.pleos.playground.vehicle.api.model.capability.AccessType NONE;
+  public static final ai.pleos.playground.vehicle.api.model.capability.AccessType READ;
+  public static final ai.pleos.playground.vehicle.api.model.capability.AccessType WRITE;
+  public static final ai.pleos.playground.vehicle.api.model.capability.AccessType READ_WRITE;
+  public static ai.pleos.playground.vehicle.api.model.capability.AccessType[] values();
+  public static ai.pleos.playground.vehicle.api.model.capability.AccessType valueOf(java.lang.String);
+  public static kotlin.enums.EnumEntries<ai.pleos.playground.vehicle.api.model.capability.AccessType> getEntries();
+  static {};
+  public final int getId$Vehicle_release();
+}

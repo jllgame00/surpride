@@ -1,0 +1,15 @@
+Phase 1A final APK validation
+TARGET=emulator-5554 USER=10 API=34 PACKAGE=com.surpride.app
+Performing Streamed Install
+Success
+Starting: Intent { cmp=com.surpride.app/.MainActivity }
+Status: ok
+LaunchState: COLD
+Activity: com.surpride.app/.MainActivity
+TotalTime: 1000
+WaitTime: 1009
+Complete
+APK_SHA256=0CB84FE263CA31449310D6181A5FF975EAD7D4404C58102F874DF45098C224E7
+PID=9353
+FATAL_OR_ANR_MATCHES=0
+STOPPED subscriptions=0 confirmed in diagnostic panel

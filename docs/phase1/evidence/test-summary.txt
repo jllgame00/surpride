@@ -1,0 +1,2 @@
+com.surpride.app.ExampleUnitTest: tests=1, failures=0, errors=0, skipped=0
+com.surpride.app.vehicle.VehicleSessionTest: tests=14, failures=0, errors=0, skipped=0
