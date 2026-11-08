@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+    useLibrary("android.car", false)
     namespace = "com.surpride.app"
     compileSdk {
         version = release(37)

@@ -1,0 +1,8 @@
+DEMO history count before restart=3
+DEMO history count after restart=3
+Mood map restored=True
+Early reveal record distinguished=True
+READY/DEMO/ARRIVED pre-reveal sample name check=hidden
+Candidate failure/editable setup=verified
+Cancel/editable setup=verified
+Early reveal/no simulated arrival=verified

@@ -43,6 +43,9 @@ class MainActivity : AppCompatActivity() {
             windowInsets
         }
         ViewCompat.requestApplyInsets(root)
+        findViewById<View>(R.id.experience_start).setOnClickListener {
+            startActivity(android.content.Intent(this, com.surpride.app.experience.ExperienceActivity::class.java))
+        }
 
         if (diagnosticsEnabled) {
             findViewById<View>(R.id.vehicle_panel).visibility = View.VISIBLE

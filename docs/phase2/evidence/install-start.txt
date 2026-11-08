@@ -1,0 +1,9 @@
+Performing Streamed Install
+Success
+Starting: Intent { cmp=com.surpride.app/.MainActivity }
+Status: ok
+LaunchState: COLD
+Activity: com.surpride.app/.MainActivity
+TotalTime: 1161
+WaitTime: 1168
+Complete

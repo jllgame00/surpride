@@ -1,0 +1,39 @@
+실제 Pleos SDK · 에뮬레이터/차량 서비스
+SDK 2.3.2 · 연결: RESPONDING
+INITIALIZED는 서비스 연결 확인 아님
+구독 2 · 수신 콜백 2 · 정리 오류 0
+마지막 SDK 응답: 오후 3:39:19
+
+배터리 SOC (%): 100.0 · AVAILABLE
+Capability: READ
+
+연료 (%): — · UNSUPPORTED
+Capability: 조회 실패 · ERROR_NOT_SUPPORTED_PROPERTY
+
+누적 주행거리 (SDK 원시 단위): 0.0 · AVAILABLE
+Capability: READ
+
+주행 가능 거리: — · NOT_QUERIED
+Capability: 공개 SDK 조회 계약 미확인 · 비공개·문서 제외 API는 호출하지 않음
+
+기어: — · NOT_QUERIED
+Capability: 공개 SDK 조회 계약 미확인 · 비공개·문서 제외 API는 호출하지 않음
+
+정차 / 주행: — · NOT_QUERIED
+Capability: 공개 SDK 조회 계약 미확인 · 기어·속도 미조회: 정차/주행 판정 안 함
+
+
+실제 Pleos NaviHelper 3.0.5
+연결: CONNECTED · 리스너 1
+경로: SAFE_GUIDING · 활성 false · 탐색 중 false
+약관 응답: true
+요청 단계: IDLE
+이 세션 테스트 요청: false
+테스트 목적지 일치: 미확인
+남은 시간/거리 (SDK 원시값): 미수신 / 미수신
+TBT 항목 수: 미수신
+최근 이력의 테스트 목적지: 미조회
+비공개 판정: UNVERIFIED · 외부 채널 별도 검증
+오류: 없음 · 정리 오류 0
+이벤트: ROUTE_STATE
+CONNECTED → ROUTE_STATE

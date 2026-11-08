@@ -1,0 +1,7 @@
+Starting: Intent { cmp=com.surpride.app/.MainActivity }
+Status: ok
+LaunchState: COLD
+Activity: com.surpride.app/.MainActivity
+TotalTime: 1121
+WaitTime: 1129
+Complete
