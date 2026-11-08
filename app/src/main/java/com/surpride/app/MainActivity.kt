@@ -18,10 +18,16 @@ import com.surpride.app.vehicle.VehicleState
 import java.text.DateFormat
 import java.util.Date
 import java.util.Locale
+import com.surpride.app.navigation.NavigationConnection
+import com.surpride.app.navigation.NavigationDataSource
+import com.surpride.app.navigation.NavigationOrigin
+import com.surpride.app.navigation.NavigationState
+import com.surpride.app.navigation.PleosNavigationDataSource
 
 /** Startup identity is preserved; the live vehicle diagnostic panel is debug-only. */
 class MainActivity : AppCompatActivity() {
     private var vehicleSource: VehicleDataSource? = null
+    private var navigationSource: NavigationDataSource? = null
     private val diagnosticsEnabled get() = applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +53,19 @@ class MainActivity : AppCompatActivity() {
                 } else source.refresh()
             }
             findViewById<View>(R.id.vehicle_stop).setOnClickListener { stopVehicle() }
+            findViewById<View>(R.id.navigation_panel).visibility = View.VISIBLE
+            navigationSource = PleosNavigationDataSource(applicationContext).also { it.start(::renderNavigation) }
+            findViewById<View>(R.id.navigation_refresh).setOnClickListener {
+                navigationSource?.let { source ->
+                    if (source.state.connection == NavigationConnection.DISCONNECTED || source.state.connection == NavigationConnection.FAILED) source.start(::renderNavigation)
+                    else source.refresh()
+                }
+            }
+            findViewById<View>(R.id.navigation_request).setOnClickListener { navigationSource?.requestTestRoute() }
+            findViewById<View>(R.id.navigation_cancel).setOnClickListener { navigationSource?.cancelTestRoute() }
+            findViewById<View>(R.id.navigation_show).setOnClickListener { navigationSource?.showNavigation() }
+            findViewById<View>(R.id.navigation_history).setOnClickListener { navigationSource?.queryHistory() }
+            findViewById<View>(R.id.navigation_stop).setOnClickListener { navigationSource?.stop() }
         }
     }
 
@@ -61,6 +80,31 @@ class MainActivity : AppCompatActivity() {
         stopVehicle()
         vehicleSource = null
         super.onStop()
+    }
+
+    override fun onDestroy() {
+        navigationSource?.stop() // Release listeners only; never implicitly cancel a route.
+        navigationSource = null
+        super.onDestroy()
+    }
+
+    private fun renderNavigation(state: NavigationState) {
+        findViewById<TextView>(R.id.navigation_diagnostics).text = buildString {
+            appendLine(if (state.origin == NavigationOrigin.PLEOS_SERVICE) "실제 Pleos NaviHelper 3.0.5" else "MOCK · 테스트 데이터")
+            appendLine("연결: ${state.connection} · 리스너 ${state.listenerCount}")
+            appendLine("경로: ${state.sdkMode} · 활성 ${state.routeActive ?: "미확인"} · 탐색 중 ${state.routeBusy}")
+            appendLine("약관 응답: ${state.termsAgreed ?: "미확인"}")
+            appendLine("요청 단계: ${state.stage}")
+            appendLine("이 세션 테스트 요청: ${state.ownsTestRequest}")
+            appendLine("테스트 목적지 일치: ${state.destinationMatchesTest ?: "미확인"}")
+            appendLine("남은 시간/거리 (SDK 원시값): ${state.remainTimeRaw ?: "미수신"} / ${state.remainDistanceRaw ?: "미수신"}")
+            appendLine("TBT 항목 수: ${state.turnCount ?: "미수신"}")
+            appendLine("최근 이력의 테스트 목적지: ${state.historyContainsTest ?: "미조회"}")
+            appendLine("비공개 판정: ${state.privacy} · 외부 채널 별도 검증")
+            appendLine("오류: ${state.error?.code ?: "없음"} · 정리 오류 ${state.cleanupErrors}")
+            appendLine("이벤트: ${state.lastEvent}")
+            append(state.recentEvents.joinToString(" → "))
+        }
     }
 
     private fun stopVehicle() {

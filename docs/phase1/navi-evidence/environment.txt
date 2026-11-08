@@ -1,0 +1,8 @@
+﻿Target=emulator-5554 / foreground user 10 / API 34 / Pleos Connect v2.1.0
+Model=Connect on x86_64 emulator
+Navi service:
+versionCode=55 minSdk=31 targetSdk=34
+versionName=3.0.4
+OEM Navigation:
+versionCode=1 minSdk=31 targetSdk=35
+versionName=3.3.2-rc5-hotfix.3

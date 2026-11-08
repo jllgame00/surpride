@@ -1,0 +1,3 @@
+      pleos.car.permission.NAVI_ROUTE_SEARCH: granted=true
+      pleos.car.permission.NAVI_CUSTOM_MAP: granted=true
+      pleos.car.permission.NAVI_ROUTE: granted=true

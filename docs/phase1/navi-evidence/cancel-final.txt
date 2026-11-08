@@ -1,0 +1,14 @@
+실제 Pleos NaviHelper 3.0.5
+연결: CONNECTED · 리스너 1
+경로: SAFE_GUIDING · 활성 false · 탐색 중 false
+약관 응답: true
+요청 단계: IDLE
+이 세션 테스트 요청: false
+테스트 목적지 일치: false
+남은 시간/거리 (SDK 원시값): 0 / 0
+TBT 항목 수: 0
+최근 이력의 테스트 목적지: 미조회
+비공개 판정: UNVERIFIED · 외부 채널 별도 검증
+오류: 없음 · 정리 오류 0
+이벤트: TBT_INFO_REDACTED
+DESTINATION_INFO_REDACTED → CANCEL_API_CALL → ROUTE_STATE → TBT_INFO_REDACTED → ROUTE_CANCELLED → NAVIGATION_STATUS_FREE_DRIVE → DESTINATION_INFO_REDACTED → TBT_INFO_REDACTED → ROUTE_STATE → TBT_INFO_REDACTED
