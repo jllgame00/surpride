@@ -1,0 +1,21 @@
+.\gradlew.bat : Exception in thread "main" java.io.FileNotFoundException: C:\Users\surlw\.gradle\wrapper\dists\gradle-9
+.6.0-bin\42k10rwplmzkhuboz9kdazi7s\gradle-9.6.0-bin.zip.lck (�׼����� �źεǾ����ϴ�)
+위치 줄:2 문자:138
++ ... tudio/jbr'; .\gradlew.bat help :app:assembleDebug :app:testDebugUnitT ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Exception in th...��� �źεǾ����ϴ�):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+	at java.base/java.io.IoOverNioFileSystem.convertNioToIoExceptionInStreams(Unknown Source)
+	at java.base/java.io.IoOverNioFileSystem.initializeStreamsUsingNio0(Unknown Source)
+	at java.base/java.io.IoOverNioFileSystem.initializeStreamUsingNio(Unknown Source)
+	at java.base/java.io.RandomAccessFile.<init>(Unknown Source)
+	at java.base/java.io.RandomAccessFile.<init>(Unknown Source)
+	at org.gradle.wrapper.GradleWrapperMain.main(SourceFile:67)
+Caused by: java.nio.file.AccessDeniedException: C:\Users\surlw\.gradle\wrapper\dists\gradle-9.6.0-bin\42k10rwplmzkhuboz
+9kdazi7s\gradle-9.6.0-bin.zip.lck
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.newFileChannel(Unknown Source)
+	... 5 more

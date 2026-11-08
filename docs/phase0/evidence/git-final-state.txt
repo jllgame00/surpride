@@ -1,0 +1,31 @@
+Phase 0 final Git state (2026-11-09)
+Branch:
+main
+HEAD:
+68c808f12fa9682c09886b60620ae2a23fb949ef
+Status:
+ M app/src/main/AndroidManifest.xml
+ M app/src/main/res/values-night/themes.xml
+ M app/src/main/res/values/strings.xml
+ M app/src/main/res/values/themes.xml
+?? .idea/.name
+?? .idea/AndroidProjectSystem.xml
+?? .idea/codeStyles/Project.xml
+?? .idea/codeStyles/codeStyleConfig.xml
+?? .idea/compiler.xml
+?? .idea/deploymentTargetSelector.xml
+?? .idea/deviceManager.xml
+?? .idea/gradle.xml
+?? .idea/misc.xml
+?? .idea/runConfigurations.xml
+?? .idea/vcs.xml
+?? app/src/main/java/com/surpride/app/MainActivity.kt
+?? app/src/main/res/layout/activity_main.xml
+?? app/src/main/res/values/start_colors.xml
+?? docs/phase0/REPORT.md
+?? docs/phase0/evidence/adb-checks.txt
+?? docs/phase0/evidence/gradle-build.txt
+?? docs/phase0/evidence/sdk-repository-checks.txt
+?? docs/phase0/evidence/sdk-runtime-packages.txt
+?? docs/phase0/evidence/static-checks.txt
+?? docs/superpowers/plans/2026-11-09-phase0.md

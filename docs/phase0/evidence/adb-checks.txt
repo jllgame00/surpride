@@ -1,0 +1,39 @@
+Phase 0 ADB evidence (2026-11-09), fresh read-only checks after source edits.
+COMMAND: adb devices -l
+List of devices attached
+emulator-5554          device product:crp_avd model:Connect_on_x86_64_emulator device:crp_avd_x86_64 transport_id:1
+
+EXIT: 0
+COMMAND: adb -s emulator-5554 shell getprop ro.build.version.sdk
+34
+EXIT: 0
+COMMAND: adb -s emulator-5554 shell am get-current-user
+10
+EXIT: 0
+COMMAND: adb -s emulator-5554 shell pm path --user 10 com.surpride.app
+package:/data/app/~~icLW2aOiTRNcYPyY2Qkvsw==/com.surpride.app-1oAwOJeIMAmLN3xY9ZaTVQ==/base.apk
+EXIT: 0
+COMMAND: adb -s emulator-5554 shell cmd package resolve-activity --brief --user 10 -a android.intent.action.MAIN -c android.intent.category.LAUNCHER com.surpride.app
+No activity found
+EXIT: 0
+COMMAND: adb -s emulator-5554 shell am start --user 10 -W -n com.surpride.app/.MainActivity
+Starting: Intent { cmp=com.surpride.app/.MainActivity }
+Error type 3
+Error: Activity class {com.surpride.app/com.surpride.app.MainActivity} does not exist.
+EXIT: 0
+COMMAND: adb -s emulator-5554 shell pidof com.surpride.app
+EXIT: 1
+COMMAND: adb -s emulator-5554 shell pm list features (filtered)
+feature:android.hardware.type.automotive
+COMMAND: adb -s emulator-5554 shell dumpsys package com.surpride.app (filtered)
+    versionCode=1 minSdk=28 targetSdk=37
+    versionName=1.0
+    lastUpdateTime=2026-11-08 11:54:39
+    User 0: ceDataInode=0 installed=false hidden=false suspended=false distractionFlags=0 stopped=true notLaunched=true enabled=0 instant=false virtual=false
+    User 10: ceDataInode=499852 installed=true hidden=false suspended=false distractionFlags=0 stopped=true notLaunched=true enabled=0 instant=false virtual=false
+    User 0:
+    User 10:
+Earlier actual install command: adb -s emulator-5554 install -r app/build/outputs/apk/debug/app-debug.apk
+Captured failure excerpt: adb.exe: failed to stat app/build/outputs/apk/debug/app-debug.apk: No such file or directory
+COMMAND: adb -s emulator-5554 logcat -b crash -d -t 150 (package-specific matches only)
+No package-specific match; no running app, so this is NOT a crash-free result.

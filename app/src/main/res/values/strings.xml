@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Surpride</string>
+    <string name="app_name" translatable="false">SURPRIDE</string>
+    <string name="start_tagline">목적지는 몰라도, 가는 길은 즐겁게.</string>
 </resources>

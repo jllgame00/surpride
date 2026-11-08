@@ -1,15 +1,49 @@
+
+# ==========================================
+# SURPRIDE - Android Automotive / Pleos
+# ==========================================
+
+# Android Studio / IntelliJ IDEA
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+
+# Gradle / Kotlin Cache
+.gradle/
+.kotlin/
+**/build/
+
+# Local SDK Configuration
 local.properties
+
+# Android Build Outputs
+*.apk
+*.aab
+output-metadata.json
+captures/
+
+# Native Build
+.externalNativeBuild/
+.cxx/
+
+# Logs / Temporary Files
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+
+# Signing Keys / Credentials
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+google-services.json
+
+# Environment Secrets
+.env
+.env.*
+!.env.example
+
+# Local IDE / Testing Artifacts
+*.hprof

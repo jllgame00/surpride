@@ -1,0 +1,6 @@
+PASS: 13 source XML files parse
+PASS: exported MAIN/LAUNCHER MainActivity
+PASS: Automotive required
+PASS: touchscreen optional
+PASS: exact startup text
+NOTE: source checks do not verify Android compilation, manifest merging, or rendering.

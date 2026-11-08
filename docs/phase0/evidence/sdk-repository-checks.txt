@@ -1,0 +1,3 @@
+https://nexus-playground.pleos.ai/repository/maven-releases/ai/pleos/playground/Vehicle/2.3.2/Vehicle-2.3.2.pom : 기본 연결이 닫혔습니다. 받기에서 예기치 않은 오류가 발생했습니다.
+https://nexus-playground.pleos.ai/repository/maven-releases/ai/pleos/playground/Vehicle/2.3.1/Vehicle-2.3.1.pom : 기본 연결이 닫혔습니다. 받기에서 예기치 않은 오류가 발생했습니다.
+https://nexus-playground.pleos.ai/repository/maven-releases/ai/pleos/playground/NaviHelper/3.0.5/NaviHelper-3.0.5.pom : 기본 연결이 닫혔습니다. 받기에서 예기치 않은 오류가 발생했습니다.

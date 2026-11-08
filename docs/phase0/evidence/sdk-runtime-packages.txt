@@ -1,0 +1,35 @@
+
+package:ai.pleos.playground.service.location.fused
+package:ai.pleos.playground.service.navi
+package:ai.umos.vehiclecontrol
+package:ai.pleos.gleoai.model.provider
+package:ai.pleos.hardware.vehicle.emulator
+package:ai.pleos.playground.service.vehicle
+package:com.android.location.fused
+package:ai.umos.maps.android.navigation.app
+
+
+PACKAGE: ai.pleos.playground.service.vehicle
+
+    versionCode=74 minSdk=31 targetSdk=34
+    versionName=2.3.22
+
+
+PACKAGE: ai.pleos.playground.service.navi
+
+    versionCode=55 minSdk=31 targetSdk=34
+    versionName=3.0.4
+
+
+PACKAGE: ai.pleos.playground.service.location.fused
+
+    versionCode=6 minSdk=31 targetSdk=34
+    versionName=1.0.0
+
+
+PACKAGE: ai.umos.maps.android.navigation.app
+
+    versionCode=1 minSdk=31 targetSdk=35
+    versionName=3.3.2-rc5-hotfix.3
+
+
