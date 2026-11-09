@@ -1,0 +1,26 @@
+﻿
+Suite                                                  Tests Failures Errors
+-----                                                  ----- -------- ------
+com.surpride.app.ExampleUnitTest                           1        0      0
+com.surpride.app.experience.core.DestinationEngineTest    16        0      0
+com.surpride.app.experience.core.TripControllerTest       10        0      0
+com.surpride.app.experience.core.TripSnapshotTest          4        0      0
+com.surpride.app.navigation.NavigationSessionTest         13        0      0
+com.surpride.app.realdata.RealRouteTest                   20        0      0
+com.surpride.app.vehicle.VehicleSessionTest               14        0      0
+
+
+
+> Task :app:testDebugUnitTest
+
+BUILD SUCCESSFUL in 29s
+41 actionable tasks: 7 executed, 34 up-to-date
+Configuration cache entry reused.
+
+
+Algorithm : SHA256
+Hash      : 111B0368D88EC2EA1E0650172E215A66323A9F174B9D22491781C177DEC5DBE2
+
+
+
+

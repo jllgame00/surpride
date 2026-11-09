@@ -1,0 +1,6 @@
+﻿Before reveal: all five destination names absent from UI hierarchy.
+30-minute budget: TIME_EXCEEDED; no automatic DEMO fallback.
+GPS: DEVICE 위치 사용 가능 (좌표 비표시·미사용)
+추천 출발지: 개발용 고정 공개 좌표
+현재 기기 위치를 사용하거나 저장하지 않습니다.
+Lab-only edits did not change MVP: original partner / nature / 30-minute preferences retained.

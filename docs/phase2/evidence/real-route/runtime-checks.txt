@@ -1,0 +1,6 @@
+﻿MainActivity visible: True
+Vehicle RESPONDING: True
+NaviHelper CONNECTED: True
+OEM active route false: True
+Current app PID crash buffer FATAL EXCEPTION count: 0
+App historical exit-info ANR entries: 0

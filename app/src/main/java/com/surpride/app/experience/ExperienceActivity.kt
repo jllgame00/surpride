@@ -152,6 +152,9 @@ class ExperienceActivity : AppCompatActivity() {
         intro.addView(Space(this),LinearLayout.LayoutParams(1,0,1f))
         intro.addView(text("정차 중 전체 흐름을 체험하는 DEMO입니다. 장소·이동 시간은 가상 샘플이며 실제 경로·주차·영업 정보는 없습니다.",17,muted))
         intro.addView(button("드라이브 시작",true){controller.openSetup()})
+        intro.addView(button("실제 장소 · 경로 검증",false){
+            startActivity(com.surpride.app.realdata.RealRouteActivity.intent(this,controller.state.preferences,controller.state.history.map {it.candidateId}.toSet()))
+        })
         if(controller.state.plan!=null && controller.state.phase!=TripPhase.COMPLETED) intro.addView(button("이전 DEMO 이어서",false){controller.showTrip()})
     }
     private fun trip() {

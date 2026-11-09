@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Optional foreground position validation; requested only from the parked Data Lab. -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-permission android:name="pleos.car.permission.CAR_ENERGY" />
     <uses-permission android:name="pleos.car.permission.CAR_DRIVE" />
     <uses-permission android:name="pleos.car.permission.NAVI_ROUTE" />
@@ -25,6 +29,7 @@
         android:theme="@style/Theme.Surpride">
         <uses-library android:name="android.car" android:required="false" />
         <activity android:name=".experience.ExperienceActivity" android:exported="false" />
+        <activity android:name=".realdata.RealRouteActivity" android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

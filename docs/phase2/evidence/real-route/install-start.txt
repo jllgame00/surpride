@@ -1,0 +1,5 @@
+﻿Phase 2B-1 final installation observations (not a raw full log)
+Target: emulator-5554 / Connect_on_x86_64_emulator / API 34 / foreground user 10
+adb -s emulator-5554 install --user 10 -r app/build/outputs/apk/debug/app-debug.apk -> Success
+adb -s emulator-5554 shell am start --user 10 -W -n com.surpride.app/.MainActivity -> Status: ok; LaunchState: COLD; TotalTime: 1042; WaitTime: 1059
+No external API HTTP requests were made. No guidance was started. Normal foreground location permission dialog was used.
