@@ -1,0 +1,9 @@
+{
+  "installed_soak_apk_sha256": "ff7885fdad447e3672114874440af2fe8760e1a015e33802b9f10d1c914c8af0",
+  "final_built_apk_sha256": "019610b9f6aaf2ae216b3f9913f194a25eb451f04c1e72dd99ba8fdefe865b2c",
+  "difference": "After soak: voice idle/error-off fixes and legacy original-start preservation; final APK reinstalled and MVP/TTS/arrival/return revalidated.",
+  "timestamp_ms": 1794212112663,
+  "final_installed_apk_sha256": "019610b9f6aaf2ae216b3f9913f194a25eb451f04c1e72dd99ba8fdefe865b2c",
+  "final_match": true,
+  "final_runtime_checked": true
+}

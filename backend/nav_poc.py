@@ -27,6 +27,9 @@ def main():
         assert data['source'] in ('KAKAO_DIRECTIONS','MOCK')
         assert data['origin']==ORIGIN and data['destination']==DESTINATION
         data['private_destination_label']='이촌한강공원'
+        data.update(proxy_session=config,trip_origin=ORIGIN,trip_destination=DESTINATION,
+                    return_to_start=True,available_minutes=120,stay_seconds=1200,safety_buffer_seconds=600,
+                    candidate_id='seoul-night-13',development_public_replay=True)
         encoded=json.dumps(data,ensure_ascii=False).encode('utf-8')
         if len(encoded)>2_000_000:
             raise ValueError()

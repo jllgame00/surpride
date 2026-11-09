@@ -1,0 +1,9 @@
+{
+  "time_epoch_ms": 1794211779349,
+  "package": "com.surpride.navhostpoc",
+  "memory_summary": [
+    "Java Heap:    10396                          29096",
+    "Native Heap:    40124                          41008",
+    "TOTAL PSS:    79463            TOTAL RSS:   175244       TOTAL SWAP PSS:      149"
+  ]
+}

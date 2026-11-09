@@ -31,6 +31,7 @@ interface NavigationOwnershipAdapter {
     val reason:String
     fun requestActivation(checks:ActivationChecks,approval:ControlledTestApproval?):Boolean
     fun updateHiddenTrip(turn:NextTurnMetadata,identity:DestinationIdentity):Boolean
+    fun updateLoadingTrip():Boolean
     fun revealDestination(turn:NextTurnMetadata,identity:DestinationIdentity,userRequested:Boolean,distanceMeters:Double,seconds:Long):Boolean
     fun environmentChanged(parked:Boolean?,oemRouteActive:Boolean?)
     fun onAppStopped()
@@ -62,6 +63,9 @@ class AndroidXNavigationOwnershipAdapter(
     }
     override fun updateHiddenTrip(turn:NextTurnMetadata,identity:DestinationIdentity):Boolean {
         checkMain();return controller.publish {navigation.update(PrivacyTripFactory.hidden(turn,identity))}
+    }
+    override fun updateLoadingTrip():Boolean {
+        checkMain();return controller.publish {navigation.update(androidx.car.app.navigation.model.Trip.Builder().setLoading(true).build())}
     }
     override fun revealDestination(turn:NextTurnMetadata,identity:DestinationIdentity,userRequested:Boolean,distanceMeters:Double,seconds:Long):Boolean {
         checkMain()

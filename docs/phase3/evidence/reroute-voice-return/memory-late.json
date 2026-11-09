@@ -1,0 +1,8 @@
+{
+  "time_epoch_ms": 1794212375266,
+  "memory_summary": [
+    "Java Heap:    11184                          35020",
+    "Native Heap:    40748                          41632",
+    "TOTAL PSS:    86153            TOTAL RSS:   182636       TOTAL SWAP PSS:       66"
+  ]
+}

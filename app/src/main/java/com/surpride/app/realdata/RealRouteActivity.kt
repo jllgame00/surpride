@@ -30,6 +30,7 @@ class RealRouteActivity:AppCompatActivity() {
         var preferences=DrivePreferences()
         var recentIds:Set<String> = emptySet()
         var plan:RoutePlan?=null
+        var recommendationOrigin:GeoPoint?=null
         var revealed=false
         var mock=false
         var stay=20
@@ -91,7 +92,7 @@ class RealRouteActivity:AppCompatActivity() {
         requestVersion++;pending?.cancel(true);pending=null
         if(::session.isInitialized && session.busy) {session.busy=false;session.requestStatus="조회 중단 · 필요하면 다시 요청하세요"}
     }
-    private fun reset() {cancelPending();session.plan=null;session.revealed=false}
+    private fun reset() {cancelPending();session.plan=null;session.recommendationOrigin=null;session.revealed=false}
     private fun calculate(mock:Boolean) {
         reset();session.mock=mock
         val location=DevelopmentLocationProvider().current()
@@ -107,27 +108,33 @@ class RealRouteActivity:AppCompatActivity() {
             } catch(_:Exception) {RoutePlan.Failure(setOf(RouteError.API))}
             runOnUiThread {
                 if(version==requestVersion && allowed && !isFinishing && !isDestroyed) {
-                    pending=null;session.busy=false;session.plan=result;session.requestStatus="조회 완료 · 응답 출처 확인";render()
+                    pending=null;session.busy=false;session.plan=result
+                    session.recommendationOrigin=location.point.takeIf {result is RoutePlan.Success}
+                    session.requestStatus="조회 완료 · 응답 출처 확인";render()
                 }
             }
         }
     }
     private fun prepareNavigation(plan:RoutePlan.Success) {
         if(plan.routeOrigin!=RouteOrigin.LIVE_API || plan!==session.plan || !allowed) return
+        val tripOrigin=session.recommendationOrigin?:return
         val config=ProxyConfiguration.load(this)
         if(config==null) {session.requestStatus="준비 불가: 프록시 설정 없음/만료";return}
         val nonce=UUID.randomUUID().toString()
         val preferences=session.preferences
+        val inbound=plan.inbound?.takeIf {it.origin==RouteOrigin.LIVE_API}
+        val trip=PreparedTripMetadata(tripOrigin,preferences.returnToStart,preferences.availableMinutes,
+            preferences.returnByEpochMillis,session.stay.toLong()*60,600,inbound?.seconds,inbound?.receivedAtMillis)
         session.busy=true;session.requestStatus="선정 코스의 최신 전체 안내 조회 중 · 자동 시작 없음"
         val version=++requestVersion
         pending=executor.submit {
             val result=try {
-                val response=ProxyHttpTransport.postGuidance(config,SeoulPilotCatalog.developmentOrigin,plan.place.point)
+                val response=ProxyHttpTransport.postGuidance(config,tripOrigin,plan.place.point)
                 if(Thread.currentThread().isInterrupted) PreparedRouteReply.Failure(RouteError.NETWORK)
                 else if(config.expiresAtMillis<=System.currentTimeMillis()) PreparedRouteReply.Failure(RouteError.NOT_CONFIGURED)
-                else PreparedRouteContract.prepare(response,SeoulPilotCatalog.developmentOrigin,plan.place.point,plan.place.id,
+                else PreparedRouteContract.prepare(response,tripOrigin,plan.place.point,plan.place.id,
                     plan.place.name,"${preferences.mood.label}의 기분과 ${preferences.companion.label} 떠나는 시간에 맞춘 공개 장소 후보입니다. 경관·차량 진입 적합성은 미검증입니다.",
-                    nonce,System.currentTimeMillis())
+                    nonce,System.currentTimeMillis(),trip,config)
             } catch(_:IOException) {PreparedRouteReply.Failure(RouteError.NETWORK)}
               catch(_:Exception) {PreparedRouteReply.Failure(RouteError.API)}
             runOnUiThread {

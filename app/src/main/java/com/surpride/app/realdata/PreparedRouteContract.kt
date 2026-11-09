@@ -9,12 +9,20 @@ sealed interface PreparedRouteReply {
     data class Failure(val error:RouteError):PreparedRouteReply
 }
 
+/** Private trip snapshot. Departure time is captured later, at the user's actual start. */
+class PreparedTripMetadata(val tripOrigin:GeoPoint,val returnToStart:Boolean,val availableMinutes:Int?,
+    val returnByEpochMillis:Long?,val staySeconds:Long,val safetyBufferSeconds:Long,
+    val initialReturnDurationSeconds:Long?,val initialReturnMeasuredAtMillis:Long?) {
+    override fun toString()="PreparedTripMetadata(REDACTED)"
+}
+
 /** Private transport envelope. This never starts guidance or upgrades a MOCK response to LIVE. */
 object PreparedRouteContract {
     const val TTL_MILLIS=3_600_000L
     const val MAX_BYTES=2_000_000
     fun prepare(response:ProxyHttpResponse,origin:GeoPoint,destination:GeoPoint,candidateId:String,
-        privateLabel:String,privateReason:String,nonce:String,now:Long):PreparedRouteReply {
+        privateLabel:String,privateReason:String,nonce:String,now:Long,trip:PreparedTripMetadata?=null,
+        proxySession:ProxySettings?=null):PreparedRouteReply {
         val parsed=ProxyRouteParser.parse(response.status,response.body,origin,destination,now)
         if(parsed is RouteReply.Failure) return PreparedRouteReply.Failure(parsed.error)
         if((parsed as RouteReply.Success).leg.origin!=RouteOrigin.LIVE_API)
@@ -35,6 +43,27 @@ object PreparedRouteContract {
             packet.put("private_destination_label",privateLabel).put("private_reason",privateReason)
                 .put("candidate_id",candidateId).put("session_nonce",nonce)
                 .put("prepared_at_epoch_ms",now).put("expires_at_epoch_ms",now+TTL_MILLIS)
+            trip?.let {
+                require(it.tripOrigin==origin)
+                require(it.availableMinutes==null || it.availableMinutes>0)
+                require(it.returnByEpochMillis==null || it.returnByEpochMillis>0)
+                require(it.staySeconds in 0..604800 && it.safetyBufferSeconds in 0..86400)
+                require((it.initialReturnDurationSeconds==null)==(it.initialReturnMeasuredAtMillis==null))
+                it.initialReturnDurationSeconds?.let {seconds->require(seconds in 1..604800)}
+                it.initialReturnMeasuredAtMillis?.let {at->require(at>0 && at<=now+60_000)}
+                packet.put("trip_origin",JSONObject().put("longitude",it.tripOrigin.longitude).put("latitude",it.tripOrigin.latitude))
+                    .put("return_to_start",it.returnToStart).put("stay_seconds",it.staySeconds)
+                    .put("safety_buffer_seconds",it.safetyBufferSeconds)
+                it.availableMinutes?.let {minutes->packet.put("available_minutes",minutes)}
+                it.returnByEpochMillis?.let {deadline->packet.put("return_by_epoch_ms",deadline)}
+                it.initialReturnDurationSeconds?.let {seconds->packet.put("initial_return_duration_seconds",seconds)}
+                it.initialReturnMeasuredAtMillis?.let {at->packet.put("initial_return_measured_at_epoch_ms",at)}
+            }
+            proxySession?.let {
+                require(it.expiresAtMillis>now)
+                packet.put("proxy_session",JSONObject().put("base_url",it.baseUrl).put("token",it.token)
+                    .put("expires_at_ms",it.expiresAtMillis))
+            }
             val body=packet.toString()
             require(body.toByteArray(Charsets.UTF_8).size<=MAX_BYTES)
             PreparedRouteReply.Success(body,now)

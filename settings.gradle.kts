@@ -21,7 +21,11 @@ dependencyResolutionManagement {
         mavenCentral()
         maven {
             url = uri("https://nexus-playground.pleos.ai/repository/maven-releases/")
-            content { includeGroup("ai.pleos.playground") }
+            content {
+                includeGroup("ai.pleos.playground")
+                // TextToSpeech 3.3.1's published runtime dependency, same official repository.
+                includeGroup("ai.pleos.playground.security")
+            }
         }
     }
 }

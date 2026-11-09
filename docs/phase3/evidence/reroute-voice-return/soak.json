@@ -1,0 +1,9 @@
+{
+  "scenario": "parked-public-position-hold",
+  "updates": 500,
+  "elapsed_seconds": 632.6,
+  "exit_code": 0,
+  "same_process": true,
+  "live_data_source": "DEVICE_API_EMULATOR",
+  "real_road_drive": false
+}

@@ -72,4 +72,47 @@ class PreparedRouteContractTest {
         assertFalse(journal.complete(nonce,"public-candidate","DEVICE_API_EMULATOR",true,true,5,now+20))
         assertEquals(1,journal.visits.size)
     }
+    @Test fun privatePacketCarriesOriginalTripPreferencesAndOnlyShortLivedProxyCredential() {
+        val trip=PreparedTripMetadata(origin,true,60,now+2_000_000,1200,600,720,now-1000)
+        val proxy=ProxySettings("http://10.0.2.2:8765","a".repeat(32),now+600_000)
+        val reply=PreparedRouteContract.prepare(response(),origin,destination,"public-candidate","name","reason",
+            nonce,now,trip,proxy) as PreparedRouteReply.Success
+        val packet=JSONObject(reply.packet)
+        assertEquals(126.97,packet.getJSONObject("trip_origin").getDouble("longitude"),0.0)
+        assertEquals(37.57,packet.getJSONObject("trip_origin").getDouble("latitude"),0.0)
+        assertTrue(packet.getBoolean("return_to_start"))
+        assertEquals(60,packet.getInt("available_minutes"))
+        assertEquals(now+2_000_000,packet.getLong("return_by_epoch_ms"))
+        assertEquals(1200,packet.getLong("stay_seconds"))
+        assertEquals(600,packet.getLong("safety_buffer_seconds"))
+        assertEquals(720,packet.getLong("initial_return_duration_seconds"))
+        assertEquals(now-1000,packet.getLong("initial_return_measured_at_epoch_ms"))
+        assertFalse(packet.has("started_at_epoch_ms"))
+        assertEquals(setOf("base_url","token","expires_at_ms"),packet.getJSONObject("proxy_session").keys().asSequence().toSet())
+        assertEquals(now+600_000,packet.getJSONObject("proxy_session").getLong("expires_at_ms"))
+        assertFalse(trip.toString().contains("126.97"))
+        assertFalse(reply.toString().contains(proxy.token))
+    }
+    @Test fun absentTripInformationIsNotInventedForOldOrOneWayPreparation() {
+        val old=JSONObject((prepare() as PreparedRouteReply.Success).packet)
+        assertFalse(old.has("trip_origin"));assertFalse(old.has("return_to_start"));assertFalse(old.has("proxy_session"))
+        val trip=PreparedTripMetadata(origin,false,null,null,0,600,null,null)
+        val packet=JSONObject((PreparedRouteContract.prepare(response(),origin,destination,"public-candidate","name","reason",
+            nonce,now,trip) as PreparedRouteReply.Success).packet)
+        assertFalse(packet.getBoolean("return_to_start"))
+        listOf("available_minutes","return_by_epoch_ms","initial_return_duration_seconds","initial_return_measured_at_epoch_ms")
+            .forEach {assertFalse(packet.has(it))}
+    }
+    @Test fun invalidTripBudgetOrExpiredProxyCannotCreatePrivatePacket() {
+        val invalid=listOf(
+            PreparedTripMetadata(origin,true,0,null,1200,600,720,now),
+            PreparedTripMetadata(origin,true,60,null,-1,600,720,now),
+            PreparedTripMetadata(origin,true,60,null,1200,600,720,null),
+            PreparedTripMetadata(destination,true,60,null,1200,600,720,now))
+        invalid.forEach {trip->assertTrue(PreparedRouteContract.prepare(response(),origin,destination,"public-candidate","name","reason",
+            nonce,now,trip) is PreparedRouteReply.Failure)}
+        val proxy=ProxySettings("http://10.0.2.2:8765","a".repeat(32),now)
+        assertTrue(PreparedRouteContract.prepare(response(),origin,destination,"public-candidate","name","reason",
+            nonce,now,proxySession=proxy) is PreparedRouteReply.Failure)
+    }
 }

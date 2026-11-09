@@ -83,6 +83,10 @@ class LiveNavigationResultActivity:AppCompatActivity() {
             }.apply {isEnabled=rating!=null})
         }
         root.addView(button("결과 화면 닫기") {if(allowed) finish()})
+        root.addView(button("내비 PoC로 돌아가 복귀 준비") {if(allowed) {
+            try {startActivity(android.content.Intent().setComponent(android.content.ComponentName("com.surpride.navhostpoc","androidx.car.app.activity.CarAppActivity")))}
+            catch(_:Exception) {root.addView(label("내비 PoC 앱을 먼저 설치해 주세요.",20))}
+        }})
     }
     private fun label(value:String,size:Int)=TextView(this).apply {
         text=value;textSize=size.toFloat();setTextColor(Color.rgb(235,241,225));setPadding(0,dp(12),0,dp(12))

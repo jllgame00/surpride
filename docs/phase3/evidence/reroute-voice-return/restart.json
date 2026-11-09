@@ -1,0 +1,9 @@
+{
+  "cached_source": "KAKAO_DIRECTIONS",
+  "return_leg_preserved": true,
+  "original_start_preserved": true,
+  "actual_departure_time_preserved": true,
+  "guidance_auto_started": false,
+  "scope": "process restarted after guidance already stopped",
+  "completed_ui_state_restored": false
+}

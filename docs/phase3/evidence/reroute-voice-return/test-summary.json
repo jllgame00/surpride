@@ -1,0 +1,30 @@
+{
+  "android_xml": {
+    "app": {
+      "tests": 98,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "nav-host-poc": {
+      "tests": 166,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "backend": {
+      "tests": 42,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "total": 306,
+  "head": "21854a9aacc9462c06baa82ddbbe61080210b154",
+  "checked_at_epoch_ms": 1794212708996,
+  "commands": [
+    "scripts/build-codex.ps1 -Test",
+    "scripts/build-nav-host-poc.ps1 -Test",
+    "backend/.venv/Scripts/python.exe -m pytest backend/tests -q -p no:cacheprovider"
+  ]
+}
