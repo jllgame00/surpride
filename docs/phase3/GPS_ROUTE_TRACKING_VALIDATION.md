@@ -2,6 +2,8 @@
 
 검증일: 2026-11-09. **판정: READY — 정차 에뮬레이터 개발용 위치 추적 범위.** 실제 GPS 기반 도로 안내·실차 안전성·마켓 정책 승인을 뜻하지 않는다.
 
+동일 요청 재검증: 구현과 최초 증거가 이미 `c62d574`에 포함된 상태에서 다시 확인했다. 1~10절은 최초 실행 기록이며, 이번 작업의 Git 상태·신규 검증 범위는 11절에 별도로 기록한다.
+
 ## 1. 기준과 변경 범위
 
 시작: `main`, HEAD `fe42f3d9bed86d70ed444eefaa5ae632361a4870`, working tree clean. 종료에도 브랜치/HEAD를 유지하며 수정3개·신규27개(문서/증거 포함)다. 커밋·Push·원격 변경은 하지 않았다. 기존 main app, Vehicle 2.3.2, NaviHelper 3.0.5, Phase 3A 재생 화면, 빌드 스크립트와 검증 자료를 보존했다. 의존성/Gradle/SDK 버전 변경은 없다.
@@ -128,3 +130,16 @@ backend/.venv/Scripts/python.exe -m backend.gps_replay --public-route-prefix --s
 다음 단계는 (1) 카카오 geometry 표시/저장·독립 내비 이용 허가와 Pleos 정차 PoC/활성 안내 심사 경계 확인, (2) segment/guide 위치와 거리의 정밀 대응·도시 교차/평행 도로 재획득·계측 기반 임계값/성능 개선, (3) 목적지 없는 Trip의 host/cluster/알림 노출을 별도 승인된 실험으로 감사, (4) 포커스 상실·사용자 취소·단일 경로 소유권 계약을 확정한 뒤 재탐색/실제 ETA/음성 설계다. 실제 사용자 위치의 저장·공유는 동의/보관 정책과 함께 별도로 설계해야 한다.
 
 기존 카카오 표시/저장/재배포 허가의 미확인 사항은 유지한다. [카카오 운영 정책](https://developers.kakao.com/terms/ko/site-policies) 및 이전 Phase의 라이선스 조사를 넘어 독립 내비 상용 표시 허가를 새로 확보한 것은 아니다.
+
+## 11. 동일 요청에 대한 재검증
+
+재검증 시작은 `main / c62d574e50125e0928674663b0a7ee5f993c85bf / clean`이다. 위치 Provider, 매칭, GPS 화면과 최초 실경로/DEVICE_API 증거가 이미 들어 있어 구현을 중복 추가하거나 변경하지 않았다. 종료 HEAD도 같으며 보고서1개 수정·증거2개 추가만 있다. 커밋·Push하지 않았다.
+
+- 기존 앱89개·PoC27개·FastAPI33개, **149개를 모두 새로 실행하여 통과**했다. main 및 PoC 각각 assembleDebug와 테스트를 `--rerun-tasks`로 수행했다. 기존133개와 신규16개가 포함된다. PoC는 기존 빌드 스크립트와 같은 JDK/프로젝트 전용 Gradle·Android 홈을 프로세스 안에서만 적용했다.
+- 첫 PoC 명령은 PowerShell이 따옴표 없는 dotted `-P` 옵션을 추가 task로 분리하여 실패했다. 문자열 인수 배열로 수정한 뒤41개 task를 실행해 성공했다. SDK/프로젝트 코드·전역 설정을 바꾸지 않았다.
+- Pleos/API34/사용자10에서 재빌드 APK 설치 Success, CarAppActivity COLD402ms를 확인했다. 설치 APK와 빌드 APK SHA256이 일치한다. 현재 PID29356 FATAL0건, 패키지 exit-info ANR0건을 관찰했다.
+- 이전에 임시 실경로 cache를 제거했으므로 이번에는 [경로 데이터 없음 화면](gps-evidence/revalidation-no-route.png)을 확인했다. GPS 시작 선택에도 구독하지 않고 NO_FIX/NOT_STARTED 및 진행률·회전·ETA UNKNOWN을 유지했다. 정상 종료/SCREEN_DESTROYED도 확인했다.
+- **이번 재검증에서는 외부 API 요청 및 geo fix 입력을 추가 실행하지 않았다.** 실제 geometry를 사용한 위치 변화/안내 변경/이탈/재진입의 기기 검증은 앞 절의 기존271개 DEVICE_API 콜백 및 화면 증거에 근거한다. Fake·합성 경로 자동 테스트와 새 기기 위치 재현을 혼동하지 않는다.
+- 기존 main의 NaviHelper 연결과 OEM 활성 경로 false를 다시 확인했다. 실제 안내/음성/포커스 요청/경로 전환은 없으며 서버·세션·원시 경로를 새로 만들지 않았다. 실제 차량·정책·지도 라이선스·정밀 매칭의 제한은 유지한다.
+
+이번 명령·테스트 집계·현재 APK hash·기기 로그는 [재검증 증거](gps-evidence/revalidation.txt)에 기록했다. READY는 최초 위치 변화/화면 검증을 보존한 개발 PoC 판정이며, 이번 데이터 없음 실행만으로 GPS 성공을 새로 선언한 것은 아니다.

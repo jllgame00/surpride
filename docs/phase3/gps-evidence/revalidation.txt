@@ -1,0 +1,26 @@
+Phase3B-1 repeated-request revalidation / 2026-11-09
+Start: main / c62d574e50125e0928674663b0a7ee5f993c85bf / clean.
+Existing implementation and prior GPS evidence already committed at start; no implementation changes.
+Main build-codex.ps1 -Test -RerunTasks: SUCCESS / 41 tasks executed / 70s.
+PoC scoped wrapper assembleDebug + testDebugUnitTest --rerun-tasks: SUCCESS / 41 tasks executed / 44s.
+Initial PoC invocation FAILED: PowerShell split unquoted dotted -P option into an extra task. Corrected using a string argument array. No SDK/source change.
+PoC wrapper used the same project Gradle/Android homes and JDK as build-nav-host-poc.ps1; process environment restored.
+app: {'tests': 89, 'failures': 0, 'errors': 0, 'skipped': 0}
+nav-host-poc: {'tests': 27, 'failures': 0, 'errors': 0, 'skipped': 0}
+FastAPI: 33 passed / 1 existing TestClient deprecation warning.
+Total fresh tests: 149 passed.
+ADB emulator-5554 / foreground user10 / API34 / intended Pleos emulator verified.
+APK install: Success; CarAppActivity COLD 402ms / Wait412ms.
+Current run: no private route cache; GPS screen displays NO_FIX / NOT_STARTED / UNKNOWN; start does not subscribe.
+Current run: no new external route request or geo fix replay; prior DEVICE_API271-callback/turn/offroute/rejoin evidence retained.
+Before PoC install: main NaviHelper connected=True / OEM route active=False confirmed using existing diagnostics.
+Installed APK matches built APK SHA256: 4c23408064e9bcd107d10e7338b1911cacd04fce6cd5c511cac10f688f7e458e
+Current PoC PID29356 FATAL count: 0
+Package exit-info ANR entries: 0
+Current GPS lifecycle log:
+TEMPLATE status=null subscribed=false progressM=null nextM=null nativeEta=false
+TEMPLATE status=null subscribed=false progressM=null nextM=null nativeEta=false
+SCREEN_DESTROYED
+Normal PoC exit confirmed; no route cache created; no local proxy session/server started.
+No navigation focus request, navigationStarted/updateTrip, route switching, voice or reroute.
+No coordinate/key/token/raw Location retained in this evidence. No commit/push.
