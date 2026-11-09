@@ -1,0 +1,13 @@
+I/SurprideMood(16475): interpretation=CANCELLED source=RULE_BASED error=null
+I/SurprideMood(16475): interpretation=CANCELLED source=RULE_BASED error=null
+I/SurprideMood(16475): speech=INITIALIZING source=PLEOS_ON_DEVICE error=null
+I/SurprideStt(16475): SDK_INITIALIZED mode=ON_DEVICE
+I/SurprideStt(16475): REQUEST_CALL_RETURNED mode=ON_DEVICE
+I/SurprideStt(16475): SDK_READY mode=ON_DEVICE
+I/SurprideMood(16475): speech=NO_SPEECH source=PLEOS_ON_DEVICE error=null
+I/SurprideMood(16475): interpretation=WORKING source=RULE_BASED error=null
+I/SurprideMood(16475): interpretation=READY source=RULE_BASED error=null
+I/SurprideMood(16475): interpretation=WORKING source=RULE_BASED error=null
+I/SurprideMood(16475): interpretation=READY source=RULE_BASED error=null
+I/SurprideMood(16475): speech=CLOSED source=PLEOS_ON_DEVICE error=null
+I/SurprideMood(16475): interpretation=CLOSED source=RULE_BASED error=null

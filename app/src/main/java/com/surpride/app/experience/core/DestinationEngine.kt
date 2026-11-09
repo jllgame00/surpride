@@ -7,9 +7,12 @@ import kotlin.random.Random
 /** Pure deterministic rules; filtering always precedes scoring/randomness. No SDK or UI calls. */
 class DestinationEngine(private val candidates: List<DestinationCandidate>) {
     fun recommend(p: DrivePreferences, c: RecommendationContext, seed: Long): RecommendationResult {
+        if (p.categories.any { it in p.excludedCategories })
+            return RecommendationResult.Failure("원하는 장소와 피할 장소가 겹칩니다. 조건을 다시 선택해 주세요.")
         val budget = budgetMinutes(p, c.nowMillis) ?: return RecommendationResult.Failure("시간 조건을 다시 선택해 주세요.")
         if (budget <= 0 || p.randomness !in 0..100) return RecommendationResult.Failure("유효한 시간과 랜덤 정도를 선택해 주세요.")
         val ranked = candidates.mapNotNull { candidate ->
+            if (candidate.categories.any { it in p.excludedCategories }) return@mapNotNull null
             if (candidate.id in c.recentIds || !candidate.categories.containsAll(p.categories) || p.companion !in candidate.companions) return@mapNotNull null
             if (c.weather != null && c.weather !in candidate.weather) return@mapNotNull null
             val estimate = candidate.estimates[p.scope] ?: return@mapNotNull null

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Official ON_DEVICE STT; recording is owned by the Pleos speech service. -->
+    <uses-permission android:name="pleos.car.permission.STT_SERVICE" />
 
     <!-- Optional foreground position validation; requested only from the parked Data Lab. -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -35,6 +37,7 @@
         android:theme="@style/Theme.Surpride">
         <uses-library android:name="android.car" android:required="false" />
         <activity android:name=".experience.ExperienceActivity" android:exported="false" />
+        <activity android:name=".moodinput.MoodInputActivity" android:exported="false" android:windowSoftInputMode="adjustResize" />
         <activity android:name=".realdata.RealRouteActivity" android:exported="false" />
         <activity android:name=".realdata.LiveNavigationResultActivity" android:exported="true" />
         <provider

@@ -5,6 +5,7 @@ import java.io.*
 /** Versioned bounded format: no Java object deserialization, destination payloads or GPS coordinates. */
 object TripSnapshotCodec {
     private const val MAGIC = 0x53555232
+    private const val EXCLUSIONS_EXTENSION = 0x45584331
     fun encode(s: MysteryTripState): ByteArray = ByteArrayOutputStream().use { bytes ->
         DataOutputStream(bytes).use { out ->
             out.writeInt(MAGIC); out.writeInt(DemoCatalog.VERSION)
@@ -29,6 +30,12 @@ object TripSnapshotCodec {
             }
             out.writeInt(s.history.size)
             s.history.forEach { v -> out.writeUTF(v.tripId); out.writeUTF(v.candidateId); out.writeUTF(v.mood.name); out.writeInt(v.rating); out.writeLong(v.completedAtMillis); out.writeBoolean(v.simulatedArrival) }
+            // Preserve the shipped v1 bytes when there are no exclusions.
+            if (p.excludedCategories.isNotEmpty()) {
+                out.writeInt(EXCLUSIONS_EXTENSION)
+                out.writeInt(p.excludedCategories.size)
+                p.excludedCategories.sortedBy { it.name }.forEach { out.writeUTF(it.name) }
+            }
         }
         bytes.toByteArray()
     }
@@ -61,9 +68,15 @@ object TripSnapshotCodec {
                 val m=Mood.valueOf(input.readUTF()); val r=input.readInt().also {require(it in 1..5)}
                 DemoVisit(id,place,m,r,input.readLong(),input.readBoolean())
             }
+            val excludedCategories = if (input.available() == 0) emptySet() else {
+                require(input.readInt() == EXCLUSIONS_EXTENSION)
+                val names = List(input.count(PlaceCategory.entries.size)) { PlaceCategory.valueOf(input.readUTF()) }
+                require(names.distinct().size == names.size)
+                names.toSet()
+            }
             require(input.available()==0)
             if(phase !in setOf(TripPhase.SETUP,TripPhase.PLANNING)) require(plan!=null)
-            MysteryTripState(phase,panel,prefs,setup,plan,error,seed,tripId,progress,arrived,hint,rating,history)
+            MysteryTripState(phase,panel,prefs.copy(excludedCategories=excludedCategories),setup,plan,error,seed,tripId,progress,arrived,hint,rating,history)
         }
     }
     private fun DataInputStream.count(max: Int) = readInt().also {require(it in 0..max)}

@@ -52,7 +52,7 @@ class TripController(private val catalog: List<DestinationCandidate>, private va
         val revealed=state.phase in setOf(TripPhase.REVEALED,TripPhase.COMPLETED)
         val p=state.preferences
         return TripPresentation(state.phase,true,state.plan?.totalMinutes,
-            if (PlaceCategory.CAMPING in p.categories) "겉옷과 편안한 신발을 준비해 보세요." else "물 한 병과 편안한 신발이면 충분해요.",
+            com.surpride.app.moodinput.core.SafePreparationPolicy.hints(p).joinToString(" "){it.label},
             "${p.mood.label}의 기분과 ${p.companion.label} 떠나는 시간을 먼저 생각했어요.",
             state.plan?.candidate?.takeIf {revealed}?.let {RevealedDestination(it.name,it.description,it.sample)})
     }

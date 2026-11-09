@@ -60,7 +60,8 @@ class RealRouteActivity:AppCompatActivity() {
                 categories=intent.getStringArrayExtra("categories")?.mapNotNull {s->PlaceCategory.entries.find {it.name==s}}?.toSet()?:emptySet(),
                 availableMinutes=intent.getIntExtra("minutes",60).takeIf {it>0},
                 returnByEpochMillis=intent.getLongExtra("deadline",0).takeIf {it>0},
-                returnToStart=intent.getBooleanExtra("returns",true),randomness=0)
+                returnToStart=intent.getBooleanExtra("returns",true),randomness=0,
+                excludedCategories=intent.getStringArrayExtra("excludedCategories")?.mapNotNull {s->PlaceCategory.entries.find {it.name==s}}?.toSet()?:emptySet())
             session.recentIds=intent.getStringArrayExtra("recent")?.toSet()?:emptySet()
             session.initialized=true
         }
@@ -171,13 +172,14 @@ class RealRouteActivity:AppCompatActivity() {
         left.addView(label("서울 공개 장소 5곳 · 출처: 서울특별시 야경명소 정보 / 공공누리 1유형",18))
         left.addView(label("대표 좌표는 차량 진입점이 아닙니다. 주차·운영시간·접근성 UNKNOWN. 실도로 추천·길 안내를 제공하지 않습니다.",18))
         val p=session.preferences
+        left.addView(label("피할 장소: ${p.excludedCategories.joinToString {it.label}.ifBlank {"없음"}}",20))
         left.addView(label("MVP 조건: ${p.mood.label} / ${p.scope.label} / ${p.companion.label}\n장소: ${p.categories.joinToString {it.label}.ifBlank {"특별한 조건 없음"}}\n가용 ${p.availableMinutes?:"미설정"}분 · ${if(p.returnToStart) "왕복" else "편도"}\n체류 ${session.stay}분 + 안전 여유 10분 (계획 가정)",20))
         p.returnByEpochMillis?.let {left.addView(label("귀가 시각 제한: ${DateFormat.getTimeInstance(DateFormat.SHORT).format(Date(it))}\n아래 가용 시간 선택 시 귀가 제한을 대체합니다.",18))}
         val times=LinearLayout(this)
         listOf(30,60,180).forEach {minutes->times.addView(button("${minutes}분") {session.preferences=p.withAvailableBudget(minutes);reset()},LinearLayout.LayoutParams(0,-2,1f))}
         left.addView(times)
-        if(p.companion!=DriveCompanion.SOLO || p.categories.isNotEmpty()) left.addView(button("검증 조건: 혼자 · 장소 제한 없음") {
-            session.preferences=p.copy(companion=DriveCompanion.SOLO,categories=emptySet());reset()
+        if(p.companion!=DriveCompanion.SOLO || p.categories.isNotEmpty() || p.excludedCategories.isNotEmpty()) left.addView(button("검증 조건: 혼자 · 장소 제한 없음") {
+            session.preferences=p.copy(companion=DriveCompanion.SOLO,categories=emptySet(),excludedCategories=emptySet());reset()
         })
         left.addView(button(if(p.returnToStart) "왕복 → 편도로 변경" else "편도 → 왕복으로 변경") {session.preferences=p.copy(returnToStart=!p.returnToStart);reset()})
         left.addView(button("체류 ${session.stay}분 → 변경") {session.stay=if(session.stay==20) 40 else 20;reset()})
@@ -239,6 +241,7 @@ class RealRouteActivity:AppCompatActivity() {
         fun intent(context:Context,p:DrivePreferences,recent:Set<String>)=Intent(context,RealRouteActivity::class.java)
             .putExtra("mood",p.mood.ordinal).putExtra("scope",p.scope.ordinal).putExtra("companion",p.companion.ordinal)
             .putExtra("categories",p.categories.map {it.name}.toTypedArray()).putExtra("minutes",p.availableMinutes?:0)
+            .putExtra("excludedCategories",p.excludedCategories.map {it.name}.toTypedArray())
             .putExtra("deadline",p.returnByEpochMillis?:0).putExtra("returns",p.returnToStart)
             .putExtra("recent",recent.toTypedArray())
     }

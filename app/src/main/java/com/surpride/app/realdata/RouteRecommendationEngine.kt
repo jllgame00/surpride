@@ -6,6 +6,8 @@ import com.surpride.app.experience.core.*
 class RouteRecommendationEngine(private val places:List<RealPlace>,private val routes:RouteProvider,
     private val clock:()->Long=System::currentTimeMillis) {
     fun recommend(origin:GeoPoint,p:DrivePreferences,c:RecommendationContext,stayMinutes:Int,bufferMinutes:Int,seed:Long):RoutePlan {
+        if(p.categories.any {it in p.excludedCategories})
+            return RoutePlan.Failure(setOf(RouteError.NO_CANDIDATE))
         val budget=budgetMinutes(p,c.nowMillis)?.takeIf {it>0}
             ?:return RoutePlan.Failure(setOf(RouteError.TIME_EXCEEDED))
         if(stayMinutes !in 0..10080 || bufferMinutes !in 0..1440 || p.randomness !in 0..100)
@@ -13,6 +15,7 @@ class RouteRecommendationEngine(private val places:List<RealPlace>,private val r
         val errors=mutableSetOf<RouteError>()
         val plans=mutableListOf<RoutePlan.Success>()
         for(place in places) {
+            if(place.categories.any {it in p.excludedCategories}) continue
             if(place.id in c.recentIds || !place.categories.containsAll(p.categories)) continue
             if(place.point==origin) continue
             // No verified companion/family/pet access data yet; do not imply that all companions fit.

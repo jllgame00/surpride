@@ -11,10 +11,13 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import com.surpride.app.experience.core.*
+import com.surpride.app.moodinput.MoodInputActivity
+import com.surpride.app.moodinput.PreferenceInputContract
 import java.text.DateFormat
 import java.util.Date
 import kotlin.math.max
@@ -39,12 +42,20 @@ class ExperienceActivity : AppCompatActivity() {
     private var recoveryDialog: AlertDialog? = null
     private val handler=Handler(Looper.getMainLooper())
     private val allowed get()=ParkedInteractionPolicy.allows(requiresDo)
+    private var pendingMoodPreferences:DrivePreferences?=null
+    private val moodInput=registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {result->
+        if(result.resultCode==RESULT_OK) {
+            pendingMoodPreferences=PreferenceInputContract.decode(result.data?.getByteArrayExtra(PreferenceInputContract.EXTRA))
+            applyMoodPreferences()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         store=DemoStateStore(this)
         val loaded=try {store.load()} catch (_: Exception) {restoreFailed=true;null}
         controller=TripController(DemoCatalog.candidates,System::currentTimeMillis,{Random.nextLong()},loaded)
+        pendingMoodPreferences=PreferenceInputContract.decode(savedInstanceState?.getByteArray(PreferenceInputContract.EXTRA))
         ux=ParkedUxMonitor(applicationContext)
         WindowCompat.setDecorFitsSystemWindows(window,false)
         root=LinearLayout(this).apply {orientation=LinearLayout.HORIZONTAL;setBackgroundColor(bg)}
@@ -61,6 +72,7 @@ class ExperienceActivity : AppCompatActivity() {
         ux.start { value ->
             requiresDo=value
             if(!allowed) {recoveryDialog?.dismiss();recoveryDialog=null}
+            applyMoodPreferences()
             render()
         }
     }
@@ -71,6 +83,19 @@ class ExperienceActivity : AppCompatActivity() {
         super.onStop()
     }
     override fun onDestroy() {ux.stop();super.onDestroy()}
+    override fun onSaveInstanceState(outState:Bundle) {
+        pendingMoodPreferences?.let {outState.putByteArray(PreferenceInputContract.EXTRA,PreferenceInputContract.encode(it))}
+        super.onSaveInstanceState(outState)
+    }
+    private fun applyMoodPreferences() {
+        val p=pendingMoodPreferences?:return
+        if(!allowed || !::controller.isInitialized || restoreFailed) return
+        pendingMoodPreferences=null;act {controller.updatePreferences(p)}
+    }
+    private fun openMoodInput() {
+        if(allowed) moodInput.launch(android.content.Intent(this,MoodInputActivity::class.java)
+            .putExtra(PreferenceInputContract.EXTRA,PreferenceInputContract.encode(controller.state.preferences)))
+    }
 
     private fun act(action: () -> Unit) {
         if(!allowed || restoreFailed) return
@@ -152,6 +177,7 @@ class ExperienceActivity : AppCompatActivity() {
         intro.addView(Space(this),LinearLayout.LayoutParams(1,0,1f))
         intro.addView(text("정차 중 전체 흐름을 체험하는 DEMO입니다. 장소·이동 시간은 가상 샘플이며 실제 경로·주차·영업 정보는 없습니다.",17,muted))
         intro.addView(button("드라이브 시작",true){controller.openSetup()})
+        intro.addView(button("말로 조건 정리 · 텍스트 / 음성",false){openMoodInput()})
         intro.addView(button("실제 장소 · 경로 검증",false){
             startActivity(com.surpride.app.realdata.RealRouteActivity.intent(this,controller.state.preferences,controller.state.history.map {it.candidateId}.toSet()))
         })
@@ -175,6 +201,7 @@ class ExperienceActivity : AppCompatActivity() {
         title("당신에게 맞는 드라이브","${s.setupStep+1} / 3  ·  선택해서 준비하는 나만의 코스")
         val split=row();content.addView(split,LinearLayout.LayoutParams(-1,0,1f))
         val form=column();split.addView(ScrollView(this).apply {isFillViewport=true;addView(form)},LinearLayout.LayoutParams(0,-1,1.7f))
+        form.addView(button("문장으로 조건 수정 · 기기 내 규칙",false){openMoodInput()})
         if(s.error!=null) form.addView(text(s.error,18,accent))
         when(s.setupStep) {
             0 -> {
@@ -182,8 +209,9 @@ class ExperienceActivity : AppCompatActivity() {
                 choices(form,Mood.entries,3,{it.label},{it==p.mood}){v -> prefs(p.copy(mood=v))}
                 form.addView(text("만나고 싶은 장소",23,ink,true).apply {setPadding(0,dp(20),0,0)})
                 form.addView(text("함께 선택한 조건을 모두 만족하는 샘플만 찾습니다.",16,muted))
-                choices(form,PlaceCategory.entries,2,{it.label},{it in p.categories}) {v -> prefs(p.copy(categories=if(v in p.categories) p.categories-v else p.categories+v))}
-                form.addView(button("특별한 조건 없음",p.categories.isEmpty()){prefs(p.copy(categories=emptySet()))})
+                choices(form,PlaceCategory.entries,2,{it.label},{it in p.categories}) {v -> prefs(p.copy(categories=if(v in p.categories) p.categories-v else p.categories+v,excludedCategories=p.excludedCategories-v))}
+                form.addView(text("제외 조건: ${p.excludedCategories.joinToString {it.label}.ifEmpty {"없음"}}",17,muted))
+                form.addView(button("특별한 조건 없음 · 선호/제외 해제",p.categories.isEmpty() && p.excludedCategories.isEmpty()){prefs(p.copy(categories=emptySet(),excludedCategories=emptySet()))})
             }
             1 -> {
                 form.addView(text("얼마나 멀리 떠나볼까요?",23,ink,true))
@@ -208,7 +236,7 @@ class ExperienceActivity : AppCompatActivity() {
         if(s.setupStep>0) form.addView(button("이전 조건",false){controller.setupStep(s.setupStep-1)})
         val summary=card();split.addView(summary,LinearLayout.LayoutParams(0,-1,1f).apply {leftMargin=dp(18)})
         summary.addView(text("YOUR DRIVE",14,accent,true));summary.addView(text(p.mood.label,32,ink,true))
-        summary.addView(text("${p.scope.label} · ${p.scope.note}\n\n${p.categories.joinToString(" · "){it.label}.ifEmpty {"특별한 장소 조건 없음"}}\n\n${p.companion.label}\n${timeSummary(p)}\n${if(p.returnToStart) "출발지 복귀" else "도착지 마무리"}\n랜덤 ${p.randomness}%",19,muted))
+        summary.addView(text("${p.scope.label} · ${p.scope.note}\n\n선호: ${p.categories.joinToString(" · "){it.label}.ifEmpty {"특별한 장소 조건 없음"}}\n제외: ${p.excludedCategories.joinToString {it.label}.ifEmpty {"없음"}}\n\n${p.companion.label}\n${timeSummary(p)}\n${if(p.returnToStart) "출발지 복귀" else "도착지 마무리"}\n랜덤 ${p.randomness}%",19,muted))
         summary.addView(Space(this),LinearLayout.LayoutParams(1,0,1f));summary.addView(text("DEMO\n모든 장소와 시간은 가상 예시",16,accent))
     }
     private fun ready() {

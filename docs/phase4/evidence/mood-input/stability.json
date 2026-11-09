@@ -1,0 +1,26 @@
+{
+  "com.surpride.app": {
+    "running": true,
+    "current_pid_fatal_exception": false,
+    "current_pid_anr_exit": false,
+    "retained_buffer_package_anr_events": 0,
+    "retained_buffer_package_crash_events": 0,
+    "phase4_window_since_local": "2026-11-09 17:50:00",
+    "phase4_window_anr_events": 0,
+    "phase4_window_crash_events": 0
+  },
+  "com.surpride.navhostpoc": {
+    "running": true,
+    "current_pid_fatal_exception": false,
+    "current_pid_anr_exit": false,
+    "retained_buffer_package_anr_events": 0,
+    "retained_buffer_package_crash_events": 2,
+    "phase4_window_since_local": "2026-11-09 17:50:00",
+    "phase4_window_anr_events": 0,
+    "phase4_window_crash_events": 0,
+    "historical_crash_event_times": [
+      "2026-11-09 15:17:11.007",
+      "2026-11-09 15:26:40.391"
+    ]
+  }
+}

@@ -24,7 +24,8 @@ data class DrivePreferences(
     val availableMinutes: Int? = 60,
     val returnByEpochMillis: Long? = null,
     val returnToStart: Boolean = true,
-    val randomness: Int = 40
+    val randomness: Int = 40,
+    val excludedCategories: Set<PlaceCategory> = emptySet()
 )
 data class JourneyEstimate(
     val outboundMinutes: Int, val stayMinutes: Int, val returnMinutes: Int, val bufferMinutes: Int,
