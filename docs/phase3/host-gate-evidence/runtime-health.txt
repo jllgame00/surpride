@@ -1,0 +1,17 @@
+Actual APK install Success /CarAppActivity COLD373ms /Wait380ms /host API4 /API34 /user10.
+Current PoC PID5081 FATAL count: 0
+PoC package historical ANR entries: 0
+Historical Phase3A development crash not counted as current-PID success.
+Read-only AppFocusService before/during/after: mActiveAppTypes:{}.
+Actual UI: Adapter CLOSED /POLICY_UNVERIFIED /INACTIVE /Destination0 /Step1 /StepETA1.
+Adapter not constructed/bound by audit UI. Real adapter manager lookup/focus request/navigationStarted/updateTrip: not executed.
+Only local ListTemplate audit text/counts shown; not a live destinationless Trip rendering.
+Final main UI: Vehicle RESPONDING /NaviHelper CONNECTED /OEM active false confirmed.
+Normal PoC exit/AUDIT_DESTROYED observed. No route/position/token cache or proxy server created.
+No OEM route cancel/switch, actual voice/road driving, external route request or geo fix.
+No inquiry sent; inquiry draft and conditional test procedure only.
+System Trip/cluster/HUD/notifications/voice/history privacy: UNVERIFIED; previous limited own-UI PARTIAL retained.
+Phase verdict CONDITIONAL. Gate not opened. No actual test approval solicited or exercised.
+Exact credential-byte hits: Git-visible files0 /APK entries0.
+Robolectric/app-testing class descriptors in APK: absent. No personal location or raw Trip retained.
+Main/GPS/MVP/Vehicle/NaviHelper/FastAPI and existing evidence preserved. No commits/push/remote modifications.

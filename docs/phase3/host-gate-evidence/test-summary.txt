@@ -1,0 +1,13 @@
+Phase3B-2.5 / 2026-11-09 / initial main clean 279c44407f865b2ba038d37d8d10282f02f215d4
+Main build-codex.ps1 -Test -RerunTasks: SUCCESS;41 tasks executed /40s.
+PoC build-nav-host-poc.ps1 -Test: SUCCESS;60tests executed /46s.
+FastAPI pytest backend/tests -q -p no:cacheprovider:33 passed /1 existing warning.
+app: {'tests': 89, 'failures': 0, 'errors': 0, 'skipped': 0}
+nav-host-poc: {'tests': 60, 'failures': 0, 'errors': 0, 'skipped': 0}
+Total182 passed = original170 + new Adapter12.
+TDD initial missing adapter compilation RED; lookup-cancellation regression60tests/1fail observed; final GREEN60/0.
+TestNavigationManager+synthetic FocusPort only; actual SDK focus or active Pleos Trip not tested.
+Default CLOSED/no approval/reused approval/environment/duplicate/lazy lookup/hidden+reveal/host stop/background/focus loss/release/reconnect/late callback/stop failure/lookup failure+cancel/main thread covered.
+No added dependencies, Manifest permissions, SDK/AGP/Gradle version or global settings changes.
+Independent read-only review: no remaining Important/Critical findings.
+Installed APK matches built APK SHA256: a50a5d52442fb8591f24a14ef638b2223f889499adedb220d56e34595d80a80e

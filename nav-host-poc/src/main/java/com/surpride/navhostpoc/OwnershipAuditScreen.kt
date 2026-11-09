@@ -30,12 +30,14 @@ internal class OwnershipAuditScreen(context:CarContext):Screen(context) {
                 .addText("정책/호스트 노출 미확인 · 포커스·안내 요청 없음").build())
             list.addItem(Row.Builder().setTitle("Trip 목적지 ${trip.destinations.size} · 도착 ETA ${trip.destinationTravelEstimates.size}")
                 .addText("Step ${trip.steps.size} · 다음 Step ETA ${trip.stepTravelEstimates.size} · 최종 도착 ETA 아님").build())
-            list.addItem(Row.Builder().setTitle("소유권 모델 INACTIVE · 실제 연결 없음")
-                .addText("공식 TestNavigationManager는 자동 테스트에서만 사용").build())
-            list.addItem(Row.Builder().setTitle("시스템 Trip·계기판·HUD·알림·이력 UNVERIFIED")
+            val gate=HostIntegrationGate.UNVERIFIED
+            list.addItem(Row.Builder().setTitle("Adapter gate CLOSED · 소유권 INACTIVE")
+                .addText("${gate.blockReason} · 정책·권한 확인 + 별도 일회성 승인 필요").build())
+            list.addItem(Row.Builder().setTitle("시스템 Trip·계기판·HUD·알림·음성·이력 UNVERIFIED")
                 .addText("이 화면은 데이터 전송/실제 비공개 성공의 증거가 아님").build())
             list.addItem(Row.Builder().setTitle("PoC 종료").setOnClickListener {if(allowed) carContext.finishCarApp()}.build())
             Log.i("SurprideOwnership","LOCAL_AUDIT destinations=${trip.destinations.size} steps=${trip.steps.size} stepEstimates=${trip.stepTravelEstimates.size} model=INACTIVE actualActivation=false carApi=${carContext.carAppApiLevel}")
+            Log.i("SurprideHostGate","AUDIT gate=${gate.blockReason} adapterBound=false actualActivation=false carApi=${carContext.carAppApiLevel}")
         }
         return ListTemplate.Builder().setTitle("소유권·비공개 계약 감사 · 정차 전용").setHeaderAction(Action.BACK).setSingleList(list.build()).build()
     }
