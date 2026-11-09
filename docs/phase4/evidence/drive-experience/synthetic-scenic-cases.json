@@ -1,0 +1,30 @@
+{
+  "source": "SYNTHETIC_TEST_ONLY",
+  "actual_api": false,
+  "actual_waypoint_guidance": false,
+  "cases": [
+    {
+      "budget_minutes": 100,
+      "normal_seconds": 4200,
+      "via_seconds": 5160,
+      "selected": "VERIFIED_FIXTURE_WAYPOINT"
+    },
+    {
+      "budget_minutes": 80,
+      "normal_seconds": 4200,
+      "via_seconds": 5160,
+      "selected": "NORMAL",
+      "via_status": "TIME_EXCEEDED"
+    }
+  ],
+  "test_results": [
+    {
+      "test": "verifiedScenicEightySixMinuteRouteCanBeatNormalSeventyMinuteRoute",
+      "passed": true
+    },
+    {
+      "test": "eightyMinuteBudgetExcludesScenicCandidate",
+      "passed": true
+    }
+  ]
+}

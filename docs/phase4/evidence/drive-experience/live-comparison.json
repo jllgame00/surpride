@@ -1,0 +1,70 @@
+{
+  "public_development_points": true,
+  "actual_upstream_requests": 4,
+  "waypoint_requests": 0,
+  "scenery_evidence": "UNKNOWN",
+  "results": [
+    {
+      "priority": "RECOMMEND",
+      "source": "KAKAO_DIRECTIONS",
+      "duration_seconds": 1335,
+      "distance_meters": 7910,
+      "geometry_points": 133,
+      "geometry_digest": "f37fdb25d339b79f1d1303855a173fdf183cd03b049530f2e1c4bc41bbe9ee44",
+      "segments": 13,
+      "maneuvers": 14,
+      "measured_at_epoch_ms": 1794219173158
+    },
+    {
+      "priority": "TIME",
+      "source": "KAKAO_DIRECTIONS",
+      "duration_seconds": 1335,
+      "distance_meters": 7910,
+      "geometry_points": 133,
+      "geometry_digest": "f37fdb25d339b79f1d1303855a173fdf183cd03b049530f2e1c4bc41bbe9ee44",
+      "segments": 13,
+      "maneuvers": 14,
+      "measured_at_epoch_ms": 1794219173709
+    },
+    {
+      "priority": "DISTANCE",
+      "source": "KAKAO_DIRECTIONS",
+      "duration_seconds": 1337,
+      "distance_meters": 7437,
+      "geometry_points": 122,
+      "geometry_digest": "31cda5b8ad5abe908139636cca4b52afae59ad55bc6a70c72787e44c841c4f85",
+      "segments": 8,
+      "maneuvers": 9,
+      "measured_at_epoch_ms": 1794219174252
+    },
+    {
+      "priority": "RETURN_RECOMMEND",
+      "source": "KAKAO_DIRECTIONS",
+      "duration_seconds": 1639,
+      "distance_meters": 11149,
+      "geometry_points": 215,
+      "geometry_digest": "d8c6034f204c8b062d5370533971c775634bbf46eab4f98109d0e734acd645e2",
+      "segments": 19,
+      "maneuvers": 20,
+      "measured_at_epoch_ms": 1794219174884
+    }
+  ],
+  "unique_outbound_geometry": 2,
+  "roundtrips": [
+    {
+      "priority": "RECOMMEND",
+      "total_seconds": 4774,
+      "fits_90_minutes": true
+    },
+    {
+      "priority": "TIME",
+      "total_seconds": 4774,
+      "fits_90_minutes": true
+    },
+    {
+      "priority": "DISTANCE",
+      "total_seconds": 4776,
+      "fits_90_minutes": true
+    }
+  ]
+}

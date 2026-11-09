@@ -15,6 +15,7 @@ import java.util.Locale
 class PleosSpeechInputSource(context: Context) : SpeechInputSource {
     private val main = Handler(Looper.getMainLooper())
     private val sdk = SpeechToText(context.applicationContext, Mode.ON_DEVICE)
+    private val diagnostics = SpeechInputDiagnostics()
     private var callback: ((SpeechInputEvent) -> Unit)? = null
     private var started = false
     private var closed = false
@@ -22,13 +23,24 @@ class PleosSpeechInputSource(context: Context) : SpeechInputSource {
     private var requested = false
 
     private val results = object : ResultListener {
-        override fun onReady() {Log.i("SurprideStt","SDK_READY mode=ON_DEVICE")}
-        override fun onStartedRecognition() = emit(SpeechInputEvent.Listening)
-        override fun onUpdated(stt: String, completed: Boolean) = emit(SpeechInputEvent.Text(stt, completed))
-        override fun onEndedRecognition() = emit(SpeechInputEvent.Ended)
-        override fun onError(errorType: ErrorType) = emit(SpeechInputEvent.Failure(mapError(errorType)))
-        override fun onUpdatedEpdData(on: Long, off: Long) = Unit
-        override fun onUpdatedRms(rms: Double) = Unit
+        override fun onReady() {
+            diagnostics.record(SpeechDiagnosticEvent.READY)
+        }
+        override fun onStartedRecognition() {
+            diagnostics.record(SpeechDiagnosticEvent.STARTED)
+            emit(SpeechInputEvent.Listening)
+        }
+        override fun onUpdated(stt: String, completed: Boolean) {
+            diagnostics.recordText(completed, stt.isNotBlank())
+            emit(SpeechInputEvent.Text(stt, completed))
+        }
+        override fun onEndedRecognition() {
+            diagnostics.record(SpeechDiagnosticEvent.ENDED)
+            emit(SpeechInputEvent.Ended)
+        }
+        override fun onError(errorType: ErrorType) = fail(mapError(errorType))
+        override fun onUpdatedEpdData(on: Long, off: Long) = diagnostics.record(SpeechDiagnosticEvent.EPD)
+        override fun onUpdatedRms(rms: Double) = diagnostics.record(SpeechDiagnosticEvent.RMS)
     }
 
     override fun start(listener: (SpeechInputEvent) -> Unit) {
@@ -42,22 +54,21 @@ class PleosSpeechInputSource(context: Context) : SpeechInputSource {
                     try { sdk.release() } catch (_: Exception) { }
                 } else {
                     try {
-                        Log.i("SurprideStt","SDK_INITIALIZED mode=ON_DEVICE")
+                        diagnostics.record(SpeechDiagnosticEvent.INITIALIZED)
                         sdk.addListener(results)
                         registered = true
                         sdk.setLocale(Locale.KOREA)
                         requested = true
                         sdk.request()
-                        Log.i("SurprideStt","REQUEST_CALL_RETURNED mode=ON_DEVICE")
+                        diagnostics.record(SpeechDiagnosticEvent.REQUEST_RETURNED)
                     } catch (error: Exception) {
-                        emit(SpeechInputEvent.Failure(if (error is SecurityException)
-                            SpeechInputError.PERMISSION_DENIED else SpeechInputError.SDK_ERROR))
+                        fail(if (error is SecurityException)
+                            SpeechInputError.PERMISSION_DENIED else SpeechInputError.SDK_ERROR)
                     }
                 }
             }
             override fun onFailure(errorType: ErrorType) {
-                Log.i("SurprideStt","INITIALIZATION_FAILED error=${mapError(errorType)}")
-                emit(SpeechInputEvent.Failure(mapError(errorType)))
+                fail(mapError(errorType))
             }
         })
     }
@@ -65,12 +76,16 @@ class PleosSpeechInputSource(context: Context) : SpeechInputSource {
     override fun stop() {
         if (!requested) return
         requested = false
+        // The controller stops before closing; do not count cleanup callbacks as input events.
+        diagnostics.finish()
         sdk.stop()
     }
 
     override fun close() {
         if (closed) return
         closed = true
+        // Freeze before cleanup: stop/release may emit callbacks synchronously.
+        Log.i("SurprideStt", "SUMMARY mode=ON_DEVICE ${diagnostics.finish()}")
         callback = null
         try { stop() } finally {
             try {
@@ -80,6 +95,11 @@ class PleosSpeechInputSource(context: Context) : SpeechInputSource {
                 }
             } finally { sdk.release() }
         }
+    }
+
+    private fun fail(error: SpeechInputError) {
+        diagnostics.recordError(error)
+        emit(SpeechInputEvent.Failure(error))
     }
 
     private fun emit(event: SpeechInputEvent) = onMain { if (!closed) callback?.invoke(event) }

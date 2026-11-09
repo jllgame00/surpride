@@ -9,12 +9,13 @@ import re
 import secrets
 import threading
 import time
+from typing import Literal
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 import httpx
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 UPSTREAM = "https://apis-navi.kakaomobility.com/v1/directions"
 MAX_RESPONSE = 2_000_000
@@ -47,6 +48,16 @@ class RouteRequest(BaseModel):
     origin: Point
     destination: Point
     include_guidance: bool = Field(default=False, strict=True)
+    priority: Literal["RECOMMEND", "TIME", "DISTANCE"] = "RECOMMEND"
+    waypoints: list[Point] = Field(default_factory=list, max_length=2, strict=True)
+
+    @model_validator(mode="after")
+    def distinct_points(self):
+        points = [self.origin, *self.waypoints, self.destination]
+        coordinates = {(point.longitude, point.latitude) for point in points}
+        if len(coordinates) != len(points):
+            raise ValueError("duplicate route point")
+        return self
 
 
 class RouteFailure(Exception):
@@ -89,6 +100,17 @@ def normalized(body, request, source):
             raise RouteFailure("INVALID_COORDINATE", 422)
         raise RouteFailure("API")
     summary = route["summary"]
+    if request.waypoints:
+        sections = route["sections"]
+        waypoints = summary["waypoints"]
+        if not isinstance(sections, list) or len(sections) != len(request.waypoints) + 1:
+            raise ValueError("invalid section count")
+        if not isinstance(waypoints, list) or len(waypoints) != len(request.waypoints):
+            raise ValueError("invalid waypoint summary")
+        for actual, expected in zip(waypoints, request.waypoints):
+            # Read coordinates only; upstream POI names never enter the contract.
+            if Point(longitude=actual["x"], latitude=actual["y"]) != expected:
+                raise ValueError("mismatched waypoint summary")
     geometry = []
     for section in route.get("sections", []):
         for road in section.get("roads", []):
@@ -105,6 +127,8 @@ def normalized(body, request, source):
                     raise ValueError("geometry limit")
     result = {"schema_version": 1, "source": source,
             "origin": request.origin.model_dump(), "destination": request.destination.model_dump(),
+            "request_options": {"priority": request.priority,
+                                "waypoints": [point.model_dump() for point in request.waypoints]},
             "duration_seconds": integer(summary["duration"], 1, 604800),
             "distance_meters": integer(summary["distance"], 0, 100_000_000),
             "geometry": geometry, "measured_at_epoch_ms": int(time.time() * 1000)}
@@ -117,7 +141,9 @@ def normalized(body, request, source):
 async def fetch_route(request, settings, transport):
     params = {"origin": f"{request.origin.longitude},{request.origin.latitude}",
               "destination": f"{request.destination.longitude},{request.destination.latitude}",
-              "priority": "RECOMMEND", "summary": "false", "alternatives": "false"}
+              "priority": request.priority, "summary": "false", "alternatives": "false"}
+    if request.waypoints:
+        params["waypoints"] = "|".join(f"{point.longitude},{point.latitude}" for point in request.waypoints)
     try:
         async with asyncio.timeout(10):
             async with httpx.AsyncClient(transport=transport, trust_env=False, follow_redirects=False,
@@ -202,6 +228,26 @@ def create_app(settings=None, transport=None):
                 # Pure fixture, deliberately asymmetric. No geography/traffic inference.
                 duration = 540 if request.origin.latitude > request.destination.latitude else 780
                 fixture = {"routes": [{"result_code": 0, "summary": {"duration": duration, "distance": 4200}}]}
+                if request.waypoints:
+                    fixture["routes"][0]["summary"]["waypoints"] = [
+                        {"x": point.longitude, "y": point.latitude} for point in request.waypoints]
+                    fixture["routes"][0]["sections"] = [{} for _ in range(len(request.waypoints) + 1)]
+                if request.include_guidance:
+                    # Synthetic straight lines only, never a road/traffic inference. Source stays MOCK.
+                    points = [request.origin, *request.waypoints, request.destination]
+                    count = len(points) - 1
+                    section_distance, section_duration = 4200 // count, duration // count
+                    sections = []
+                    for index, (start, end) in enumerate(zip(points, points[1:])):
+                        guides = [{"type": 100, "distance": 0, "road_index": 0}] if index == 0 else []
+                        guides.append({"type": 101 if index == count - 1 else 1000,
+                                       "distance": section_distance, "road_index": 0})
+                        sections.append({"distance": section_distance, "duration": section_duration,
+                            "roads": [{"name": "", "distance": section_distance,
+                                "duration": section_duration, "traffic_state": 0,
+                                "vertexes": [start.longitude, start.latitude, end.longitude, end.latitude]}],
+                            "guides": guides})
+                    fixture["routes"][0]["sections"] = sections
                 return normalized(fixture, request, "MOCK")
             return await fetch_route(request, settings, transport)
         except RouteFailure as exc:

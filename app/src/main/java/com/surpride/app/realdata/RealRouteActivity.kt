@@ -22,6 +22,7 @@ import java.util.UUID
 import java.io.IOException
 import java.util.concurrent.Executors
 import java.util.concurrent.Future
+import com.surpride.app.realdata.experience.*
 
 /** Parked-only validation and explicit private preparation; guidance starts only inside the PoC. */
 class RealRouteActivity:AppCompatActivity() {
@@ -37,6 +38,7 @@ class RealRouteActivity:AppCompatActivity() {
         var gps="아직 확인하지 않음"
         var busy=false
         var requestStatus="요청 전"
+        var optimize=true
     }
     private lateinit var session:Session
     private lateinit var ux:ParkedUxMonitor
@@ -104,8 +106,11 @@ class RealRouteActivity:AppCompatActivity() {
         val version=++requestVersion
         pending=executor.submit {
             val provider=if(mock) MockRouteProvider(System::currentTimeMillis) else LiveRouteProvider(config)
-            val result=try {RouteRecommendationEngine(SeoulPilotCatalog.places,provider).recommend(
-                location.point,preferences,RecommendationContext(System.currentTimeMillis(),recentIds=recent),stay,10,1)
+            val result=try {
+                val context=RecommendationContext(System.currentTimeMillis(),recentIds=recent)
+                if(session.optimize) DriveExperienceEngine(SeoulPilotCatalog.places,provider,PendingScenicCatalog.routingCandidates).recommend(
+                    location.point,preferences,context,stay,10,1)
+                else RouteRecommendationEngine(SeoulPilotCatalog.places,provider).recommend(location.point,preferences,context,stay,10,1)
             } catch(_:Exception) {RoutePlan.Failure(setOf(RouteError.API))}
             runOnUiThread {
                 if(version==requestVersion && allowed && !isFinishing && !isDestroyed) {
@@ -118,6 +123,9 @@ class RealRouteActivity:AppCompatActivity() {
     }
     private fun prepareNavigation(plan:RoutePlan.Success) {
         if(plan.routeOrigin!=RouteOrigin.LIVE_API || plan!==session.plan || !allowed) return
+        if(!plan.feasibleForHandoff(session.preferences,System.currentTimeMillis())) {
+            session.requestStatus="준비 중단: 귀가 시간 또는 데이터 신선도 변경 · 다시 평가해 주세요";return
+        }
         val tripOrigin=session.recommendationOrigin?:return
         val config=ProxyConfiguration.load(this)
         if(config==null) {session.requestStatus="준비 불가: 프록시 설정 없음/만료";return}
@@ -126,16 +134,21 @@ class RealRouteActivity:AppCompatActivity() {
         val inbound=plan.inbound?.takeIf {it.origin==RouteOrigin.LIVE_API}
         val trip=PreparedTripMetadata(tripOrigin,preferences.returnToStart,preferences.availableMinutes,
             preferences.returnByEpochMillis,session.stay.toLong()*60,600,inbound?.seconds,inbound?.receivedAtMillis)
-        session.busy=true;session.requestStatus="선정 코스의 최신 전체 안내 조회 중 · 자동 시작 없음"
+        session.busy=true;session.requestStatus=if(plan.experience!=null) "선정 경로 확인 중 · 추가 기본 경로 조회 없음 · 자동 시작 없음" else "선정 코스의 최신 전체 안내 조회 중 · 자동 시작 없음"
         val version=++requestVersion
         pending=executor.submit {
             val result=try {
-                val response=ProxyHttpTransport.postGuidance(config,tripOrigin,plan.place.point)
+                // The exact measured alternative is handed off; do not replace it with a new default route.
+                val response=if(plan.experience!=null) {
+                    val raw=plan.outbound.guidancePayload?:throw IOException("Missing selected guidance")
+                    ProxyHttpResponse(200,raw)
+                } else ProxyHttpTransport.postGuidance(config,tripOrigin,plan.place.point)
                 if(Thread.currentThread().isInterrupted) PreparedRouteReply.Failure(RouteError.NETWORK)
                 else if(config.expiresAtMillis<=System.currentTimeMillis()) PreparedRouteReply.Failure(RouteError.NOT_CONFIGURED)
+                else if(!plan.feasibleForHandoff(preferences,System.currentTimeMillis())) PreparedRouteReply.Failure(RouteError.TIME_EXCEEDED)
                 else PreparedRouteContract.prepare(response,tripOrigin,plan.place.point,plan.place.id,
-                    plan.place.name,"${preferences.mood.label}의 기분과 ${preferences.companion.label} 떠나는 시간에 맞춘 공개 장소 후보입니다. 경관·차량 진입 적합성은 미검증입니다.",
-                    nonce,System.currentTimeMillis(),trip,config)
+                    plan.place.name,plan.experience?.publicReason?:"${preferences.mood.label}의 기분과 ${preferences.companion.label} 떠나는 시간에 맞춘 공개 장소 후보입니다. 경관·차량 진입 적합성은 미검증입니다.",
+                    nonce,System.currentTimeMillis(),trip,config,plan.experience?.selectedOptions)
             } catch(_:IOException) {PreparedRouteReply.Failure(RouteError.NETWORK)}
               catch(_:Exception) {PreparedRouteReply.Failure(RouteError.API)}
             runOnUiThread {
@@ -143,7 +156,8 @@ class RealRouteActivity:AppCompatActivity() {
                     pending=null;session.busy=false
                     session.requestStatus=when(result) {
                         is PreparedRouteReply.Failure -> "준비 실패: ${result.error} · 자동 DEMO 전환 없음"
-                        is PreparedRouteReply.Success -> when(PreparedNavigationHandoff.launch(this,result,plan.place.id,nonce)) {
+                        is PreparedRouteReply.Success -> if(!plan.feasibleForHandoff(preferences,System.currentTimeMillis())) "시간/신선도 변경 · 다시 평가 필요"
+                        else when(PreparedNavigationHandoff.launch(this,result,plan.place.id,nonce)) {
                             PreparedNavigationHandoff.Result.LAUNCHED -> "PoC 준비 화면 전달 완료 · 직접 시작 전에는 길 안내 없음"
                             PreparedNavigationHandoff.Result.APP_MISSING -> "PoC 앱이 설치되지 않았습니다. nav-host-poc APK 설치 후 다시 준비하세요."
                             PreparedNavigationHandoff.Result.FAILED -> "PoC 전달 실패 · 비공개 패킷 삭제 · 다시 준비하세요."
@@ -202,6 +216,10 @@ class RealRouteActivity:AppCompatActivity() {
         right.addView(label("실제 장소와 실제 경로는 별개입니다. 서버의 MOCK 응답은 실시간 교통 데이터가 아닙니다. 대표 좌표의 차량 진입점은 미확인입니다.",19))
         right.addView(button("서버 프록시로 경로 평가") {calculate(false)})
         right.addView(button("명시적으로 MOCK 경로 평가") {calculate(true)})
+        right.addView(button(if(session.optimize) "경로·목적지 통합 비교 ON · 기존 평가로 변경" else "기존 평가 · 경로·목적지 통합 비교 켜기") {
+            session.optimize=!session.optimize;reset()
+        })
+        right.addView(label("경관 연구 후보 2곳은 차량 진입·운영·이용 조건 미확인으로 제외합니다. 경관 UNKNOWN은 낮은 품질이라는 뜻이 아닙니다.",18))
         right.addView(label(session.requestStatus,18))
         if(session.busy) right.addView(Button(this).apply {
             text="조회 취소";textSize=20f;minHeight=dp(70);setOnClickListener {act {cancelPending()}}
@@ -212,9 +230,19 @@ class RealRouteActivity:AppCompatActivity() {
                 val view=plan.presentation(session.revealed)
                 val provenance=if(view.mode==RouteOrigin.LIVE_API) "공급자 조회 시점의 자동차 예상값 · 실제 길 안내 아님" else "시간·거리는 합성 Mock 값이며 실제 이동 예측이 아닙니다."
                 right.addView(label("비밀 코스 선정 · ${view.mode}\n총 ${view.totalMinutes}분 / ${"%.1f".format(view.distanceMeters/1000.0)}km\n$provenance",23,true))
-                right.addView(label("기분·장소 선호 점수로 선정. 경관 점수 없음. 날씨·계절·차량 주행 가능 거리 미확인. 복귀도 별도 조회 계약으로 검증합니다.",18))
+                right.addView(label(plan.experience?.publicReason?:"기분·장소 선호 점수로 선정. 경관 점수 없음. 날씨·계절·차량 주행 가능 거리 미확인. 복귀도 별도 조회 계약으로 검증합니다.",18))
+                plan.experience?.let {experience->
+                    val selected=experience.selectedOptions
+                    val routeType=if(selected.waypoints.isNotEmpty()) "검증 경유" else when(selected.priority) {
+                        RoutePriority.RECOMMEND->"기본";RoutePriority.TIME->"시간 우선";RoutePriority.DISTANCE->"거리 우선"
+                    }
+                    right.addView(label("선정 유형: $routeType / 경관 보장 없음\n총 이용시간은 출발+복귀+체류+여유이며 교통 상황에 따라 달라집니다.",18))
+                    right.addView(label(experience.comparisons.mapIndexed {i,v->
+                        "비교 ${i+1} · ${v.label}: ${v.totalSeconds?.let {s->"${(s+59)/60}분"}?:"시간 없음"} · ${v.status}"
+                    }.joinToString("\n"),17))
+                }
                 if(view.mode==RouteOrigin.LIVE_API) {
-                    right.addView(label("REAL ROUTE + DEVICE_API_EMULATOR\n선정 코스의 출발편 전체 안내를 최신 조회해 PoC 준비 화면으로 전달합니다. PoC에서 직접 시작해야 합니다. 실도로 인증·자동 복귀 안내는 제공하지 않습니다. 차량 진입·주차 UNKNOWN.",18))
+                    right.addView(label("REAL ROUTE + DEVICE_API_EMULATOR\n선정 코스의 출발편 전체 안내를 PoC 준비 화면으로 전달합니다. 비교 경로는 같은 geometry를 유지하고 신선도·귀가 제한을 재검사합니다. PoC에서 직접 시작해야 합니다. 실도로 인증·자동 복귀 안내는 제공하지 않습니다. 차량 진입·주차 UNKNOWN.",18))
                     right.addView(button("선정 LIVE 코스로 내비 PoC 준비") {prepareNavigation(plan)})
                 }
                 if(view.destination==null) {

@@ -1,0 +1,4 @@
+I/SurprideMood(15859): speech=INITIALIZING source=PLEOS_ON_DEVICE error=null
+I/SurprideStt(15859): SUMMARY mode=ON_DEVICE requestReturned=true recognitionSucceeded=false INITIALIZED=1 REQUEST_RETURNED=1 READY=1 STARTED=0 ENDED=0 PARTIAL=0 COMPLETED_EMPTY=0 COMPLETED_NONEMPTY=0 RMS=145 EPD=0 ERROR=0 lastEvent=RMS lastError=NONE
+I/SurprideMood(15859): speech=NO_SPEECH source=PLEOS_ON_DEVICE error=null
+I/SurprideMood(15859): speech=CLOSED source=PLEOS_ON_DEVICE error=null

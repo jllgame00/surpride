@@ -121,7 +121,7 @@ class FollowCamera {
         val path = mutableListOf<RouteCoordinate>()
         if (onRoute) {
             val geometry = route!!.geometry
-            val next = match!!.nextManeuver?.takeIf { it.type != 100 && it.type != 101 }
+            val next = match!!.nextManeuver?.takeIf { it.type != 100 && it.type != 101 && it.type != 1000 }
             val nextAlong = next?.let { it.offsetMeters.toDouble() / route.distanceMeters.coerceAtLeast(1) * geometry.lengthMeters }
             if (nextAlong != null && nextAlong - along in 0.0..1500.0) horizon = max(horizon, nextAlong - along + 70.0)
             val remaining = (geometry.lengthMeters - along).coerceAtLeast(0.0)

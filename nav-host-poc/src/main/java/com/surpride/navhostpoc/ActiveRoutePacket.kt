@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.car.app.CarContext
 import com.surpride.navhostpoc.guidance.GuidanceParser
 import com.surpride.navhostpoc.guidance.GuidanceRoute
+import com.surpride.navhostpoc.guidance.RouteRequestOptions
+import com.surpride.navhostpoc.guidance.WaypointProgress
 import com.surpride.navhostpoc.ownership.DestinationIdentity
 import org.json.JSONObject
 import java.io.File
@@ -17,6 +19,8 @@ import com.surpride.navhostpoc.returntrip.ReturnEstimate
 internal class ActiveRoutePacket(val route:GuidanceRoute,val identity:DestinationIdentity,val reason:String,
     val candidateId:String?,val nonce:String?,private val measuredAt:Long,private val expiresAt:Long,
     private val envelope:JSONObject) {
+    val requestOptions=RouteRequestOptions.parse(if(envelope.has("request_options")) envelope.getJSONObject("request_options") else null)
+    init {WaypointProgress(route,requestOptions.waypoints.size)}
     private fun point(key:String):RouteCoordinate?=try {envelope.optJSONObject(key)?.let {RouteCoordinate(it.getDouble("longitude"),it.getDouble("latitude"))}} catch(_:Exception) {null}
     val destination get()=checkNotNull(point("destination"))
     val outboundDestination get()=point("trip_destination")?:destination
@@ -33,7 +37,11 @@ internal class ActiveRoutePacket(val route:GuidanceRoute,val identity:Destinatio
         return if(seconds>0 && at>0) ReturnEstimate(seconds,at) else null
     }
     fun rememberStart(context:CarContext,at:Long) {envelope.put("trip_started_at_epoch_ms",at);File(context.cacheDir,"route-guidance.json").writeText(envelope.toString())}
-    fun replace(context:CarContext,value:RouteRefreshResult.Success,isReturn:Boolean,at:Long?):ActiveRoutePacket {
+    fun replace(context:CarContext,value:RouteRefreshResult.Success,isReturn:Boolean,at:Long?,
+        remainingWaypointCount:Int=requestOptions.waypoints.size):ActiveRoutePacket {
+        require(remainingWaypointCount in 0..requestOptions.waypoints.size)
+        // A two-point refresh cannot silently skip a waypoint. Caller must first prove all passed.
+        require(isReturn || remainingWaypointCount==0) {"WAYPOINT_REFRESH_NOT_SUPPORTED"}
         val next=JSONObject(value.payload)
         for(key in listOf("candidate_id","session_nonce","private_reason","trip_origin","return_to_start","available_minutes","return_by_epoch_ms",
             "stay_seconds","safety_buffer_seconds","initial_return_duration_seconds","initial_return_measured_at_epoch_ms","proxy_session","development_public_replay"))

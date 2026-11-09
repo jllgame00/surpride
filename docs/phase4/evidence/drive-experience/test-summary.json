@@ -1,0 +1,23 @@
+{
+  "results": [
+    {
+      "module": "app",
+      "tests": 187,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "module": "nav-host-poc",
+      "tests": 175,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "module": "FastAPI",
+      "tests": 90,
+      "failures": 0,
+      "errors": 0
+    }
+  ],
+  "total": 452
+}

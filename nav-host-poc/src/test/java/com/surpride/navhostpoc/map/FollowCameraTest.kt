@@ -68,6 +68,15 @@ class FollowCameraTest {
         assertTrue(fast.zoom < 19.0)
     }
 
+    @Test fun waypointDoesNotExpandCameraAsIfItWereATurn() {
+        val r=route(turn=1200)
+        val waypoint=match(turn=1200).copy(nextManeuver=Maneuver(1000,1200,0))
+        val pose=FollowCamera().update(r,fix(speed=2.0),waypoint,1200,700)!!
+        assertEquals(284.0,pose.forwardMeters,0.01)
+        val turn=FollowCamera().update(r,fix(speed=2.0),match(turn=1200),1200,700)!!
+        assertTrue(turn.forwardMeters>1200.0)
+    }
+
     @Test fun routeWindowOmitsTerminalCoordinateAndKeepsNearEndTurnAndCurrentMarker() {
         val r = route()
         val pose = FollowCamera().update(r, fix(east = 2700.0), match(2700.0), 2560, 1440)!!

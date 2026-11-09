@@ -22,8 +22,8 @@ object PreparedRouteContract {
     const val MAX_BYTES=2_000_000
     fun prepare(response:ProxyHttpResponse,origin:GeoPoint,destination:GeoPoint,candidateId:String,
         privateLabel:String,privateReason:String,nonce:String,now:Long,trip:PreparedTripMetadata?=null,
-        proxySession:ProxySettings?=null):PreparedRouteReply {
-        val parsed=ProxyRouteParser.parse(response.status,response.body,origin,destination,now)
+        proxySession:ProxySettings?=null,expectedOptions:RouteOptions?=null):PreparedRouteReply {
+        val parsed=ProxyRouteParser.parse(response.status,response.body,origin,destination,now,expectedOptions)
         if(parsed is RouteReply.Failure) return PreparedRouteReply.Failure(parsed.error)
         if((parsed as RouteReply.Success).leg.origin!=RouteOrigin.LIVE_API)
             return PreparedRouteReply.Failure(RouteError.INVALID_RESPONSE)
@@ -40,6 +40,7 @@ object PreparedRouteContract {
             val packet=JSONObject()
             listOf("schema_version","source","origin","destination","duration_seconds","distance_meters",
                 "geometry","measured_at_epoch_ms","guidance").forEach {packet.put(it,data.get(it))}
+            if(expectedOptions!=null) packet.put("request_options",data.getJSONObject("request_options"))
             packet.put("private_destination_label",privateLabel).put("private_reason",privateReason)
                 .put("candidate_id",candidateId).put("session_nonce",nonce)
                 .put("prepared_at_epoch_ms",now).put("expires_at_epoch_ms",now+TTL_MILLIS)

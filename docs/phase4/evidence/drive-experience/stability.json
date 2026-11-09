@@ -1,0 +1,14 @@
+{
+  "com.surpride.app": {
+    "running": true,
+    "current_pid_fatal_exception": false,
+    "current_pid_crash_events": 0,
+    "current_pid_anr_events": 0
+  },
+  "com.surpride.navhostpoc": {
+    "running": true,
+    "current_pid_fatal_exception": false,
+    "current_pid_crash_events": 0,
+    "current_pid_anr_events": 0
+  }
+}

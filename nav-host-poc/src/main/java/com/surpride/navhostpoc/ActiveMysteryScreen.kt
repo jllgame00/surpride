@@ -38,6 +38,7 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
     private val allowed get()=foreground && emulator && requiresDo==false
     private var route=packet?.route
     private var matcher=route?.let(::RouteMatcher)
+    private var waypointProgress=packet?.let {WaypointProgress(it.route,it.requestOptions.waypoints.size)}
     private val arrival=ArrivalGate()
     private var fix:PositionFix?=null
     private var revealed=false
@@ -87,11 +88,18 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         if(!subscribed || !allowed) return@PositionSession
         when(event) {
             is PositionEvent.Fix->{fix=event.value;received++;val state=matcher!!.accept(event.value,SystemClock.elapsedRealtime())
-                if(adapter.state==OwnershipState.ACTIVE) arrival.observe(event.value,state,route!!.distanceToRouteEnd(event.value.coordinate),requiresDo==false,SystemClock.elapsedRealtime())
+                waypointProgress?.observe(state.progress,state.status==MatchStatus.ON_ROUTE)
+                if(adapter.state==OwnershipState.ACTIVE) {
+                    if(waypointProgress?.canConfirmFinalArrival(state.progress)==true)
+                        arrival.observe(event.value,state,route!!.distanceToRouteEnd(event.value.coordinate),requiresDo==false,SystemClock.elapsedRealtime())
+                    else arrival.invalidate()
+                }
                 maybeStart()
                 maybePrepare()
                 if(adapter.state==OwnershipState.ACTIVE) {
-                    ensureDeparture();reroute?.updateEligibility(true,allowed);reroute?.onMatch(event.value,state.status)
+                    ensureDeparture()
+                    if(state.status==MatchStatus.OFF_ROUTE && waypointProgress?.canRefreshDirect()!=true) stopForWaypointRefresh()
+                    else {reroute?.updateEligibility(true,allowed);reroute?.onMatch(event.value,state.status)}
                     when(state.status) {
                         MatchStatus.ON_ROUTE->{gpsMissingSince=null;loadingPublished=false;publish();refreshReturnEstimate()}
                         MatchStatus.OFF_ROUTE_CANDIDATE,MatchStatus.OFF_ROUTE,MatchStatus.REJOINING->{gpsMissingSince=null;beginLoading("경로 이탈 확인 · 재탐색 대기")}
@@ -156,6 +164,8 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         if(oem.status.routeActive!=false || focus.status.otherNavigationActive==true) {pendingStart=false;result="EXISTING_NAVIGATION_BLOCKED";return}
         if(ContextCompat.checkSelfPermission(carContext,Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED) {pendingStart=false;result="PRECISE_LOCATION_REQUIRED";return}
         if(route?.source!=RouteDataSource.KAKAO_DIRECTIONS) {pendingStart=false;result="LIVE_ROUTE_REQUIRED";return}
+        // Waypoint support has synthetic contract coverage only; LIVE activation stays closed.
+        if(packet?.requestOptions?.waypoints?.isNotEmpty()==true) {pendingStart=false;result="WAYPOINT_LIVE_NOT_VERIFIED";return}
         if(packet?.isFresh(System.currentTimeMillis())!=true) {pendingStart=false;result="ROUTE_EXPIRED / PREPARE_AGAIN";return}
         if(matcher?.state()?.status!=MatchStatus.ON_ROUTE || fix?.let {SystemClock.elapsedRealtime()-it.elapsedMillis in 0..5000}!=true) {result="FRESH_ON_ROUTE_GPS_REQUIRED";return}
         pendingStart=false
@@ -173,6 +183,10 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
     private fun stopForUnreliable(reason:String) {
         // No exact TBT from uncertain positions. Stop active host session; restart requires another explicit action.
         adapter.stop();result="POSITION_UNTRUSTED / $reason";arrival.invalidate()
+    }
+    private fun stopForWaypointRefresh() {
+        adapter.stop();reroute?.cancel();pendingPreparation=null;cancelRequests();arrival.invalidate()
+        result="WAYPOINT_REFRESH_NOT_SUPPORTED / PREPARE_AGAIN"
     }
     private fun ensureDeparture() {
         if(startedAt==null) {
@@ -219,12 +233,15 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         }
     }
     private fun installRoute(value:RouteRefreshResult.Success,isReturn:Boolean):Boolean {
+        if(!isReturn && waypointProgress?.canRefreshDirect()!=true) {stopForWaypointRefresh();return false}
         val position=fix?.takeIf {SystemClock.elapsedRealtime()-it.elapsedMillis in 0..5000}?:return false
         val nextMatcher=RouteMatcher(value.route)
         if(nextMatcher.accept(position,SystemClock.elapsedRealtime()).status!=MatchStatus.ON_ROUTE) return false
         return try {
-            val next=packet!!.replace(carContext,value,isReturn,startedAt)
+            val next=packet!!.replace(carContext,value,isReturn,startedAt,
+                remainingWaypointCount=waypointProgress?.state()?.remaining?:0)
             packet=next;route=value.route;matcher=nextMatcher;returning=isReturn;arrival.reset();returnCompleted=false
+            waypointProgress=WaypointProgress(next.route,next.requestOptions.waypoints.size)
             loadingPublished=false;gpsMissingSince=null;voice.invalidateRoute();guidanceGeneration++
             Log.i("SurprideReroute","ROUTE_REPLACED source=${value.route.source} return=$isReturn segments=${value.route.segments.size} maneuvers=${value.route.maneuvers.size} owner=${adapter.state} gpsSubscribed=$subscribed")
             refresh(true);true
@@ -240,6 +257,7 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         val p=packet?:return
         val position=fix?.takeIf {SystemClock.elapsedRealtime()-it.elapsedMillis in 0..5000 && it.accuracyMeters in 0.1..50.0}?:return
         val isReturn=purpose=="RETURN" || returning
+        if(!isReturn && waypointProgress?.canRefreshDirect()!=true) {stopForWaypointRefresh();refresh(true);return}
         val target=if(purpose=="RETURN") p.tripOrigin else p.destination
         if(target==null) {pendingPreparation=null;result="RETURN_ORIGIN_UNKNOWN";return}
         if(lastPreparationAt?.let {SystemClock.elapsedRealtime()-it<30_000}==true) {pendingPreparation=null;result="REQUEST_COOLDOWN · 잠시 후 다시 선택";return}
@@ -313,6 +331,7 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
     }
     private fun reveal() {if(!allowed) return;revealed=true;publish();refresh(true);Log.i("SurprideActive","DISCLOSURE explicit=true")}
     private fun confirmArrival() {
+        if(waypointProgress?.canConfirmFinalArrival(matcher?.state()?.progress)!=true) {arrival.invalidate();result="ARRIVAL_NOT_CONFIRMED";refresh(true);return}
         if(!allowed || !arrival.confirm(true,true,SystemClock.elapsedRealtime())) {result="ARRIVAL_NOT_CONFIRMED";refresh(true);return}
         adapter.stop();revealed=true;arrivedAt=System.currentTimeMillis();returnCompleted=returning
         result=if(returning) "RETURN_COMPLETED / GUIDANCE_ENDED" else "ARRIVED / USER_CONFIRMED_PARKED / GUIDANCE_ENDED"
