@@ -1,0 +1,11 @@
+SurprideNavPoc: SESSION_CREATED_STATIC_ONLY
+SurprideNavPoc: HOST_CONNECTED carApi=4
+SurprideNavPoc: NAVIGATION_TEMPLATE_STATIC_MOCK
+SurprideNavPoc: STATIC_SURFACE_DRAWN
+SurprideOwnership: LOCAL_AUDIT destinations=0 steps=1 stepEstimates=1 model=INACTIVE actualActivation=false carApi=4
+SurprideOwnership: AUDIT_DESTROYED actualActivation=false
+SurprideNavPoc: NAVIGATION_TEMPLATE_STATIC_MOCK
+SurprideNavPoc: STATIC_SURFACE_DRAWN
+SurprideGps: TEMPLATE status=null subscribed=false progressM=null nextM=null nativeEta=false
+SurprideGps: SCREEN_DESTROYED
+SurprideNavPoc: SCREEN_DESTROYED

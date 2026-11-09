@@ -1,0 +1,41 @@
+AndroidX app/app-automotive/app-testing: 1.7.0. API34 emulator; observed host API4.
+App1.7.0 cached classes.jar matches audited phase3-contract classes.jar SHA256: f457e670d4a151fb6e0834679713fa85eaeb7c071b58c1d9f84c72aa711b266d
+Trip declared serialized fields:
+private final java.util.List<androidx.car.app.navigation.model.Destination> mDestinations;
+private final java.util.List<androidx.car.app.navigation.model.Step> mSteps;
+private final java.util.List<androidx.car.app.navigation.model.TravelEstimate> mDestinationTravelEstimates;
+private final java.util.List<androidx.car.app.navigation.model.TravelEstimate> mStepTravelEstimates;
+private final androidx.car.app.model.CarText mCurrentRoad;
+private final boolean mIsLoading;
+Destination declared serialized fields:
+private final androidx.car.app.model.CarText mName;
+private final androidx.car.app.model.CarText mAddress;
+private final androidx.car.app.model.CarIcon mImage;
+Step declared serialized fields:
+private final androidx.car.app.navigation.model.Maneuver mManeuver;
+private final java.util.List<androidx.car.app.navigation.model.Lane> mLanes;
+private final androidx.car.app.model.CarIcon mLanesImage;
+private final androidx.car.app.model.CarText mCue;
+private final androidx.car.app.model.CarText mRoad;
+Maneuver declared serialized fields:
+private final int mType;
+private final int mRoundaboutExitNumber;
+private final int mRoundaboutExitAngle;
+private final androidx.car.app.model.CarIcon mIcon;
+TravelEstimate declared serialized fields:
+private final androidx.car.app.model.Distance mRemainingDistance;
+private final long mRemainingTimeSeconds;
+private final androidx.car.app.model.DateTimeWithZone mArrivalTimeAtDestination;
+private final androidx.car.app.model.CarColor mRemainingTimeColor;
+private final androidx.car.app.model.CarColor mRemainingDistanceColor;
+private final androidx.car.app.model.CarText mTripText;
+private final androidx.car.app.model.CarIcon mTripIcon;
+Destination.Builder.build rejects missing/empty BOTH name and address (actual bytecode + runtime test).
+Trip.Builder accepts an empty destination list; destinations and destination-estimates must be paired.
+Step accepts no Maneuver; lanes image requires lane data. Factory requires a cue/road and valid Maneuver.
+Maneuver supports type-specific roundabout fields, not all can be omitted.
+TravelEstimate requires Distance and arrival time; remaining seconds >=0 or library UNKNOWN(-1). Factory accepts known >=0 only.
+No direct final coordinate fields in these five model classes in1.7.0. Image/road/cue text can still reveal identity.
+Hidden factory omits Destination/destination estimate/image/icon; emits current road, next Step and its estimate.
+TestNavigationManager records attempts BEFORE super validation; getTripsSent/counts alone do not prove successful delivery.
+Actual Pleos navigationStarted/updateTrip/focus request not executed. Test manager is an official FakeHost.

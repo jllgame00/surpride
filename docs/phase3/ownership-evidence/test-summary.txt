@@ -1,0 +1,14 @@
+Phase3B-2 / 2026-11-09 / main b76331468d725f43e42f84250754dbf002c83439 (start clean)
+Main build-codex.ps1 -Test -RerunTasks: SUCCESS; 41 tasks executed / 62s.
+PoC build-nav-host-poc.ps1 -Test (normal sandbox after runtime bootstrap): SUCCESS;48 tests / 50s.
+FastAPI pytest backend/tests -q -p no:cacheprovider: 33 passed,1 existing warning.
+app: {'tests': 89, 'failures': 0, 'errors': 0, 'skipped': 0}
+nav-host-poc: {'tests': 48, 'failures': 0, 'errors': 0, 'skipped': 0}
+Total:170 passed; previous149+new21 (ownership14+Trip4+official manager3).
+Review regression RED:47 tests/5fail; additional debt RED:48tests/1fail; all fixed then GREEN48/0.
+TestNavigationManager counts attempts before base validation; no actual Pleos Trip delivered.
+Official test host callback injection is used; internal NavigationManager.onStopNavigation is not called.
+Robolectric cold downloader staging failed in normal restricted run (parent mkdir); local JVM homes/temp/cache configured.
+One approved scoped runtime bootstrap succeeded. Subsequent ordinary standard command executed all new tests successfully.
+No global ACL/cache/env changes; AGP/SDK/production Car App versions unchanged.
+Installed PoC APK SHA256 matches build: 92373a3b3b5a8594f385caf68e741b9e0207971ee2e9c555ca7e92b445f7c11b

@@ -99,7 +99,7 @@ private class MockNavigationScreen(context: CarContext) : Screen(context) {
                 .addAction(Action.Builder().setTitle("실험 선택").setOnClickListener {
                     screenManager.push(ExperimentChooserScreen(carContext) {selection->
                         screenManager.pop()
-                        screenManager.push(when(selection) {0->DynamicNavigationScreen(carContext);2->GpsTrackingScreen(carContext);else->ExplanationScreen(carContext)})
+                        screenManager.push(when(selection) {0->DynamicNavigationScreen(carContext);2->GpsTrackingScreen(carContext);3->OwnershipAuditScreen(carContext);else->ExplanationScreen(carContext)})
                     })
                 }.build())
                 .build())
@@ -113,7 +113,8 @@ private class ExperimentChooserScreen(context:CarContext,private val choose:(Int
         .setSingleList(ItemList.Builder()
             .addItem(Row.Builder().setTitle("실경로 동적 DEMO · 정차 전용").setOnClickListener {choose(0)}.build())
             .addItem(Row.Builder().setTitle("기존 정적 PoC 설명").setOnClickListener {choose(1)}.build())
-            .addItem(Row.Builder().setTitle("GPS 경로 추적 · 정차 실험").setOnClickListener {choose(2)}.build()).build()).build()
+            .addItem(Row.Builder().setTitle("GPS 경로 추적 · 정차 실험").setOnClickListener {choose(2)}.build())
+            .addItem(Row.Builder().setTitle("소유권·비공개 계약 감사 · 활성화 없음").setOnClickListener {choose(3)}.build()).build()).build()
 }
 
 private class ExplanationScreen(context: CarContext) : Screen(context) {
