@@ -1,7 +1,11 @@
 package com.surpride.app.realdata
 
-import android.graphics.Color
+import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.Path
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ScrollView
@@ -12,6 +16,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import com.surpride.app.experience.ParkedUxMonitor
 import com.surpride.app.experience.core.ParkedInteractionPolicy
+import com.surpride.app.ui.SurprideUi
 
 /** Exported callback entry: an opaque pending token authorizes review, never automatic rating. */
 class LiveNavigationResultActivity:AppCompatActivity() {
@@ -21,6 +26,7 @@ class LiveNavigationResultActivity:AppCompatActivity() {
     private var rating:Int?=null
     private var saved=false
     private var saveError=false
+    private val ui by lazy {SurprideUi(this)}
     private val allowed get()=ParkedInteractionPolicy.allows(requiresDo)
     private val nonce get()=intent.getStringExtra("session_nonce")
     private val candidateId get()=intent.getStringExtra("candidate_id")
@@ -29,13 +35,14 @@ class LiveNavigationResultActivity:AppCompatActivity() {
     private val stopped get()=intent.getBooleanExtra("stopped",false)
 
     override fun onCreate(savedInstanceState:Bundle?) {
+        SurprideUi.applyAppearance(this)
         super.onCreate(savedInstanceState)
         rating=savedInstanceState?.getInt("rating",0)?.takeIf {it in 1..5}
         saved=savedInstanceState?.getBoolean("saved",false)?:false
         ux=ParkedUxMonitor(applicationContext)
         WindowCompat.setDecorFitsSystemWindows(window,false)
-        root=LinearLayout(this).apply {orientation=LinearLayout.VERTICAL;setBackgroundColor(Color.rgb(10,24,24))}
-        setContentView(ScrollView(this).apply {isFillViewport=true;setBackgroundColor(Color.rgb(10,24,24));addView(root)})
+        root=LinearLayout(this).apply {orientation=LinearLayout.VERTICAL;setBackgroundColor(ui.background)}
+        setContentView(ScrollView(this).apply {isFillViewport=true;setBackgroundColor(ui.background);addView(root)})
         ViewCompat.setOnApplyWindowInsetsListener(root) {view,insets->
             val bars=insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
             view.setPadding(bars.left+dp(32),bars.top+dp(20),bars.right+dp(32),bars.bottom+dp(20));insets
@@ -53,27 +60,32 @@ class LiveNavigationResultActivity:AppCompatActivity() {
         SeoulPilotCatalog.places.any {it.id==candidateId}
     private fun render() {
         root.removeAllViews()
-        root.addView(label("REAL ROUTE / DEVICE_API_EMULATOR",25))
-        root.addView(label("임시 실제경로 · 정차 에뮬레이터 전용, 실제 운행 검증 없음",18))
-        if(!allowed) {root.addView(label("정차 상태가 확인되면 결과를 검토할 수 있습니다.",24));return}
-        root.addView(label("AVD 에뮬레이터 결과 · 실도로 방문 인증 아님\nDEMO 기록과 별도 보관합니다.",20))
+        root.addView(ui.text("S /  오늘의 발견",32,ui.accent,true))
+        root.addView(label("실제 경로 · 정차 에뮬레이터 체험 기록",20))
+        if(!allowed) {root.addView(label("안전하게 정차한 뒤 결과를 확인해 주세요",28));return}
+        val result=ui.card();root.addView(result)
         if(saved) {
-            root.addView(label("LIVE 에뮬레이터 평가를 저장했습니다.",28))
+            result.addView(ui.text("오늘의 경험을 기록했어요",36,ui.accent,true))
+            result.addView(JourneyMark(this),LinearLayout.LayoutParams(-1,dp(88)))
+            result.addView(label("기분 지도에서 다시 만나 보세요\n실제 방문 인증과는 다른 에뮬레이터 평가입니다",24))
         } else if(!valid()) {
-            root.addView(label("결과를 확인할 수 없습니다. 세션이 만료되었거나 이미 저장되었거나, 공개·중지가 확인되지 않았습니다.",23))
+            result.addView(ui.text("지금은 결과를 확인할 수 없어요",28,ui.error,true))
+            result.addView(label("세션이 만료되었거나 이미 저장됐어요\n목적지 공개와 안내 종료가 확인되어야 평가할 수 있어요",24))
         } else {
             val place=SeoulPilotCatalog.places.first {it.id==candidateId}
-            root.addView(label(place.name,32))
-            root.addView(label(if(intent.getBooleanExtra("arrived",false)) "도착 후 공개·중지 결과" else "명시적 공개·중지 결과 (도착 확인 아님)",20))
-            root.addView(label("대표 좌표의 차량 진입·주차·접근성은 UNKNOWN입니다.\n경로/GPS/API 키를 기록에 저장하지 않습니다.",18))
-            root.addView(label("이번 에뮬레이터 경험을 직접 평가해 주세요.",24))
-            if(saveError) root.addView(label("저장하지 못했습니다. 세션과 저장 공간을 확인하고 다시 시도하세요.",20))
+            result.addView(ui.text(place.name,36,ui.accent,true))
+            result.addView(JourneyMark(this),LinearLayout.LayoutParams(-1,dp(88)))
+            result.addView(label(if(intent.getBooleanExtra("arrived",false)) "도착을 확인하고 만난 목적지" else "직접 공개한 목적지 · 도착 확인 전",24))
+            result.addView(label("${place.type}\n선택한 드라이브 조건으로 준비한 실제 장소입니다",24))
+            result.addView(label("차량 진입·주차·운영시간은 확인이 필요해요",20))
+            result.addView(label("이번 드라이브 체험은 어땠나요?",28))
+            if(saveError) result.addView(ui.text("기록을 저장하지 못했어요 · 다시 시도해 주세요",24,ui.error))
             val choices=LinearLayout(this)
-            (1..5).forEach {value->choices.addView(button(if(rating==value) "✓ $value / 5" else "$value / 5") {
+            (1..5).forEach {value->choices.addView(button("$value 점") {
                 if(allowed && valid()) {rating=value;render()}
-            },LinearLayout.LayoutParams(0,-2,1f))}
-            root.addView(choices)
-            root.addView(button("선택한 평가를 LIVE 에뮬레이터 기록에 저장") {
+            }.apply {ui.styleButton(this,selected=rating==value)},LinearLayout.LayoutParams(0,-2,1f).apply {setMargins(dp(4),0,dp(4),0)})}
+            result.addView(choices)
+            result.addView(button(if(rating==null) "평가를 선택해 주세요" else "이 경험 기록하기",true) {
                 val selected=rating
                 if(allowed && selected!=null && valid()) {
                     saved=LiveNavigationStore.complete(this,nonce,candidateId,source,revealed,stopped,selected,System.currentTimeMillis())
@@ -81,18 +93,32 @@ class LiveNavigationResultActivity:AppCompatActivity() {
                     render()
                 }
             }.apply {isEnabled=rating!=null})
+            result.addView(label("별도 에뮬레이터 기록으로 보관해요\n실도로 방문 인증이 아니며 경로와 위치는 저장하지 않아요",20))
         }
-        root.addView(button("결과 화면 닫기") {if(allowed) finish()})
-        root.addView(button("내비 PoC로 돌아가 복귀 준비") {if(allowed) {
+        root.addView(button("출발지로 돌아가기 준비") {if(allowed) {
             try {startActivity(android.content.Intent().setComponent(android.content.ComponentName("com.surpride.navhostpoc","androidx.car.app.activity.CarAppActivity")))}
-            catch(_:Exception) {root.addView(label("내비 PoC 앱을 먼저 설치해 주세요.",20))}
+            catch(_:Exception) {root.addView(ui.text("지도 안내 앱을 찾을 수 없어요",24,ui.error))}
         }})
+        root.addView(label("복귀 코스를 확인한 뒤 직접 시작해요\n시간 내 귀가를 보장하지 않아요",20))
+        root.addView(button("결과 화면 닫기") {if(allowed) finish()})
     }
-    private fun label(value:String,size:Int)=TextView(this).apply {
-        text=value;textSize=size.toFloat();setTextColor(Color.rgb(235,241,225));setPadding(0,dp(12),0,dp(12))
+    private fun label(value:String,size:Int)=ui.text(value,size)
+    private fun button(value:String,primary:Boolean=false,action:()->Unit)=ui.button(value,primary,action)
+    private fun dp(value:Int)=ui.dp(value)
+
+    /** Static brand curve only; not a geographic route or an interactive Surface. */
+    private class JourneyMark(context:Context):View(context) {
+        private val ui=SurprideUi(context)
+        private val paint=Paint(Paint.ANTI_ALIAS_FLAG)
+        init {importantForAccessibility=IMPORTANT_FOR_ACCESSIBILITY_NO}
+        override fun onDraw(canvas:Canvas) {
+            super.onDraw(canvas)
+            val start=width*.04f;val end=width*.94f;val y=height*.5f
+            paint.color=ui.accent;paint.strokeWidth=ui.dp(4).toFloat();paint.style=Paint.Style.STROKE;paint.strokeCap=Paint.Cap.ROUND
+            canvas.drawPath(Path().apply {moveTo(start,y);cubicTo(width*.28f,height*.95f,width*.63f,height*.05f,end,y)},paint)
+            paint.style=Paint.Style.FILL
+            canvas.drawCircle(start,y,ui.dp(6).toFloat(),paint)
+            canvas.drawCircle(end,y,ui.dp(8).toFloat(),paint)
+        }
     }
-    private fun button(value:String,action:()->Unit)=Button(this).apply {
-        text=value;textSize=20f;minHeight=dp(76);isAllCaps=false;setOnClickListener {action()}
-    }
-    private fun dp(value:Int)=(value*resources.displayMetrics.density).toInt()
 }

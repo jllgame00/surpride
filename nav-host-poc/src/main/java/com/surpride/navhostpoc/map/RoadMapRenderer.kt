@@ -25,6 +25,8 @@ class RoadMapRenderer(context: Context, private val onChanged: () -> Unit) : Aut
     private var closed = false
     private var redrawPending = false
     private var lastTileMetadata: String? = null
+    private val displayMetrics = context.resources.displayMetrics
+    private val fontScale = context.resources.configuration.fontScale
     private val redraw = Runnable {
         synchronized(lock) { redrawPending = false; if (closed) return@Runnable }
         onChanged()
@@ -39,7 +41,7 @@ class RoadMapRenderer(context: Context, private val onChanged: () -> Unit) : Aut
 
     @Synchronized
     fun render(canvas: Canvas, bounds: Rect, route: GuidanceRoute?, fix: PositionFix?, match: MatchState?, status: String,
-        darkMode: Boolean = false) {
+        darkMode: Boolean = false, surfaceDpi: Int = 0) {
         if (closed || bounds.width() <= 0 || bounds.height() <= 0) return
         val saved = canvas.save()
         try {
@@ -48,6 +50,8 @@ class RoadMapRenderer(context: Context, private val onChanged: () -> Unit) : Aut
             canvas.drawColor(if (darkMode) Color.rgb(30, 34, 38) else Color.rgb(230, 233, 231))
             val width = bounds.width(); val height = bounds.height()
             val unit = min(width / 900f, height / 520f).coerceIn(0.85f, 2.5f)
+            val density = if (surfaceDpi > 0) surfaceDpi / 160f else displayMetrics.density
+            val textUnit = density * fontScale
             val pose = camera.update(route, fix, match, width, height)
             val visible = pose?.visibleTiles().orEmpty()
             tiles.want(visible.map { it.key }.toSet())
@@ -85,28 +89,37 @@ class RoadMapRenderer(context: Context, private val onChanged: () -> Unit) : Aut
                 pose == null -> "현재 위치 대기 · 지도 미표시"
                 failures > 0 && loaded == 0 -> "지도 로드 실패 · 네트워크 확인 필요"
                 stale > 0 -> "저장 지도 표시 · 최신 지도 연결 실패"
-                failures > 0 -> "지도 일부 로드 실패 ($loaded/${visible.size})"
-                loaded < visible.size -> "OSM 지도 로딩 ($loaded/${visible.size})"
-                else -> "OSM 지도 표시"
+                failures > 0 -> "일부 지도를 불러오지 못했어요"
+                loaded < visible.size -> "지도를 불러오고 있어요"
+                else -> ""
             }
-            label(canvas, mapStatus, 14f * unit, 14f * unit, 18f * unit, width - 28f * unit)
-            if (status.isNotBlank()) label(canvas, status, 14f * unit, 49f * unit, 15f * unit, width - 28f * unit)
-            if (fix != null) {
-                val source = when {
+            val padding = 12f * density
+            val textSize = 20f * textUnit
+            val labelLine = Paint().apply { this.textSize = textSize }.fontSpacing + 16f * density
+            val source = if (fix != null) when {
                     fix.source == PositionSource.FAKE -> "모의 위치"
                     fix.platformMock -> "기기 모의 위치"
                     else -> "기기 위치"
-                }
-                val direction = when (pose?.headingSource) {
-                    HeadingSource.ROUTE_ESTIMATE -> " · 경로 방향 추정"
-                    HeadingSource.DEVICE_BEARING -> " · GPS 이동 방향"
-                    else -> " · 방향 정보 없음"
-                }
-                label(canvas, source + direction, 14f * unit, height - 78f * unit, 14f * unit, width - 28f * unit)
+                } else "위치 대기"
+            val direction = when (pose?.headingSource) {
+                HeadingSource.ROUTE_ESTIMATE -> " · 경로 방향 추정"
+                HeadingSource.DEVICE_BEARING -> " · 이동 방향 수신"
+                else -> " · 방향 확인 중"
             }
-            // Both lines stay inside the supplied map bounds, above any host-owned footer.
-            label(canvas, "© OpenStreetMap contributors", 12f * unit, height - 51f * unit, 13f * unit, width - 24f * unit)
-            label(canvas, "openstreetmap.org/copyright · ODbL", 12f * unit, height - 28f * unit, 13f * unit, width - 24f * unit)
+            // Attribution stays inside map bounds and is never replaced with an app badge.
+            val attributionSize = 18f * textUnit
+            val attributionLine = Paint().apply { this.textSize = attributionSize }.fontSpacing + 12f * density
+            val topLimit = height - attributionLine * 2 - padding * 2
+            if (topLimit >= labelLine) {
+                val topStatus=if(mapStatus.isNotBlank()) mapStatus else "$status · $source$direction"
+                label(canvas, topStatus, padding, padding, textSize, width-padding*2,darkMode,density)
+                if(mapStatus.isNotBlank() && status.isNotBlank() && topLimit>=labelLine*2)
+                    label(canvas,"$status · $source$direction",padding,padding+labelLine,textSize,width-padding*2,darkMode,density)
+            }
+            label(canvas, "© OpenStreetMap contributors", padding, height - attributionLine * 2 - padding,
+                attributionSize, width - padding * 2, darkMode, density)
+            label(canvas, "openstreetmap.org/copyright · ODbL", padding, height - attributionLine - padding,
+                attributionSize, width - padding * 2, darkMode, density)
         } finally { canvas.restoreToCount(saved) }
     }
 
@@ -155,14 +168,20 @@ class RoadMapRenderer(context: Context, private val onChanged: () -> Unit) : Aut
             canvas.drawPath(arrow, paint)
         } finally { canvas.restoreToCount(saved) }
     }
-    private fun label(canvas: Canvas, text: String, x: Float, y: Float, size: Float, maxWidth: Float) {
+    private fun label(canvas: Canvas, text: String, x: Float, y: Float, size: Float, maxWidth: Float,
+        darkMode: Boolean, density: Float) {
         if (maxWidth <= 0) return
         val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply { textSize = size; typeface = Typeface.create("sans-serif", Typeface.NORMAL) }
-        val count = paint.breakText(text, true, maxWidth - 12, null)
-        val shown = text.take(count)
-        val box = RectF(x - 6, y - 4, x + paint.measureText(shown) + 6, y + size + 5)
-        paint.color = Color.argb(235, 255, 255, 255); canvas.drawRoundRect(box, 5f, 5f, paint)
-        paint.color = Color.rgb(35, 45, 55); canvas.drawText(shown, x, y + size, paint)
+        val pad = 4f * density
+        val shown = android.text.TextUtils.ellipsize(text, android.text.TextPaint(paint),
+            (maxWidth - pad * 2).coerceAtLeast(0f), android.text.TextUtils.TruncateAt.END).toString()
+        val metrics = paint.fontMetrics
+        val box = RectF(x, y, x + paint.measureText(shown) + pad * 2,
+            y + metrics.descent - metrics.ascent + pad * 2)
+        paint.color = if(darkMode) Color.rgb(21,40,39) else Color.WHITE
+        canvas.drawRoundRect(box, 4f*density, 4f*density, paint)
+        paint.color = if(darkMode) Color.rgb(235,241,225) else Color.rgb(25,35,30)
+        canvas.drawText(shown, x + pad, y + pad - metrics.ascent, paint)
     }
 
     @Synchronized

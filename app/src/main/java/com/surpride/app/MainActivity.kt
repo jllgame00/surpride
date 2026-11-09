@@ -29,7 +29,13 @@ class MainActivity : AppCompatActivity() {
     private var vehicleSource: VehicleDataSource? = null
     private var navigationSource: NavigationDataSource? = null
     private val diagnosticsEnabled get() = applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
+    private var diagnosticsVisible=false
+    private var diagnosticsInitialized=false
+    private val ui by lazy {com.surpride.app.ui.SurprideUi(this)}
+    private lateinit var parkedUx:com.surpride.app.experience.ParkedUxMonitor
+    private var requiresDo:Boolean?=null
     override fun onCreate(savedInstanceState: Bundle?) {
+        com.surpride.app.ui.SurprideUi.applyAppearance(this)
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContentView(R.layout.activity_main)
@@ -46,9 +52,47 @@ class MainActivity : AppCompatActivity() {
         findViewById<View>(R.id.experience_start).setOnClickListener {
             startActivity(android.content.Intent(this, com.surpride.app.experience.ExperienceActivity::class.java))
         }
+        (findViewById<View>(R.id.launch_art) as android.widget.FrameLayout).addView(
+            com.surpride.app.experience.ExperienceArt(this,com.surpride.app.experience.core.Mood.HEALING),
+            android.widget.FrameLayout.LayoutParams(-1,-1))
+        ui.styleButton(findViewById(R.id.experience_start),primary=true)
+        parkedUx=com.surpride.app.experience.ParkedUxMonitor(applicationContext)
+        findViewById<android.widget.Button>(R.id.appearance).apply {
+            ui.styleButton(this)
+            setOnClickListener {
+                if(com.surpride.app.experience.core.ParkedInteractionPolicy.allows(requiresDo)) {
+                    val choices=arrayOf("차량 설정 따르기","밝은 화면","어두운 화면")
+                    androidx.appcompat.app.AlertDialog.Builder(this@MainActivity).setTitle("화면 표시")
+                        .setItems(choices) {_,index->
+                            if(com.surpride.app.experience.core.ParkedInteractionPolicy.allows(requiresDo))
+                                com.surpride.app.ui.SurprideUi.setAppearance(this@MainActivity,listOf(-1,1,2)[index])
+                        }.show().also(ui::styleDialog)
+                }
+            }
+        }
+        val toggle=findViewById<android.widget.Button>(R.id.debug_toggle)
+        toggle.visibility=if(diagnosticsEnabled) View.VISIBLE else View.GONE
+        ui.styleButton(toggle)
+        toggle.setOnClickListener {
+            if(!com.surpride.app.experience.core.ParkedInteractionPolicy.allows(requiresDo)) return@setOnClickListener
+            diagnosticsVisible=!diagnosticsVisible
+            findViewById<View>(R.id.launch_brand).visibility=if(diagnosticsVisible) View.GONE else View.VISIBLE
+            listOf(R.id.vehicle_panel,R.id.navigation_panel).forEach {findViewById<View>(it).visibility=if(diagnosticsVisible) View.VISIBLE else View.GONE}
+            toggle.text=if(diagnosticsVisible) "진단 닫기" else "개발 진단"
+            if(diagnosticsVisible) {
+                initializeDiagnostics()
+                if(vehicleSource==null) vehicleSource=PleosVehicleDataSource(applicationContext).also {it.start(::renderVehicle)}
+            } else {
+                stopVehicle();vehicleSource=null
+                navigationSource?.stop()
+            }
+        }
+    }
 
+    private fun initializeDiagnostics() {
         if (diagnosticsEnabled) {
-            findViewById<View>(R.id.vehicle_panel).visibility = View.VISIBLE
+            if(diagnosticsInitialized) {navigationSource?.start(::renderNavigation);return}
+            diagnosticsInitialized=true
             findViewById<View>(R.id.vehicle_refresh).setOnClickListener {
                 val source = vehicleSource ?: return@setOnClickListener
                 if (source.state.connection == ConnectionStatus.STOPPED || source.state.connection == ConnectionStatus.FAILED) {
@@ -56,7 +100,6 @@ class MainActivity : AppCompatActivity() {
                 } else source.refresh()
             }
             findViewById<View>(R.id.vehicle_stop).setOnClickListener { stopVehicle() }
-            findViewById<View>(R.id.navigation_panel).visibility = View.VISIBLE
             navigationSource = PleosNavigationDataSource(applicationContext).also { it.start(::renderNavigation) }
             findViewById<View>(R.id.navigation_refresh).setOnClickListener {
                 navigationSource?.let { source ->
@@ -74,12 +117,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        if (diagnosticsEnabled) {
+        parkedUx.start {value->
+            requiresDo=value
+            val allowed=com.surpride.app.experience.core.ParkedInteractionPolicy.allows(value)
+            listOf(R.id.appearance,R.id.debug_toggle,R.id.navigation_request,R.id.navigation_cancel,R.id.navigation_show,R.id.navigation_history).forEach {findViewById<View>(it).isEnabled=allowed}
+        }
+        if (diagnosticsEnabled && diagnosticsVisible) {
             vehicleSource = PleosVehicleDataSource(applicationContext).also { it.start(::renderVehicle) }
         }
     }
 
     override fun onStop() {
+        requiresDo=null;parkedUx.stop()
         stopVehicle()
         vehicleSource = null
         super.onStop()

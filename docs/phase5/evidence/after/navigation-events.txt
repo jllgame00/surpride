@@ -1,0 +1,35 @@
+I/SurprideActive(18095): POSITION_SUBSCRIBED owner=false
+I/SurprideActive(18095): OEM connected=true active=false error=null
+I/SurprideActive(18095): POSITION_SUBSCRIBED owner=false
+I/SurprideActive(18095): START_REQUEST accepted=true state=REQUESTED reason=AWAITING_GRANT
+I/SurprideActive(18095): FOCUS connected=true otherActive=false error=null
+I/SurprideActive(18095): TRIP returned=true updates=1 destinations=0 state=ACTIVE
+I/SurprideActive(18095): TRIP returned=true updates=10 destinations=0 state=ACTIVE
+I/SurprideReroute(18095): LOADING_TRIP returned=true owner=ACTIVE
+I/SurprideReroute(18095): ROUTE_REPLACED source=KAKAO_DIRECTIONS return=false segments=8 maneuvers=9 owner=ACTIVE gpsSubscribed=true
+I/SurprideActive(18095): TRIP returned=true updates=50 destinations=0 state=ACTIVE
+I/SurprideActive(18095): TRIP returned=true updates=100 destinations=0 state=ACTIVE
+I/SurprideActive(18095): POSITION_SUBSCRIBED owner=false
+I/SurprideActive(18095): POSITION_SUBSCRIBED owner=false
+I/SurprideActive(18095): START_REQUEST accepted=true state=REQUESTED reason=AWAITING_GRANT
+I/SurprideActive(18095): TRIP returned=true updates=1 destinations=0 state=ACTIVE
+I/SurprideActive(18095): TRIP returned=true updates=10 destinations=0 state=ACTIVE
+I/SurprideVoice(18095): status=COMPLETED enabled=true focus=false requested=1 started=1 completed=1 errors=0 network=false backend=PLEOS_ON_DEVICE preRoll=SCHEDULER_200_MS
+I/SurprideActive(18095): TRIP returned=true updates=50 destinations=0 state=ACTIVE
+I/SurprideActive(18095): TRIP returned=true updates=100 destinations=0 state=ACTIVE
+I/SurprideActive(18095): ARRIVED confirmed=true ownerReleased=STOPPED
+I/SurprideActive(18095): POSITION_SUBSCRIBED owner=false
+I/SurprideReroute(18095): ROUTE_REPLACED source=KAKAO_DIRECTIONS return=true segments=9 maneuvers=10 owner=STOPPED gpsSubscribed=true
+I/SurprideReturn(18095): PREPARED success=true returning=true autoStart=false
+I/SurprideActive(18095): POSITION_SUBSCRIBED owner=false
+I/SurprideActive(18095): START_REQUEST accepted=true state=REQUESTED reason=AWAITING_GRANT
+I/SurprideActive(18095): TRIP returned=true updates=1 destinations=0 state=ACTIVE
+I/SurprideActive(18095): TRIP returned=true updates=10 destinations=0 state=ACTIVE
+I/SurprideActive(18095): POSITION_SUBSCRIBED owner=false
+I/SurprideActive(18095): POSITION_SUBSCRIBED owner=false
+I/SurprideActive(18095): START_REQUEST accepted=true state=REQUESTED reason=AWAITING_GRANT
+I/SurprideReroute(18095): LOADING_TRIP returned=true owner=ACTIVE
+I/SurprideActive(18095): TRIP returned=true updates=1 destinations=0 state=ACTIVE
+I/SurprideActive(18095): TRIP returned=true updates=10 destinations=0 state=ACTIVE
+I/SurprideActive(18095): TRIP returned=true updates=50 destinations=0 state=ACTIVE
+I/SurprideActive(18095): ARRIVED confirmed=true ownerReleased=STOPPED

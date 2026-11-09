@@ -15,6 +15,7 @@ import androidx.car.app.navigation.model.RoutingInfo
 import androidx.car.app.navigation.model.Step
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.IconCompat
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import com.surpride.navhostpoc.guidance.*
@@ -54,6 +55,11 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
     private var renderer:RoadMapRenderer?=null
     private var lastRefresh=0L
     private var scheduled=false
+    private var controlsOpen=false
+    private val menuBack=object:OnBackPressedCallback(false) {
+        override fun handleOnBackPressed() {closeControls()}
+    }
+    private val diagnosticsEnabled get()=carContext.applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE!=0
     private var focus=AndroidCarFocusPort(carContext.applicationContext)
     private var oem=PleosOemRouteMonitor(carContext.applicationContext)
     private var hasStarted=false
@@ -127,7 +133,9 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         override fun onStableAreaChanged(area:Rect) {stable=Rect(area);paint()}
         override fun onSurfaceDestroyed(container:SurfaceContainer) {surface=null;visible=null;stable=null}
     }
-    init {lifecycle.addObserver(object:DefaultLifecycleObserver {
+    init {
+        carContext.onBackPressedDispatcher.addCallback(this,menuBack)
+        lifecycle.addObserver(object:DefaultLifecycleObserver {
         override fun onStart(owner:LifecycleOwner) {
             if(hasStarted) {focus=AndroidCarFocusPort(carContext.applicationContext);oem=PleosOemRouteMonitor(carContext.applicationContext);adapter=newAdapter()}
             hasStarted=true
@@ -152,6 +160,7 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
             handler.post(tick)
         }
         override fun onStop(owner:LifecycleOwner) {
+            controlsOpen=false;menuBack.isEnabled=false
             pendingStart=false;pendingPreparation=null;foreground=false;requiresDo=null;adapter.onAppStopped();adapter.release();reroute?.cancel();cancelRequests();voice.close();stopPosition();handler.removeCallbacksAndMessages(null)
             scheduled=false;ux.stop();oem.close();focus.close();renderer?.close();renderer=null
             carContext.getCarService(AppManager::class.java).setSurfaceCallback(null);surface=null
@@ -348,11 +357,18 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
     }
     private fun controls() {
         if(!allowed) return
-        screenManager.push(ActiveControlsScreen(carContext,route!=null,revealed,packet?.nonce!=null && !returning,arrival.arrived && !returning && packet?.tripOrigin!=null) {command->
+        val diagnostics=if(diagnosticsEnabled) listOf(
+            "호스트·경로 소유권" to "${adapter.state} · ${adapter.reason}\n$result",
+            "위치·Trip 수신" to "GPS $received / Trip $sent · ${matcher?.state()?.status?:"UNKNOWN"}\n수신 위치 원본과 좌표는 표시하지 않습니다",
+            "음성 연결" to "${voice.state.status} · ${if(voiceOn) "ON" else "OFF"}\n${voice.state.backend}",
+            "재탐색·귀가" to "${reroute?.state()?.status?:"대기"} · 요청 ${reroute?.state()?.attempts?:0}\n귀가 ${budgetSnapshot()?.risk?:"UNKNOWN"}"
+        ) else emptyList()
+        screenManager.push(ActiveControlsScreen(carContext,route!=null,revealed,packet?.nonce!=null && !returning,arrival.arrived && !returning && packet?.tripOrigin!=null,voiceOn,diagnostics) {command->
             screenManager.pop()
             when(command) {
                 "start"->{matcher?.reset();arrival.reset();gpsMissingSince=null;pendingStart=true;pendingStartAt=SystemClock.elapsedRealtime();result="EXPLICIT_OPERATOR_APPROVAL / CHECKING";maybeStart()}
                 "reveal"->{revealed=true}
+                "voice"->{voiceOn=!voiceOn;voice.setEnabled(voiceOn)}
                 "record"->{handler.postDelayed({returnResult()},700)}
                 "retry"->{pendingPreparation="RETRY";startPosition();maybePrepare()}
                 "return"->{pendingPreparation="RETURN";startPosition();maybePrepare()}
@@ -362,10 +378,33 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
     }
     override fun onGetTemplate():Template {
         val active=adapter.state==OwnershipState.ACTIVE && allowed
-        val strip=ActionStrip.Builder().addAction(Action.Builder().setTitle(when {active && arrival.candidate->"정차·도착 확인";active->"안내 종료";else->"준비 / 조작"}).setOnClickListener {
-            if(active) {if(arrival.candidate) confirmArrival() else {adapter.stop();result="USER_STOPPED";refresh(true)}} else controls()
-        }.build()).build()
-        val b=NavigationTemplate.Builder().setActionStrip(strip)
+        if(controlsOpen) return NavigationControlMenu.build(allowed,voiceOn,active && arrival.candidate,
+            arrival.arrived && !returning && packet?.tripOrigin!=null) {command->
+            when(command) {
+                "stop"->{adapter.stop();result="USER_STOPPED";closeControls()}
+                "map"->closeControls()
+                "reveal"->{if(allowed) {reveal();closeControls()}}
+                "voice"->{if(allowed) {voiceOn=!voiceOn;voice.setEnabled(voiceOn);closeControls()}}
+                "arrival"->{if(allowed) {confirmArrival();closeControls()}}
+                "return"->{if(allowed && arrival.arrived) {pendingPreparation="RETURN";startPosition();maybePrepare();closeControls()}}
+            }
+        }
+        // Template-scoped controls belong in the app action strip, not the map pan/zoom strip.
+        // The host chooses placement/visibility. No Surface click hit targets are used on API 4.
+        val strip=ActionStrip.Builder().addAction(Action.Builder().setTitle(if(active) "종료·조작" else "안내 준비").setOnClickListener {
+            if(active) {controlsOpen=true;menuBack.isEnabled=true;refresh(true)} else controls()
+        }.build())
+        fun action(label:String,drawable:Int,selected:()->Unit)=Action.Builder().setTitle(label)
+            .setIcon(CarIcon.Builder(IconCompat.createWithResource(carContext,drawable)).build()).setOnClickListener {selected()}.build()
+        strip.addAction(action(if(revealed) "공개한 목적지" else "목적지 공개",R.drawable.ic_reveal) {reveal()})
+        strip.addAction(action(if(voiceOn) "음성 끄기" else "음성 켜기",if(voiceOn) R.drawable.ic_voice else R.drawable.ic_voice_off) {
+            if(allowed) {voiceOn=!voiceOn;voice.setEnabled(voiceOn);refresh(true)}
+        })
+        if(active && arrival.candidate) strip.addAction(action("정차·도착 확인",R.drawable.ic_arrival_confirm) {confirmArrival()})
+        else if(arrival.arrived && !returning && packet?.tripOrigin!=null) strip.addAction(action("복귀 준비",R.drawable.ic_return) {
+            if(allowed) {pendingPreparation="RETURN";startPosition();maybePrepare();refresh(true)}
+        })
+        val b=NavigationTemplate.Builder().setActionStrip(strip.build())
         if(active && matcher?.state()?.status!=MatchStatus.ON_ROUTE) b.setNavigationInfo(RoutingInfo.Builder().setLoading(true).build())
         else if(active) turn()?.let {t->
             val maneuver=CarManeuver.Builder(t.maneuverType)
@@ -381,16 +420,11 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
             b.setNavigationInfo(RoutingInfo.Builder().setCurrentStep(Step.Builder(t.cue).setRoad(t.road)
                 .setManeuver(maneuver.build()).build(),distance).build())
         }
-        val icon=CarIcon.Builder(IconCompat.createWithResource(carContext,R.drawable.ic_reveal)).build()
-        val mapActions=ActionStrip.Builder().addAction(Action.Builder().setIcon(icon).setOnClickListener {reveal()}.build())
-        val audioIcon=CarIcon.Builder(IconCompat.createWithResource(carContext,R.drawable.ic_voice)).build()
-        mapActions.addAction(Action.Builder().setIcon(audioIcon).setOnClickListener {if(allowed) {voiceOn=!voiceOn;voice.setEnabled(voiceOn);refresh(true)}}.build())
-        if(arrival.arrived && !returning && packet?.tripOrigin!=null) mapActions.addAction(Action.Builder().setIcon(CarIcon.Builder(IconCompat.createWithResource(carContext,R.drawable.ic_return)).build())
-            .setOnClickListener {if(allowed) {pendingPreparation="RETURN";startPosition();maybePrepare();refresh(true)}}.build())
-        b.setMapActionStrip(mapActions.build())
-        // Host-owned final ETA card is clipped on Pleos. Accurate provenance-labelled totals are in stable Surface footer.
+        // The earlier native ETA-card clipping is a host investigation, not an app layout fix.
+        // Do not create a destination card merely to show totals; this app footer labels its estimate.
         return b.build()
     }
+    private fun closeControls() {controlsOpen=false;menuBack.isEnabled=false;refresh(true)}
     private fun refresh(immediate:Boolean=false) {
         if(!foreground || scheduled) return
         val delay=if(immediate) 0L else (1000-(SystemClock.elapsedRealtime()-lastRefresh)).coerceAtLeast(0)
@@ -400,38 +434,51 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         val s=surface?.surface?.takeIf {it.isValid}?:return
         val c=try {s.lockCanvas(null)} catch(_:Exception) {return}
         try {
-            c.drawColor(Color.rgb(14,24,30))
+            val dark=carContext.isDarkMode
+            val background=if(dark) Color.rgb(10,24,24) else Color.rgb(246,247,242)
+            val ink=if(dark) Color.rgb(235,241,225) else Color.rgb(25,35,30)
+            val accent=if(dark) Color.rgb(215,242,139) else Color.rgb(63,95,39)
+            c.drawColor(background)
             val area=Rect(0,0,c.width,c.height)
             visible?.takeIf {!it.isEmpty}?.let {if(!area.intersect(it)) return};stable?.takeIf {!it.isEmpty}?.let {if(!area.intersect(it)) return}
-            area.inset(20,20)
-            val footer=(area.height()*.27f).toInt().coerceIn(130,230)
-            val map=Rect(area.left,area.top,area.right,area.bottom-footer)
-            if(map.width()<=0 || map.height()<80) return
+            val density=surface?.dpi?.takeIf {it>0}?.div(160f)?:carContext.resources.displayMetrics.density
+            val scale=density*carContext.resources.configuration.fontScale
+            area.inset((16*density).toInt(),(16*density).toInt())
+            if(area.isEmpty) return
+            c.clipRect(area)
+            val p=Paint(Paint.ANTI_ALIAS_FLAG).apply {textSize=28f*scale;typeface=Typeface.create("sans-serif",Typeface.NORMAL)}
+            val metrics=p.fontMetrics
+            val lineHeight=metrics.descent-metrics.ascent+8*density
+            val layout=SurfaceFooterLayout.measure(area.height(),lineHeight,density)
+            val map=Rect(area.left,area.top,area.right,area.top+layout.mapHeight)
+            if(map.width()<=0) return
             val locationStatus=when {
-                matcher?.state()?.status!=MatchStatus.ON_ROUTE->"위치 신뢰도 낮음 · 마지막 수신 위치 / 정차 AVD"
-                adapter.state==OwnershipState.ACTIVE->"기기 위치 · 활성 안내 / 정차 AVD 실험"
-                else->"기기 위치 · 안내 비활성 / 정차 AVD"
+                matcher?.state()?.status!=MatchStatus.ON_ROUTE->"정차 에뮬레이터 · 마지막 위치 · 신뢰도 낮음"
+                adapter.state==OwnershipState.ACTIVE->"정차 에뮬레이터 · 안내 중"
+                else->"정차 에뮬레이터 · 안내 종료/준비"
             }
-            renderer?.render(c,map,route,fix,matcher?.state(),locationStatus,carContext.isDarkMode)
-            val p=Paint(Paint.ANTI_ALIAS_FLAG).apply {textSize=(area.width()/48f).coerceIn(19f,32f);color=Color.WHITE}
-            c.drawRect(area.left.toFloat(),map.bottom.toFloat(),area.right.toFloat(),area.bottom.toFloat(),p.apply {color=Color.rgb(14,24,30)})
-            p.color=Color.rgb(215,242,139);var y=map.bottom+p.textSize*1.25f
-            fun line(value:String) {val text=android.text.TextUtils.ellipsize(value,android.text.TextPaint(p),area.width().toFloat(),android.text.TextUtils.TruncateAt.END);c.drawText(text.toString(),area.left.toFloat()+12,y,p);y+=p.textSize*1.35f}
-            line(if(returning) (if(returnCompleted) "출발지 복귀 완료" else "RETURNING · 출발지로 복귀 · 직접 선택한 경로")
-                else if(revealed) "공개 · ${packet?.identity?.name?:"목적지 없음"}" else "목적지는 아직 비밀입니다 · 눈: 공개 / 스피커: 음성")
-            val progress=matcher?.state()?.progress
-            if(arrival.arrived) line("안내 종료 · 정차 확인 후 목적지 공개 완료")
-            else if(progress!=null) line("${ceil(progress.remainingSeconds/60.0).toInt()}분 · ${"%.1f".format(progress.remainingMeters/1000)}km 남음 · API 기록 비율 추정 ETA")
-            else if(fix!=null) line("남은 시간·거리 UNKNOWN · 위치 재확인 필요")
-            else line("${route?.let {ceil(it.durationSeconds/60.0).toInt()}?:"?"}분 · 경로 준비 / GPS 신뢰도 ${matcher?.state()?.status?:"UNKNOWN"}")
-            p.color=Color.WHITE
-            line(if(preparation!=null || pendingPreparation!=null) "실제 경로 요청 중 · 완료 후 직접 시작"
-                else if(reroute?.state()?.status in listOf(RerouteStatus.LOADING,RerouteStatus.WAITING_RETRY)) "REROUTING · ${reroute?.state()?.status} · 요청 ${reroute?.state()?.attempts}/2"
-                else if(arrival.arrived) "도착·정차 확인 완료 · ${packet?.reason}" else if(arrival.candidate) "도착 후보 · 안전한 정차 후 상단에서 확인"
-                else if(adapter.state==OwnershipState.ACTIVE) "현재 도로 · ${turn()?.road?:"확인 중"} · 활성 안내"
-                else "${adapter.state} · $result")
-            val risk=budgetSnapshot()?.risk
-            line("GPS $received / Trip $sent · 음성 ${if(voiceOn) "ON" else "OFF"}/${voice.state.status} · 귀가 ${risk?:"UNKNOWN"} · 정차 AVD")
+            // Tiny map regions cannot fit readable attribution. Preserve the critical status instead;
+            // those dimensions are unsupported for a complete map+guidance experience.
+            if(map.height()>=128*density) renderer?.render(c,map,route,fix,matcher?.state(),locationStatus,dark,surface?.dpi?:0)
+            val lines=NavigationFooter.present(NavigationFooterInput(packet?.identity?.name,revealed,
+                adapter.state==OwnershipState.ACTIVE,returning,returnCompleted,arrival.arrived,arrival.candidate,
+                preparation!=null || pendingPreparation!=null,
+                reroute?.state()?.status in listOf(RerouteStatus.LOADING,RerouteStatus.WAITING_RETRY),
+                matcher?.state()?.status,matcher?.state()?.progress,turn()?.road,voiceOn,budgetSnapshot()?.risk,result,adapter.state))
+            val footer=Rect(area.left,map.bottom,area.right,area.bottom)
+            val saved=c.save()
+            try {
+                c.clipRect(footer)
+                p.color=background;c.drawRect(footer,p)
+                var y=footer.top+layout.padding-metrics.ascent
+                lines.take(layout.rows).forEachIndexed {index,value->
+                    p.color=if(index==0) accent else ink
+                    p.textSize=if(index==2) 24f*scale else 28f*scale
+                    val width=(footer.width()-layout.padding*2).coerceAtLeast(0f)
+                    val text=android.text.TextUtils.ellipsize(value,android.text.TextPaint(p),width,android.text.TextUtils.TruncateAt.END)
+                    c.drawText(text.toString(),footer.left+layout.padding,y,p);y+=lineHeight
+                }
+            } finally {c.restoreToCount(saved)}
             Log.i("SurprideActive","SURFACE state=${adapter.state} fixes=$received tripUpdates=$sent revealed=$revealed candidate=${arrival.candidate}")
         } finally {try {s.unlockCanvasAndPost(c)} catch(_:Exception) {}}
     }
@@ -439,7 +486,8 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
 }
 
 private class ActiveControlsScreen(context:CarContext,private val routeReady:Boolean,private val disclosed:Boolean,
-    private val canRecord:Boolean,private val canReturn:Boolean,private val selected:(String)->Unit):Screen(context) {
+    private val canRecord:Boolean,private val canReturn:Boolean,private val voiceOn:Boolean,
+    private val diagnostics:List<Pair<String,String>>,private val selected:(String)->Unit):Screen(context) {
     private val ux=PocParkedMonitor(carContext.applicationContext);private var allowed=false
     init {lifecycle.addObserver(object:DefaultLifecycleObserver {
         override fun onStart(owner:LifecycleOwner) {ux.start {allowed=it==false;invalidate()}}
@@ -455,11 +503,32 @@ private class ActiveControlsScreen(context:CarContext,private val routeReady:Boo
             list.addItem(Row.Builder().setTitle(if(routeReady) "다른 안내·Phone Projection 종료 확인 후 시작" else "실제 경로 없음 / 만료 · 먼저 준비 필요")
                 .addText("정차 AVD 한정 · 정책 허용 가정 · 일회성 활성 실험 동의").setOnClickListener {if(routeReady && allowed) selected("start")}.build())
             list.addItem(Row.Builder().setTitle("목적지 즉시 공개").setOnClickListener {if(allowed) selected("reveal")}.build())
+            list.addItem(Row.Builder().setTitle(if(voiceOn) "음성 안내 끄기" else "음성 안내 켜기").setOnClickListener {if(allowed) selected("voice")}.build())
             if(disclosed && canRecord) list.addItem(Row.Builder().setTitle("안내 종료 후 SURPRIDE 평가·기록").setOnClickListener {if(allowed) selected("record")}.build())
             if(canReturn) list.addItem(Row.Builder().setTitle("출발지 복귀 경로 준비 · 자동 시작 없음").setOnClickListener {if(allowed) selected("return")}.build())
             if(routeReady) list.addItem(Row.Builder().setTitle("현재 위치에서 경로 재요청 · 준비만").setOnClickListener {if(allowed) selected("retry")}.build())
+            if(diagnostics.isNotEmpty()) list.addItem(Row.Builder().setTitle("개발 진단").addText("정차 상태에서만 확인").setOnClickListener {
+                if(allowed) screenManager.push(NavigationDiagnosticsScreen(carContext,diagnostics))
+            }.build())
             list.addItem(Row.Builder().setTitle("기존 PoC로 돌아가기").setOnClickListener {if(allowed) selected("back")}.build())
         }
         return ListTemplate.Builder().setTitle("실제 지도 · 정차 AVD 개발 검증").setHeaderAction(Action.BACK).setSingleList(list.build()).build()
+    }
+}
+
+/** Debug-only safe snapshots: no coordinates, destination identity or provider credentials. */
+private class NavigationDiagnosticsScreen(context:CarContext,private val rows:List<Pair<String,String>>):Screen(context) {
+    private val ux=PocParkedMonitor(carContext.applicationContext);private var allowed=false
+    init {lifecycle.addObserver(object:DefaultLifecycleObserver {
+        override fun onStart(owner:LifecycleOwner) {ux.start {allowed=it==false;invalidate()}}
+        override fun onStop(owner:LifecycleOwner) {allowed=false;ux.stop()}
+        override fun onDestroy(owner:LifecycleOwner) {ux.stop()}
+    })}
+    override fun onGetTemplate():Template {
+        val debug=carContext.applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE!=0
+        val list=ItemList.Builder()
+        if(!allowed || !debug) list.addItem(Row.Builder().setTitle("정차 상태 확인 후 이용할 수 있어요").build())
+        else rows.forEach {(title,detail)->list.addItem(Row.Builder().setTitle(title).addText(detail.take(240)).build())}
+        return ListTemplate.Builder().setTitle("개발 진단 · 정차 에뮬레이터").setHeaderAction(Action.BACK).setSingleList(list.build()).build()
     }
 }

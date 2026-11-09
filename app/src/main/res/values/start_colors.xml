@@ -1,4 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="surpride_background">#111820</color>
+    <color name="surpride_background">#F6F7F2</color>
+    <color name="surpride_surface">#FFFFFF</color>
+    <color name="surpride_raised">#EDF1E9</color>
+    <color name="surpride_ink">#19231E</color>
+    <color name="surpride_muted">#4B5C52</color>
+    <color name="surpride_disabled">#51695B</color>
+    <color name="surpride_accent">#3F5F27</color>
+    <color name="surpride_accent_fill">#D7F28B</color>
+    <color name="surpride_on_accent">#19231E</color>
+    <color name="surpride_divider">#D5DED3</color>
+    <color name="surpride_focus">#24382F</color>
+    <color name="surpride_warning">#78531A</color>
+    <color name="surpride_error">#973D35</color>
 </resources>

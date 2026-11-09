@@ -1,0 +1,235 @@
+{
+  "git": {
+    "branch": "main",
+    "head": "bdb7d23bf16972f259c951df1af0ff2f7ad4c24b"
+  },
+  "preservation": {
+    "baseline_files": 488,
+    "changed_existing_files": [
+      "app/src/main/java/com/surpride/app/MainActivity.kt",
+      "app/src/main/java/com/surpride/app/experience/ExperienceActivity.kt",
+      "app/src/main/java/com/surpride/app/experience/ExperienceArt.kt",
+      "app/src/main/java/com/surpride/app/moodinput/MoodInputActivity.kt",
+      "app/src/main/java/com/surpride/app/realdata/LiveNavigationResultActivity.kt",
+      "app/src/main/java/com/surpride/app/realdata/RealRouteActivity.kt",
+      "app/src/main/res/layout/activity_main.xml",
+      "app/src/main/res/values-night/themes.xml",
+      "app/src/main/res/values/start_colors.xml",
+      "app/src/main/res/values/themes.xml",
+      "nav-host-poc/src/main/java/com/surpride/navhostpoc/ActiveMysteryScreen.kt",
+      "nav-host-poc/src/main/java/com/surpride/navhostpoc/map/RoadMapRenderer.kt"
+    ],
+    "missing_existing_files": [],
+    "phase5a_unchanged": true,
+    "backend_unchanged": true
+  },
+  "tests": {
+    "app": {
+      "tests": 196,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "nav-host-poc": {
+      "tests": 195,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "backend": {
+      "tests": 90,
+      "failures": 0,
+      "errors": 0,
+      "source": "final-backend.log: 90 passed"
+    }
+  },
+  "installed_apks": {
+    "com.surpride.app": {
+      "matches_final_build": true,
+      "sha256": "16f625a4a0974bd2735e9feff8b66edb76ee2878f2aa364991313812a282f8bc"
+    },
+    "com.surpride.navhostpoc": {
+      "matches_final_build": true,
+      "sha256": "a496c8e6dc7d680aa739009907897a45f0fd08bb22cbf9526cc7394378451e99"
+    }
+  },
+  "runtime": {
+    "reroute_loading_active": true,
+    "reroute_kakao_active": true,
+    "tts_completion_callback": true,
+    "arrival_confirmations_released": 2,
+    "return_prepared_without_auto_start": true,
+    "returned_trip_destination_free": true
+  },
+  "stability": {
+    "final_apk_window_since_device_time": "2026-11-09 21:28:54",
+    "crash_anr_final_apk_window": {
+      "com.surpride.app": [],
+      "com.surpride.navhostpoc": []
+    },
+    "older_available_exit_history": {
+      "com.surpride.app": [],
+      "com.surpride.navhostpoc": [
+        {
+          "timestamp": "2026-11-09 15:26:40.392",
+          "reason": 4
+        }
+      ]
+    },
+    "final_poc_pid": 18095,
+    "note": "Older crash buffer entries are preserved; no logcat clear was used."
+  },
+  "accessibility_sample": {
+    "surface": "final light conditions",
+    "density_dpi": 160,
+    "button_rects": [
+      {
+        "width_px": 176,
+        "height_px": 76,
+        "selected": false
+      },
+      {
+        "width_px": 176,
+        "height_px": 76,
+        "selected": true
+      },
+      {
+        "width_px": 176,
+        "height_px": 76,
+        "selected": false
+      },
+      {
+        "width_px": 176,
+        "height_px": 76,
+        "selected": false
+      },
+      {
+        "width_px": 176,
+        "height_px": 76,
+        "selected": false
+      },
+      {
+        "width_px": 877,
+        "height_px": 76,
+        "selected": false
+      },
+      {
+        "width_px": 284,
+        "height_px": 76,
+        "selected": true
+      },
+      {
+        "width_px": 284,
+        "height_px": 76,
+        "selected": false
+      },
+      {
+        "width_px": 285,
+        "height_px": 76,
+        "selected": false
+      },
+      {
+        "width_px": 284,
+        "height_px": 76,
+        "selected": false
+      },
+      {
+        "width_px": 284,
+        "height_px": 76,
+        "selected": false
+      },
+      {
+        "width_px": 285,
+        "height_px": 76,
+        "selected": false
+      },
+      {
+        "width_px": 430,
+        "height_px": 76,
+        "selected": false
+      },
+      {
+        "width_px": 431,
+        "height_px": 76,
+        "selected": false
+      },
+      {
+        "width_px": 430,
+        "height_px": 76,
+        "selected": false
+      },
+      {
+        "width_px": 431,
+        "height_px": 76,
+        "selected": false
+      },
+      {
+        "width_px": 430,
+        "height_px": 76,
+        "selected": false
+      },
+      {
+        "width_px": 431,
+        "height_px": 76,
+        "selected": false
+      },
+      {
+        "width_px": 877,
+        "height_px": 76,
+        "selected": true
+      },
+      {
+        "width_px": 877,
+        "height_px": 76,
+        "selected": false
+      }
+    ],
+    "all_sampled_buttons_min_76px": true,
+    "talkback_verified": false,
+    "soft_ime_verified": false
+  },
+  "security": {
+    "known_key_present_for_comparison": true,
+    "known_secret_found_in_nonignored_sources": false,
+    "known_secret_found_in_apk_entries": false,
+    "scope": "known local configured credentials only; not a universal secret audit"
+  },
+  "runtime_restored": {
+    "no_backup/surpride-demo-v1.bin": true,
+    "shared_prefs/live_navigation_emulator.xml": true
+  },
+  "environment_restored": {
+    "app_follows_system": true,
+    "font_scale_default": true,
+    "system_night_no": true,
+    "proxy_session_stopped": true,
+    "font_scale_observed": "1.0",
+    "font_scale_note": "Temporary 1.3 request was deleted; Android now exposes default 1.0."
+  },
+  "screenshots": {
+    "count": 69,
+    "all_2560x1440": true
+  },
+  "contrast_srgb_opaque": {
+    "light": {
+      "body_surface": 16.15,
+      "secondary_surface": 7.11,
+      "accent_surface": 7.3,
+      "on_accent": 13.04,
+      "warning_surface": 6.88,
+      "error_surface": 6.92,
+      "disabled_raised": 5.21,
+      "focus_raised": 10.92
+    },
+    "dark": {
+      "body_surface": 13.34,
+      "secondary_surface": 6.75,
+      "accent_surface": 12.43,
+      "on_accent": 13.04,
+      "warning_surface": 10.29,
+      "error_surface": 8.18,
+      "disabled_raised": 5.69,
+      "focus_raised": 11.26
+    }
+  }
+}
