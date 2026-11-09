@@ -1,0 +1,10 @@
+﻿Final PoC PID FATAL EXCEPTION count: 0
+PoC historical ANR exit-info entries: 0
+Known earlier development PID5194: BackFlowViolationException, fixed by stable Screen template type; not included as final-PID success.
+Final main Vehicle responding: True
+Final main NaviHelper connected: True
+Final OEM active false: True
+After normal exit, verified final PID31091 FATAL count: 0
+Temporary route cache removed: True
+Host server session removed: True
+Exact credential-byte scan: Git-visible files=0 / final PoC APK entries=0

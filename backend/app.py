@@ -46,6 +46,7 @@ class RouteRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
     origin: Point
     destination: Point
+    include_guidance: bool = Field(default=False, strict=True)
 
 
 class RouteFailure(Exception):
@@ -102,11 +103,15 @@ def normalized(body, request, source):
                 geometry.append([point.longitude, point.latitude])
                 if len(geometry) > 100_000:
                     raise ValueError("geometry limit")
-    return {"schema_version": 1, "source": source,
+    result = {"schema_version": 1, "source": source,
             "origin": request.origin.model_dump(), "destination": request.destination.model_dump(),
             "duration_seconds": integer(summary["duration"], 1, 604800),
             "distance_meters": integer(summary["distance"], 0, 100_000_000),
             "geometry": geometry, "measured_at_epoch_ms": int(time.time() * 1000)}
+    if request.include_guidance:
+        from backend.guidance import guidance_data
+        result["guidance"] = guidance_data(route)
+    return result
 
 
 async def fetch_route(request, settings, transport):

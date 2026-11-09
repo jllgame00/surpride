@@ -1,0 +1,32 @@
+﻿
+Module       Suite                                                  Tests Failures Errors
+------       -----                                                  ----- -------- ------
+app          com.surpride.app.ExampleUnitTest                           1        0      0
+app          com.surpride.app.experience.core.DestinationEngineTest    16        0      0
+app          com.surpride.app.experience.core.TripControllerTest       10        0      0
+app          com.surpride.app.experience.core.TripSnapshotTest          4        0      0
+app          com.surpride.app.navigation.NavigationSessionTest         13        0      0
+app          com.surpride.app.realdata.LiveRouteProviderTest           11        0      0
+app          com.surpride.app.realdata.RealRouteTest                   20        0      0
+app          com.surpride.app.vehicle.VehicleSessionTest               14        0      0
+nav-host-poc com.surpride.navhostpoc.guidance.GuidanceTest             11        0      0
+
+
+
+
+BUILD SUCCESSFUL in 39s
+41 actionable tasks: 41 executed
+Configuration cache entry reused.
+
+BUILD SUCCESSFUL in 18s
+41 actionable tasks: 7 executed, 34 up-to-date
+Configuration cache entry reused.
+33 passed, 1 warning in 0.66s
+
+
+Algorithm : SHA256
+Hash      : A4763589C758202F02520E1A1986528693D154BE88E05ADC42C6A3A2D19348A6
+
+
+
+

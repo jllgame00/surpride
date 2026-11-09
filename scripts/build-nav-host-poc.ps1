@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param([string]$JdkHome)
+param([string]$JdkHome, [switch]$Test)
 
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
@@ -17,6 +17,7 @@ try {
     New-Item -ItemType Directory -Force $env:ANDROID_USER_HOME | Out-Null
     $ErrorActionPreference = 'Continue'
     $gradleArguments = @('-p', $projectRoot, '-PnavHostPoc=true', ':nav-host-poc:assembleDebug', '--no-daemon', '--console=plain', '-Pkotlin.compiler.execution.strategy=in-process')
+    if ($Test) { $gradleArguments += ':nav-host-poc:testDebugUnitTest' }
     & (Join-Path $projectRoot 'gradlew.bat') @gradleArguments 2>&1 | ForEach-Object {
         $line = $_.ToString().Replace($projectRoot, '<PROJECT>').Replace($projectRoot.Replace('\', '/'), '<PROJECT>')
         if ($env:USERPROFILE) { $line = $line.Replace($env:USERPROFILE, '<USER_HOME>').Replace($env:USERPROFILE.Replace('\', '/'), '<USER_HOME>') }

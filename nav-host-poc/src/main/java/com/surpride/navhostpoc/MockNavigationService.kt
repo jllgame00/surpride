@@ -18,6 +18,9 @@ import androidx.car.app.model.CarIcon
 import androidx.car.app.model.DateTimeWithZone
 import androidx.car.app.model.Distance
 import androidx.car.app.model.Template
+import androidx.car.app.model.ItemList
+import androidx.car.app.model.ListTemplate
+import androidx.car.app.model.Row
 import androidx.car.app.navigation.model.Maneuver
 import androidx.car.app.navigation.model.NavigationTemplate
 import androidx.car.app.navigation.model.RoutingInfo
@@ -65,7 +68,7 @@ private class MockNavigationScreen(context: CarContext) : Screen(context) {
 
     init {
         lifecycle.addObserver(object : DefaultLifecycleObserver {
-            override fun onCreate(owner: LifecycleOwner) {
+            override fun onStart(owner: LifecycleOwner) {
                 if (emulator) carContext.getCarService(AppManager::class.java).setSurfaceCallback(surfaceCallback)
             }
             override fun onDestroy(owner: LifecycleOwner) {
@@ -93,12 +96,23 @@ private class MockNavigationScreen(context: CarContext) : Screen(context) {
             .setNavigationInfo(RoutingInfo.Builder().setCurrentStep(step, Distance.create(300.0, Distance.UNIT_METERS)).build())
             .setDestinationTravelEstimate(estimate)
             .setActionStrip(ActionStrip.Builder()
-                .addAction(Action.Builder().setTitle("설명").setOnClickListener {
-                    screenManager.push(ExplanationScreen(carContext))
+                .addAction(Action.Builder().setTitle("실험 선택").setOnClickListener {
+                    screenManager.push(ExperimentChooserScreen(carContext) {dynamic->
+                        screenManager.pop()
+                        screenManager.push(if(dynamic) DynamicNavigationScreen(carContext) else ExplanationScreen(carContext))
+                    })
                 }.build())
                 .build())
             .build()
     }
+}
+
+/** Preserve both experiments on hosts that show only the first custom navigation strip action. */
+private class ExperimentChooserScreen(context:CarContext,private val choose:(Boolean)->Unit):Screen(context) {
+    override fun onGetTemplate():Template=ListTemplate.Builder().setTitle("SURPRIDE · 개발 실험 선택").setHeaderAction(Action.BACK)
+        .setSingleList(ItemList.Builder()
+            .addItem(Row.Builder().setTitle("실경로 동적 DEMO · 정차 전용").setOnClickListener {choose(true)}.build())
+            .addItem(Row.Builder().setTitle("기존 정적 PoC 설명").setOnClickListener {choose(false)}.build()).build()).build()
 }
 
 private class ExplanationScreen(context: CarContext) : Screen(context) {

@@ -1,0 +1,7 @@
+﻿Paused state unchanged: True
+11-08 16:55:37.989  5194  5194 I SurprideDynamic: TEMPLATE status=ARRIVED source=KAKAO_DIRECTIONS segment=7 maneuver=null nextM=0 remainingM=0 etaS=0
+Final PID RUNNING templates: 6
+Final PID ARRIVED templates: 1
+Final PID STOPPED without routing info: True
+Restored static surface: True
+Legacy explanation reachable: True

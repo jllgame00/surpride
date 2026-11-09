@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+    useLibrary("android.car", false)
     namespace = "com.surpride.navhostpoc"
     compileSdk { version = release(37) }
     defaultConfig {
@@ -23,4 +24,6 @@ android {
 dependencies {
     implementation("androidx.car.app:app:1.7.0")
     implementation("androidx.car.app:app-automotive:1.7.0")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.json:json:20250517")
 }
