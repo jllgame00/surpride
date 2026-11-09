@@ -1,0 +1,621 @@
+--------- beginning of main
+11-09 15:54:40.164 23715 23715 I SurprideActive: FOCUS connected=false otherActive=null error=null
+11-09 15:54:40.177 23715 23715 I SurprideActive: FOCUS connected=true otherActive=null error=null
+11-09 15:54:40.184 23715 23715 I SurprideActive: OEM connected=false active=null error=null
+11-09 15:54:40.213 23715 23715 I SurprideActive: FIX n=1 status=UNKNOWN progressM=null nextM=null source=DEVICE_API
+11-09 15:54:40.213 23715 23715 I SurprideActive: POSITION_SUBSCRIBED owner=false
+11-09 15:54:40.222 23715 23715 I SurprideActive: OEM connected=true active=null error=null
+11-09 15:54:40.234 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:54:40.423 23715 23715 I SurprideMap: MAP_TILES loaded=0 requested=28 failed=0 stale=0
+11-09 15:54:40.436 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=1 tripUpdates=0 revealed=false candidate=false
+11-09 15:54:40.466 23715 23715 I SurprideMap: MAP_TILES loaded=0 requested=6 failed=0 stale=0
+11-09 15:54:40.470 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=1 tripUpdates=0 revealed=false candidate=false
+11-09 15:54:40.498 23715 23715 I SurprideMap: MAP_TILES loaded=0 requested=8 failed=0 stale=0
+11-09 15:54:40.503 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=1 tripUpdates=0 revealed=false candidate=false
+11-09 15:54:40.516 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=1 tripUpdates=0 revealed=false candidate=false
+11-09 15:54:41.215 23715 23715 I SurprideActive: OEM connected=false active=null error=null
+11-09 15:54:41.216 23715 23715 I SurprideActive: FOCUS connected=false otherActive=null error=null
+11-09 15:54:42.367 23715 23715 I SurprideActive: FOCUS connected=false otherActive=null error=null
+11-09 15:54:42.368 23715 23715 I SurprideActive: FOCUS connected=true otherActive=null error=null
+11-09 15:54:42.370 23715 23715 I SurprideActive: OEM connected=false active=null error=null
+11-09 15:54:42.376 23715 23715 I SurprideActive: FIX n=2 status=UNKNOWN progressM=null nextM=null source=DEVICE_API
+11-09 15:54:42.376 23715 23715 I SurprideActive: POSITION_SUBSCRIBED owner=false
+11-09 15:54:42.386 23715 23715 I SurprideActive: OEM connected=true active=null error=null
+11-09 15:54:42.392 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:54:42.424 23715 23715 I SurprideMap: MAP_TILES loaded=0 requested=28 failed=0 stale=0
+11-09 15:54:42.430 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=2 tripUpdates=0 revealed=false candidate=false
+11-09 15:54:42.455 23715 23715 I SurprideMap: MAP_TILES loaded=0 requested=8 failed=0 stale=0
+11-09 15:54:42.457 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=2 tripUpdates=0 revealed=false candidate=false
+11-09 15:54:42.490 23715 23715 I SurprideMap: MAP_TILES loaded=6 requested=8 failed=0 stale=0
+11-09 15:54:42.493 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=2 tripUpdates=0 revealed=false candidate=false
+11-09 15:54:43.395 23715 23715 I SurprideMap: MAP_TILES loaded=8 requested=8 failed=0 stale=0
+11-09 15:54:43.396 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=2 tripUpdates=0 revealed=false candidate=false
+11-09 15:54:43.412 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=2 tripUpdates=0 revealed=false candidate=false
+11-09 15:54:44.399 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=2 tripUpdates=0 revealed=false candidate=false
+11-09 15:54:44.430 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=2 tripUpdates=0 revealed=false candidate=false
+11-09 15:54:45.401 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=2 tripUpdates=0 revealed=false candidate=false
+11-09 15:54:45.428 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=2 tripUpdates=0 revealed=false candidate=false
+11-09 15:54:46.029 23715 23715 I SurprideActive: START_REQUEST accepted=true state=REQUESTED reason=AWAITING_GRANT
+11-09 15:54:46.029 23715 23715 I SurprideActive: FIX n=3 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:54:46.030 23715 23715 I SurprideActive: FOCUS connected=true otherActive=false error=null
+11-09 15:54:46.031 23715 23715 I SurprideActive: FOCUS connected=true otherActive=false error=null
+11-09 15:54:46.392 23715 23715 I SurprideMap: MAP_TILES loaded=0 requested=12 failed=0 stale=0
+11-09 15:54:46.396 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=3 tripUpdates=0 revealed=false candidate=false
+11-09 15:54:46.430 23715 23715 I SurprideMap: MAP_TILES loaded=12 requested=12 failed=0 stale=0
+11-09 15:54:46.431 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=3 tripUpdates=0 revealed=false candidate=false
+11-09 15:54:47.029 23715 23715 I SurprideActive: TRIP returned=true updates=1 destinations=0 state=ACTIVE
+11-09 15:54:47.029 23715 23715 I SurprideActive: FIX n=4 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:54:47.404 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=4 tripUpdates=1 revealed=false candidate=false
+11-09 15:54:47.407 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:54:47.430 23715 23715 I SurprideMap: MAP_TILES loaded=14 requested=14 failed=0 stale=0
+11-09 15:54:47.433 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=4 tripUpdates=1 revealed=false candidate=false
+11-09 15:54:47.451 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=4 tripUpdates=1 revealed=false candidate=false
+11-09 15:54:48.033 23715 23715 I SurprideActive: TRIP returned=true updates=2 destinations=0 state=ACTIVE
+11-09 15:54:48.033 23715 23715 I SurprideActive: FIX n=5 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:54:48.408 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=5 tripUpdates=2 revealed=false candidate=false
+11-09 15:54:48.435 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=5 tripUpdates=2 revealed=false candidate=false
+11-09 15:54:49.030 23715 23715 I SurprideActive: TRIP returned=true updates=3 destinations=0 state=ACTIVE
+11-09 15:54:49.030 23715 23715 I SurprideActive: FIX n=6 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:54:49.406 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=6 tripUpdates=3 revealed=false candidate=false
+11-09 15:54:49.432 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=6 tripUpdates=3 revealed=false candidate=false
+11-09 15:54:50.033 23715 23715 I SurprideActive: TRIP returned=true updates=4 destinations=0 state=ACTIVE
+11-09 15:54:50.033 23715 23715 I SurprideActive: FIX n=7 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:54:50.406 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=7 tripUpdates=4 revealed=false candidate=false
+11-09 15:54:50.437 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=7 tripUpdates=4 revealed=false candidate=false
+11-09 15:54:51.033 23715 23715 I SurprideActive: TRIP returned=true updates=5 destinations=0 state=ACTIVE
+11-09 15:54:51.033 23715 23715 I SurprideActive: FIX n=8 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:54:51.407 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=8 tripUpdates=5 revealed=false candidate=false
+11-09 15:54:51.438 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=8 tripUpdates=5 revealed=false candidate=false
+11-09 15:54:52.412 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=8 tripUpdates=5 revealed=false candidate=false
+11-09 15:54:52.416 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:54:52.431 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=8 tripUpdates=5 revealed=false candidate=false
+11-09 15:54:52.449 23715 23715 I SurprideMap: MAP_TILES loaded=14 requested=16 failed=0 stale=0
+11-09 15:54:52.452 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=8 tripUpdates=5 revealed=false candidate=false
+11-09 15:54:53.032 23715 23715 I SurprideActive: TRIP returned=true updates=6 destinations=0 state=ACTIVE
+11-09 15:54:53.032 23715 23715 I SurprideActive: FIX n=9 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:54:53.410 23715 23715 I SurprideMap: MAP_TILES loaded=13 requested=13 failed=0 stale=0
+11-09 15:54:53.413 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=9 tripUpdates=6 revealed=false candidate=false
+11-09 15:54:53.433 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=9 tripUpdates=6 revealed=false candidate=false
+11-09 15:54:54.033 23715 23715 I SurprideActive: TRIP returned=true updates=7 destinations=0 state=ACTIVE
+11-09 15:54:54.033 23715 23715 I SurprideActive: FIX n=10 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:54:54.413 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=10 tripUpdates=7 revealed=false candidate=false
+11-09 15:54:54.446 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=10 tripUpdates=7 revealed=false candidate=false
+11-09 15:54:55.032 23715 23715 I SurprideActive: TRIP returned=true updates=8 destinations=0 state=ACTIVE
+11-09 15:54:55.032 23715 23715 I SurprideActive: FIX n=11 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:54:55.416 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=11 tripUpdates=8 revealed=false candidate=false
+11-09 15:54:55.434 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=11 tripUpdates=8 revealed=false candidate=false
+11-09 15:54:56.033 23715 23715 I SurprideActive: TRIP returned=true updates=9 destinations=0 state=ACTIVE
+11-09 15:54:56.033 23715 23715 I SurprideActive: FIX n=12 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:54:56.414 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=12 tripUpdates=9 revealed=false candidate=false
+11-09 15:54:56.434 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=12 tripUpdates=9 revealed=false candidate=false
+11-09 15:54:57.032 23715 23715 I SurprideActive: TRIP returned=true updates=10 destinations=0 state=ACTIVE
+11-09 15:54:57.032 23715 23715 I SurprideActive: FIX n=13 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:54:57.396 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:54:57.420 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=13 tripUpdates=10 revealed=false candidate=false
+11-09 15:54:57.448 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=13 tripUpdates=10 revealed=false candidate=false
+11-09 15:54:58.034 23715 23715 I SurprideActive: TRIP returned=true updates=11 destinations=0 state=ACTIVE
+11-09 15:54:58.034 23715 23715 I SurprideActive: FIX n=14 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:54:58.417 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=14 tripUpdates=11 revealed=false candidate=false
+11-09 15:54:58.447 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=14 tripUpdates=11 revealed=false candidate=false
+11-09 15:54:59.034 23715 23715 I SurprideActive: TRIP returned=true updates=12 destinations=0 state=ACTIVE
+11-09 15:54:59.034 23715 23715 I SurprideActive: FIX n=15 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:54:59.416 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=15 tripUpdates=12 revealed=false candidate=false
+11-09 15:54:59.446 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=15 tripUpdates=12 revealed=false candidate=false
+11-09 15:55:00.037 23715 23715 I SurprideActive: TRIP returned=true updates=13 destinations=0 state=ACTIVE
+11-09 15:55:00.037 23715 23715 I SurprideActive: FIX n=16 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:00.426 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=16 tripUpdates=13 revealed=false candidate=false
+11-09 15:55:00.453 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=16 tripUpdates=13 revealed=false candidate=false
+11-09 15:55:01.036 23715 23715 I SurprideActive: TRIP returned=true updates=14 destinations=0 state=ACTIVE
+11-09 15:55:01.036 23715 23715 I SurprideActive: FIX n=17 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:01.417 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=17 tripUpdates=14 revealed=false candidate=false
+11-09 15:55:01.447 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=17 tripUpdates=14 revealed=false candidate=false
+11-09 15:55:02.036 23715 23715 I SurprideActive: TRIP returned=true updates=15 destinations=0 state=ACTIVE
+11-09 15:55:02.036 23715 23715 I SurprideActive: FIX n=18 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:02.398 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:55:02.418 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=18 tripUpdates=15 revealed=false candidate=false
+11-09 15:55:02.448 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=18 tripUpdates=15 revealed=false candidate=false
+11-09 15:55:03.037 23715 23715 I SurprideActive: TRIP returned=true updates=16 destinations=0 state=ACTIVE
+11-09 15:55:03.037 23715 23715 I SurprideActive: FIX n=19 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:03.419 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=19 tripUpdates=16 revealed=false candidate=false
+11-09 15:55:03.449 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=19 tripUpdates=16 revealed=false candidate=false
+11-09 15:55:04.037 23715 23715 I SurprideActive: TRIP returned=true updates=17 destinations=0 state=ACTIVE
+11-09 15:55:04.037 23715 23715 I SurprideActive: FIX n=20 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:04.419 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=20 tripUpdates=17 revealed=false candidate=false
+11-09 15:55:04.448 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=20 tripUpdates=17 revealed=false candidate=false
+11-09 15:55:05.037 23715 23715 I SurprideActive: TRIP returned=true updates=18 destinations=0 state=ACTIVE
+11-09 15:55:05.037 23715 23715 I SurprideActive: FIX n=21 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:05.422 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=21 tripUpdates=18 revealed=false candidate=false
+11-09 15:55:05.447 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=21 tripUpdates=18 revealed=false candidate=false
+11-09 15:55:06.039 23715 23715 I SurprideActive: TRIP returned=true updates=19 destinations=0 state=ACTIVE
+11-09 15:55:06.039 23715 23715 I SurprideActive: FIX n=22 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:06.420 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=22 tripUpdates=19 revealed=false candidate=false
+11-09 15:55:06.459 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=22 tripUpdates=19 revealed=false candidate=false
+11-09 15:55:07.039 23715 23715 I SurprideActive: TRIP returned=true updates=20 destinations=0 state=ACTIVE
+11-09 15:55:07.039 23715 23715 I SurprideActive: FIX n=23 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:07.401 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:55:07.423 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=23 tripUpdates=20 revealed=false candidate=false
+11-09 15:55:07.465 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=23 tripUpdates=20 revealed=false candidate=false
+11-09 15:55:08.039 23715 23715 I SurprideActive: TRIP returned=true updates=21 destinations=0 state=ACTIVE
+11-09 15:55:08.040 23715 23715 I SurprideActive: FIX n=24 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:08.422 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=24 tripUpdates=21 revealed=false candidate=false
+11-09 15:55:08.461 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=24 tripUpdates=21 revealed=false candidate=false
+11-09 15:55:09.039 23715 23715 I SurprideActive: TRIP returned=true updates=22 destinations=0 state=ACTIVE
+11-09 15:55:09.039 23715 23715 I SurprideActive: FIX n=25 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:09.424 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=25 tripUpdates=22 revealed=false candidate=false
+11-09 15:55:09.464 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=25 tripUpdates=22 revealed=false candidate=false
+11-09 15:55:10.039 23715 23715 I SurprideActive: TRIP returned=true updates=23 destinations=0 state=ACTIVE
+11-09 15:55:10.039 23715 23715 I SurprideActive: FIX n=26 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:10.425 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=26 tripUpdates=23 revealed=false candidate=false
+11-09 15:55:10.463 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=26 tripUpdates=23 revealed=false candidate=false
+11-09 15:55:11.041 23715 23715 I SurprideActive: TRIP returned=true updates=24 destinations=0 state=ACTIVE
+11-09 15:55:11.041 23715 23715 I SurprideActive: FIX n=27 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:11.430 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=27 tripUpdates=24 revealed=false candidate=false
+11-09 15:55:11.465 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=27 tripUpdates=24 revealed=false candidate=false
+11-09 15:55:12.041 23715 23715 I SurprideActive: TRIP returned=true updates=25 destinations=0 state=ACTIVE
+11-09 15:55:12.041 23715 23715 I SurprideActive: FIX n=28 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:12.401 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:55:12.429 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=28 tripUpdates=25 revealed=false candidate=false
+11-09 15:55:12.465 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=28 tripUpdates=25 revealed=false candidate=false
+11-09 15:55:13.041 23715 23715 I SurprideActive: TRIP returned=true updates=26 destinations=0 state=ACTIVE
+11-09 15:55:13.041 23715 23715 I SurprideActive: FIX n=29 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:13.428 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=29 tripUpdates=26 revealed=false candidate=false
+11-09 15:55:13.462 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=29 tripUpdates=26 revealed=false candidate=false
+11-09 15:55:14.041 23715 23715 I SurprideActive: TRIP returned=true updates=27 destinations=0 state=ACTIVE
+11-09 15:55:14.041 23715 23715 I SurprideActive: FIX n=30 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:14.432 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=30 tripUpdates=27 revealed=false candidate=false
+11-09 15:55:14.468 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=30 tripUpdates=27 revealed=false candidate=false
+11-09 15:55:15.044 23715 23715 I SurprideActive: TRIP returned=true updates=28 destinations=0 state=ACTIVE
+11-09 15:55:15.044 23715 23715 I SurprideActive: FIX n=31 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:15.431 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=31 tripUpdates=28 revealed=false candidate=false
+11-09 15:55:15.465 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=31 tripUpdates=28 revealed=false candidate=false
+11-09 15:55:16.045 23715 23715 I SurprideActive: TRIP returned=true updates=29 destinations=0 state=ACTIVE
+11-09 15:55:16.045 23715 23715 I SurprideActive: FIX n=32 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:16.432 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=32 tripUpdates=29 revealed=false candidate=false
+11-09 15:55:16.461 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=32 tripUpdates=29 revealed=false candidate=false
+11-09 15:55:17.045 23715 23715 I SurprideActive: TRIP returned=true updates=30 destinations=0 state=ACTIVE
+11-09 15:55:17.045 23715 23715 I SurprideActive: FIX n=33 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:17.401 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:55:17.433 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=33 tripUpdates=30 revealed=false candidate=false
+11-09 15:55:17.463 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=33 tripUpdates=30 revealed=false candidate=false
+11-09 15:55:18.046 23715 23715 I SurprideActive: TRIP returned=true updates=31 destinations=0 state=ACTIVE
+11-09 15:55:18.046 23715 23715 I SurprideActive: FIX n=34 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:18.433 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=34 tripUpdates=31 revealed=false candidate=false
+11-09 15:55:18.464 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=34 tripUpdates=31 revealed=false candidate=false
+11-09 15:55:19.046 23715 23715 I SurprideActive: TRIP returned=true updates=32 destinations=0 state=ACTIVE
+11-09 15:55:19.046 23715 23715 I SurprideActive: FIX n=35 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:19.436 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=35 tripUpdates=32 revealed=false candidate=false
+11-09 15:55:19.475 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=35 tripUpdates=32 revealed=false candidate=false
+11-09 15:55:20.048 23715 23715 I SurprideActive: TRIP returned=true updates=33 destinations=0 state=ACTIVE
+11-09 15:55:20.048 23715 23715 I SurprideActive: FIX n=36 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:20.438 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=36 tripUpdates=33 revealed=false candidate=false
+11-09 15:55:20.482 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=36 tripUpdates=33 revealed=false candidate=false
+11-09 15:55:21.049 23715 23715 I SurprideActive: TRIP returned=true updates=34 destinations=0 state=ACTIVE
+11-09 15:55:21.049 23715 23715 I SurprideActive: FIX n=37 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:21.439 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=37 tripUpdates=34 revealed=false candidate=false
+11-09 15:55:21.479 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=37 tripUpdates=34 revealed=false candidate=false
+11-09 15:55:22.048 23715 23715 I SurprideActive: TRIP returned=true updates=35 destinations=0 state=ACTIVE
+11-09 15:55:22.048 23715 23715 I SurprideActive: FIX n=38 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:22.403 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:55:22.442 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=38 tripUpdates=35 revealed=false candidate=false
+11-09 15:55:22.480 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=38 tripUpdates=35 revealed=false candidate=false
+11-09 15:55:23.049 23715 23715 I SurprideActive: TRIP returned=true updates=36 destinations=0 state=ACTIVE
+11-09 15:55:23.049 23715 23715 I SurprideActive: FIX n=39 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:23.441 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=39 tripUpdates=36 revealed=false candidate=false
+11-09 15:55:23.475 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=39 tripUpdates=36 revealed=false candidate=false
+11-09 15:55:24.049 23715 23715 I SurprideActive: TRIP returned=true updates=37 destinations=0 state=ACTIVE
+11-09 15:55:24.049 23715 23715 I SurprideActive: FIX n=40 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:24.442 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=40 tripUpdates=37 revealed=false candidate=false
+11-09 15:55:24.479 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=40 tripUpdates=37 revealed=false candidate=false
+11-09 15:55:25.050 23715 23715 I SurprideActive: TRIP returned=true updates=38 destinations=0 state=ACTIVE
+11-09 15:55:25.050 23715 23715 I SurprideActive: FIX n=41 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:25.444 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=41 tripUpdates=38 revealed=false candidate=false
+11-09 15:55:25.479 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=41 tripUpdates=38 revealed=false candidate=false
+11-09 15:55:26.052 23715 23715 I SurprideActive: TRIP returned=true updates=39 destinations=0 state=ACTIVE
+11-09 15:55:26.052 23715 23715 I SurprideActive: FIX n=42 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:26.447 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=42 tripUpdates=39 revealed=false candidate=false
+11-09 15:55:26.479 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=42 tripUpdates=39 revealed=false candidate=false
+11-09 15:55:27.051 23715 23715 I SurprideActive: TRIP returned=true updates=40 destinations=0 state=ACTIVE
+11-09 15:55:27.051 23715 23715 I SurprideActive: FIX n=43 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:27.405 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:55:27.447 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=43 tripUpdates=40 revealed=false candidate=false
+11-09 15:55:27.478 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=43 tripUpdates=40 revealed=false candidate=false
+11-09 15:55:28.053 23715 23715 I SurprideActive: TRIP returned=true updates=41 destinations=0 state=ACTIVE
+11-09 15:55:28.053 23715 23715 I SurprideActive: FIX n=44 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:28.450 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=44 tripUpdates=41 revealed=false candidate=false
+11-09 15:55:28.483 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=44 tripUpdates=41 revealed=false candidate=false
+11-09 15:55:29.063 23715 23715 I SurprideActive: TRIP returned=true updates=42 destinations=0 state=ACTIVE
+11-09 15:55:29.063 23715 23715 I SurprideActive: FIX n=45 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:29.451 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=45 tripUpdates=42 revealed=false candidate=false
+11-09 15:55:29.477 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=45 tripUpdates=42 revealed=false candidate=false
+11-09 15:55:30.054 23715 23715 I SurprideActive: TRIP returned=true updates=43 destinations=0 state=ACTIVE
+11-09 15:55:30.054 23715 23715 I SurprideActive: FIX n=46 status=ON_ROUTE progressM=3096 nextM=2848 source=DEVICE_API
+11-09 15:55:30.450 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=46 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:30.484 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=46 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:31.054 23715 23715 I SurprideActive: FOCUS connected=true otherActive=null error=null
+11-09 15:55:31.054 23715 23715 I SurprideActive: FIX n=47 status=OFF_ROUTE_CANDIDATE progressM=null nextM=null source=DEVICE_API
+11-09 15:55:31.054 23715 23715 I SurprideActive: FOCUS connected=true otherActive=false error=null
+11-09 15:55:31.447 23715 23715 I SurprideMap: MAP_TILES loaded=8 requested=15 failed=0 stale=0
+11-09 15:55:31.449 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=47 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:31.480 23715 23715 I SurprideMap: MAP_TILES loaded=13 requested=15 failed=0 stale=0
+11-09 15:55:31.481 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=47 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:31.498 23715 23715 I SurprideActive: FIX n=48 status=UNKNOWN progressM=null nextM=null source=DEVICE_API
+11-09 15:55:31.498 23715 23715 I SurprideActive: POSITION_SUBSCRIBED owner=false
+11-09 15:55:32.408 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:55:32.449 23715 23715 I SurprideMap: MAP_TILES loaded=15 requested=15 failed=0 stale=0
+11-09 15:55:32.450 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=48 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:32.483 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=48 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:32.507 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=48 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:33.452 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=48 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:34.457 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=48 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:35.054 23715 23715 I SurprideActive: FIX n=49 status=OFF_ROUTE_CANDIDATE progressM=null nextM=null source=DEVICE_API
+11-09 15:55:35.451 23715 23715 I SurprideMap: MAP_TILES loaded=9 requested=35 failed=0 stale=0
+11-09 15:55:35.453 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=49 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:36.055 23715 23715 I SurprideActive: FIX n=50 status=OFF_ROUTE progressM=null nextM=null source=DEVICE_API
+11-09 15:55:36.459 23715 23715 I SurprideMap: MAP_TILES loaded=35 requested=35 failed=0 stale=0
+11-09 15:55:36.460 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=50 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:37.055 23715 23715 I SurprideActive: FIX n=51 status=OFF_ROUTE progressM=null nextM=null source=DEVICE_API
+11-09 15:55:37.412 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:55:37.459 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=51 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:38.056 23715 23715 I SurprideActive: FIX n=52 status=REJOINING progressM=null nextM=null source=DEVICE_API
+11-09 15:55:38.452 23715 23715 I SurprideMap: MAP_TILES loaded=0 requested=34 failed=0 stale=0
+11-09 15:55:38.454 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=52 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:39.057 23715 23715 I SurprideActive: FIX n=53 status=JUMP_REJECTED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:39.465 23715 23715 I SurprideMap: MAP_TILES loaded=34 requested=34 failed=0 stale=0
+11-09 15:55:39.466 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=53 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:40.059 23715 23715 I SurprideActive: FIX n=54 status=JUMP_REJECTED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:40.485 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=54 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:41.059 23715 23715 I SurprideActive: FIX n=55 status=JUMP_REJECTED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:41.486 23715 23715 I SurprideMap: MAP_TILES loaded=31 requested=32 failed=0 stale=0
+11-09 15:55:41.487 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=55 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:42.059 23715 23715 I SurprideActive: FIX n=56 status=JUMP_REJECTED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:42.413 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:55:42.482 23715 23715 I SurprideMap: MAP_TILES loaded=32 requested=33 failed=0 stale=0
+11-09 15:55:42.486 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=56 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:43.059 23715 23715 I SurprideActive: FIX n=57 status=JUMP_REJECTED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:43.485 23715 23715 I SurprideMap: MAP_TILES loaded=33 requested=33 failed=0 stale=0
+11-09 15:55:43.487 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=57 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:44.060 23715 23715 I SurprideActive: FIX n=58 status=JUMP_REJECTED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:44.487 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=58 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:45.061 23715 23715 I SurprideActive: FIX n=59 status=JUMP_REJECTED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:45.487 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=59 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:46.062 23715 23715 I SurprideActive: FIX n=60 status=JUMP_REJECTED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:46.488 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=60 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:47.062 23715 23715 I SurprideActive: FIX n=61 status=JUMP_REJECTED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:47.416 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:55:47.488 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=61 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:48.063 23715 23715 I SurprideActive: FIX n=62 status=JUMP_REJECTED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:48.488 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=62 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:49.064 23715 23715 I SurprideActive: FIX n=63 status=JUMP_REJECTED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:49.494 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=63 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:50.064 23715 23715 I SurprideActive: FIX n=64 status=JUMP_REJECTED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:50.493 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=64 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:51.066 23715 23715 I SurprideActive: FIX n=65 status=JUMP_REJECTED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:51.490 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=65 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:52.066 23715 23715 I SurprideActive: FIX n=66 status=JUMP_REJECTED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:52.418 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:55:52.489 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=66 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:53.066 23715 23715 I SurprideActive: FIX n=67 status=JUMP_REJECTED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:53.491 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=67 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:54.066 23715 23715 I SurprideActive: FIX n=68 status=JUMP_REJECTED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:54.495 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=68 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:55.067 23715 23715 I SurprideActive: FIX n=69 status=JUMP_REJECTED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:55.502 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=69 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:56.067 23715 23715 I SurprideActive: FIX n=70 status=JUMP_REJECTED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:56.496 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=70 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:57.068 23715 23715 I SurprideActive: FIX n=71 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:57.421 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:55:57.503 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=71 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:58.069 23715 23715 I SurprideActive: FIX n=72 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:58.502 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=72 tripUpdates=43 revealed=false candidate=false
+11-09 15:55:59.069 23715 23715 I SurprideActive: FIX n=73 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:55:59.502 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=73 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:00.071 23715 23715 I SurprideActive: FIX n=74 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:00.502 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=74 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:01.070 23715 23715 I SurprideActive: FIX n=75 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:01.504 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=75 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:02.072 23715 23715 I SurprideActive: FIX n=76 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:02.421 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:56:02.506 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=76 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:03.071 23715 23715 I SurprideActive: FIX n=77 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:03.513 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=77 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:04.072 23715 23715 I SurprideActive: FIX n=78 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:04.509 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=78 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:05.073 23715 23715 I SurprideActive: FIX n=79 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:05.510 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=79 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:06.074 23715 23715 I SurprideActive: FIX n=80 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:06.511 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=80 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:07.075 23715 23715 I SurprideActive: FIX n=81 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:07.422 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:56:07.512 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=81 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:08.075 23715 23715 I SurprideActive: FIX n=82 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:08.515 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=82 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:09.077 23715 23715 I SurprideActive: FIX n=83 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:09.519 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=83 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:10.077 23715 23715 I SurprideActive: FIX n=84 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:10.523 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=84 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:11.077 23715 23715 I SurprideActive: FIX n=85 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:11.520 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=85 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:12.077 23715 23715 I SurprideActive: FIX n=86 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:12.426 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:56:12.521 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=86 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:13.078 23715 23715 I SurprideActive: FIX n=87 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:13.521 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=87 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:14.078 23715 23715 I SurprideActive: FIX n=88 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:14.523 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=88 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:15.079 23715 23715 I SurprideActive: FIX n=89 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:15.527 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=89 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:16.079 23715 23715 I SurprideActive: FIX n=90 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:16.526 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=90 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:17.081 23715 23715 I SurprideActive: FIX n=91 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:17.426 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:56:17.527 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=91 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:18.081 23715 23715 I SurprideActive: FIX n=92 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:18.529 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=92 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:19.083 23715 23715 I SurprideActive: FIX n=93 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:19.527 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=93 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:20.083 23715 23715 I SurprideActive: FIX n=94 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:20.528 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=94 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:21.084 23715 23715 I SurprideActive: FIX n=95 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:21.529 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=95 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:22.085 23715 23715 I SurprideActive: FIX n=96 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:22.428 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:56:22.530 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=96 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:23.530 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=96 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:24.085 23715 23715 I SurprideActive: FIX n=97 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:24.536 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=97 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:25.086 23715 23715 I SurprideActive: FIX n=98 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:25.532 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=98 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:26.085 23715 23715 I SurprideActive: FIX n=99 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:26.535 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=99 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:27.087 23715 23715 I SurprideActive: FIX n=100 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:27.426 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:56:27.533 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=100 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:28.087 23715 23715 I SurprideActive: FIX n=101 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:28.535 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=101 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:29.088 23715 23715 I SurprideActive: FIX n=102 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:29.533 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=102 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:30.088 23715 23715 I SurprideActive: FIX n=103 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:30.535 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=103 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:31.090 23715 23715 I SurprideActive: FIX n=104 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:31.540 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=104 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:32.091 23715 23715 I SurprideActive: FIX n=105 status=REVERSED progressM=null nextM=null source=DEVICE_API
+11-09 15:56:32.135 23715 23715 I SurprideMap: MAP_TILES loaded=0 requested=12 failed=0 stale=0
+11-09 15:56:32.137 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=105 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:32.153 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=105 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:32.228 23715 23715 I SurprideActive: OEM connected=false active=null error=null
+11-09 15:56:32.228 23715 23715 I SurprideActive: FOCUS connected=false otherActive=null error=null
+11-09 15:56:33.282 23715 23715 I SurprideActive: FOCUS connected=false otherActive=null error=null
+11-09 15:56:33.284 23715 23715 I SurprideActive: FOCUS connected=true otherActive=null error=null
+11-09 15:56:33.289 23715 23715 I SurprideActive: OEM connected=false active=null error=null
+11-09 15:56:33.296 23715 23715 I SurprideActive: FIX n=106 status=UNKNOWN progressM=null nextM=null source=DEVICE_API
+11-09 15:56:33.296 23715 23715 I SurprideActive: POSITION_SUBSCRIBED owner=false
+11-09 15:56:33.304 23715 23715 I SurprideActive: OEM connected=true active=null error=null
+11-09 15:56:33.313 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:56:33.588 23715 23715 I SurprideMap: MAP_TILES loaded=0 requested=32 failed=0 stale=0
+11-09 15:56:33.592 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=106 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:33.622 23715 23715 I SurprideMap: MAP_TILES loaded=0 requested=15 failed=0 stale=0
+11-09 15:56:33.624 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=106 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:33.662 23715 23715 I SurprideMap: MAP_TILES loaded=15 requested=15 failed=0 stale=0
+11-09 15:56:33.664 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=106 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:34.317 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=106 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:34.576 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=106 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:35.318 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=106 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:35.575 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=106 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:36.317 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=106 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:36.579 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=106 tripUpdates=43 revealed=false candidate=false
+11-09 15:56:37.094 23715 23715 I SurprideActive: START_REQUEST accepted=true state=REQUESTED reason=AWAITING_GRANT
+11-09 15:56:37.094 23715 23715 I SurprideActive: FIX n=107 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:37.094 23715 23715 I SurprideActive: FOCUS connected=true otherActive=false error=null
+11-09 15:56:37.095 23715 23715 I SurprideActive: FOCUS connected=true otherActive=false error=null
+11-09 15:56:37.317 23715 23715 I SurprideMap: MAP_TILES loaded=13 requested=18 failed=0 stale=0
+11-09 15:56:37.322 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=107 tripUpdates=0 revealed=false candidate=false
+11-09 15:56:37.591 23715 23715 I SurprideMap: MAP_TILES loaded=18 requested=21 failed=0 stale=0
+11-09 15:56:37.596 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=107 tripUpdates=0 revealed=false candidate=false
+11-09 15:56:37.617 23715 23715 I SurprideMap: MAP_TILES loaded=21 requested=21 failed=0 stale=0
+11-09 15:56:37.620 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=107 tripUpdates=0 revealed=false candidate=false
+11-09 15:56:38.097 23715 23715 I SurprideActive: TRIP returned=true updates=1 destinations=0 state=ACTIVE
+11-09 15:56:38.097 23715 23715 I SurprideActive: FIX n=108 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:38.322 23715 23715 I SurprideMap: MAP_TILES loaded=20 requested=20 failed=0 stale=0
+11-09 15:56:38.324 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=108 tripUpdates=1 revealed=false candidate=false
+11-09 15:56:38.333 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:56:38.576 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=108 tripUpdates=1 revealed=false candidate=false
+11-09 15:56:39.096 23715 23715 I SurprideActive: TRIP returned=true updates=2 destinations=0 state=ACTIVE
+11-09 15:56:39.096 23715 23715 I SurprideActive: FIX n=109 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:39.321 23715 23715 I SurprideMap: MAP_TILES loaded=20 requested=21 failed=0 stale=0
+11-09 15:56:39.324 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=109 tripUpdates=2 revealed=false candidate=false
+11-09 15:56:39.581 23715 23715 I SurprideMap: MAP_TILES loaded=21 requested=21 failed=0 stale=0
+11-09 15:56:39.587 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=109 tripUpdates=2 revealed=false candidate=false
+11-09 15:56:40.097 23715 23715 I SurprideActive: TRIP returned=true updates=3 destinations=0 state=ACTIVE
+11-09 15:56:40.097 23715 23715 I SurprideActive: FIX n=110 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:40.334 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=110 tripUpdates=3 revealed=false candidate=false
+11-09 15:56:40.578 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=110 tripUpdates=3 revealed=false candidate=false
+11-09 15:56:41.101 23715 23715 I SurprideActive: TRIP returned=true updates=4 destinations=0 state=ACTIVE
+11-09 15:56:41.102 23715 23715 I SurprideActive: FIX n=111 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:41.324 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=111 tripUpdates=4 revealed=false candidate=false
+11-09 15:56:41.580 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=111 tripUpdates=4 revealed=false candidate=false
+11-09 15:56:42.099 23715 23715 I SurprideActive: TRIP returned=true updates=5 destinations=0 state=ACTIVE
+11-09 15:56:42.099 23715 23715 I SurprideActive: FIX n=112 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:42.328 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=112 tripUpdates=5 revealed=false candidate=false
+11-09 15:56:42.581 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=112 tripUpdates=5 revealed=false candidate=false
+11-09 15:56:43.100 23715 23715 I SurprideActive: TRIP returned=true updates=6 destinations=0 state=ACTIVE
+11-09 15:56:43.100 23715 23715 I SurprideActive: FIX n=113 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:43.330 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=113 tripUpdates=6 revealed=false candidate=false
+11-09 15:56:43.333 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:56:43.597 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=113 tripUpdates=6 revealed=false candidate=false
+11-09 15:56:43.619 23715 23715 I SurprideMap: MAP_TILES loaded=24 requested=25 failed=0 stale=0
+11-09 15:56:43.624 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=113 tripUpdates=6 revealed=false candidate=false
+11-09 15:56:44.103 23715 23715 I SurprideActive: TRIP returned=true updates=7 destinations=0 state=ACTIVE
+11-09 15:56:44.103 23715 23715 I SurprideActive: FIX n=114 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:44.327 23715 23715 I SurprideMap: MAP_TILES loaded=22 requested=22 failed=0 stale=0
+11-09 15:56:44.329 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=114 tripUpdates=7 revealed=false candidate=false
+11-09 15:56:44.596 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=114 tripUpdates=7 revealed=false candidate=false
+11-09 15:56:45.101 23715 23715 I SurprideActive: TRIP returned=true updates=8 destinations=0 state=ACTIVE
+11-09 15:56:45.101 23715 23715 I SurprideActive: FIX n=115 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:45.328 23715 23715 I SurprideMap: MAP_TILES loaded=20 requested=20 failed=0 stale=0
+11-09 15:56:45.332 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=115 tripUpdates=8 revealed=false candidate=false
+11-09 15:56:45.605 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=115 tripUpdates=8 revealed=false candidate=false
+11-09 15:56:46.101 23715 23715 I SurprideActive: TRIP returned=true updates=9 destinations=0 state=ACTIVE
+11-09 15:56:46.101 23715 23715 I SurprideActive: FIX n=116 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:46.336 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=116 tripUpdates=9 revealed=false candidate=false
+11-09 15:56:46.599 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=116 tripUpdates=9 revealed=false candidate=false
+11-09 15:56:47.101 23715 23715 I SurprideActive: TRIP returned=true updates=10 destinations=0 state=ACTIVE
+11-09 15:56:47.101 23715 23715 I SurprideActive: FIX n=117 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:47.333 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=117 tripUpdates=10 revealed=false candidate=false
+11-09 15:56:47.599 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=117 tripUpdates=10 revealed=false candidate=false
+11-09 15:56:48.102 23715 23715 I SurprideActive: TRIP returned=true updates=11 destinations=0 state=ACTIVE
+11-09 15:56:48.102 23715 23715 I SurprideActive: FIX n=118 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:48.313 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:56:48.335 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=118 tripUpdates=11 revealed=false candidate=false
+11-09 15:56:48.595 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=118 tripUpdates=11 revealed=false candidate=false
+11-09 15:56:49.102 23715 23715 I SurprideActive: TRIP returned=true updates=12 destinations=0 state=ACTIVE
+11-09 15:56:49.102 23715 23715 I SurprideActive: FIX n=119 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:49.338 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=119 tripUpdates=12 revealed=false candidate=false
+11-09 15:56:49.600 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=119 tripUpdates=12 revealed=false candidate=false
+11-09 15:56:50.104 23715 23715 I SurprideActive: TRIP returned=true updates=13 destinations=0 state=ACTIVE
+11-09 15:56:50.104 23715 23715 I SurprideActive: FIX n=120 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:50.336 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=120 tripUpdates=13 revealed=false candidate=false
+11-09 15:56:50.605 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=120 tripUpdates=13 revealed=false candidate=false
+11-09 15:56:51.105 23715 23715 I SurprideActive: TRIP returned=true updates=14 destinations=0 state=ACTIVE
+11-09 15:56:51.105 23715 23715 I SurprideActive: FIX n=121 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:51.339 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=121 tripUpdates=14 revealed=false candidate=false
+11-09 15:56:51.599 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=121 tripUpdates=14 revealed=false candidate=false
+11-09 15:56:52.103 23715 23715 I SurprideActive: TRIP returned=true updates=15 destinations=0 state=ACTIVE
+11-09 15:56:52.103 23715 23715 I SurprideActive: FIX n=122 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:52.356 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=122 tripUpdates=15 revealed=false candidate=false
+11-09 15:56:52.600 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=122 tripUpdates=15 revealed=false candidate=false
+11-09 15:56:53.105 23715 23715 I SurprideActive: TRIP returned=true updates=16 destinations=0 state=ACTIVE
+11-09 15:56:53.105 23715 23715 I SurprideActive: FIX n=123 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:53.314 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:56:53.342 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=123 tripUpdates=16 revealed=false candidate=false
+11-09 15:56:53.595 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=123 tripUpdates=16 revealed=false candidate=false
+11-09 15:56:54.106 23715 23715 I SurprideActive: TRIP returned=true updates=17 destinations=0 state=ACTIVE
+11-09 15:56:54.106 23715 23715 I SurprideActive: FIX n=124 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:54.340 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=124 tripUpdates=17 revealed=false candidate=false
+11-09 15:56:54.593 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=124 tripUpdates=17 revealed=false candidate=false
+11-09 15:56:55.105 23715 23715 I SurprideActive: TRIP returned=true updates=18 destinations=0 state=ACTIVE
+11-09 15:56:55.106 23715 23715 I SurprideActive: FIX n=125 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:55.341 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=125 tripUpdates=18 revealed=false candidate=false
+11-09 15:56:55.605 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=125 tripUpdates=18 revealed=false candidate=false
+11-09 15:56:56.107 23715 23715 I SurprideActive: TRIP returned=true updates=19 destinations=0 state=ACTIVE
+11-09 15:56:56.107 23715 23715 I SurprideActive: FIX n=126 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:56.358 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=126 tripUpdates=19 revealed=false candidate=false
+11-09 15:56:56.602 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=126 tripUpdates=19 revealed=false candidate=false
+11-09 15:56:57.108 23715 23715 I SurprideActive: TRIP returned=true updates=20 destinations=0 state=ACTIVE
+11-09 15:56:57.108 23715 23715 I SurprideActive: FIX n=127 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:57.344 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=127 tripUpdates=20 revealed=false candidate=false
+11-09 15:56:57.599 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=127 tripUpdates=20 revealed=false candidate=false
+11-09 15:56:58.109 23715 23715 I SurprideActive: TRIP returned=true updates=21 destinations=0 state=ACTIVE
+11-09 15:56:58.109 23715 23715 I SurprideActive: FIX n=128 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:58.320 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:56:58.346 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=128 tripUpdates=21 revealed=false candidate=false
+11-09 15:56:58.612 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=128 tripUpdates=21 revealed=false candidate=false
+11-09 15:56:59.108 23715 23715 I SurprideActive: TRIP returned=true updates=22 destinations=0 state=ACTIVE
+11-09 15:56:59.108 23715 23715 I SurprideActive: FIX n=129 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:56:59.346 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=129 tripUpdates=22 revealed=false candidate=false
+11-09 15:56:59.620 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=129 tripUpdates=22 revealed=false candidate=false
+11-09 15:57:00.109 23715 23715 I SurprideActive: TRIP returned=true updates=23 destinations=0 state=ACTIVE
+11-09 15:57:00.109 23715 23715 I SurprideActive: FIX n=130 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:00.346 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=130 tripUpdates=23 revealed=false candidate=false
+11-09 15:57:00.615 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=130 tripUpdates=23 revealed=false candidate=false
+11-09 15:57:01.109 23715 23715 I SurprideActive: TRIP returned=true updates=24 destinations=0 state=ACTIVE
+11-09 15:57:01.109 23715 23715 I SurprideActive: FIX n=131 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:01.346 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=131 tripUpdates=24 revealed=false candidate=false
+11-09 15:57:01.616 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=131 tripUpdates=24 revealed=false candidate=false
+11-09 15:57:02.110 23715 23715 I SurprideActive: TRIP returned=true updates=25 destinations=0 state=ACTIVE
+11-09 15:57:02.110 23715 23715 I SurprideActive: FIX n=132 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:02.349 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=132 tripUpdates=25 revealed=false candidate=false
+11-09 15:57:02.614 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=132 tripUpdates=25 revealed=false candidate=false
+11-09 15:57:03.110 23715 23715 I SurprideActive: TRIP returned=true updates=26 destinations=0 state=ACTIVE
+11-09 15:57:03.110 23715 23715 I SurprideActive: FIX n=133 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:03.320 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:57:03.350 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=133 tripUpdates=26 revealed=false candidate=false
+11-09 15:57:03.618 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=133 tripUpdates=26 revealed=false candidate=false
+11-09 15:57:04.112 23715 23715 I SurprideActive: TRIP returned=true updates=27 destinations=0 state=ACTIVE
+11-09 15:57:04.112 23715 23715 I SurprideActive: FIX n=134 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:04.351 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=134 tripUpdates=27 revealed=false candidate=false
+11-09 15:57:04.616 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=134 tripUpdates=27 revealed=false candidate=false
+11-09 15:57:05.113 23715 23715 I SurprideActive: TRIP returned=true updates=28 destinations=0 state=ACTIVE
+11-09 15:57:05.113 23715 23715 I SurprideActive: FIX n=135 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:05.351 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=135 tripUpdates=28 revealed=false candidate=false
+11-09 15:57:05.611 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=135 tripUpdates=28 revealed=false candidate=false
+11-09 15:57:06.112 23715 23715 I SurprideActive: TRIP returned=true updates=29 destinations=0 state=ACTIVE
+11-09 15:57:06.112 23715 23715 I SurprideActive: FIX n=136 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:06.351 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=136 tripUpdates=29 revealed=false candidate=false
+11-09 15:57:06.613 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=136 tripUpdates=29 revealed=false candidate=false
+11-09 15:57:07.113 23715 23715 I SurprideActive: TRIP returned=true updates=30 destinations=0 state=ACTIVE
+11-09 15:57:07.113 23715 23715 I SurprideActive: FIX n=137 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:07.352 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=137 tripUpdates=30 revealed=false candidate=false
+11-09 15:57:07.611 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=137 tripUpdates=30 revealed=false candidate=false
+11-09 15:57:08.115 23715 23715 I SurprideActive: TRIP returned=true updates=31 destinations=0 state=ACTIVE
+11-09 15:57:08.115 23715 23715 I SurprideActive: FIX n=138 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:08.323 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:57:08.354 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=138 tripUpdates=31 revealed=false candidate=false
+11-09 15:57:08.623 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=138 tripUpdates=31 revealed=false candidate=false
+11-09 15:57:09.116 23715 23715 I SurprideActive: TRIP returned=true updates=32 destinations=0 state=ACTIVE
+11-09 15:57:09.116 23715 23715 I SurprideActive: FIX n=139 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:09.356 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=139 tripUpdates=32 revealed=false candidate=false
+11-09 15:57:09.617 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=139 tripUpdates=32 revealed=false candidate=false
+11-09 15:57:10.115 23715 23715 I SurprideActive: TRIP returned=true updates=33 destinations=0 state=ACTIVE
+11-09 15:57:10.115 23715 23715 I SurprideActive: FIX n=140 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:10.357 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=140 tripUpdates=33 revealed=false candidate=false
+11-09 15:57:10.614 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=140 tripUpdates=33 revealed=false candidate=false
+11-09 15:57:11.117 23715 23715 I SurprideActive: TRIP returned=true updates=34 destinations=0 state=ACTIVE
+11-09 15:57:11.117 23715 23715 I SurprideActive: FIX n=141 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:11.357 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=141 tripUpdates=34 revealed=false candidate=false
+11-09 15:57:11.617 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=141 tripUpdates=34 revealed=false candidate=false
+11-09 15:57:12.116 23715 23715 I SurprideActive: TRIP returned=true updates=35 destinations=0 state=ACTIVE
+11-09 15:57:12.116 23715 23715 I SurprideActive: FIX n=142 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:12.357 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=142 tripUpdates=35 revealed=false candidate=false
+11-09 15:57:12.609 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=142 tripUpdates=35 revealed=false candidate=false
+11-09 15:57:13.117 23715 23715 I SurprideActive: TRIP returned=true updates=36 destinations=0 state=ACTIVE
+11-09 15:57:13.117 23715 23715 I SurprideActive: FIX n=143 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:13.321 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:57:13.358 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=143 tripUpdates=36 revealed=false candidate=false
+11-09 15:57:13.614 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=143 tripUpdates=36 revealed=false candidate=false
+11-09 15:57:14.121 23715 23715 I SurprideActive: TRIP returned=true updates=37 destinations=0 state=ACTIVE
+11-09 15:57:14.121 23715 23715 I SurprideActive: FIX n=144 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:14.357 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=144 tripUpdates=37 revealed=false candidate=false
+11-09 15:57:14.631 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=144 tripUpdates=37 revealed=false candidate=false
+11-09 15:57:15.122 23715 23715 I SurprideActive: TRIP returned=true updates=38 destinations=0 state=ACTIVE
+11-09 15:57:15.122 23715 23715 I SurprideActive: FIX n=145 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:15.358 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=145 tripUpdates=38 revealed=false candidate=false
+11-09 15:57:15.629 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=145 tripUpdates=38 revealed=false candidate=false
+11-09 15:57:16.118 23715 23715 I SurprideActive: TRIP returned=true updates=39 destinations=0 state=ACTIVE
+11-09 15:57:16.118 23715 23715 I SurprideActive: FIX n=146 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:16.362 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=146 tripUpdates=39 revealed=false candidate=false
+11-09 15:57:16.630 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=146 tripUpdates=39 revealed=false candidate=false
+11-09 15:57:17.120 23715 23715 I SurprideActive: TRIP returned=true updates=40 destinations=0 state=ACTIVE
+11-09 15:57:17.120 23715 23715 I SurprideActive: FIX n=147 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:17.361 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=147 tripUpdates=40 revealed=false candidate=false
+11-09 15:57:17.634 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=147 tripUpdates=40 revealed=false candidate=false
+11-09 15:57:18.326 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:57:18.366 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=147 tripUpdates=40 revealed=false candidate=false
+11-09 15:57:18.629 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=147 tripUpdates=40 revealed=false candidate=false
+11-09 15:57:19.120 23715 23715 I SurprideActive: TRIP returned=true updates=41 destinations=0 state=ACTIVE
+11-09 15:57:19.120 23715 23715 I SurprideActive: FIX n=148 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:19.368 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=148 tripUpdates=41 revealed=false candidate=false
+11-09 15:57:19.633 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=148 tripUpdates=41 revealed=false candidate=false
+11-09 15:57:20.122 23715 23715 I SurprideActive: TRIP returned=true updates=42 destinations=0 state=ACTIVE
+11-09 15:57:20.122 23715 23715 I SurprideActive: FIX n=149 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:20.367 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=149 tripUpdates=42 revealed=false candidate=false
+11-09 15:57:20.633 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=149 tripUpdates=42 revealed=false candidate=false
+11-09 15:57:21.122 23715 23715 I SurprideActive: TRIP returned=true updates=43 destinations=0 state=ACTIVE
+11-09 15:57:21.122 23715 23715 I SurprideActive: FIX n=150 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:21.367 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=150 tripUpdates=43 revealed=false candidate=false
+11-09 15:57:21.632 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=150 tripUpdates=43 revealed=false candidate=false
+11-09 15:57:22.122 23715 23715 I SurprideActive: TRIP returned=true updates=44 destinations=0 state=ACTIVE
+11-09 15:57:22.122 23715 23715 I SurprideActive: FIX n=151 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:22.368 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=151 tripUpdates=44 revealed=false candidate=false
+11-09 15:57:22.632 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=151 tripUpdates=44 revealed=false candidate=false
+11-09 15:57:23.124 23715 23715 I SurprideActive: TRIP returned=true updates=45 destinations=0 state=ACTIVE
+11-09 15:57:23.124 23715 23715 I SurprideActive: FIX n=152 status=ON_ROUTE progressM=1628 nextM=237 source=DEVICE_API
+11-09 15:57:23.328 23715 23715 I SurprideActive: OEM connected=true active=false error=null
+11-09 15:57:23.343 23715 23715 I SurprideMap: MAP_TILES loaded=21 requested=21 failed=0 stale=0
+11-09 15:57:23.347 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=152 tripUpdates=45 revealed=false candidate=false
+11-09 15:57:23.369 23715 23715 I SurprideActive: SURFACE state=ACTIVE fixes=152 tripUpdates=45 revealed=false candidate=false
+11-09 15:57:23.419 23715 23715 I SurprideActive: FOCUS connected=true otherActive=null error=null
+11-09 15:57:23.419 23715 23715 I SurprideActive: FOCUS connected=true otherActive=false error=null
+11-09 15:57:23.633 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=152 tripUpdates=45 revealed=false candidate=false
+11-09 15:57:24.366 23715 23715 I SurprideActive: SURFACE state=STOPPED fixes=152 tripUpdates=45 revealed=false candidate=false
+11-09 15:57:24.390 23715 23715 I SurprideActive: FIX n=153 status=UNKNOWN progressM=null nextM=null source=DEVICE_API
+11-09 15:57:24.390 23715 23715 I SurprideActive: POSITION_SUBSCRIBED owner=false

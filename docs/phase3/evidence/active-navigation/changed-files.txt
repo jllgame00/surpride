@@ -1,0 +1,62 @@
+ M .gitignore
+ M app/src/main/AndroidManifest.xml
+ M app/src/main/java/com/surpride/app/experience/ExperienceActivity.kt
+ M app/src/main/java/com/surpride/app/realdata/LiveRouteProvider.kt
+ M app/src/main/java/com/surpride/app/realdata/RealRouteActivity.kt
+ M app/src/main/res/xml/backup_rules.xml
+ M app/src/main/res/xml/data_extraction_rules.xml
+ M backend/gps_replay.py
+ M nav-host-poc/build.gradle.kts
+ M nav-host-poc/src/main/AndroidManifest.xml
+ M nav-host-poc/src/main/java/com/surpride/navhostpoc/MockNavigationService.kt
+ M nav-host-poc/src/main/java/com/surpride/navhostpoc/guidance/GuidanceModels.kt
+?? app/src/main/java/com/surpride/app/realdata/LiveNavigationResultActivity.kt
+?? app/src/main/java/com/surpride/app/realdata/LiveNavigationStore.kt
+?? app/src/main/java/com/surpride/app/realdata/NavigationFileProvider.kt
+?? app/src/main/java/com/surpride/app/realdata/PreparedNavigationHandoff.kt
+?? app/src/main/java/com/surpride/app/realdata/PreparedRouteContract.kt
+?? app/src/main/res/xml/navigation_file_paths.xml
+?? app/src/test/java/com/surpride/app/realdata/PreparedRouteContractTest.kt
+?? backend/tests/test_active_replay.py
+?? docs/phase3/ACTIVE_MYSTERY_NAVIGATION.md
+?? docs/phase3/ACTIVE_MYSTERY_PLAN.md
+?? docs/phase3/PLEOS_MAP_REUSE_AUDIT.md
+?? docs/phase3/evidence/active-navigation/01-prepared-live.png
+?? docs/phase3/evidence/active-navigation/02-active-secret-map.png
+?? docs/phase3/evidence/active-navigation/03-turn-follow-camera.png
+?? docs/phase3/evidence/active-navigation/04-explicit-reveal.png
+?? docs/phase3/evidence/active-navigation/05-rating-recorded.png
+?? docs/phase3/evidence/active-navigation/06-arrival-candidate.png
+?? docs/phase3/evidence/active-navigation/07-arrived-revealed.png
+?? docs/phase3/evidence/active-navigation/08-mood-atlas-live-records.png
+?? docs/phase3/evidence/active-navigation/09-final-apk-guidance.png
+?? docs/phase3/evidence/active-navigation/10-final-turn-road.png
+?? docs/phase3/evidence/active-navigation/11-unreliable-position-stopped.png
+?? docs/phase3/evidence/active-navigation/12-final-build-active.png
+?? docs/phase3/evidence/active-navigation/13-explicit-recovery.png
+?? docs/phase3/evidence/active-navigation/changed-files.txt
+?? docs/phase3/evidence/active-navigation/final-runtime-metadata.txt
+?? docs/phase3/evidence/active-navigation/validation-summary.json
+?? nav-host-poc/src/main/java/com/surpride/navhostpoc/ActiveMysteryScreen.kt
+?? nav-host-poc/src/main/java/com/surpride/navhostpoc/ActiveRoutePacket.kt
+?? nav-host-poc/src/main/java/com/surpride/navhostpoc/map/FollowCamera.kt
+?? nav-host-poc/src/main/java/com/surpride/navhostpoc/map/RoadMapRenderer.kt
+?? nav-host-poc/src/main/java/com/surpride/navhostpoc/map/TileStore.kt
+?? nav-host-poc/src/main/java/com/surpride/navhostpoc/ownership/AndroidCarFocusPort.kt
+?? nav-host-poc/src/main/java/com/surpride/navhostpoc/ownership/FocusLeaseSession.kt
+?? nav-host-poc/src/main/java/com/surpride/navhostpoc/ownership/OemRouteObservation.kt
+?? nav-host-poc/src/main/java/com/surpride/navhostpoc/ownership/PleosOemRouteMonitor.kt
+?? nav-host-poc/src/main/java/com/surpride/navhostpoc/ownership/ReadinessFocusPort.kt
+?? nav-host-poc/src/main/java/com/surpride/navhostpoc/tracking/ArrivalGate.kt
+?? nav-host-poc/src/main/res/drawable/ic_reveal.xml
+?? nav-host-poc/src/main/res/drawable/ic_turn_left.xml
+?? nav-host-poc/src/main/res/drawable/ic_turn_right.xml
+?? nav-host-poc/src/main/res/drawable/ic_turn_straight.xml
+?? nav-host-poc/src/test/java/com/surpride/navhostpoc/MapActionContractTest.kt
+?? nav-host-poc/src/test/java/com/surpride/navhostpoc/RoutePacketFreshnessTest.kt
+?? nav-host-poc/src/test/java/com/surpride/navhostpoc/map/FollowCameraTest.kt
+?? nav-host-poc/src/test/java/com/surpride/navhostpoc/map/TileStoreTest.kt
+?? nav-host-poc/src/test/java/com/surpride/navhostpoc/ownership/FocusLeaseSessionTest.kt
+?? nav-host-poc/src/test/java/com/surpride/navhostpoc/ownership/OemRouteObservationTest.kt
+?? nav-host-poc/src/test/java/com/surpride/navhostpoc/ownership/ReadinessFocusPortTest.kt
+?? nav-host-poc/src/test/java/com/surpride/navhostpoc/tracking/ArrivalGateTest.kt

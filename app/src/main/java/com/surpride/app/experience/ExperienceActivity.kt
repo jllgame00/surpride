@@ -279,6 +279,16 @@ class ExperienceActivity : AppCompatActivity() {
         val map=card();split.addView(map,LinearLayout.LayoutParams(0,-1,1f))
         map.addView(text("MOOD ATLAS",15,accent,true));map.addView(ExperienceArt(this,controller.state.preferences.mood,controller.state.history),LinearLayout.LayoutParams(-1,0,1f))
         val list=column();split.addView(ScrollView(this).apply {addView(list)},LinearLayout.LayoutParams(0,-1,1f).apply {leftMargin=dp(18)})
+        val live=com.surpride.app.realdata.LiveNavigationStore.read(this).visits
+        if(live.isNotEmpty()) list.addView(card().apply {
+            addView(text("실제 경로 · AVD 검증 기록",24,accent,true))
+            addView(text("정차 에뮬레이터 평가 · 실도로 방문 인증 아님\nDEMO 기분 개념도와 별도 기록입니다.",17,muted))
+            live.asReversed().take(10).forEach {visit->
+                val place=com.surpride.app.realdata.SeoulPilotCatalog.places.firstOrNull {it.id==visit.candidateId}
+                addView(text("${place?.name?:"공개 장소"} · ${visit.rating}/5",21,ink,true))
+                addView(text("DEVICE_API_EMULATOR · ${DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(Date(visit.completedAtMillis))}",16,muted))
+            }
+        })
         if(controller.state.history.isEmpty()) list.addView(card().apply {addView(text("첫 여정을 기다리고 있어요",27,ink,true));addView(text("DEMO를 공개하고 평가하면 기분별 기록이 여기에 모입니다.",19,muted));addView(button("첫 DEMO 만들기",true){controller.openSetup()})})
         controller.state.history.asReversed().forEach {visit -> list.addView(card().apply {
             addView(text("${visit.mood.label}  ·  ${visit.rating}/5",22,accent,true))

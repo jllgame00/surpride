@@ -20,6 +20,10 @@
         android:name="android.hardware.touchscreen"
         android:required="false" />
 
+    <queries>
+        <package android:name="com.surpride.navhostpoc" />
+    </queries>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -32,6 +36,14 @@
         <uses-library android:name="android.car" android:required="false" />
         <activity android:name=".experience.ExperienceActivity" android:exported="false" />
         <activity android:name=".realdata.RealRouteActivity" android:exported="false" />
+        <activity android:name=".realdata.LiveNavigationResultActivity" android:exported="true" />
+        <provider
+            android:name=".realdata.NavigationFileProvider"
+            android:authorities="com.surpride.app.navigationfiles"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/navigation_file_paths" />
+        </provider>
         <activity
             android:name=".MainActivity"
             android:exported="true"

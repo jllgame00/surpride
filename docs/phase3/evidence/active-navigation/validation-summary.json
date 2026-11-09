@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-09",
+  "branch": "main",
+  "head_start": "ae83519b7a28058f6c9053665e01bf9c4799fdb3",
+  "head_end": "ae83519b7a28058f6c9053665e01bf9c4799fdb3",
+  "tests": {
+    "app": {
+      "tests": 95,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "nav-host-poc": {
+      "tests": 91,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "backend": {
+      "tests": 37,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "total_tests": 223,
+  "apk_artifacts": {
+    "app": {
+      "sha256": "ac73fba859161ae8352e14866cacb0253db7e0946b3805cad97affa41a5761d1",
+      "bytes": 17881601
+    },
+    "nav-host-poc": {
+      "sha256": "1606b0b6267da981bccaacb4cee413b7bb44757c6f695f2a9637a7618e2303b9",
+      "bytes": 17813886
+    }
+  },
+  "runtime": {
+    "final_window_start_device_time": "11-09 15:54:00.000",
+    "target_fatal_process_records": 0,
+    "target_anr_records": 0,
+    "active_focus_observed": [
+      1
+    ],
+    "focus_after_stop_empty": true,
+    "explicit_reveal_preserved_active_session": true,
+    "arrival_candidate_and_parked_user_confirmation_observed": true,
+    "off_route_stopped_focus": true,
+    "explicit_recovery_observed": true,
+    "real_vehicle_driving_tested": false,
+    "destinationless_updateTrip_returned_without_exception": true,
+    "navigation_template_tbt_observed": true,
+    "host_internal_trip_receipt_acknowledgement": "UNVERIFIED",
+    "local_proxy_stopped": true
+  },
+  "pleos_public_map_reuse": "NOT_EXPOSED",
+  "independent_navigation": "READY_WITH_LIMITATIONS",
+  "destination_privacy": "PARTIAL",
+  "committed_or_pushed": false,
+  "sdk_keys_printed": false
+}

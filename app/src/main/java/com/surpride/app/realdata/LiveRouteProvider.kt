@@ -79,15 +79,24 @@ class LiveRouteProvider(private val settings:ProxySettings?,
     }
 }
 object ProxyHttpTransport {
-    fun post(settings:ProxySettings,origin:GeoPoint,destination:GeoPoint):ProxyHttpResponse {
+    fun post(settings:ProxySettings,origin:GeoPoint,destination:GeoPoint):ProxyHttpResponse =
+        request(settings,origin,destination,false)
+    fun postGuidance(settings:ProxySettings,origin:GeoPoint,destination:GeoPoint):ProxyHttpResponse =
+        request(settings,origin,destination,true)
+    internal fun requestBody(origin:GeoPoint,destination:GeoPoint,includeGuidance:Boolean):ByteArray {
+        fun point(p:GeoPoint)=JSONObject().put("longitude",p.longitude).put("latitude",p.latitude)
+        val body=JSONObject().put("origin",point(origin)).put("destination",point(destination))
+        if(includeGuidance) body.put("include_guidance",true)
+        return body.toString().toByteArray(Charsets.UTF_8)
+    }
+    private fun request(settings:ProxySettings,origin:GeoPoint,destination:GeoPoint,includeGuidance:Boolean):ProxyHttpResponse {
         val connection=URL(settings.baseUrl+"/v1/routes").openConnection() as HttpURLConnection
         try {
             connection.requestMethod="POST";connection.connectTimeout=3000;connection.readTimeout=12000
             connection.instanceFollowRedirects=false;connection.useCaches=false;connection.doOutput=true
             connection.setRequestProperty("Authorization","Bearer "+settings.token)
             connection.setRequestProperty("Content-Type","application/json")
-            fun point(p:GeoPoint)=JSONObject().put("longitude",p.longitude).put("latitude",p.latitude)
-            val bytes=JSONObject().put("origin",point(origin)).put("destination",point(destination)).toString().toByteArray(Charsets.UTF_8)
+            val bytes=requestBody(origin,destination,includeGuidance)
             connection.setFixedLengthStreamingMode(bytes.size)
             connection.outputStream.use {it.write(bytes)}
             val status=connection.responseCode

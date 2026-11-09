@@ -23,6 +23,7 @@ android {
 }
 
 dependencies {
+    implementation("ai.pleos.playground:NaviHelper:3.0.5")
     implementation("androidx.car.app:app:1.7.0")
     implementation("androidx.car.app:app-automotive:1.7.0")
     testImplementation("junit:junit:4.13.2")

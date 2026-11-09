@@ -36,6 +36,7 @@ enum class RouteDataSource { KAKAO_DIRECTIONS, MOCK }
 enum class GuidanceStatus { READY, RUNNING, PAUSED, ARRIVED, STOPPED }
 class GuidanceRoute(val source:RouteDataSource,val geometry:RouteGeometry,val segments:List<RouteSegment>,val maneuvers:List<Maneuver>,
     val distanceMeters:Long,val durationSeconds:Long,private val destination:RouteCoordinate) {
+    internal fun distanceToRouteEnd(point:RouteCoordinate)=meters(point,geometry.points.last())
     internal fun outsideDestinationArea(point:RouteCoordinate)=meters(point,destination)>=200 && meters(point,geometry.points.last())>=200
     override fun toString()="GuidanceRoute(source=$source, destination=REDACTED)"
 }

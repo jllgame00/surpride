@@ -53,3 +53,4 @@ backend/.venv/
 __pycache__/
 *.pyc
 .pytest_cache/
+pytest-cache-files-*/

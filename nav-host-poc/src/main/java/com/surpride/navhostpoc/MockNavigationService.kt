@@ -43,7 +43,14 @@ class MockNavigationService : CarAppService() {
         return object : Session() {
             override fun onCreateScreen(intent: Intent): Screen {
                 Log.i(TAG, "HOST_CONNECTED carApi=${carContext.carAppApiLevel}")
-                return MockNavigationScreen(carContext)
+                return if(intent.data!=null) ActiveMysteryScreen(carContext,ActiveRoutePacket.load(carContext,intent)) else MockNavigationScreen(carContext)
+            }
+            override fun onNewIntent(intent:Intent) {
+                if(intent.data!=null) {
+                    val screens=carContext.getCarService(androidx.car.app.ScreenManager::class.java)
+                    screens.popToRoot()
+                    screens.push(ActiveMysteryScreen(carContext,ActiveRoutePacket.load(carContext,intent)))
+                }
             }
         }
     }
@@ -55,13 +62,13 @@ private class MockNavigationScreen(context: CarContext) : Screen(context) {
         override fun onSurfaceAvailable(surfaceContainer: SurfaceContainer) {
             val surface = surfaceContainer.surface ?: return
             if (!surface.isValid) return
-            val canvas = surface.lockCanvas(null)
+            val canvas = try {surface.lockCanvas(null)} catch(_:Exception) {return}
             try {
                 canvas.drawColor(Color.rgb(20, 30, 40))
                 val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE; textSize = 32f }
                 // Blank schematic surface, never an actual map/road or a route.
                 canvas.drawText("MOCK ONLY / NO GPS / NO ROUTE", 40f, canvas.height * 0.60f, paint)
-            } finally { surface.unlockCanvasAndPost(canvas) }
+            } finally { try {surface.unlockCanvasAndPost(canvas)} catch(_:Exception) {} }
             Log.i(TAG, "STATIC_SURFACE_DRAWN")
         }
     }
@@ -99,7 +106,7 @@ private class MockNavigationScreen(context: CarContext) : Screen(context) {
                 .addAction(Action.Builder().setTitle("실험 선택").setOnClickListener {
                     screenManager.push(ExperimentChooserScreen(carContext) {selection->
                         screenManager.pop()
-                        screenManager.push(when(selection) {0->DynamicNavigationScreen(carContext);2->GpsTrackingScreen(carContext);3->OwnershipAuditScreen(carContext);else->ExplanationScreen(carContext)})
+                        screenManager.push(when(selection) {0->DynamicNavigationScreen(carContext);2->GpsTrackingScreen(carContext);3->OwnershipAuditScreen(carContext);4->ActiveMysteryScreen(carContext);else->ExplanationScreen(carContext)})
                     })
                 }.build())
                 .build())
@@ -114,7 +121,8 @@ private class ExperimentChooserScreen(context:CarContext,private val choose:(Int
             .addItem(Row.Builder().setTitle("실경로 동적 DEMO · 정차 전용").setOnClickListener {choose(0)}.build())
             .addItem(Row.Builder().setTitle("기존 정적 PoC 설명").setOnClickListener {choose(1)}.build())
             .addItem(Row.Builder().setTitle("GPS 경로 추적 · 정차 실험").setOnClickListener {choose(2)}.build())
-            .addItem(Row.Builder().setTitle("소유권·비공개 계약 감사 · 활성화 없음").setOnClickListener {choose(3)}.build()).build()).build()
+            .addItem(Row.Builder().setTitle("소유권·비공개 계약 감사 · 활성화 없음").setOnClickListener {choose(3)}.build())
+            .addItem(Row.Builder().setTitle("실제 지도 · 활성 미스터리 안내 · 정차 AVD").setOnClickListener {choose(4)}.build()).build()).build()
 }
 
 private class ExplanationScreen(context: CarContext) : Screen(context) {
