@@ -1,0 +1,13 @@
+Final PoC PID31076 FATAL EXCEPTION count: 0
+PoC historical ANR exit-info entries: 0
+Historical Phase3A PID5194 BackFlowViolationException is not included as a current-PID success.
+Foreground main Activity switch: GPS UNSUBSCRIBED; return: SUBSCRIBED; verified in final-lifecycle.txt.
+New GPS screen entry after pop/exit: subscribed=false. SCREEN_DESTROYED observed.
+Vehicle RESPONDING / NaviHelper CONNECTED / OEM active false: verified via existing main UI this phase.
+No focus ownership request, navigationStarted/Ended/updateTrip, voice, reroute or OEM route request/cancel used.
+Emulator remains at last public test position; original position not guessed or restored.
+Exact credential-byte scan: Git-visible files=0 / PoC APK entries=0
+Unchanged previous-phase evidence trailing-whitespace lines: 13 (preserved)
+Phase3B changed/new text trailing-whitespace lines: 0
+Temporary PoC private route cache removed: True
+Local proxy stopped and host session removed: True

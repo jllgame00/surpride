@@ -34,7 +34,7 @@ import java.util.TimeZone
 
 private const val TAG = "SurprideNavPoc"
 
-/** Host rendering spike: no GPS, real destination, route, audio or navigation focus. */
+/** Static entry; route replay and parked GPS experiments require explicit separate-screen selection. No active navigation focus/audio. */
 class MockNavigationService : CarAppService() {
     override fun createHostValidator(): HostValidator = HostValidator.Builder(this).build()
 
@@ -97,9 +97,9 @@ private class MockNavigationScreen(context: CarContext) : Screen(context) {
             .setDestinationTravelEstimate(estimate)
             .setActionStrip(ActionStrip.Builder()
                 .addAction(Action.Builder().setTitle("실험 선택").setOnClickListener {
-                    screenManager.push(ExperimentChooserScreen(carContext) {dynamic->
+                    screenManager.push(ExperimentChooserScreen(carContext) {selection->
                         screenManager.pop()
-                        screenManager.push(if(dynamic) DynamicNavigationScreen(carContext) else ExplanationScreen(carContext))
+                        screenManager.push(when(selection) {0->DynamicNavigationScreen(carContext);2->GpsTrackingScreen(carContext);else->ExplanationScreen(carContext)})
                     })
                 }.build())
                 .build())
@@ -108,11 +108,12 @@ private class MockNavigationScreen(context: CarContext) : Screen(context) {
 }
 
 /** Preserve both experiments on hosts that show only the first custom navigation strip action. */
-private class ExperimentChooserScreen(context:CarContext,private val choose:(Boolean)->Unit):Screen(context) {
+private class ExperimentChooserScreen(context:CarContext,private val choose:(Int)->Unit):Screen(context) {
     override fun onGetTemplate():Template=ListTemplate.Builder().setTitle("SURPRIDE · 개발 실험 선택").setHeaderAction(Action.BACK)
         .setSingleList(ItemList.Builder()
-            .addItem(Row.Builder().setTitle("실경로 동적 DEMO · 정차 전용").setOnClickListener {choose(true)}.build())
-            .addItem(Row.Builder().setTitle("기존 정적 PoC 설명").setOnClickListener {choose(false)}.build()).build()).build()
+            .addItem(Row.Builder().setTitle("실경로 동적 DEMO · 정차 전용").setOnClickListener {choose(0)}.build())
+            .addItem(Row.Builder().setTitle("기존 정적 PoC 설명").setOnClickListener {choose(1)}.build())
+            .addItem(Row.Builder().setTitle("GPS 경로 추적 · 정차 실험").setOnClickListener {choose(2)}.build()).build()).build()
 }
 
 private class ExplanationScreen(context: CarContext) : Screen(context) {

@@ -1,0 +1,435 @@
+TEMPLATE status=UNKNOWN subscribed=false progressM=null nextM=null nativeEta=false
+FIX n=1 source=DEVICE_API status=UNKNOWN reason=STALE_OR_FUTURE progressM=null nextM=null
+SUBSCRIBED foreground=true
+TEMPLATE status=UNKNOWN subscribed=true progressM=null nextM=null nativeEta=false
+TEMPLATE status=UNKNOWN subscribed=true progressM=null nextM=null nativeEta=false
+FIX n=2 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=100 nextM=1234
+TEMPLATE status=ON_ROUTE subscribed=true progressM=100 nextM=1234 nativeEta=false
+FIX n=3 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=139 nextM=1195
+TEMPLATE status=ON_ROUTE subscribed=true progressM=139 nextM=1195 nativeEta=false
+FIX n=4 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=179 nextM=1155
+FIX n=5 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=179 nextM=1155
+TEMPLATE status=ON_ROUTE subscribed=true progressM=179 nextM=1155 nativeEta=false
+FIX n=6 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=219 nextM=1115
+FIX n=7 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=259 nextM=1075
+TEMPLATE status=ON_ROUTE subscribed=true progressM=259 nextM=1075 nativeEta=false
+FIX n=8 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=299 nextM=1035
+FIX n=9 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=299 nextM=1035
+TEMPLATE status=ON_ROUTE subscribed=true progressM=299 nextM=1035 nativeEta=false
+FIX n=10 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=339 nextM=995
+FIX n=11 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=379 nextM=955
+TEMPLATE status=ON_ROUTE subscribed=true progressM=379 nextM=955 nativeEta=false
+FIX n=12 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=419 nextM=915
+FIX n=13 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=459 nextM=875
+TEMPLATE status=ON_ROUTE subscribed=true progressM=459 nextM=875 nativeEta=false
+FIX n=14 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=459 nextM=875
+FIX n=15 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=499 nextM=835
+TEMPLATE status=ON_ROUTE subscribed=true progressM=499 nextM=835 nativeEta=false
+FIX n=16 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=539 nextM=795
+FIX n=17 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=579 nextM=755
+TEMPLATE status=ON_ROUTE subscribed=true progressM=579 nextM=755 nativeEta=false
+FIX n=18 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=619 nextM=715
+FIX n=19 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=619 nextM=715
+TEMPLATE status=ON_ROUTE subscribed=true progressM=619 nextM=715 nativeEta=false
+FIX n=20 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=659 nextM=675
+FIX n=21 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=699 nextM=635
+TEMPLATE status=ON_ROUTE subscribed=true progressM=699 nextM=635 nativeEta=false
+FIX n=22 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=739 nextM=595
+FIX n=23 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=739 nextM=595
+TEMPLATE status=ON_ROUTE subscribed=true progressM=739 nextM=595 nativeEta=false
+FIX n=24 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=819 nextM=515
+FIX n=25 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=859 nextM=475
+TEMPLATE status=ON_ROUTE subscribed=true progressM=859 nextM=475 nativeEta=false
+FIX n=26 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=899 nextM=435
+TEMPLATE status=ON_ROUTE subscribed=true progressM=899 nextM=435 nativeEta=false
+FIX n=27 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=899 nextM=435
+FIX n=28 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=938 nextM=396
+TEMPLATE status=ON_ROUTE subscribed=true progressM=938 nextM=396 nativeEta=false
+FIX n=29 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=978 nextM=356
+FIX n=30 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1018 nextM=316
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1018 nextM=316 nativeEta=false
+FIX n=31 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1058 nextM=276
+FIX n=32 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1058 nextM=276
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1058 nextM=276 nativeEta=false
+FIX n=33 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1098 nextM=236
+FIX n=34 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1178 nextM=156
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1178 nextM=156 nativeEta=false
+FIX n=35 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1218 nextM=116
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1218 nextM=116 nativeEta=false
+FIX n=36 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1218 nextM=116
+FIX n=37 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1258 nextM=76
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1258 nextM=76 nativeEta=false
+FIX n=38 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1338 nextM=527
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1338 nextM=527 nativeEta=false
+FIX n=39 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1378 nextM=487
+FIX n=40 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1378 nextM=487
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1378 nextM=487 nativeEta=false
+FIX n=41 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1418 nextM=447
+FIX n=42 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1458 nextM=407
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1458 nextM=407 nativeEta=false
+FIX n=43 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1498 nextM=367
+FIX n=44 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1498 nextM=367
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1498 nextM=367 nativeEta=false
+FIX n=45 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1538 nextM=327
+FIX n=46 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1578 nextM=287
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1578 nextM=287 nativeEta=false
+FIX n=47 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1578 nextM=287
+FIX n=48 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1578 nextM=287
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1578 nextM=287 nativeEta=false
+FIX n=49 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1578 nextM=287
+FIX n=50 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1578 nextM=287
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1578 nextM=287 nativeEta=false
+FIX n=51 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1578 nextM=287
+FIX n=52 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1578 nextM=287
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1578 nextM=287 nativeEta=false
+FIX n=53 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1578 nextM=287
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1578 nextM=287 nativeEta=false
+FIX n=54 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1578 nextM=287
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1578 nextM=287 nativeEta=false
+FIX n=55 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1578 nextM=287
+FIX n=56 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1578 nextM=287
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1578 nextM=287 nativeEta=false
+FIX n=57 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1578 nextM=287
+FIX n=58 source=DEVICE_API status=OFF_ROUTE_CANDIDATE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+TEMPLATE status=OFF_ROUTE_CANDIDATE subscribed=true progressM=null nextM=null nativeEta=false
+FIX n=59 source=DEVICE_API status=OFF_ROUTE_CANDIDATE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+FIX n=60 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+TEMPLATE status=OFF_ROUTE subscribed=true progressM=null nextM=null nativeEta=false
+FIX n=61 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+FIX n=62 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+TEMPLATE status=OFF_ROUTE subscribed=true progressM=null nextM=null nativeEta=false
+FIX n=63 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+TEMPLATE status=OFF_ROUTE subscribed=true progressM=null nextM=null nativeEta=false
+FIX n=64 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+FIX n=65 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+TEMPLATE status=OFF_ROUTE subscribed=true progressM=null nextM=null nativeEta=false
+FIX n=66 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+FIX n=67 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+TEMPLATE status=OFF_ROUTE subscribed=true progressM=null nextM=null nativeEta=false
+FIX n=68 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+FIX n=69 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+TEMPLATE status=OFF_ROUTE subscribed=true progressM=null nextM=null nativeEta=false
+FIX n=70 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+FIX n=71 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+TEMPLATE status=OFF_ROUTE subscribed=true progressM=null nextM=null nativeEta=false
+FIX n=72 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+FIX n=73 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+TEMPLATE status=OFF_ROUTE subscribed=true progressM=null nextM=null nativeEta=false
+FIX n=74 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+FIX n=75 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+TEMPLATE status=OFF_ROUTE subscribed=true progressM=null nextM=null nativeEta=false
+FIX n=76 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+FIX n=77 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+TEMPLATE status=OFF_ROUTE subscribed=true progressM=null nextM=null nativeEta=false
+FIX n=78 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+TEMPLATE status=OFF_ROUTE subscribed=true progressM=null nextM=null nativeEta=false
+FIX n=79 source=DEVICE_API status=OFF_ROUTE reason=OUTSIDE_UNCERTAINTY_CORRIDOR progressM=null nextM=null
+FIX n=80 source=DEVICE_API status=REJOINING reason=NEED_CONFIRMATION progressM=null nextM=null
+TEMPLATE status=REJOINING subscribed=true progressM=null nextM=null nativeEta=false
+FIX n=81 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1608 nextM=257
+FIX n=82 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1618 nextM=247
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1618 nextM=247 nativeEta=false
+FIX n=83 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1618 nextM=247
+FIX n=84 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=85 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=86 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=87 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=88 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=89 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=90 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=91 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=92 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=93 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=94 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=95 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=96 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=97 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=98 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=99 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=100 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=101 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=102 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=103 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=104 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=105 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=106 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=107 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=108 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=109 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=110 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=111 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=112 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=113 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=114 source=DEVICE_API status=REVERSED reason=BACKWARD_PROGRESS progressM=null nextM=null
+TEMPLATE status=REVERSED subscribed=true progressM=null nextM=null nativeEta=false
+FIX n=115 source=DEVICE_API status=REVERSED reason=BACKWARD_PROGRESS progressM=null nextM=null
+FIX n=116 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=117 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=118 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=119 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=120 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=121 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=122 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=123 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=124 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=125 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=126 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=127 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=128 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=129 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=130 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+UNSUBSCRIBED
+TEMPLATE status=UNKNOWN subscribed=false progressM=null nextM=null nativeEta=false
+FIX n=131 source=DEVICE_API status=UNKNOWN reason=STALE_OR_FUTURE progressM=null nextM=null
+SUBSCRIBED foreground=true
+TEMPLATE status=UNKNOWN subscribed=true progressM=null nextM=null nativeEta=false
+TEMPLATE status=UNKNOWN subscribed=true progressM=null nextM=null nativeEta=false
+FIX n=132 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=133 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=134 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=135 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=136 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=137 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=138 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=139 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=140 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=141 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=142 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=143 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=144 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=145 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=146 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=147 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=148 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=149 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+UNSUBSCRIBED
+TEMPLATE status=UNKNOWN subscribed=false progressM=null nextM=null nativeEta=false
+FIX n=150 source=DEVICE_API status=UNKNOWN reason=STALE_OR_FUTURE progressM=null nextM=null
+SUBSCRIBED foreground=true
+TEMPLATE status=UNKNOWN subscribed=true progressM=null nextM=null nativeEta=false
+TEMPLATE status=UNKNOWN subscribed=true progressM=null nextM=null nativeEta=false
+TEMPLATE status=UNKNOWN subscribed=true progressM=null nextM=null nativeEta=false
+FIX n=151 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1608 nextM=257
+FIX n=152 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1618 nextM=247
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1618 nextM=247 nativeEta=false
+FIX n=153 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1618 nextM=247
+FIX n=154 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=155 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=156 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=157 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=158 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=159 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=160 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=161 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=162 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=163 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=164 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=165 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=166 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=167 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=168 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=169 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=170 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=171 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=172 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=173 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=174 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=175 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=176 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=177 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=178 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=179 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=180 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=181 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=182 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=183 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=184 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=185 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=186 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=187 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=188 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=189 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=190 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=191 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=192 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=193 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=194 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=195 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=196 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=197 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=198 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=199 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=200 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=201 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=202 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=203 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=204 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=205 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=206 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=207 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=208 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=209 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=210 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=211 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=212 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=213 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=214 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=215 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=216 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=217 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=218 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=219 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=220 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=221 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=222 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=223 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=224 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=225 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=226 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=227 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=228 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=229 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=230 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=231 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=232 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=233 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=234 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=235 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=236 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=237 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=238 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=239 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=240 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=241 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=242 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=243 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=244 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=245 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=246 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=247 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=248 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=249 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=250 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=251 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=252 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=253 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=254 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=255 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=256 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=257 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=258 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=259 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=260 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=261 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=262 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=263 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=264 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=265 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=266 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=267 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=268 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=269 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+TEMPLATE status=ON_ROUTE subscribed=true progressM=1628 nextM=237 nativeEta=false
+FIX n=270 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+FIX n=271 source=DEVICE_API status=ON_ROUTE reason=MATCHED progressM=1628 nextM=237
+UNSUBSCRIBED
+SCREEN_DESTROYED
+TEMPLATE status=UNKNOWN subscribed=false progressM=null nextM=null nativeEta=false
+SCREEN_DESTROYED

@@ -1,0 +1,11 @@
+app: {"tests": 89, "failures": 0, "errors": 0, "skipped": 0}
+nav-host-poc: {"tests": 27, "failures": 0, "errors": 0, "skipped": 0}
+FastAPI: 33 passed, 1 existing deprecation warning (pytest completed this phase).
+Total: 149 passed; previous 133 preserved + 16 new PoC tests.
+Main assemble/test --rerun-tasks: BUILD SUCCESSFUL, 41 tasks executed.
+PoC assemble/test: BUILD SUCCESSFUL; 27 tests executed after rejoin/loss fixes.
+Installed PoC APK SHA256 = built APK SHA256: fc1a3c92d285f3bbb61d463c392102d4f7acec3092abc04211f9462b2642e778
+Public live request: KAKAO_DIRECTIONS / segments13 / maneuvers14 / geometry133 / distance7910m / duration1332s.
+Actual emulator GPS callbacks observed (final PID31076): 271
+Observed statuses: OFF_ROUTE, OFF_ROUTE_CANDIDATE, ON_ROUTE, REJOINING, REVERSED, UNKNOWN
+No raw coordinates, route payload, API key or token retained in evidence.

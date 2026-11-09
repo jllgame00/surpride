@@ -45,16 +45,7 @@ class GuidanceSimulator(private val route:GuidanceRoute,private val speedMetersP
             warning=warning,localPath=if(stopped) emptyList() else localPath())
     }
     private fun localPath():List<LocalRoutePoint> {
-        // No final 200m, destination/cursor pin, absolute coordinate, overview or arrival marker.
         val along=position/route.distanceMeters*route.geometry.lengthMeters
-        val end=min(along+300,route.geometry.lengthMeters-200.0)
-        if(along>=end) return emptyList()
-        val center=route.geometry.atFraction(along/route.geometry.lengthMeters)
-        val samples=mutableListOf<RouteCoordinate>()
-        var m=along
-        while(m<end) {samples.add(route.geometry.atFraction(m/route.geometry.lengthMeters));m+=10}
-        samples.add(route.geometry.atFraction(end/route.geometry.lengthMeters))
-        return samples.takeWhile {route.outsideDestinationArea(it)}.map {p->LocalRoutePoint(Math.toRadians(p.longitude-center.longitude)*6_371_000*cos(Math.toRadians(center.latitude)),
-            Math.toRadians(p.latitude-center.latitude)*6_371_000)}
+        return localRouteWindow(route,along)
     }
 }
