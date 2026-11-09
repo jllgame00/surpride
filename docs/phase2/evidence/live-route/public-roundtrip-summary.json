@@ -1,0 +1,11 @@
+{
+  "evidence_kind": "aggregate observations from backend.smoke public coordinate requests; raw response not retained",
+  "outbound": {"source": "KAKAO_DIRECTIONS", "duration_seconds": 1247, "distance_meters": 7437, "geometry_points": 122},
+  "inbound": {"source": "KAKAO_DIRECTIONS", "duration_seconds": 2553, "distance_meters": 11149, "geometry_points": 215},
+  "stay_minutes": 20,
+  "buffer_minutes": 10,
+  "total_seconds": 5600,
+  "fits_60_minutes": false,
+  "vehicle_entry": "UNKNOWN",
+  "observed_at_epoch_ms": 1794183479126
+}

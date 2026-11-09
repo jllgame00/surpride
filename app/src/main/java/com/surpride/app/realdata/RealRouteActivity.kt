@@ -18,6 +18,8 @@ import com.surpride.app.experience.core.*
 import com.surpride.app.experience.core.Companion as DriveCompanion
 import java.text.DateFormat
 import java.util.Date
+import java.util.concurrent.Executors
+import java.util.concurrent.Future
 
 /** Parked-only ephemeral validation. Never starts guidance or writes positions/history to disk. */
 class RealRouteActivity:AppCompatActivity() {
@@ -30,11 +32,16 @@ class RealRouteActivity:AppCompatActivity() {
         var mock=false
         var stay=20
         var gps="아직 확인하지 않음"
+        var busy=false
+        var requestStatus="요청 전"
     }
     private lateinit var session:Session
     private lateinit var ux:ParkedUxMonitor
     private lateinit var root:LinearLayout
     private var requiresDo:Boolean?=null
+    private val executor=Executors.newSingleThreadExecutor()
+    private var pending:Future<*>?=null
+    private var requestVersion=0
     private val allowed get()=ParkedInteractionPolicy.allows(requiresDo)
     private val ink=Color.rgb(235,241,225)
     private val accent=Color.rgb(215,242,139)
@@ -64,9 +71,9 @@ class RealRouteActivity:AppCompatActivity() {
         }
         render()
     }
-    override fun onStart() {super.onStart();ux.start {requiresDo=it;render()}}
-    override fun onStop() {requiresDo=null;ux.stop();super.onStop()}
-    override fun onDestroy() {ux.stop();super.onDestroy()}
+    override fun onStart() {super.onStart();ux.start {requiresDo=it;if(!allowed) cancelPending();render()}}
+    override fun onStop() {requiresDo=null;cancelPending();ux.stop();super.onStop()}
+    override fun onDestroy() {executor.shutdownNow();ux.stop();super.onDestroy()}
     override fun onRequestPermissionsResult(requestCode:Int,permissions:Array<out String>,grantResults:IntArray) {
         super.onRequestPermissionsResult(requestCode,permissions,grantResults)
         if(requestCode==700 && allowed) {readGpsStatus();render()}
@@ -78,14 +85,30 @@ class RealRouteActivity:AppCompatActivity() {
         }
     }
     private fun act(action:()->Unit) {if(allowed) {action();render()}}
-    private fun reset() {session.plan=null;session.revealed=false}
+    private fun cancelPending() {
+        requestVersion++;pending?.cancel(true);pending=null
+        if(::session.isInitialized && session.busy) {session.busy=false;session.requestStatus="조회 중단 · 필요하면 다시 요청하세요"}
+    }
+    private fun reset() {cancelPending();session.plan=null;session.revealed=false}
     private fun calculate(mock:Boolean) {
         reset();session.mock=mock
-        if(!mock) {session.plan=RoutePlan.Failure(setOf(RouteError.NOT_CONFIGURED));return}
         val location=DevelopmentLocationProvider().current()
-        session.plan=RouteRecommendationEngine(SeoulPilotCatalog.places,
-            if(mock) MockRouteProvider(System::currentTimeMillis) else UnconfiguredRouteProvider()).recommend(
-            location.point,session.preferences,RecommendationContext(System.currentTimeMillis(),recentIds=session.recentIds),session.stay,10,1)
+        val config=if(mock) null else ProxyConfiguration.load(this)
+        if(!mock && config==null) {session.plan=RoutePlan.Failure(setOf(RouteError.NOT_CONFIGURED));session.requestStatus="디버그 서버 설정 없음/만료";return}
+        val preferences=session.preferences;val recent=session.recentIds;val stay=session.stay
+        session.busy=true;session.requestStatus="조회 중 · 자동 길 안내 없음"
+        val version=++requestVersion
+        pending=executor.submit {
+            val provider=if(mock) MockRouteProvider(System::currentTimeMillis) else LiveRouteProvider(config)
+            val result=try {RouteRecommendationEngine(SeoulPilotCatalog.places,provider).recommend(
+                location.point,preferences,RecommendationContext(System.currentTimeMillis(),recentIds=recent),stay,10,1)
+            } catch(_:Exception) {RoutePlan.Failure(setOf(RouteError.API))}
+            runOnUiThread {
+                if(version==requestVersion && allowed && !isFinishing && !isDestroyed) {
+                    pending=null;session.busy=false;session.plan=result;session.requestStatus="조회 완료 · 응답 출처 확인";render()
+                }
+            }
+        }
     }
     private fun render() {
         root.removeAllViews()
@@ -121,15 +144,20 @@ class RealRouteActivity:AppCompatActivity() {
             requestPermissions(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION),700)
         })
         left.addView(label("GPS: ${session.gps}\n추천 출발지: 개발용 고정 공개 좌표\n현재 기기 위치를 사용하거나 저장하지 않습니다.",18))
-        right.addView(label(if(session.mock) "REAL PLACES + MOCK ROUTE" else "REAL DATA / 경로 미연결",24,true))
-        right.addView(label("실제 장소와 실제 도로 데이터는 별개입니다. 인증키·서버 프록시가 없어 실시간 경로 요청은 실행되지 않습니다.",19))
-        right.addView(button("REAL DATA 연결 확인") {calculate(false)})
+        right.addView(label(if(session.mock) "REAL PLACES + MOCK ROUTE" else "SERVER PROXY / 응답 출처 확인",24,true))
+        right.addView(label("실제 장소와 실제 경로는 별개입니다. 서버의 MOCK 응답은 실시간 교통 데이터가 아닙니다. 대표 좌표의 차량 진입점은 미확인입니다.",19))
+        right.addView(button("서버 프록시로 경로 평가") {calculate(false)})
         right.addView(button("명시적으로 MOCK 경로 평가") {calculate(true)})
+        right.addView(label(session.requestStatus,18))
+        if(session.busy) right.addView(Button(this).apply {
+            text="조회 취소";textSize=20f;minHeight=dp(70);setOnClickListener {act {cancelPending()}}
+        })
         when(val plan=session.plan) {
             is RoutePlan.Failure -> right.addView(label("추천 생성 안 됨: ${plan.errors.joinToString()}\n자동 DEMO 전환 없음. 동행 적합성 미확인 시 혼자 조건만 평가합니다. 조건은 MVP 설정에서 수정할 수 있습니다.",20))
             is RoutePlan.Success -> {
                 val view=plan.presentation(session.revealed)
-                right.addView(label("비밀 코스 선정 · ${view.mode}\n총 ${view.totalMinutes}분 / ${"%.1f".format(view.distanceMeters/1000.0)}km\n시간·거리는 합성 Mock 값이며 실제 이동 예측이 아닙니다.",23,true))
+                val provenance=if(view.mode==RouteOrigin.LIVE_API) "공급자 조회 시점의 자동차 예상값 · 실제 길 안내 아님" else "시간·거리는 합성 Mock 값이며 실제 이동 예측이 아닙니다."
+                right.addView(label("비밀 코스 선정 · ${view.mode}\n총 ${view.totalMinutes}분 / ${"%.1f".format(view.distanceMeters/1000.0)}km\n$provenance",23,true))
                 right.addView(label("기분·장소 선호 점수로 선정. 경관 점수 없음. 날씨·계절·차량 주행 가능 거리 미확인. 복귀도 별도 조회 계약으로 검증합니다.",18))
                 if(view.destination==null) {
                     right.addView(label("목적지 이름·좌표 비공개",22,true))
@@ -140,7 +168,7 @@ class RealRouteActivity:AppCompatActivity() {
                     right.addView(label("${place.type}\n대표 좌표 (경도, 위도): ${place.point.longitude}, ${place.point.latitude}\n${place.license} · 확인 ${place.checkedDate}\n${place.sourceUrl}\n주차/운영시간/접근성: UNKNOWN",17))
                 }
             }
-            null -> right.addView(label("REAL DATA는 미구성 오류를 확인합니다. MOCK은 실제 장소 후보와 합성 응답으로 시간 제약을 검사합니다. 실제 내비게이션은 시작하지 않습니다.",20))
+            null -> right.addView(label("서버 키 미설정·연결 실패 시 오류로 표시합니다. MOCK은 실제 장소 후보와 합성 응답으로 시간 제약을 검사합니다. 실제 내비게이션은 시작하지 않습니다.",20))
         }
     }
     private fun label(value:String,size:Int,bold:Boolean=false)=TextView(this).apply {
@@ -148,7 +176,7 @@ class RealRouteActivity:AppCompatActivity() {
         if(bold) setTypeface(typeface,android.graphics.Typeface.BOLD)
     }
     private fun button(value:String,action:()->Unit)=Button(this).apply {
-        text=value;textSize=20f;minHeight=dp(70);isAllCaps=false;setOnClickListener {act(action)}
+        text=value;textSize=20f;minHeight=dp(70);isAllCaps=false;isEnabled=!session.busy;setOnClickListener {act(action)}
     }
     private fun dp(value:Int)=(value*resources.displayMetrics.density).toInt()
     companion object {

@@ -13,7 +13,7 @@ class RealRouteTest {
     private fun parsed(body:String=json(), status:Int=200)=KakaoRouteParser.parse(status,body,RouteOrigin.MOCK,now)
     private fun preferences(minutes:Int=60, returns:Boolean=true)=DrivePreferences(availableMinutes=minutes,returnToStart=returns,randomness=0)
     private fun evaluate(provider:RouteProvider,p:DrivePreferences=preferences(),context:RecommendationContext=RecommendationContext(now))=
-        RouteRecommendationEngine(places,provider).recommend(origin,p,context,20,10,1)
+        RouteRecommendationEngine(places,provider,{now}).recommend(origin,p,context,20,10,1)
 
     @Test fun catalogContainsFiveSourcedRealPlacesAndUnknownFacilities() {
         assertEquals(5,SeoulPilotCatalog.places.size)

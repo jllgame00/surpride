@@ -3,7 +3,8 @@ package com.surpride.app.realdata
 import com.surpride.app.experience.core.*
 
 /** API time is a constraint, never a scenic score. No inferred range, route doubling or DEMO fallback. */
-class RouteRecommendationEngine(private val places:List<RealPlace>,private val routes:RouteProvider) {
+class RouteRecommendationEngine(private val places:List<RealPlace>,private val routes:RouteProvider,
+    private val clock:()->Long=System::currentTimeMillis) {
     fun recommend(origin:GeoPoint,p:DrivePreferences,c:RecommendationContext,stayMinutes:Int,bufferMinutes:Int,seed:Long):RoutePlan {
         val budget=budgetMinutes(p,c.nowMillis)?.takeIf {it>0}
             ?:return RoutePlan.Failure(setOf(RouteError.TIME_EXCEEDED))
@@ -23,8 +24,9 @@ class RouteRecommendationEngine(private val places:List<RealPlace>,private val r
             if(back is RouteReply.Failure) {errors.add(back.error);continue}
             val inbound=(back as? RouteReply.Success)?.leg
             val legs=listOfNotNull(outbound,inbound)
-            // Request context precedes receipt. Allow at most a minute of request/clock skew.
-            if(legs.any {c.nowMillis-it.receivedAtMillis !in -60_000..300_000} || legs.any {it.origin!=outbound.origin}) {
+            // Freshness is measured at evaluation, independently of the planning start/budget.
+            val checkedAt=clock()
+            if(legs.any {checkedAt-it.receivedAtMillis !in -60_000..300_000} || legs.any {it.origin!=outbound.origin}) {
                 errors.add(RouteError.STALE_DATA);continue
             }
             val seconds=legs.sumOf {it.seconds}+(stayMinutes.toLong()+bufferMinutes)*60
@@ -42,7 +44,15 @@ class RouteRecommendationEngine(private val places:List<RealPlace>,private val r
             if(scored is RecommendationResult.Success) plans.add(RoutePlan.Success(place,outbound,inbound,seconds,scored))
             else errors.add(RouteError.NO_CANDIDATE)
         }
-        return plans.sortedWith(compareByDescending<RoutePlan.Success>{it.scoring.score.total}.thenBy {it.place.id}).firstOrNull()
+        val finishedAt=clock()
+        val finalBudget=budgetMinutes(p,finishedAt)?.coerceAtLeast(0)?.toLong()?.times(60)?:0
+        val eligible=plans.filter {plan->
+            val fresh=listOfNotNull(plan.outbound,plan.inbound).all {finishedAt-it.receivedAtMillis in -60_000..300_000}
+            if(!fresh) errors.add(RouteError.STALE_DATA)
+            if(plan.totalSeconds>finalBudget) errors.add(RouteError.TIME_EXCEEDED)
+            fresh && plan.totalSeconds<=finalBudget
+        }
+        return eligible.sortedWith(compareByDescending<RoutePlan.Success>{it.scoring.score.total}.thenBy {it.place.id}).firstOrNull()
             ?:RoutePlan.Failure(errors.ifEmpty {setOf(RouteError.NO_CANDIDATE)})
     }
 }

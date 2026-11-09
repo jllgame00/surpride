@@ -1,0 +1,33 @@
+﻿
+Suite                                                  Tests Failures Errors
+-----                                                  ----- -------- ------
+com.surpride.app.ExampleUnitTest                           1        0      0
+com.surpride.app.experience.core.DestinationEngineTest    16        0      0
+com.surpride.app.experience.core.TripControllerTest       10        0      0
+com.surpride.app.experience.core.TripSnapshotTest          4        0      0
+com.surpride.app.navigation.NavigationSessionTest         13        0      0
+com.surpride.app.realdata.LiveRouteProviderTest           11        0      0
+com.surpride.app.realdata.RealRouteTest                   20        0      0
+com.surpride.app.vehicle.VehicleSessionTest               14        0      0
+
+
+
+Android total: 89
+> Task :app:testDebugUnitTest
+
+BUILD SUCCESSFUL in 35s
+41 actionable tasks: 8 executed, 33 up-to-date
+Configuration cache entry reused.
+29 passed, 1 warning in 0.62s
+
+
+Algorithm : SHA256
+Hash      : 06BEB3AFA1B7CB00D9CD8066A47D80859E6B2C6718DAA3A83FDA1B277354C2A0
+
+Observed credential scan: Git-visible files containing actual provider key or current dev token = 0
+Observed credential scan: final APK entries containing those credential bytes = 0
+Host session file removed after server shutdown: True
+
+
+
+

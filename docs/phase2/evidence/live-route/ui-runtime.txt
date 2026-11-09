@@ -1,0 +1,20 @@
+﻿Installed on emulator-5554 / API34 / user10: Success
+MainActivity COLD start: Status ok / TotalTime1139 / WaitTime1144
+Android -> loopback FastAPI -> Kakao: LIVE_API recommendation received
+Secret UI: no catalog place names or longitudes in hierarchy
+Observed recommendation: 83 minutes / 18.4 km / 180-minute budget
+Development fixed public origin; current device location unused; car entry/parking UNKNOWN
+Server stopped: NETWORK, no automatic MOCK fallback
+HTTP FastAPI mock mode: 52min / 8.4km, UI source MOCK retained
+Final APK / LIVE server with key deliberately masked only in server process: NOT_CONFIGURED (503), no upstream call or mock fallback
+Server token rotation: old debug credential rejected as AUTH before upstream call
+비밀 코스 선정 · LIVE_API
+총 84분 / 17.9km
+공급자 조회 시점의 자동차 예상값 · 실제 길 안내 아님
+Final APK: LIVE_API after latency correction; hidden names verified; no guidance started.
+MVP persisted preferences retained: partner/nature/30 minutes. Lab selections stayed in memory only.
+Vehicle RESPONDING: True
+NaviHelper CONNECTED: True
+OEM active route false: True
+Current app PID FATAL EXCEPTION count: 0
+App historical ANR exit-info entries: 0
