@@ -10,6 +10,7 @@ import time
 
 from backend.gps_replay import distance, point_at, PUBLIC_CATALOG
 from backend.smoke import ORIGIN, DESTINATION
+from backend.dev import DEFAULT_SERIAL, adb_serial
 
 
 def validate_session(data, now_ms, allow_catalog=False):
@@ -52,6 +53,7 @@ def sample_offsets(scenario, length, start, count):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--adb',default='adb')
+    parser.add_argument('--serial',type=adb_serial,default=DEFAULT_SERIAL)
     scope=parser.add_mutually_exclusive_group(required=True)
     scope.add_argument('--public-session',action='store_true')
     scope.add_argument('--prepared-public-catalog',action='store_true')
@@ -60,7 +62,7 @@ def main():
     parser.add_argument('--count',type=int,default=8)
     args=parser.parse_args()
     def adb(*parts):
-        result=subprocess.run([args.adb,'-s','emulator-5554',*parts],capture_output=True,timeout=10)
+        result=subprocess.run([args.adb,'-s',args.serial,*parts],capture_output=True,timeout=10)
         if result.returncode: raise ValueError('emulator command failed')
         return result.stdout
     try:
@@ -84,7 +86,7 @@ def main():
             if b'OK' not in adb('emu','geo','fix',f'{point[0]:.9f}',f'{point[1]:.9f}'):
                 raise ValueError('console rejected input')
             if i==1 or i==len(updates):
-                print(f'{args.scenario}: public emulator input {i}/{len(updates)}',flush=True)
+                print(f'{args.scenario}: public emulator input {i}/{len(updates)}; serial={args.serial}',flush=True)
             time.sleep(1.2)
         return 0
     except Exception:

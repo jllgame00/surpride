@@ -36,12 +36,19 @@ backend/.venv/Scripts/python.exe -m backend.dev serve --mode live
 
 ```powershell
 .\scripts\build-codex.ps1 -Test
-adb -s emulator-5554 install --user 10 -r app/build/outputs/apk/debug/app-debug.apk
-backend/.venv/Scripts/python.exe -m backend.dev provision-android --adb adb
-adb -s emulator-5554 shell am start --user 10 -W -n com.surpride.app/.MainActivity
+$serial = 'emulator-5556' # 실제 준비한 정차 시험 AVD의 serial을 직접 지정한다.
+adb -s $serial install --user 10 -r app/build/outputs/apk/debug/app-debug.apk
+backend/.venv/Scripts/python.exe -m backend.dev provision-android --adb adb --serial $serial
+adb -s $serial shell am start --user 10 -W -n com.surpride.app/.MainActivity
 ```
 
-`adb`가 PATH에 없으면 `--adb`에 SDK의 adb.exe 경로를 전달한다. 프로비저닝은 **emulator-5554 / 사용자10 / com.surpride.app 디버그 패키지**만 대상으로 한다. 토큰을 argv·로그에 싣지 않고 stdin으로 `run-as com.surpride.app --user 10`의 private cache에 기록하며 바이트 수를 확인한다. 일반 디버거 접근이며 권한/OS 우회가 아니다. 다른 기기·사용자에는 자동 연결하지 않는다. 이 대상과 다르면 도구를 검토해 명시적으로 변경해야 한다.
+`adb`가 PATH에 없으면 `--adb`에 SDK의 adb.exe 경로를 전달한다. 네 도구 `backend.dev provision-android`, `backend.nav_poc`, `backend.gps_replay`, `backend.active_replay`는 모두 `--serial emulator-5556`처럼 대상을 명시할 수 있다. 생략하면 이전 명령/`provision(adb)` 호환을 위해 **고정 emulator-5554**를 사용한다. 이는 연결 기기 검색/첫 기기 선택이 아니며 `ANDROID_SERIAL`도 사용하지 않는다. 재현 가능한 새 검증에는 생략하지 말고 serial을 명시한다.
+
+도구의 허용 serial은 `emulator-` 뒤 4~5자리 숫자, 1024~65534의 짝수 console port다. 형식 오류는 ADB/HTTP 이전에 거부하고, 없는 기기·offline·명령 실패는 중단한다. 다른 AVD/실기기로 fallback하지 않는다. 다중 AVD에서도 모든 읽기·쓰기·검증·console 호출에 같은 `-s`를 전달한다.
+
+사용자 **10**과 패키지는 옵션으로 바꾸지 않는다. 메인 프로비저닝은 `com.surpride.app`, PoC와 replay는 `com.surpride.navhostpoc`이다. `run-as ... --user 10`은 설치된 debuggable 패키지가 없거나 접근이 거부되면 실패한다. PoC 경로 요청은 외부 API를 호출하기 전에 해당 user10 패키지의 UID도 확인한다. 토큰은 argv·stdout·stderr에 넣지 않고 stdin으로 private cache에 전달한 뒤 같은 serial에서 바이트 수를 확인한다. 일반 디버거 접근이며 권한/OS 우회가 아니다. 오류의 원시 ADB stderr/프록시 본문은 출력하지 않는다.
+
+`nav_poc --request-public-route`는 실제 API 요청과 private packet 쓰기를, `gps_replay`/`active_replay`는 공식 emulator console GPS 변경을 수행하는 **별도 명시적 시험 명령**이다. serial 옵션 추가가 실행 승인을 의미하지 않는다. 기존 공개 경로 opt-in, 신선도·범위 검사와 user/package 제한은 그대로다. 현재 **HOST_ACTIVE=BLOCKED**이며 종료 조작이 보장되지 않은 활성 안내를 강행하지 않는다. 위 설치/실행 예제도 개발자가 대상·정차 환경을 확인한 경우에만 직접 실행한다.
 
 에뮬레이터의 `10.0.2.2:8765`로 호스트 loopback에 접근한다. debug Network Security Config만 해당 호스트의 개발 HTTP를 허용하며 release 구성은 로컬 설정을 읽지 않는다. API 키는 APK에 넣지 않는다. 이 방식은 공용 네트워크나 실제 사용자 위치 전송에 사용하면 안 된다.
 

@@ -3,6 +3,7 @@ import argparse
 import asyncio
 import json
 import os
+import re
 from pathlib import Path
 import secrets
 import subprocess
@@ -12,6 +13,13 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 SESSION = ROOT / ".gradle" / "route-proxy" / "session.json"
 STOP = SESSION.with_name("stop")
+DEFAULT_SERIAL = "emulator-5554"
+
+
+def adb_serial(value):
+    if not re.fullmatch(r"emulator-[0-9]{4,5}", value) or not 1024 <= int(value[9:]) <= 65534 or int(value[9:]) % 2:
+        raise argparse.ArgumentTypeError("Specify an emulator serial with an even console port (e.g. emulator-5556)")
+    return value
 
 
 def load_env():
@@ -63,21 +71,22 @@ async def serve(mode):
         STOP.unlink(missing_ok=True)
 
 
-def provision(adb):
+def provision(adb, serial=DEFAULT_SERIAL):
     # Explicit serial/user/package; no other device, data directory or app is touched.
+    serial = adb_serial(serial)
     config = json.loads(SESSION.read_text(encoding="utf-8"))
     if config["expires_at_ms"] <= int(time.time() * 1000):
         raise ValueError("Session expired")
-    command = [adb, "-s", "emulator-5554", "exec-in",
+    command = [adb, "-s", serial, "exec-in",
                "run-as com.surpride.app --user 10 sh -c 'cat > cache/route-proxy-session.json'"]
     result = subprocess.run(command, input=json.dumps(config).encode(), capture_output=True, timeout=10)
     if result.returncode or result.stderr:
         raise RuntimeError("Debug provisioning failed; check installed debuggable app and user 10")
-    check = subprocess.run([adb, "-s", "emulator-5554", "exec-out", "run-as", "com.surpride.app", "--user", "10",
+    check = subprocess.run([adb, "-s", serial, "exec-out", "run-as", "com.surpride.app", "--user", "10",
                             "wc", "-c", "cache/route-proxy-session.json"], capture_output=True, timeout=10)
     if check.returncode or not check.stdout or int(check.stdout.split()[0]) != len(json.dumps(config).encode()):
         raise RuntimeError("Debug provisioning byte count verification failed")
-    print("Provisioned debug app private cache; credential output suppressed.")
+    print("Provisioned debug app private cache; serial=" + serial + "; credential output suppressed.")
 
 
 def main():
@@ -87,6 +96,7 @@ def main():
     run.add_argument("--mode", choices=("live", "mock"))
     device = commands.add_parser("provision-android")
     device.add_argument("--adb", default="adb")
+    device.add_argument("--serial", type=adb_serial, default=DEFAULT_SERIAL)
     commands.add_parser("stop")
     args = parser.parse_args()
     try:
@@ -97,7 +107,7 @@ def main():
             STOP.touch()
             print("Stop requested for local proxy.")
         else:
-            provision(args.adb)
+            provision(args.adb, args.serial)
     except KeyboardInterrupt:
         pass
     except Exception:

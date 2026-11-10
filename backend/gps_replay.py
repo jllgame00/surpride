@@ -10,6 +10,7 @@ import subprocess
 import time
 
 from backend.smoke import ORIGIN, DESTINATION
+from backend.dev import DEFAULT_SERIAL, adb_serial
 
 # Same explicitly public Seoul pilot catalog as the app; never accepts an arbitrary user destination.
 PUBLIC_CATALOG = {
@@ -63,6 +64,7 @@ def point_at(points, target):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--adb', default='adb')
+    parser.add_argument('--serial',type=adb_serial,default=DEFAULT_SERIAL)
     scope=parser.add_mutually_exclusive_group(required=True)
     scope.add_argument('--public-route-prefix', action='store_true')
     scope.add_argument('--prepared-public-catalog', action='store_true')
@@ -71,7 +73,7 @@ def main():
     args = parser.parse_args()
 
     def adb(*parts):
-        result = subprocess.run([args.adb, '-s', 'emulator-5554', *parts], capture_output=True, timeout=10)
+        result = subprocess.run([args.adb, '-s', args.serial, *parts], capture_output=True, timeout=10)
         if result.returncode:
             raise ValueError('emulator command failed')
         return result.stdout
@@ -100,7 +102,7 @@ def main():
             if b'OK' not in output:
                 raise ValueError('console rejected input')
             if index == 1 or index == len(updates):
-                print(f'{args.scenario}: official emulator input {index}/{len(updates)}', flush=True)
+                print(f'{args.scenario}: official emulator input {index}/{len(updates)}; serial={args.serial}', flush=True)
             time.sleep(1.2)
         return 0
     except Exception:

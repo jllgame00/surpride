@@ -58,9 +58,6 @@ fun interface RouteProvider {
     fun route(origin:GeoPoint,destination:GeoPoint,options:RouteOptions):RouteReply =
         if(options==RouteOptions()) route(origin,destination) else RouteReply.Failure(RouteError.UNSUPPORTED_OPTIONS)
 }
-class UnconfiguredRouteProvider:RouteProvider {
-    override fun route(origin:GeoPoint,destination:GeoPoint)=RouteReply.Failure(RouteError.NOT_CONFIGURED)
-}
 data class PublicRoutePresentation(val mode:RouteOrigin,val totalMinutes:Int,val distanceMeters:Long,val destination:RealPlace?)
 sealed interface RoutePlan {
     class Success internal constructor(val place:RealPlace,val outbound:RouteLeg,val inbound:RouteLeg?,
