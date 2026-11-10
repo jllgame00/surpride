@@ -18,11 +18,15 @@ import com.surpride.navhostpoc.returntrip.ReturnBudget
 import com.surpride.navhostpoc.returntrip.ReturnEstimate
 
 /** Private ephemeral handoff. Never serialize this object into logs or public Intent extras. */
-internal class ActiveRoutePacket(val route:GuidanceRoute,val identity:DestinationIdentity,val reason:String,
+internal class ActiveRoutePacket(private var routeData:GuidanceRoute?,val identity:DestinationIdentity,val reason:String,
     val candidateId:String?,val nonce:String?,private val measuredAt:Long,private val expiresAt:Long,
     private var envelope:JSONObject,private var committedRaw:String) {
-    val requestOptions=RouteRequestOptions.parse(if(envelope.has("request_options")) envelope.getJSONObject("request_options") else null)
-    init {WaypointProgress(route,requestOptions.waypoints.size)}
+    var requestOptions=RouteRequestOptions.parse(if(envelope.has("request_options")) envelope.getJSONObject("request_options") else null)
+        private set
+    val route get()=checkNotNull(routeData) {"SESSION_COMPLETED"}
+    val guidanceRoute get()=routeData
+    val source get()=com.surpride.navhostpoc.guidance.RouteDataSource.valueOf(envelope.getString("source"))
+    init {routeData?.let {WaypointProgress(it,requestOptions.waypoints.size)}}
     private fun point(key:String):RouteCoordinate?=try {envelope.optJSONObject(key)?.let {RouteCoordinate(it.getDouble("longitude"),it.getDouble("latitude"))}} catch(_:Exception) {null}
     val destination get()=checkNotNull(point("destination"))
     val outboundDestination get()=point("trip_destination")?:destination
@@ -52,7 +56,7 @@ internal class ActiveRoutePacket(val route:GuidanceRoute,val identity:Destinatio
     }
     fun rememberArrival(context:CarContext,at:Long)=synchronized(lock) {
         require(at>0 && at<=System.currentTimeMillis())
-        update(context,JSONObject(committedRaw),outcome.copy(revealed=true,arrivedAt=at,
+        update(context,if(returning) receipt() else JSONObject(committedRaw),outcome.copy(revealed=true,arrivedAt=at,
             returnPhase=if(returning) ReturnPhase.COMPLETED else outcome.returnPhase))
     }
     fun rememberReturnRequest(context:CarContext)=synchronized(lock) {
@@ -61,7 +65,16 @@ internal class ActiveRoutePacket(val route:GuidanceRoute,val identity:Destinatio
     }
     private fun update(context:CarContext,next:JSONObject,state:SessionOutcome) {
         SessionOutcomeCodec.attach(next,state,System.currentTimeMillis(),expiresAt)
-        val saved=save(context,next);envelope=saved.envelope;committedRaw=saved.committedRaw;outcome=saved.outcome
+        val saved=save(context,next);envelope=saved.envelope;committedRaw=saved.committedRaw;outcome=saved.outcome;routeData=saved.routeData;requestOptions=saved.requestOptions
+    }
+    private fun receipt()=JSONObject().apply {
+        for(key in RECEIPT_KEYS) if(envelope.has(key)) put(key,envelope.get(key))
+        put("retired_version",1).put("private_destination_label",identity.name)
+    }
+    fun cancel(context:CarContext):Boolean=synchronized(lock) {
+        val atomic=AtomicFile(File(context.cacheDir,"route-guidance.json"))
+        if(read(atomic)!=committedRaw) return@synchronized false
+        remove(atomic);routeData=null;envelope=JSONObject();committedRaw="";true
     }
     private fun save(context:CarContext,next:JSONObject):ActiveRoutePacket=synchronized(lock) {
         val raw=next.toString();val saved=parse(raw)
@@ -105,6 +118,15 @@ internal class ActiveRoutePacket(val route:GuidanceRoute,val identity:Destinatio
     companion object {
         const val RESUME_ACTION="com.surpride.navhostpoc.RESUME_SESSION"
         private val lock=Any()
+        private val RECEIPT_KEYS=setOf("source","candidate_id","session_nonce","measured_at_epoch_ms","prepared_at_epoch_ms",
+            "expires_at_epoch_ms","returning","private_destination_label","terminal_state")
+        private fun remove(atomic:AtomicFile) {
+            atomic.delete()
+            if(listOf("", ".bak", ".new").any {File(atomic.baseFile.path+it).exists()}) {
+                android.util.Log.w("SurprideRetention","PACKET_DELETE_FAILED")
+                throw IOException("PACKET_DELETE_FAILED")
+            }
+        }
         private fun read(atomic:AtomicFile)=atomic.openRead().use {String(it.readBytesBounded(),Charsets.UTF_8)}
         private fun write(atomic:AtomicFile,raw:String) {
             val bytes=raw.toByteArray(Charsets.UTF_8);require(bytes.size in 1..2_000_000)
@@ -121,6 +143,16 @@ internal class ActiveRoutePacket(val route:GuidanceRoute,val identity:Destinatio
         fun load(context:CarContext,intent:Intent?=null):ActiveRoutePacket?=synchronized(lock) {try {
             val file=File(context.cacheDir,"route-guidance.json")
             val atomic=AtomicFile(file)
+            if(!file.exists() && !File(file.path+".bak").exists() && File(file.path+".new").exists()) remove(atomic)
+            if(file.exists() || File(file.path+".bak").exists()) {
+                val saved=try {JSONObject(read(atomic))} catch(_:Exception) {null}
+                val now=System.currentTimeMillis()
+                val deadline=saved?.let {minOf(it.optLong("expires_at_epoch_ms",Long.MAX_VALUE),
+                    it.optLong("measured_at_epoch_ms",now)+3_600_000,it.optLong("prepared_at_epoch_ms",now)+3_600_000,
+                    it.optJSONObject("terminal_state")?.optLong("expires_at_epoch_ms",Long.MAX_VALUE)?:Long.MAX_VALUE)}?:
+                    (file.lastModified()+3_600_000)
+                if(now>=deadline) remove(atomic)
+            }
             val uri=intent?.data
             val raw=if(uri!=null) {
                 require(uri.scheme=="content" && uri.authority=="com.surpride.app.navigationfiles")
@@ -135,7 +167,7 @@ internal class ActiveRoutePacket(val route:GuidanceRoute,val identity:Destinatio
                 require(json.getString("session_nonce").matches(Regex("[a-fA-F0-9-]{36}")))
                 require(!json.has("terminal_state")) // A provider handoff cannot assert user outcomes.
             }
-            val packet=parse(raw)
+            var packet=parse(raw)
             require(packet.isFresh(System.currentTimeMillis()))
             if(intent?.action==RESUME_ACTION) require(uri==null && packet.nonce!=null && packet.candidateId!=null &&
                 intent.getStringExtra("session_nonce")==packet.nonce && intent.getStringExtra("candidate_id")==packet.candidateId)
@@ -145,22 +177,34 @@ internal class ActiveRoutePacket(val route:GuidanceRoute,val identity:Destinatio
                 val existing=try {stored?.let(::parse)} catch(_:Exception) {null}
                 require(!sameNonce || existing!=null) // Reimport must not erase damaged/expired outcomes.
                 if(existing?.nonce!=null && existing.nonce==packet.nonce) {
+                    require(existing.guidanceRoute!=null) // A consumed handoff cannot resurrect a completed route.
                     require(existing.sessionIdentity()==packet.sessionIdentity())
-                    return@synchronized existing
-                }
-                write(atomic,raw)
+                    packet=existing
+                } else write(atomic,raw)
+            }
+            if(packet.envelope.has("proxy_session") && packet.proxySettings?.expiresAtEpochMillis?.let {it>System.currentTimeMillis()}!=true) {
+                val clean=JSONObject(packet.committedRaw).apply {remove("proxy_session")}
+                if(clean.has("terminal_state")) SessionOutcomeCodec.attach(clean,packet.outcome,System.currentTimeMillis(),packet.expiresAt)
+                return@synchronized packet.save(context,clean)
             }
             packet
         } catch(_:Exception) {null}}
         private fun parse(raw:String):ActiveRoutePacket {
             val json=JSONObject(raw)
-            val route=GuidanceParser.parse(raw,System.currentTimeMillis())
+            val retired=json.has("retired_version")
+            val route=if(retired) null else GuidanceParser.parse(raw,System.currentTimeMillis())
             if(json.has("session_nonce")) require(json.getString("session_nonce").matches(Regex("[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}")))
             if(json.has("candidate_id")) require(json.getString("candidate_id").matches(Regex("[A-Za-z0-9_-]{1,100}")))
             val now=System.currentTimeMillis();val measured=json.getLong("measured_at_epoch_ms")
             val prepared=if(json.has("prepared_at_epoch_ms")) json.getLong("prepared_at_epoch_ms").also {require(it>0 && it<=now+60_000 && now-it<3_600_000)} else measured
             val expires=minOf(json.optLong("expires_at_epoch_ms",Long.MAX_VALUE),measured+3_600_000,prepared+3_600_000)
-            require(validAt(measured,expires,now));SessionOutcomeCodec.read(json,now,expires)
+            require(validAt(measured,expires,now))
+            val state=SessionOutcomeCodec.read(json,now,expires)
+            if(retired) {
+                require(json.getInt("retired_version")==1 && json.keys().asSequence().toSet().all {it in RECEIPT_KEYS || it=="retired_version"})
+                require(state.returnPhase==ReturnPhase.COMPLETED && state.revealed && state.arrivedAt!=null)
+                com.surpride.navhostpoc.guidance.RouteDataSource.valueOf(json.getString("source"))
+            }
             return ActiveRoutePacket(route,DestinationIdentity(json.optString("outbound_private_label",json.getString("private_destination_label")),null),
                 json.optString("private_reason","실제 자동차 경로 · 개발용 공개 장소 검증"),
                 json.optString("candidate_id").takeIf {it.isNotBlank()},json.optString("session_nonce").takeIf {it.isNotBlank()},

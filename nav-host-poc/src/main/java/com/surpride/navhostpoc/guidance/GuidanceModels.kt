@@ -23,7 +23,9 @@ class RouteGeometry(input:List<RouteCoordinate>) {
     }
     fun atFraction(value:Double):RouteCoordinate {
         val target=value.coerceIn(0.0,1.0)*lengthMeters
-        val next=cumulative.indexOfFirst {it>=target}.coerceAtLeast(1)
+        var low=0;var high=cumulative.size
+        while(low<high) {val mid=(low+high) ushr 1;if(cumulative[mid]>=target) high=mid else low=mid+1}
+        val next=low.coerceIn(1,cumulative.lastIndex)
         val fraction=(target-cumulative[next-1])/(cumulative[next]-cumulative[next-1])
         val a=points[next-1];val b=points[next]
         return RouteCoordinate(a.longitude+(b.longitude-a.longitude)*fraction,a.latitude+(b.latitude-a.latitude)*fraction)
@@ -76,7 +78,9 @@ class GuidanceRoute(val source:RouteDataSource,val segments:List<RouteSegment>,v
         geometryStarts[road]+interpolate(guide.offsetMeters.toDouble(),distanceAnchors[road].map {(g,d)->d to g})
     }
     fun roadIndexAtGeometry(along:Double):Int {
-        val edge=geometry.cumulative.indexOfLast {it<=along+0.000001}.coerceIn(0,geometryRoadIndices.lastIndex)
+        var low=0;var high=geometry.cumulative.size
+        while(low<high) {val mid=(low+high) ushr 1;if(geometry.cumulative[mid]<=along+0.000001) low=mid+1 else high=mid}
+        val edge=(low-1).coerceIn(0,geometryRoadIndices.lastIndex)
         return geometryRoadIndices[edge]
     }
     fun distanceAtGeometry(along:Double):Double {

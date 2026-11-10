@@ -14,7 +14,9 @@ data class MatchState(val status:MatchStatus,val reason:String,val source:Positi
     val nextManeuver:Maneuver?=null,val deviationMeters:Double?=null,val geometryAlongMeters:Double?=null,val accuracyMeters:Double?=null)
 
 class RouteMatcher(private val route:GuidanceRoute,private val config:MatcherConfig=MatcherConfig()) {
-    private data class Candidate(val along:Double,val deviation:Double,val heading:Double,val index:Int)
+    private data class Candidate(val along:Double,val deviation:Double,val heading:Double)
+    // Keep the original haversine result, not cumulative differences, to preserve boundary rounding.
+    private val segmentLengths=DoubleArray(route.geometry.points.size-1) {meters(route.geometry.points[it],route.geometry.points[it+1])}
     private var current=MatchState(MatchStatus.UNKNOWN,"NO_DATA",null)
     private var lastFix:PositionFix?=null
     private var lastAlong:Double?=null
@@ -41,8 +43,9 @@ class RouteMatcher(private val route:GuidanceRoute,private val config:MatcherCon
         if(lastObservedTime!=null && fix.elapsedMillis<=lastObservedTime!!) return fail(MatchStatus.UNKNOWN,"OUT_OF_ORDER")
         if(lastObservedTime!=null && fix.elapsedMillis-lastObservedTime!!>config.maxAgeMillis) needsAcquisition=true
         lastObservedTime=fix.elapsedMillis
-        val candidates=route.geometry.points.zipWithNext().mapIndexedNotNull {index,(a,b)->
-            project(fix.coordinate,a,b,route.geometry.cumulative[index],index)
+        val candidates=ArrayList<Candidate>()
+        for(index in 0 until route.geometry.points.lastIndex) {
+            project(fix.coordinate,route.geometry.points[index],route.geometry.points[index+1],route.geometry.cumulative[index],index)?.let(candidates::add)
         }
         val nearest=candidates.minOfOrNull {it.deviation}?:return fail(MatchStatus.UNKNOWN,"NO_GEOMETRY")
         if(nearest>config.corridorMeters(fix.accuracyMeters)) {
@@ -60,9 +63,9 @@ class RouteMatcher(private val route:GuidanceRoute,private val config:MatcherCon
         fun score(c:Candidate):Double=c.deviation+
             (if(headingReliable) angle(c.heading,bearing!!)/180*40 else 0.0)+
             (if(lastAlong!=null && !acquiring) min(abs(c.along-lastAlong!!)*0.2,200.0) else 0.0)
-        val ranked=pool.sortedBy(::score)
-        val best=ranked.first()
-        if(acquiring && ranked.drop(1).any {abs(it.along-best.along)>50 && abs(score(it)-score(best))<5})
+        val best=pool.minWithOrNull(compareBy(::score))!!
+        val bestScore=score(best)
+        if(acquiring && pool.any {abs(it.along-best.along)>50 && abs(score(it)-bestScore)<5})
             return fail(MatchStatus.AMBIGUOUS,"MULTIPLE_ROUTE_TRAVERSALS",nearest)
         if(headingReliable && angle(best.heading,bearing!!)>120) return fail(MatchStatus.REVERSED,"OPPOSITE_HEADING",nearest)
         if(lastAlong!=null) {
@@ -99,7 +102,7 @@ class RouteMatcher(private val route:GuidanceRoute,private val config:MatcherCon
         val dx=bx-ax;val dy=by-ay;val size=dx*dx+dy*dy
         if(size<0.000001) return null
         val t=(-(ax*dx+ay*dy)/size).coerceIn(0.0,1.0)
-        return Candidate(start+meters(a,b)*t,hypot(ax+t*dx,ay+t*dy),(Math.toDegrees(atan2(dx,dy))+360)%360,index)
+        return Candidate(start+segmentLengths[index]*t,hypot(ax+t*dx,ay+t*dy),(Math.toDegrees(atan2(dx,dy))+360)%360)
     }
     private fun angle(a:Double,b:Double):Double {val d=abs(a-b)%360;return min(d,360-d)}
 }

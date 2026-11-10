@@ -8,18 +8,38 @@ import org.json.JSONObject
 object LiveNavigationStore {
     private const val PREFS="live_navigation_emulator"
     private val lock=Any()
-    fun read(context:Context):LiveNavigationJournal=synchronized(lock) {load(context)}
+    fun read(context:Context):LiveNavigationJournal=synchronized(lock) {
+        val journal=load(context);val now=System.currentTimeMillis()
+        fun current(value:PendingLiveNavigation?)=value?.takeIf {now-it.preparedAtMillis in 0..PreparedRouteContract.TTL_MILLIS}
+        val pending=current(journal.pending);val completed=current(journal.completed)
+        if(pending===journal.pending && completed===journal.completed) journal else {
+            val clean=LiveNavigationJournal(pending,journal.visits,completed)
+            if(!persist(context,clean)) android.util.Log.w("SurprideRetention","JOURNAL_CLEANUP_FAILED")
+            if(pending==null) journal.pending?.let {PreparedNavigationHandoff.cleanup(context,it.nonce)}
+            clean
+        }
+    }
     fun prepare(context:Context,pending:PendingLiveNavigation):Boolean=synchronized(lock) {
-        persist(context,LiveNavigationJournal(pending,load(context).visits))
+        val previous=load(context)
+        persist(context,LiveNavigationJournal(pending,previous.visits)).also {saved->
+            if(saved) {
+                previous.pending?.nonce?.takeIf {it!=pending.nonce}?.let {PreparedNavigationHandoff.cleanup(context,it)}
+                PreparedNavigationHandoff.cleanup(context)
+            }
+        }
     }
     fun cancel(context:Context,nonce:String) = synchronized(lock) {
         val journal=load(context)
-        if(journal.pending?.nonce==nonce) persist(context,LiveNavigationJournal(null,journal.visits)) else true
+        val saved=if(journal.pending?.nonce==nonce) persist(context,LiveNavigationJournal(null,journal.visits)) else true
+        if(saved) PreparedNavigationHandoff.cleanup(context,nonce)
+        saved
     }
     fun complete(context:Context,nonce:String?,candidateId:String?,source:String?,revealed:Boolean,
         stopped:Boolean,rating:Int,now:Long,arrivalConfirmed:Boolean?=null):Boolean=synchronized(lock) {
         val journal=load(context)
-        journal.complete(nonce,candidateId,source,revealed,stopped,rating,now,arrivalConfirmed) && persist(context,journal)
+        val saved=journal.complete(nonce,candidateId,source,revealed,stopped,rating,now,arrivalConfirmed) && persist(context,journal)
+        if(saved) PreparedNavigationHandoff.cleanup(context,nonce)
+        saved
     }
     private fun load(context:Context):LiveNavigationJournal=try {
         val json=JSONObject(context.getSharedPreferences(PREFS,Context.MODE_PRIVATE).getString("journal","{}")?:"{}")

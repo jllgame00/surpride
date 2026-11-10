@@ -17,7 +17,9 @@ import kotlin.math.*
  * Map labels are the original OSM raster labels and can include ordinary place/POI names.
  */
 class RoadMapRenderer(context: Context, private val onChanged: () -> Unit) : AutoCloseable {
-    private data class TileImage(val bitmap: Bitmap?, val stale: Boolean, val failed: Boolean, val loadedAt: Long)
+    private data class TileImage(val bitmap: Bitmap?, val stale: Boolean, val failed: Boolean, val loadedAt: Long,
+        val expiresAt: Long = 0, val cacheable: Boolean = true, val requiresValidation:Boolean=false,
+        val awaitingPaint:Boolean=true)
     private val camera = FollowCamera()
     private val tiles = ViewportTiles(File(context.applicationContext.filesDir, "osm-viewport-tiles"))
     private val handler = Handler(Looper.getMainLooper())
@@ -198,25 +200,44 @@ class RoadMapRenderer(context: Context, private val onChanged: () -> Unit) : Aut
         private val pending = mutableSetOf<TileKey>()
         private val images = LinkedHashMap<TileKey, TileImage>(64, 0.75f, true)
         private var stopped = false
-        fun peek(key: TileKey): TileImage? = synchronized(monitor) { images[key] }
+        fun peek(key: TileKey): TileImage? = synchronized(monitor) {
+            val image=images[key]?:return@synchronized null
+            if(!image.cacheable) images.remove(key) else if(image.requiresValidation) {
+                if(!image.awaitingPaint && System.currentTimeMillis()>=image.expiresAt) return@synchronized null
+                images[key]=image.copy(awaitingPaint=false)
+            }
+            image
+        }
         fun want(keys: Set<TileKey>) {
             synchronized(monitor) {
                 if (stopped) return
                 wanted = keys
+                images.entries.removeAll {it.key !in keys && !it.value.cacheable}
+                images.entries.forEach {if(it.key !in keys && it.value.requiresValidation) it.setValue(it.value.copy(awaitingPaint=false))}
                 val now = System.currentTimeMillis()
                 for (key in keys) {
                     val existing = images[key]
-                    if (key in pending || (existing != null && (!existing.failed || now - existing.loadedAt < 30_000))) continue
+                    if (key in pending || (existing != null &&
+                        (!existing.cacheable || (existing.requiresValidation && existing.awaitingPaint && existing.bitmap!=null) ||
+                            if(existing.failed) now-existing.loadedAt<30_000 else now<existing.expiresAt))) continue
                     pending.add(key)
                     executor.execute {
+                        var notify=false
                         try {
                             // Recheck at worker start: queued work for old viewports never triggers a request.
                             if (!synchronized(monitor) { !stopped && key in wanted }) return@execute
                             val result = store.load(key)
                             val bitmap = result.bytes?.let { BitmapFactory.decodeByteArray(it, 0, it.size) }
+                            if (result.bytes != null && bitmap == null) store.invalidate(key)
                             synchronized(monitor) {
-                                if (!stopped) {
-                                    images[key] = TileImage(bitmap, result.stale, result.failure != null || bitmap == null, System.currentTimeMillis())
+                                if (!stopped && (result.cacheable || key in wanted)) {
+                                    val previous=images[key]
+                                    val next=TileImage(bitmap, result.stale, result.failure != null || bitmap == null,
+                                        System.currentTimeMillis(), result.expiresAtMillis, result.cacheable,result.requiresValidation)
+                                    images[key]=next
+                                    // Immediately expired refreshes repaint on the next external frame, not their own download loop.
+                                    notify=previous==null || previous.failed!=next.failed || previous.stale!=next.stale ||
+                                        (previous.bitmap==null && bitmap!=null) || (!next.failed && (next.requiresValidation || next.expiresAt>next.loadedAt))
                                     // Only decoded memory is bounded; persistent fresh tiles are retained.
                                     while (images.size > max(96, wanted.size * 2)) {
                                         val victim = images.keys.firstOrNull { it !in wanted } ?: break
@@ -225,18 +246,22 @@ class RoadMapRenderer(context: Context, private val onChanged: () -> Unit) : Aut
                                 }
                             }
                         } catch (_: Exception) {
-                            synchronized(monitor) { if (!stopped) images[key] = TileImage(null, false, true, System.currentTimeMillis()) }
+                            synchronized(monitor) { if (!stopped) {
+                                notify=images[key]?.failed!=true
+                                images[key] = TileImage(null, false, true, System.currentTimeMillis())
+                            } }
                         } finally {
                             synchronized(monitor) { pending.remove(key) }
-                            changed()
+                            if(notify) changed()
                         }
                     }
                 }
             }
         }
         override fun close() {
-            synchronized(monitor) { stopped = true; wanted = emptySet(); images.clear() }
+            synchronized(monitor) { stopped = true; wanted = emptySet(); images.clear(); pending.clear() }
             executor.shutdownNow()
+            store.close()
         }
     }
 }

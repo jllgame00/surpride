@@ -112,3 +112,7 @@ R09/R14의 조치는 현재 코드에 운영 시스템을 한꺼번에 추가하
 **현재 결정:** 분석 자료가 충분하므로 **제한을 유지한 Phase 6B 개선 작업에 진입 가능**하다. 실제 시스템·성능·실차 검증이 남아 최종 감사는 **AUDIT_WITH_LIMITATIONS**다. 소스/테스트 수정·기기 조작·서비스 배포·커밋/Push는 이번에 수행하지 않았다.
 
 미확인: 실제 Host 재검증·실차·음향·장시간 부하·전체 개인정보 채널·최신 취약점/공급자 승인. 잔여 위험은 테스트 개수로 상쇄되지 않으며 해당 게이트의 직접 증거가 필요하다.
+
+### 후속 이력 — Phase 6B-5
+
+[B5 성능·개인정보 보고서](B5_PERFORMANCE_PRIVACY.md): A09는 합성 JVM에서 MEASURED_IMPROVEMENT, A12 client 수명은 계약 검증 완료다. A10 캐시 및 A11 보존/삭제의 주요 코드 회귀는 통과했으나 실제 HTTP·native 종료·프로세스 부재 중 삭제·LIVE 평문 기록 위험이 남아 CACHE_POLICY/DATA_RETENTION은 PARTIAL이다. A04 Host ACTIVE BLOCKED와 DESTINATION_PRIVACY PARTIAL을 유지한다. 고유 검사 637개를 보존하고 신규 39개를 더해 676개 PASS. 이 링크는 과거 위험 판정의 조용한 덮어쓰기가 아니다.

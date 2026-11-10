@@ -285,3 +285,7 @@ Phase 6B는 이 감사의 ID·기준 해시·기존 미커밋 변경을 고정�
 재확인 보안 기록: 현재 전체 참조 **22 commits / 1,307 objects / 765 blobs / 254,353,910 bytes**, text 분류 469 blobs를 검사했다. 알려진 비밀값 UTF-8/UTF-16LE literal은 모든 blob에, 최초와 같은 대표 비밀 패턴은 text blob에 대조했다. **알려진 값 일치 0 / 대표 패턴 일치 0**이다. 비밀 원문은 출력·기록하지 않았다. 이미지 OCR·알 수 없는 비밀·unreachable 객체·원격 사본의 한계는 최초 검사와 같다.
 
 재확인 종료 시 제품 코드·기존 테스트·기존 증거는 그대로이며 `docs/phase6/`의 요청 문서 3개만 수정 상태로 남긴다. HEAD는 재확인 시작 값으로 유지하고 커밋·Push하지 않는다.
+
+### 후속 이력 — Phase 6B-5
+
+위 내용은 감사 당시 기록이다. [B5 성능·보존 결과](B5_PERFORMANCE_PRIVACY.md)에서 A09 호스트 JVM 측정 개선, A10 캐시 신선도/종료, A11 packet·grant·완료 receipt 정리, A12 lifespan client 재사용을 구현·검증했다. 고유 검사 676개 통과. A10/A11의 실제 플랫폼·장기 보존은 PARTIAL, Host ACTIVE는 BLOCKED이며 최초 감사의 제한을 전체 해제하지 않는다.

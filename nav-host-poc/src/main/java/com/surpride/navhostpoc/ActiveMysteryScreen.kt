@@ -37,9 +37,9 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
     private var foreground=false
     private val emulator=Build.MODEL=="Connect on x86_64 emulator" && Build.PRODUCT=="crp_avd"
     private val allowed get()=foreground && emulator && requiresDo==false
-    private var route=packet?.route
+    private var route=packet?.guidanceRoute
     private var matcher=route?.let(::RouteMatcher)
-    private var waypointProgress=packet?.let {WaypointProgress(it.route,it.requestOptions.waypoints.size)}
+    private var waypointProgress=route?.let {WaypointProgress(it,packet!!.requestOptions.waypoints.size)}
     private val arrival=ArrivalGate()
     private var fix:PositionFix?=null
     private var revealed=packet?.outcome?.revealed?:false
@@ -229,6 +229,16 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         subscribed=true;positions.start();Log.i("SurprideActive","POSITION_SUBSCRIBED owner=${adapter.state==OwnershipState.ACTIVE}")
     }
     private fun stopPosition() {subscribed=false;positions.stop();arrival.invalidate()}
+    private fun cancelSession() {
+        pendingStart=false;pendingControl=null;pendingPreparation=null
+        adapter.stop();reroute?.cancel();cancelRequests();voice.setOwnership(false);stopPosition()
+        result=try {
+            if(packet?.cancel(carContext)!=true) "SESSION_CHANGED / PREPARE_AGAIN" else {
+                packet=null;route=null;matcher=null;waypointProgress=null;fix=null;budget=null;returnEstimate=null
+                "USER_STOPPED"
+            }
+        } catch(_:Exception) {"SESSION_CACHE_UNAVAILABLE / PREPARE_AGAIN"}
+    }
     private fun stopForUnreliable(reason:String) {
         // No exact TBT from uncertain positions. Stop active host session; restart requires another explicit action.
         adapter.stop();result="POSITION_UNTRUSTED / $reason";arrival.invalidate()
@@ -248,6 +258,7 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
     private fun configureReroute() {
         reroute?.cancel()
         val p=packet?:return
+        if(p.guidanceRoute==null) {reroute=null;return}
         reroute=RerouteCoordinator(refreshClient,p.destination,if(returning) "출발지" else p.identity.name,
             SystemClock::elapsedRealtime,{value->
                 if(allowed && adapter.state==OwnershipState.ACTIVE) {
@@ -397,12 +408,13 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         val at=System.currentTimeMillis()
         if(!saveOutcome {it.rememberArrival(carContext,at)}) {arrival.reset();return}
         revealed=true;arrivedAt=at;returnCompleted=returning
+        if(returnCompleted) {stopPosition();route=null;matcher=null;waypointProgress=null;fix=null;returnEstimate=null;budget=null}
         result=if(returning) "RETURN_COMPLETED / GUIDANCE_ENDED" else "ARRIVED / USER_CONFIRMED_PARKED / GUIDANCE_ENDED"
         Log.i("SurprideActive","ARRIVED confirmed=true ownerReleased=${adapter.state}");refresh(true)
     }
     private fun returnResult() {
         val currentPacket=packet?:return
-        if(!allowed || !revealed || currentPacket.route.source!=RouteDataSource.KAKAO_DIRECTIONS || currentPacket.nonce==null || currentPacket.candidateId==null || !currentPacket.isCurrent(carContext)) return
+        if(!allowed || !revealed || currentPacket.source!=RouteDataSource.KAKAO_DIRECTIONS || currentPacket.nonce==null || currentPacket.candidateId==null || !currentPacket.isCurrent(carContext)) return
         adapter.stop()
         try {carContext.startActivity(Intent().setComponent(ComponentName("com.surpride.app","com.surpride.app.realdata.LiveNavigationResultActivity"))
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("session_nonce",currentPacket.nonce).putExtra("candidate_id",currentPacket.candidateId)
@@ -451,7 +463,7 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         if(controlsOpen) return NavigationControlMenu.build(allowed,voiceOn,active && arrival.candidate,
             confirmedArrival && !returning && packet?.tripOrigin!=null) {command->
             when(command) {
-                "stop"->{adapter.stop();result="USER_STOPPED";closeControls()}
+                "stop"->{cancelSession();closeControls()}
                 "map"->closeControls()
                 "reveal"->{if(allowed) {reveal();closeControls()}}
                 "voice"->{if(allowed) {voiceOn=!voiceOn;voice.setEnabled(voiceOn);closeControls()}}

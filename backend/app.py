@@ -1,6 +1,7 @@
 """Loopback development gateway. Never log requests, headers, upstream URLs or bodies."""
 import asyncio
 from collections import deque
+from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
 import json
 import logging
@@ -138,7 +139,7 @@ def normalized(body, request, source):
     return result
 
 
-async def fetch_route(request, settings, transport):
+async def fetch_route(request, settings, client):
     params = {"origin": f"{request.origin.longitude},{request.origin.latitude}",
               "destination": f"{request.destination.longitude},{request.destination.latitude}",
               "priority": request.priority, "summary": "false", "alternatives": "false"}
@@ -146,22 +147,20 @@ async def fetch_route(request, settings, transport):
         params["waypoints"] = "|".join(f"{point.longitude},{point.latitude}" for point in request.waypoints)
     try:
         async with asyncio.timeout(10):
-            async with httpx.AsyncClient(transport=transport, trust_env=False, follow_redirects=False,
-                                        timeout=httpx.Timeout(8, connect=3)) as client:
-                async with client.stream("GET", UPSTREAM, params=params,
-                                         headers={"Authorization": "KakaoAK " + settings.api_key}) as response:
-                    if response.status_code in (401, 403):
-                        raise RouteFailure("AUTH", 502)
-                    if response.status_code == 429:
-                        raise RouteFailure("RATE_LIMIT", 429)
-                    if response.status_code not in (200, 400):
-                        raise RouteFailure("API")
-                    status = response.status_code
-                    raw = bytearray()
-                    async for chunk in response.aiter_bytes():
-                        raw.extend(chunk)
-                        if len(raw) > MAX_RESPONSE:
-                            raise RouteFailure("INVALID_RESPONSE")
+            async with client.stream("GET", UPSTREAM, params=params,
+                                     headers={"Authorization": "KakaoAK " + settings.api_key}) as response:
+                if response.status_code in (401, 403):
+                    raise RouteFailure("AUTH", 502)
+                if response.status_code == 429:
+                    raise RouteFailure("RATE_LIMIT", 429)
+                if response.status_code not in (200, 400):
+                    raise RouteFailure("API")
+                status = response.status_code
+                raw = bytearray()
+                async for chunk in response.aiter_bytes():
+                    raw.extend(chunk)
+                    if len(raw) > MAX_RESPONSE:
+                        raise RouteFailure("INVALID_RESPONSE")
         try:
             body = json.loads(raw)
             if status == 400:
@@ -192,7 +191,21 @@ def create_app(settings=None, transport=None):
     logging.getLogger("httpx").disabled = True
     logging.getLogger("httpcore").disabled = True
     budget = RequestBudget(settings.requests_per_minute, settings.max_requests)
-    app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None, debug=False)
+    @asynccontextmanager
+    async def lifespan(application):
+        if settings.mode != "live" or not settings.api_key:
+            yield
+            return
+        async with httpx.AsyncClient(transport=transport, trust_env=False, follow_redirects=False,
+                                     timeout=httpx.Timeout(8, connect=3)) as upstream:
+            application.state.upstream_client = upstream
+            try:
+                yield
+            finally:
+                application.state.upstream_client = None
+
+    app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None, debug=False, lifespan=lifespan)
+    app.state.upstream_client = None
 
     @app.middleware("http")
     async def protect(request: Request, call_next):
@@ -249,7 +262,9 @@ def create_app(settings=None, transport=None):
                             "guides": guides})
                     fixture["routes"][0]["sections"] = sections
                 return normalized(fixture, request, "MOCK")
-            return await fetch_route(request, settings, transport)
+            if app.state.upstream_client is None:
+                raise RouteFailure("API")
+            return await fetch_route(request, settings, app.state.upstream_client)
         except RouteFailure as exc:
             return JSONResponse({"error": exc.code}, status_code=exc.status)
         except Exception:
