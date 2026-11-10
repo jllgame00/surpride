@@ -31,11 +31,70 @@ class RouteGeometry(input:List<RouteCoordinate>) {
     override fun toString()="RouteGeometry(points=${points.size}, coordinates=REDACTED)"
 }
 data class RouteSegment(val roadName:String,val distanceMeters:Long,val durationSeconds:Long,val trafficState:Int,val geometry:List<RouteCoordinate>)
-data class Maneuver(val type:Int,val offsetMeters:Long,val roadIndex:Int)
+data class Maneuver(val type:Int,val offsetMeters:Long,val roadIndex:Int,val anchor:RouteCoordinate?=null)
 enum class RouteDataSource { KAKAO_DIRECTIONS, MOCK }
 enum class GuidanceStatus { READY, RUNNING, PAUSED, ARRIVED, STOPPED }
-class GuidanceRoute(val source:RouteDataSource,val geometry:RouteGeometry,val segments:List<RouteSegment>,val maneuvers:List<Maneuver>,
+class GuidanceRoute(val source:RouteDataSource,val segments:List<RouteSegment>,val maneuvers:List<Maneuver>,
     val distanceMeters:Long,val durationSeconds:Long,private val destination:RouteCoordinate) {
+    init {
+        require(segments.size in 1..10000 && segments.sumOf {it.geometry.size.toLong()}<=100_000)
+        require(distanceMeters in 1..100_000_000 && segments.all {it.distanceMeters in 1..100_000_000})
+        require(segments.sumOf {it.distanceMeters}==distanceMeters)
+    }
+    private val roads=segments.map {RouteGeometry(it.geometry)}
+    init {
+        // No gap tolerance is evidenced by the public fixture: never manufacture a connector.
+        require(roads.zipWithNext().all {(a,b)->a.points.last()==b.points.first()})
+    }
+    val geometry=RouteGeometry(roads.flatMap {it.points})
+    val geometryRoadIndices=roads.flatMapIndexed {index,road->List(road.points.size-1) {index}}
+    private val geometryStarts=roads.runningFold(0.0) {sum,road->sum+road.lengthMeters}
+    private val distanceStarts=segments.runningFold(0L) {sum,road->sum+road.distanceMeters}
+    init {
+        require(maneuvers.all {it.roadIndex in segments.indices &&
+            it.offsetMeters in distanceStarts[it.roadIndex]..distanceStarts[it.roadIndex+1]})
+        require(maneuvers.filter {it.type !in setOf(100,101,1000)}.groupBy {it.offsetMeters}
+            .values.all {group->group.map {it.type}.distinct().size<=1})
+    }
+    private val guidesByRoad=maneuvers.groupBy {it.roadIndex}
+    // Endpoint and verified guide anchors keep API meters and geometric meters in one ordered mapping.
+    private val distanceAnchors=roads.mapIndexed {index,road->
+        val anchors=sortedMapOf(0.0 to distanceStarts[index].toDouble(),road.lengthMeters to distanceStarts[index+1].toDouble())
+        guidesByRoad[index].orEmpty().filter {it.anchor!=null}.forEach {guide->
+            val matches=road.points.indices.filter {road.points[it]==guide.anchor}
+            require(matches.size==1)
+            val at=road.cumulative[matches.single()]
+            require(anchors[at]==null || anchors[at]==guide.offsetMeters.toDouble())
+            anchors[at]=guide.offsetMeters.toDouble()
+        }
+        val result=anchors.toList()
+        require(result.zipWithNext().all {(a,b)->a.second<b.second})
+        result
+    }
+    private val maneuverGeometry=maneuvers.associateWith {guide->
+        val road=guide.roadIndex
+        geometryStarts[road]+interpolate(guide.offsetMeters.toDouble(),distanceAnchors[road].map {(g,d)->d to g})
+    }
+    fun roadIndexAtGeometry(along:Double):Int {
+        val edge=geometry.cumulative.indexOfLast {it<=along+0.000001}.coerceIn(0,geometryRoadIndices.lastIndex)
+        return geometryRoadIndices[edge]
+    }
+    fun distanceAtGeometry(along:Double):Double {
+        val road=roadIndexAtGeometry(along)
+        return interpolate((along-geometryStarts[road]).coerceIn(0.0,roads[road].lengthMeters),distanceAnchors[road])
+    }
+    fun geometryAtDistance(distance:Double):Double {
+        val at=distance.coerceIn(0.0,distanceMeters.toDouble())
+        val road=distanceStarts.indexOfLast {it<=at}.coerceIn(0,segments.lastIndex)
+        return geometryStarts[road]+interpolate(at,distanceAnchors[road].map {(g,d)->d to g})
+    }
+    fun geometryOffset(guide:Maneuver)=checkNotNull(maneuverGeometry[guide])
+    fun nextManeuver(along:Double)=maneuvers.firstOrNull {it.type!=100 && geometryOffset(it)>=along-0.000001}
+    private fun interpolate(value:Double,anchors:List<Pair<Double,Double>>):Double {
+        val next=anchors.indexOfFirst {it.first>=value}.let {if(it<0) anchors.lastIndex else it.coerceAtLeast(1)}
+        val (a,x)=anchors[next-1];val (b,y)=anchors[next]
+        return x+(y-x)*((value-a)/(b-a)).coerceIn(0.0,1.0)
+    }
     internal fun distanceToRouteEnd(point:RouteCoordinate)=meters(point,geometry.points.last())
     internal fun outsideDestinationArea(point:RouteCoordinate)=meters(point,destination)>=200 && meters(point,geometry.points.last())>=200
     override fun toString()="GuidanceRoute(source=$source, destination=REDACTED)"

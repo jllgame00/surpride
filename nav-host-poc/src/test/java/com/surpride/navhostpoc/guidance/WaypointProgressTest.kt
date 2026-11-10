@@ -7,8 +7,8 @@ import org.junit.Test
 class WaypointProgressTest {
     private fun route(guides:List<Maneuver> = listOf(Maneuver(100,0,0),Maneuver(1000,100,0),
         Maneuver(2,150,0),Maneuver(1000,200,0),Maneuver(101,300,0))) = GuidanceRoute(
-        RouteDataSource.MOCK,RouteGeometry(listOf(RouteCoordinate(127.0,37.0),RouteCoordinate(127.003,37.0))),
-        emptyList(),guides,300,60,RouteCoordinate(127.003,37.0))
+        RouteDataSource.MOCK,listOf(RouteSegment("Road",300,60,0,listOf(RouteCoordinate(127.0,37.0),RouteCoordinate(127.003,37.0)))),
+        guides,300,60,RouteCoordinate(127.003,37.0))
     private fun progress(at:Double)=RouteProgress(at,300-at,0.0,0,0)
 
     @Test fun onlyOfficialWaypointOffsetsAdvancePassedAndRemaining() {

@@ -8,8 +8,7 @@ class RouteMatcherTest {
     private val now=100_000L
     private fun p(x:Double,y:Double=0.0)=RouteCoordinate(127.0+x/88_804.0,37.0+y/111_195.0)
     private fun route(points:List<RouteCoordinate> = listOf(p(0.0),p(500.0),p(1000.0))):GuidanceRoute {
-        val geometry=RouteGeometry(points)
-        return GuidanceRoute(RouteDataSource.KAKAO_DIRECTIONS,geometry,
+        return GuidanceRoute(RouteDataSource.KAKAO_DIRECTIONS,
             listOf(RouteSegment("검증도로",1000,100,4,points)),listOf(Maneuver(100,0,0),Maneuver(2,500,0),Maneuver(101,1000,0)),1000,100,points.last())
     }
     private fun fix(x:Double,y:Double=0.0,t:Long=now,accuracy:Double=5.0,bearing:Double?=90.0,speed:Double?=10.0)=

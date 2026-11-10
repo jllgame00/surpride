@@ -76,7 +76,7 @@ class RerouteCoordinatorTest {
     }
     private fun success():RouteRefreshResult.Success {
         val geometry=listOf(RouteCoordinate(127.0,37.0),destination)
-        val route=GuidanceRoute(RouteDataSource.KAKAO_DIRECTIONS,RouteGeometry(geometry),listOf(RouteSegment("Road",100,60,0,geometry)),listOf(Maneuver(100,0,0),Maneuver(101,100,0)),100,60,destination)
+        val route=GuidanceRoute(RouteDataSource.KAKAO_DIRECTIONS,listOf(RouteSegment("Road",100,60,0,geometry)),listOf(Maneuver(100,0,0),Maneuver(101,100,0)),100,60,destination)
         return RouteRefreshResult.Success("PRIVATE_PAYLOAD",route,1_800_000_000_000L,1_800_003_600_000L)
     }
 }

@@ -8,7 +8,7 @@ import org.junit.Test
 class FollowCameraTest {
     private fun p(east: Double, north: Double = 0.0) = RouteCoordinate(east / 111195.0, north / 111195.0)
     private fun route(points: List<RouteCoordinate> = listOf(p(0.0), p(3000.0)), turn: Long = 400) =
-        GuidanceRoute(RouteDataSource.MOCK, RouteGeometry(points), emptyList(),
+        GuidanceRoute(RouteDataSource.MOCK, listOf(RouteSegment("Road",3000,300,0,points)),
             listOf(Maneuver(2, turn, 0), Maneuver(101, 3000, 0)), 3000, 300, points.last())
     private fun fix(east: Double = 0.0, speed: Double? = 10.0, bearing: Double? = 90.0, time: Long = 1000) =
         PositionFix(p(east), 5.0, time, 0, speed, bearing, 10.0, PositionSource.FAKE, false)

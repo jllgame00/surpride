@@ -75,10 +75,9 @@ class RouteMatcher(private val route:GuidanceRoute,private val config:MatcherCon
         val accepted=if(lastAlong==null) best.along else if(best.along<lastAlong!!+max(3.0,fix.accuracyMeters)) lastAlong!! else best.along
         offRoute=false;rejoinCount=0;needsAcquisition=false
         lastAlong=accepted;lastFix=fix
-        val traveled=(accepted/route.geometry.lengthMeters*route.distanceMeters).coerceIn(0.0,route.distanceMeters.toDouble())
-        val next=route.maneuvers.firstOrNull {it.type!=100 && it.offsetMeters>traveled}
-        var segmentOffset=0L
-        val segment=route.segments.indexOfFirst {segmentOffset+=it.distanceMeters;traveled<segmentOffset}.let {if(it<0) route.segments.lastIndex else it}
+        val traveled=route.distanceAtGeometry(accepted)
+        val next=route.nextManeuver(accepted)
+        val segment=route.roadIndexAtGeometry(accepted)
         val remaining=route.distanceMeters-traveled
         current=MatchState(MatchStatus.ON_ROUTE,"MATCHED",fix.source,
             RouteProgress(traveled,remaining,((next?.offsetMeters?:route.distanceMeters)-traveled).coerceAtLeast(0.0),segment,ceil(route.durationSeconds*remaining/route.distanceMeters).toLong()),

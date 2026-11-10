@@ -1,4 +1,5 @@
 import httpx
+from copy import deepcopy
 from fastapi.testclient import TestClient
 from backend.app import Settings, create_app
 
@@ -47,7 +48,10 @@ def test_unknown_maneuver_code_and_traffic_warning_are_retained_without_inventin
 
 def test_section_offsets_and_road_indices_are_global_not_restarted():
     value=body();section=value['routes'][0]['sections'][0]
-    value['routes'][0]['sections']=[section,section]
+    continuation=deepcopy(section)
+    for road in continuation['roads']:
+        road['vertexes']=[coordinate+0.01 for coordinate in road['vertexes']]
+    value['routes'][0]['sections']=[section,continuation]
     value['routes'][0]['summary']['distance']=2000
     value['routes'][0]['summary']['duration']=240
     data=response(value).json()['guidance']

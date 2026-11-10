@@ -93,7 +93,10 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
     private val positions=PositionSession(AndroidPositionProvider(carContext.applicationContext)) {event->
         if(!subscribed || !allowed) return@PositionSession
         when(event) {
-            is PositionEvent.Fix->{fix=event.value;received++;val state=matcher!!.accept(event.value,SystemClock.elapsedRealtime())
+            is PositionEvent.Fix->{
+                if(fix?.let {event.value.elapsedMillis<=it.elapsedMillis}==true) return@PositionSession
+                received++;val state=matcher!!.accept(event.value,SystemClock.elapsedRealtime())
+                if(state.reason !in listOf("STALE_OR_FUTURE","LOW_OR_INVALID_ACCURACY","OUT_OF_ORDER")) fix=event.value
                 waypointProgress?.observe(state.progress,state.status==MatchStatus.ON_ROUTE)
                 if(adapter.state==OwnershipState.ACTIVE) {
                     if(waypointProgress?.canConfirmFinalArrival(state.progress)==true)

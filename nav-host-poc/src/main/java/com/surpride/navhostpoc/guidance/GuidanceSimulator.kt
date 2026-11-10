@@ -45,7 +45,7 @@ class GuidanceSimulator(private val route:GuidanceRoute,private val speedMetersP
             warning=warning,localPath=if(stopped) emptyList() else localPath())
     }
     private fun localPath():List<LocalRoutePoint> {
-        val along=position/route.distanceMeters*route.geometry.lengthMeters
+        val along=route.geometryAtDistance(position)
         return localRouteWindow(route,along)
     }
 }

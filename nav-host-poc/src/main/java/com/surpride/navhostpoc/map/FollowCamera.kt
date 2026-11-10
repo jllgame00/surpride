@@ -122,7 +122,7 @@ class FollowCamera {
         if (onRoute) {
             val geometry = route!!.geometry
             val next = match!!.nextManeuver?.takeIf { it.type != 100 && it.type != 101 && it.type != 1000 }
-            val nextAlong = next?.let { it.offsetMeters.toDouble() / route.distanceMeters.coerceAtLeast(1) * geometry.lengthMeters }
+            val nextAlong = next?.let(route::geometryOffset)
             if (nextAlong != null && nextAlong - along in 0.0..1500.0) horizon = max(horizon, nextAlong - along + 70.0)
             val remaining = (geometry.lengthMeters - along).coerceAtLeast(0.0)
             // A small adaptive tail suppresses terminal expression without suppressing a nearby safe turn.

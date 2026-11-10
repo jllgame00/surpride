@@ -1,0 +1,103 @@
+{
+  "date": "2026-11-10",
+  "branch": "main",
+  "head": "b2e0e47ddc78e2a78a45161bbd11964518ac36de",
+  "result": "READY_WITH_LIMITATIONS",
+  "guidance_accuracy": "VERIFIED_CONTRACT",
+  "tests": {
+    "app": {
+      "tests": 196,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "nav-host-poc": {
+      "tests": 219,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "backend": {
+      "tests": 102,
+      "failures": 0,
+      "skipped": 0
+    },
+    "instrumentation": {
+      "tests": 10,
+      "failures": 0
+    }
+  },
+  "jvm_backend_total": 517,
+  "instrumentation_separate": 10,
+  "unique_total": 527,
+  "new_tests": 35,
+  "tracked_baseline_files": 670,
+  "unchanged_baseline_files": 655,
+  "changed_tracked_files": [
+    "backend/guidance.py",
+    "backend/tests/test_guidance.py",
+    "docs/phase6/CODEBASE_AUDIT.md",
+    "docs/phase6/REFACTOR_PLAN.md",
+    "docs/phase6/RELEASE_RISK_REGISTER.md",
+    "nav-host-poc/src/main/java/com/surpride/navhostpoc/ActiveMysteryScreen.kt",
+    "nav-host-poc/src/main/java/com/surpride/navhostpoc/guidance/GuidanceModels.kt",
+    "nav-host-poc/src/main/java/com/surpride/navhostpoc/guidance/GuidanceParser.kt",
+    "nav-host-poc/src/main/java/com/surpride/navhostpoc/guidance/GuidanceSimulator.kt",
+    "nav-host-poc/src/main/java/com/surpride/navhostpoc/map/FollowCamera.kt",
+    "nav-host-poc/src/main/java/com/surpride/navhostpoc/tracking/RouteMatcher.kt",
+    "nav-host-poc/src/test/java/com/surpride/navhostpoc/guidance/WaypointProgressTest.kt",
+    "nav-host-poc/src/test/java/com/surpride/navhostpoc/map/FollowCameraTest.kt",
+    "nav-host-poc/src/test/java/com/surpride/navhostpoc/routing/RerouteCoordinatorTest.kt",
+    "nav-host-poc/src/test/java/com/surpride/navhostpoc/tracking/RouteMatcherTest.kt"
+  ],
+  "known_secret_literal_matches_in_changed_files_and_apk_entries": 0,
+  "public_live_sample": {
+    "roads": 8,
+    "boundary_pairs": 7,
+    "exact_boundaries": 7,
+    "max_gap_m": 0,
+    "exact_guide_anchors": 9,
+    "guide_count": 9,
+    "road_and_summary_m": 7437
+  },
+  "device_restoration": {
+    "restored_private_records": true,
+    "restored_original_gps": true,
+    "removed_test_created_handoffs": 0,
+    "local_proxy_stopped": true,
+    "navigation_focus_empty": true,
+    "installed_apk_hashes": {
+      "com.surpride.app": "200e36db63e18f9c4f7e244d2bbbaea48992c6853f771e7b16401d821527952b",
+      "com.surpride.navhostpoc": "7c7b5744a1fe1ee087a08efb75c7b7ba4a5a96079f6215304d38e7de56649f9a"
+    },
+    "total_test_created_handoffs_removed": 1
+  },
+  "crash_observation": {
+    "com.surpride.app": {
+      "crash_buffer_mentions": 0,
+      "historical_crash_or_anr_records": 0
+    },
+    "com.surpride.navhostpoc": {
+      "crash_buffer_mentions": 0,
+      "historical_crash_or_anr_records": 0
+    }
+  },
+  "native_active_trip_tts_focus_cycle": "UNVERIFIED: existing A04 Host control transition failure",
+  "red_green": {
+    "initial_android_expected_failures": 8,
+    "initial_backend_expected_failures": 4,
+    "screen_stale_replacement_expected_failures": 1,
+    "screen_future_timestamp_expected_failures": 1,
+    "same_inputs_final": "PASS"
+  },
+  "review": {
+    "important_findings": 1,
+    "resolved_by_red_green_test": 1,
+    "item": "Future timestamp must not poison screen fix ordering"
+  },
+  "screenshots": [
+    "main-live-ready.png",
+    "poc-prepared.png",
+    "poc-invalid-geometry.png"
+  ]
+}

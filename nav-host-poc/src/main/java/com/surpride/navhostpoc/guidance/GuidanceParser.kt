@@ -33,13 +33,14 @@ object GuidanceParser {
             val road=number(g,"road_index",0,segments.lastIndex.toLong()).toInt()
             require(offset>=previousDistance && road>=previousRoad)
             previousDistance=offset;previousRoad=road
-            Maneuver(number(g,"type",0,10000).toInt(),offset,road)
+            Maneuver(number(g,"type",0,10000).toInt(),offset,road,
+                if(g.has("anchor")) coordinate(g.getJSONArray("anchor")) else null)
         }
         require(maneuvers.first().type==100 && maneuvers.first().offsetMeters==0L)
         require(maneuvers.last().type==101 && maneuvers.last().offsetMeters==distance)
         require(maneuvers.dropLast(1).none {it.type==101}) // single-destination PoC only
         val destination=json.getJSONObject("destination")
-        GuidanceRoute(source,RouteGeometry(segments.flatMap {it.geometry}),segments,maneuvers,distance,duration,
+        GuidanceRoute(source,segments,maneuvers,distance,duration,
             RouteCoordinate(destination.getDouble("longitude"),destination.getDouble("latitude")))
     } catch(_:Exception) {throw IllegalArgumentException("Invalid/expired/unsupported private route data")}
 
@@ -49,6 +50,10 @@ object GuidanceParser {
     }
     private fun points(array:JSONArray):List<RouteCoordinate> {
         require(array.length() in 2..100000)
-        return (0 until array.length()).map {i->val pair=array.getJSONArray(i);require(pair.length()==2);RouteCoordinate(pair.getDouble(0),pair.getDouble(1))}
+        return (0 until array.length()).map {i->coordinate(array.getJSONArray(i))}
+    }
+    private fun coordinate(pair:JSONArray):RouteCoordinate {
+        require(pair.length()==2 && pair.get(0) is Number && pair.get(1) is Number)
+        return RouteCoordinate(pair.getDouble(0),pair.getDouble(1))
     }
 }
