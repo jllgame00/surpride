@@ -105,21 +105,23 @@ class RealRouteActivity:AppCompatActivity() {
         val location=DevelopmentLocationProvider().current()
         val config=if(mock) null else ProxyConfiguration.load(this)
         if(!mock && config==null) {session.plan=RoutePlan.Failure(setOf(RouteError.NOT_CONFIGURED));session.requestStatus="디버그 서버 설정 없음/만료";return}
-        val preferences=session.preferences;val recent=session.recentIds;val stay=session.stay
+        val preferences=session.preferences;val recent=session.recentIds;val stay=session.stay;val optimize=session.optimize
         session.busy=true;session.requestStatus="조회 중 · 자동 길 안내 없음"
         val version=++requestVersion
         pending=executor.submit {
             val provider=if(mock) MockRouteProvider(System::currentTimeMillis) else LiveRouteProvider(config)
             val result=try {
-                val context=RecommendationContext(System.currentTimeMillis(),recentIds=recent)
-                if(session.optimize) DriveExperienceEngine(SeoulPilotCatalog.places,provider,PendingScenicCatalog.routingCandidates).recommend(
+                val context=LiveNavigationStore.read(this).recommendationContext(System.currentTimeMillis(),mock,recent)
+                if(optimize) DriveExperienceEngine(SeoulPilotCatalog.places,provider,PendingScenicCatalog.routingCandidates).recommend(
                     location.point,preferences,context,stay,10,1)
                 else RouteRecommendationEngine(SeoulPilotCatalog.places,provider).recommend(location.point,preferences,context,stay,10,1)
             } catch(_:Exception) {RoutePlan.Failure(setOf(RouteError.API))}
             runOnUiThread {
                 if(version==requestVersion && allowed && !isFinishing && !isDestroyed) {
-                    pending=null;session.busy=false;session.plan=result
-                    session.recommendationOrigin=location.point.takeIf {result is RoutePlan.Success}
+                    val accepted=if(result is RoutePlan.Success && result.routeOrigin!=if(mock) RouteOrigin.MOCK else RouteOrigin.LIVE_API)
+                        RoutePlan.Failure(setOf(RouteError.INVALID_RESPONSE)) else result
+                    pending=null;session.busy=false;session.plan=accepted
+                    session.recommendationOrigin=location.point.takeIf {accepted is RoutePlan.Success}
                     session.requestStatus="조회 완료 · 응답 출처 확인";render()
                 }
             }
@@ -315,7 +317,7 @@ class RealRouteActivity:AppCompatActivity() {
         RouteError.INVALID_COORDINATE->"출발지나 목적지 위치를 확인할 수 없어요"
         RouteError.NO_ROUTE->"연결 가능한 자동차 경로를 찾지 못했어요"
         RouteError.TIME_EXCEEDED->"이동·체류·복귀에 필요한 시간이 부족해요"
-        RouteError.NO_CANDIDATE->"현재 장소·동행 조건에 맞는 후보가 없어요"
+        RouteError.NO_CANDIDATE->"현재 조건과 최근 방문 제외 기준에 맞는 후보가 없어요"
         RouteError.STALE_DATA->"경로 정보가 오래됐어요 · 다시 확인해 주세요"
         RouteError.UNSUPPORTED_OPTIONS->"현재 경로 서비스가 지원하지 않는 조건이에요"
         RouteError.API,RouteError.INVALID_RESPONSE->"경로 정보를 올바르게 받지 못했어요"

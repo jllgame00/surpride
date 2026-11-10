@@ -91,7 +91,7 @@ class LiveNavigationResultActivity:AppCompatActivity() {
             result.addView(button(if(rating==null) "평가를 선택해 주세요" else "이 경험 기록하기",true) {
                 val selected=rating
                 if(allowed && selected!=null && valid()) {
-                    saved=LiveNavigationStore.complete(this,nonce,candidateId,source,revealed,stopped,selected,System.currentTimeMillis())
+                    saved=LiveNavigationStore.complete(this,nonce,candidateId,source,revealed,stopped,selected,System.currentTimeMillis(),intent.getBooleanExtra("arrived",false))
                     saveError=!saved
                     render()
                 }

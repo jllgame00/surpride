@@ -17,6 +17,24 @@ data class RealPlace(val id:String,val name:String,val point:GeoPoint,val type:S
 }
 enum class RouteOrigin { LIVE_API, MOCK }
 fun DrivePreferences.withAvailableBudget(minutes:Int)=copy(availableMinutes=minutes,returnByEpochMillis=null)
+
+/** Exact seconds for measured routes; DEMO's minute-based estimates keep their own contract. */
+internal fun routeBudgetSeconds(p:DrivePreferences,now:Long):Long {
+    if(p.availableMinutes==null && p.returnByEpochMillis==null || p.availableMinutes?.let {it<=0}==true) return 0
+    val available=p.availableMinutes?.toLong()?.times(60)?:Long.MAX_VALUE
+    val deadline=p.returnByEpochMillis?.let {(it-now)/1000}?:Long.MAX_VALUE
+    return minOf(available,deadline).coerceAtLeast(0)
+}
+
+internal fun requestRoute(request:()->RouteReply):RouteReply {
+    if(Thread.currentThread().isInterrupted) return RouteReply.Failure(RouteError.NETWORK)
+    val reply=try {request()} catch(_:InterruptedException) {
+        Thread.currentThread().interrupt();RouteReply.Failure(RouteError.NETWORK)
+    }
+    return if(Thread.currentThread().isInterrupted) RouteReply.Failure(RouteError.NETWORK) else reply
+}
+internal fun RouteReply.stopsRecommendation()=Thread.currentThread().isInterrupted ||
+    this is RouteReply.Failure && error in setOf(RouteError.AUTH,RouteError.RATE_LIMIT,RouteError.NOT_CONFIGURED)
 enum class RouteError { NOT_CONFIGURED, AUTH, RATE_LIMIT, NETWORK, INVALID_COORDINATE, NO_ROUTE, API, INVALID_RESPONSE, TIME_EXCEEDED, NO_CANDIDATE, STALE_DATA, UNSUPPORTED_OPTIONS }
 
 enum class RoutePriority { RECOMMEND, TIME, DISTANCE }

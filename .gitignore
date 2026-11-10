@@ -54,3 +54,6 @@ __pycache__/
 *.pyc
 .pytest_cache/
 pytest-cache-files-*/
+
+# Internal development reports and evidence
+/docs/phase*/

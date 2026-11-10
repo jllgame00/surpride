@@ -75,7 +75,8 @@ object PreparedRouteContract {
 data class PendingLiveNavigation(val nonce:String,val candidateId:String,val preparedAtMillis:Long) {
     override fun toString()="PendingLiveNavigation(REDACTED)"
 }
-data class LiveNavigationVisit(val candidateId:String,val rating:Int,val completedAtMillis:Long)
+data class LiveNavigationVisit(val candidateId:String,val rating:Int,val completedAtMillis:Long,
+    val arrivalConfirmed:Boolean?=null)
 
 object LiveNavigationResultPolicy {
     const val SOURCE="DEVICE_API_EMULATOR"
@@ -94,14 +95,23 @@ class LiveNavigationJournal(pending:PendingLiveNavigation?=null,visits:List<Live
         private set
     var completed:PendingLiveNavigation?=completed
         private set
+    /** Completed emulator reviews, not physical visit certification; unknown legacy arrivals stay unknown. */
+    fun recommendationContext(now:Long,mock:Boolean,demoRecentIds:Set<String>):com.surpride.app.experience.core.RecommendationContext {
+        val known=SeoulPilotCatalog.places.map {it.id}.toSet()
+        val recent=if(mock) demoRecentIds.toSet() else visits.asSequence().filter {
+            now>0 && it.arrivalConfirmed==true && it.rating in 1..5 && it.candidateId in known &&
+                it.completedAtMillis>0 && now-it.completedAtMillis in 0..7*86_400_000L
+        }.map {it.candidateId}.toSet()
+        return com.surpride.app.experience.core.RecommendationContext(now,recentIds=recent)
+    }
     fun hasCompleted(nonce:String?,candidateId:String?,source:String?,revealed:Boolean,stopped:Boolean,now:Long):Boolean =
         pending==null && LiveNavigationResultPolicy.accepts(completed,nonce,candidateId,source,revealed,stopped,now) &&
             visits.lastOrNull()?.let {it.candidateId==candidateId && it.rating in 1..5 &&
                 it.completedAtMillis in completed!!.preparedAtMillis..now}==true
     fun complete(nonce:String?,candidateId:String?,source:String?,revealed:Boolean,stopped:Boolean,
-        rating:Int,now:Long):Boolean {
+        rating:Int,now:Long,arrivalConfirmed:Boolean?=null):Boolean {
         if(rating !in 1..5 || !LiveNavigationResultPolicy.accepts(pending,nonce,candidateId,source,revealed,stopped,now)) return false
-        visits=(visits+LiveNavigationVisit(pending!!.candidateId,rating,now)).takeLast(30)
+        visits=(visits+LiveNavigationVisit(pending!!.candidateId,rating,now,arrivalConfirmed)).takeLast(30)
         completed=pending
         pending=null
         return true

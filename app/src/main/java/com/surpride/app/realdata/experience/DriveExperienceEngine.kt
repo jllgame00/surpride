@@ -15,7 +15,7 @@ class DriveExperienceEngine(private val places: List<RealPlace>, private val rou
         stayMinutes: Int, bufferMinutes: Int, seed: Long): RoutePlan {
         if (stayMinutes !in 0..10080 || bufferMinutes !in 0..1440 || p.randomness !in 0..100)
             return RoutePlan.Failure(setOf(RouteError.INVALID_RESPONSE))
-        if (budgetSeconds(p, context.nowMillis) <= 0) return RoutePlan.Failure(setOf(RouteError.TIME_EXCEEDED))
+        if (routeBudgetSeconds(p, context.nowMillis) <= 0) return RoutePlan.Failure(setOf(RouteError.TIME_EXCEEDED))
         val shortlist = places.filter { p.companion == Companion.SOLO && it.point != origin &&
             it.id !in context.recentIds && it.categories.containsAll(p.categories) &&
             it.categories.none { category -> category in p.excludedCategories } &&
@@ -28,17 +28,9 @@ class DriveExperienceEngine(private val places: List<RealPlace>, private val rou
         val errors = mutableSetOf<RouteError>()
         val evaluated = mutableListOf<Evaluated>()
         var requests = 0
-        fun stop(reply: RouteReply) = Thread.currentThread().isInterrupted || reply is RouteReply.Failure &&
-            reply.error in setOf(RouteError.AUTH, RouteError.RATE_LIMIT, RouteError.NOT_CONFIGURED)
-        fun request(a: GeoPoint, b: GeoPoint, options: RouteOptions): RouteReply {
-            if (Thread.currentThread().isInterrupted) return RouteReply.Failure(RouteError.NETWORK)
-            if (requests >= 12) return RouteReply.Failure(RouteError.RATE_LIMIT)
-            requests++
-            val reply = try { routes.route(a, b, options) } catch (_: InterruptedException) {
-                Thread.currentThread().interrupt()
-                RouteReply.Failure(RouteError.NETWORK)
-            }
-            return if (Thread.currentThread().isInterrupted) RouteReply.Failure(RouteError.NETWORK) else reply
+        fun request(a: GeoPoint, b: GeoPoint, options: RouteOptions): RouteReply = requestRoute {
+            if (requests >= 12) RouteReply.Failure(RouteError.RATE_LIMIT)
+            else {requests++;routes.route(a, b, options)}
         }
         for (place in shortlist) {
             val options = mutableListOf(
@@ -54,7 +46,7 @@ class DriveExperienceEngine(private val places: List<RealPlace>, private val rou
                     is RouteReply.Success -> Measured(option, reply.leg)
                     is RouteReply.Failure -> {
                         errors.add(reply.error)
-                        if (stop(reply)) return RoutePlan.Failure(errors)
+                        if (reply.stopsRecommendation()) return RoutePlan.Failure(errors)
                         comparisons.add(RouteComparison(option.label, option.type, null, null, ComparisonStatus.NO_ROUTE))
                         null
                     }
@@ -65,7 +57,7 @@ class DriveExperienceEngine(private val places: List<RealPlace>, private val rou
             val back = (reverse as? RouteReply.Success)?.leg
             if (reverse is RouteReply.Failure) {
                 errors.add(reverse.error)
-                if (stop(reverse)) return RoutePlan.Failure(errors)
+                if (reverse.stopsRecommendation()) return RoutePlan.Failure(errors)
                 measured.forEach { comparisons.add(RouteComparison(it.option.label, it.option.type, null, null, ComparisonStatus.NO_ROUTE)) }
                 continue
             }
@@ -73,7 +65,6 @@ class DriveExperienceEngine(private val places: List<RealPlace>, private val rou
                 validResponse(it.leg, it.option.options) }
             val bestSeconds = baseline.minOfOrNull { it.leg.seconds }
             val bestMeters = baseline.minOfOrNull { it.leg.meters }?.takeIf { it > 0 }
-            val seen = mutableSetOf<Any>()
             for ((option, out) in measured) {
                 val legs = listOfNotNull(out, back)
                 val seconds = legs.sumOf { it.seconds } + (stayMinutes.toLong() + bufferMinutes) * 60
@@ -82,8 +73,7 @@ class DriveExperienceEngine(private val places: List<RealPlace>, private val rou
                 var status = when {
                     legs.any { !fresh(it, checkedAt) || it.origin != out.origin } -> ComparisonStatus.STALE_DATA
                     !validResponse(out, option.options) || back != null && !validResponse(back, RouteOptions()) -> ComparisonStatus.INVALID_RESPONSE
-                    seconds > budgetSeconds(p, checkedAt) -> ComparisonStatus.TIME_EXCEEDED
-                    !seen.add(if (out.geometry.size >= 2) out.geometry else out.seconds to out.meters) -> ComparisonStatus.DUPLICATE
+                    seconds > routeBudgetSeconds(p, checkedAt) -> ComparisonStatus.TIME_EXCEEDED
                     option.type == ComparisonType.SCENIC && (bestSeconds == null ||
                         out.seconds > bestSeconds * 1.6 || bestMeters != null && out.meters > bestMeters * 1.6) -> ComparisonStatus.EXCESSIVE_DETOUR
                     else -> ComparisonStatus.ELIGIBLE
@@ -95,7 +85,7 @@ class DriveExperienceEngine(private val places: List<RealPlace>, private val rou
                 if (status != ComparisonStatus.ELIGIBLE) {
                     errors.add(error(status)); continue
                 }
-                val time = (1 - seconds.toDouble() / budgetSeconds(p, checkedAt)).coerceIn(0.0, 1.0)
+                val time = (1 - seconds.toDouble() / routeBudgetSeconds(p, checkedAt)).coerceIn(0.0, 1.0)
                 val repeat = repeatScore(out.geometry)
                 val detour = bestMeters?.let { (it.toDouble() / out.meters.coerceAtLeast(1)).coerceIn(0.0, 1.0) }
                 val scenery = if (option.type == ComparisonType.SCENIC && out.origin == RouteOrigin.LIVE_API) 1.0 else null
@@ -111,7 +101,7 @@ class DriveExperienceEngine(private val places: List<RealPlace>, private val rou
         val finalists = evaluated.filter {
             val status = when {
                 listOfNotNull(it.out, it.back).any { leg -> !fresh(leg, finishedAt) } -> ComparisonStatus.STALE_DATA
-                it.seconds > budgetSeconds(p, finishedAt) -> ComparisonStatus.TIME_EXCEEDED
+                it.seconds > routeBudgetSeconds(p, finishedAt) -> ComparisonStatus.TIME_EXCEEDED
                 else -> ComparisonStatus.ELIGIBLE
             }
             if (status != ComparisonStatus.ELIGIBLE) {
@@ -120,8 +110,19 @@ class DriveExperienceEngine(private val places: List<RealPlace>, private val rou
             }
             status == ComparisonStatus.ELIGIBLE
         }
-        val winner = finalists.sortedWith(compareByDescending<Evaluated> { it.assessment.combinedScore }
-            .thenBy { it.place.id }.thenBy { it.option.options.priority.ordinal }).firstOrNull()
+        if (Thread.currentThread().isInterrupted) return RoutePlan.Failure(setOf(RouteError.NETWORK))
+        val ordered = finalists.sortedWith(compareByDescending<Evaluated> { it.assessment.combinedScore }
+            .thenBy { it.place.id }.thenBy { it.option.options.priority.ordinal })
+        val seen = mutableSetOf<Any>()
+        val representatives = ordered.filter {
+            val key = Triple(it.place.id, it.out.origin,
+                if (it.out.geometry.size >= 2) it.out.geometry else it.out.seconds to it.out.meters)
+            if (seen.add(key)) true else {
+                comparisons[it.comparison] = comparisons[it.comparison].copy(status = ComparisonStatus.DUPLICATE)
+                false
+            }
+        }
+        val winner = representatives.firstOrNull()
             ?: return RoutePlan.Failure(errors.ifEmpty { setOf(RouteError.NO_CANDIDATE) })
         val reason = if (winner.assessment.sceneryScore != null)
             "검증된 경유지와 관측된 시간·거리·반복 구간을 비교했습니다. 기분 가중치는 초기 가설입니다."
@@ -150,12 +151,6 @@ class DriveExperienceEngine(private val places: List<RealPlace>, private val rou
         val categories = waypoint.tags.mapNotNull { mapping[it.lowercase()] }.toSet()
         val preferred = p.categories.intersect(mapping.values.toSet())
         return categories.isNotEmpty() && categories.none { it in p.excludedCategories } && categories.containsAll(preferred)
-    }
-    private fun budgetSeconds(p: DrivePreferences, now: Long): Long {
-        if (p.availableMinutes == null && p.returnByEpochMillis == null || p.availableMinutes?.let { it <= 0 } == true) return 0
-        val available = p.availableMinutes?.toLong()?.times(60) ?: Long.MAX_VALUE
-        val deadline = p.returnByEpochMillis?.let { (it - now) / 1000 } ?: Long.MAX_VALUE
-        return minOf(available, deadline).coerceAtLeast(0)
     }
     private fun repeatScore(points: List<GeoPoint>): Double? {
         val segments = points.zipWithNext().filter { it.first != it.second }

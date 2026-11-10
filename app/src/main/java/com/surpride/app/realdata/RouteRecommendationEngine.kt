@@ -8,7 +8,7 @@ class RouteRecommendationEngine(private val places:List<RealPlace>,private val r
     fun recommend(origin:GeoPoint,p:DrivePreferences,c:RecommendationContext,stayMinutes:Int,bufferMinutes:Int,seed:Long):RoutePlan {
         if(p.categories.any {it in p.excludedCategories})
             return RoutePlan.Failure(setOf(RouteError.NO_CANDIDATE))
-        val budget=budgetMinutes(p,c.nowMillis)?.takeIf {it>0}
+        val budget=routeBudgetSeconds(p,c.nowMillis).takeIf {it>0}
             ?:return RoutePlan.Failure(setOf(RouteError.TIME_EXCEEDED))
         if(stayMinutes !in 0..10080 || bufferMinutes !in 0..1440 || p.randomness !in 0..100)
             return RoutePlan.Failure(setOf(RouteError.INVALID_RESPONSE))
@@ -20,11 +20,11 @@ class RouteRecommendationEngine(private val places:List<RealPlace>,private val r
             if(place.point==origin) continue
             // No verified companion/family/pet access data yet; do not imply that all companions fit.
             if(p.companion!=Companion.SOLO) continue
-            val out=routes.route(origin,place.point)
-            if(out is RouteReply.Failure) {errors.add(out.error);continue}
+            val out=requestRoute {routes.route(origin,place.point)}
+            if(out is RouteReply.Failure) {errors.add(out.error);if(out.stopsRecommendation()) return RoutePlan.Failure(errors);continue}
             val outbound=(out as RouteReply.Success).leg
-            val back=if(p.returnToStart) routes.route(place.point,origin) else null
-            if(back is RouteReply.Failure) {errors.add(back.error);continue}
+            val back=if(p.returnToStart) requestRoute {routes.route(place.point,origin)} else null
+            if(back is RouteReply.Failure) {errors.add(back.error);if(back.stopsRecommendation()) return RoutePlan.Failure(errors);continue}
             val inbound=(back as? RouteReply.Success)?.leg
             val legs=listOfNotNull(outbound,inbound)
             // Freshness is measured at evaluation, independently of the planning start/budget.
@@ -33,7 +33,7 @@ class RouteRecommendationEngine(private val places:List<RealPlace>,private val r
                 errors.add(RouteError.STALE_DATA);continue
             }
             val seconds=legs.sumOf {it.seconds}+(stayMinutes.toLong()+bufferMinutes)*60
-            if(seconds>budget.toLong()*60) {errors.add(RouteError.TIME_EXCEEDED);continue}
+            if(seconds>budget) {errors.add(RouteError.TIME_EXCEEDED);continue}
             // Reuse existing preference scoring. Exact-second eligibility was decided above;
             // do not apply a second, per-leg rounded budget during scoring.
             val estimate=JourneyEstimate(((outbound.seconds+59)/60).toInt(),stayMinutes,
@@ -48,13 +48,14 @@ class RouteRecommendationEngine(private val places:List<RealPlace>,private val r
             else errors.add(RouteError.NO_CANDIDATE)
         }
         val finishedAt=clock()
-        val finalBudget=budgetMinutes(p,finishedAt)?.coerceAtLeast(0)?.toLong()?.times(60)?:0
+        val finalBudget=routeBudgetSeconds(p,finishedAt)
         val eligible=plans.filter {plan->
             val fresh=listOfNotNull(plan.outbound,plan.inbound).all {finishedAt-it.receivedAtMillis in -60_000..300_000}
             if(!fresh) errors.add(RouteError.STALE_DATA)
             if(plan.totalSeconds>finalBudget) errors.add(RouteError.TIME_EXCEEDED)
             fresh && plan.totalSeconds<=finalBudget
         }
+        if(Thread.currentThread().isInterrupted) return RoutePlan.Failure(setOf(RouteError.NETWORK))
         return eligible.sortedWith(compareByDescending<RoutePlan.Success>{it.scoring.score.total}.thenBy {it.place.id}).firstOrNull()
             ?:RoutePlan.Failure(errors.ifEmpty {setOf(RouteError.NO_CANDIDATE)})
     }

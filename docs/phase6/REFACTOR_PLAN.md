@@ -1,5 +1,7 @@
 # SURPRIDE Phase 6B — 최소·완전 개선 계획
 
+> 후속 실행 기록(2026-11-10, 6B-4): [B4 결과](B4_RECOMMENDATION_CORRECTNESS.md)에 A07/A08/A14의 수정 전 실패·수정 후 회귀·정차 실행을 분리했다. 최근 7일의 명시적 도착 확인·평가 기록만 LIVE 제외에 사용하고 DEMO·미도착·과거 미확인 기록을 혼합하지 않는다. B5 독립 작업과 실제 Host ACTIVE 차단은 별개다. 아래는 6A 당시 계획이다.
+
 > 후속 실행 기록(2026-11-10, 6B-3): [B3 결과](B3_HOST_LIFECYCLE_VOICE.md)에 A04 앱 갱신/Surface 정리, A05 Screen 경합 회귀, A13 발화 watchdog을 기록한다. 실제 Host 공식 종료 도달성과 ANR 원인/플랫폼 계측은 남는다. B4의 독립 코드 작업은 가능하지만 ACTIVE 시연 게이트는 자동으로 열리지 않는다.
 
 > 후속 실행 기록(2026-11-10, 6B-2): B2의 A06/A03 및 실제 Screen stack 회귀 결과를 [별도 문서](B2_PERSISTENCE_RESTORATION.md)에 기록했다. 저장/복원 계약 검증 뒤 B3에 진입 가능하나 Host 활성 전체 흐름은 미완료다. B3에서 A04 Surface/조작·결과 Activity FocusEvent timeout과 남은 A05/A13을 우선한다. 아래는 6A 당시 계획이다.

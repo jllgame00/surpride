@@ -1,5 +1,7 @@
 # SURPRIDE Phase 6A — 전체 코드베이스 품질·안전 감사
 
+> 후속 구현 기록(2026-11-10, 6B-4): A07의 정책 점수 기반 geometry 대표 선택, A08의 fatal/취소/초 단위 예산 일치, A14의 도착 확인 LIVE 평가 이력 연결과 손상 행 분리 파싱을 [B4 결과](B4_RECOMMENDATION_CORRECTNESS.md)에 기록했다. 기존 평점·미확인 도착 기록은 보존하며 실제 API·플랫폼 제약과 HOST_ACTIVE BLOCKED는 유지한다. 아래 당시 감사 원문·발견 수는 변경하지 않는다.
+
 > 후속 구현 기록(2026-11-10, 6B-3): A04 앱 예약 지연과 Surface handle/lifetime 정리, A05 실제 Screen 경합, A13 Android TTS watchdog의 변경·증거는 [B3 결과](B3_HOST_LIFECYCLE_VOICE.md)에 분리했다. 실제 Host ACTIVE·종료 조작과 기존 FocusEvent ANR 원인은 여전히 미확정이다. 아래 감사 원문·발견 수는 보존한다.
 
 > 후속 구현 기록(2026-11-10, 6B-2): A06 원자적 저장과 A03 명시적 세션 결과/평가 영수증 복원 및 관련 A05 회귀를 구현했다. [B2 결과](B2_PERSISTENCE_RESTORATION.md)는 576 PASS, READY_WITH_LIMITATIONS / PERSISTENCE_INTEGRITY VERIFIED_CONTRACT / SESSION_RESTORATION PARTIAL이다. 실제 Host Surface/컨트롤 및 FocusEvent timeout은 남는다. 아래 당시 감사 발견 수·원문은 보존한다.
