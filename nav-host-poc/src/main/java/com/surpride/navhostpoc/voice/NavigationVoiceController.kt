@@ -9,7 +9,7 @@ data class NavigationVoiceState(
 enum class VoiceBackend { UNKNOWN, ANDROID_TTS, PLEOS_ON_DEVICE }
 enum class VoicePreRoll { UNKNOWN, ANDROID_QUEUE_180_MS, SCHEDULER_200_MS }
 enum class VoiceStatus { STOPPED, INITIALIZING, DISABLED, NOT_OWNED, READY, QUEUED, SPEAKING, COMPLETED,
-    NO_ENGINE, KOREAN_UNAVAILABLE, FOCUS_DENIED, FOCUS_LOST, ERROR, CLOSED }
+    NO_ENGINE, KOREAN_UNAVAILABLE, FOCUS_DENIED, FOCUS_LOST, TIMEOUT, ERROR, CLOSED }
 enum class VoiceReadiness { READY, NO_ENGINE, KOREAN_UNAVAILABLE, ERROR }
 
 internal interface VoiceUtteranceEvents {
@@ -34,11 +34,12 @@ internal interface VoiceFocusPort {
 }
 
 /** Main-thread controller; accepts no destination, road, address, coordinate, or backend text. */
-internal class NavigationVoiceController(private val speech:VoiceSpeechPort,private val focus:VoiceFocusPort) {
+internal class NavigationVoiceController(private val speech:VoiceSpeechPort,private val focus:VoiceFocusPort,private val delay:VoiceDelayPort?=null) {
     var state=NavigationVoiceState();private set
     private var changed:(NavigationVoiceState)->Unit={}
     private var running=false;private var closed=false;private var session=0L
     private var utterance=0L;private var focusLease=0L;private var activeId:String?=null;private var activeStarted=false
+    private var cancelDeadline:(()->Unit)?=null
     private var routeGeneration:Long?=null;private var minimumGeneration=Long.MIN_VALUE
     private var latestManeuver=-1;private var latestStage=-1
     private val statusCues=mutableSetOf<Int>()
@@ -161,17 +162,28 @@ internal class NavigationVoiceController(private val speech:VoiceSpeechPort,priv
         activeId=id;activeStarted=false
         val queued=try {speech.speak(id,text)} catch(_:Exception) {false}
         if(!queued) {cancelOutput();update(state.copy(enabled=false,errors=state.errors+1,status=VoiceStatus.ERROR));return false}
-        update(state.copy(requested=state.requested+1,status=VoiceStatus.QUEUED))
+        // A synchronous completion/error may already have retired this utterance.
+        update(state.copy(requested=state.requested+1,status=if(activeId==id && !activeStarted) VoiceStatus.QUEUED else state.status))
+        if(activeId==id && speech.backend==VoiceBackend.ANDROID_TTS) {
+            val token=session
+            // Conservative 2 characters/second plus engine/pre-roll budget; bounded, not an audibility claim.
+            val deadline=(5000L+500L*text.codePointCount(0,text.length)).coerceIn(10_000L,30_000L)
+            cancelDeadline=(delay?:AndroidVoiceDelay()).schedule(deadline) {
+                if(running && !closed && session==token && activeId==id && focusLease==lease) {
+                    cancelOutput();update(state.copy(enabled=false,errors=state.errors+1,status=VoiceStatus.TIMEOUT))
+                }
+            }
+        }
         return true
     }
     private fun releaseOutput() {
-        activeId=null;activeStarted=false;focusLease++
+        activeId=null;activeStarted=false;focusLease++;cancelDeadline?.invoke();cancelDeadline=null
         try {focus.abandon()} catch(_:Exception) {state=state.copy(errors=state.errors+1)}
         state=state.copy(focusGranted=false)
     }
     private fun cancelOutput():Boolean {
         // Invalidate before touching the engine: stop/abandon may deliver callbacks synchronously.
-        activeId=null;activeStarted=false;focusLease++
+        activeId=null;activeStarted=false;focusLease++;cancelDeadline?.invoke();cancelDeadline=null
         var cleaned=true
         try {speech.stop()} catch(_:Exception) {cleaned=false;state=state.copy(errors=state.errors+1)}
         try {focus.abandon()} catch(_:Exception) {cleaned=false;state=state.copy(errors=state.errors+1)}

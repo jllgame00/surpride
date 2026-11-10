@@ -1,0 +1,4 @@
+
+BUILD SUCCESSFUL in 4m 43s
+150 actionable tasks: 2 executed, 148 up-to-date
+Configuration cache entry reused.

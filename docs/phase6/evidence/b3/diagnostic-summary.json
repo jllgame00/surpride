@@ -1,0 +1,11 @@
+{
+  "request_events": 1,
+  "first_observation_ms": 2600.2018,
+  "second_observation_ms": 8175.4086,
+  "focus_requests": 0,
+  "native_navigation_started": 0,
+  "end_after_control_ms": [
+    27.519713
+  ],
+  "voice_requested_max": 0
+}

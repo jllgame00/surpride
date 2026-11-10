@@ -1,0 +1,17 @@
+[
+  {
+    "trial": 1,
+    "observation_ms": 1529.3902,
+    "active": false
+  },
+  {
+    "trial": 2,
+    "observation_ms": 2774.514,
+    "active": false
+  },
+  {
+    "trial": 3,
+    "observation_ms": 2959.0258,
+    "active": false
+  }
+]

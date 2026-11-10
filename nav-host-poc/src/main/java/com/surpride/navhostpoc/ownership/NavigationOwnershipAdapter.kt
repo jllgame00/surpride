@@ -1,5 +1,7 @@
 package com.surpride.navhostpoc.ownership
 
+import com.surpride.navhostpoc.HostDiagnostics
+import com.surpride.navhostpoc.HostEvent
 import android.os.Handler
 import android.os.Looper
 import androidx.annotation.MainThread
@@ -59,7 +61,9 @@ class AndroidXNavigationOwnershipAdapter(
         val blocked=gate.blockReason?:if(!approved) "EXPLICIT_EXPERIMENT_APPROVAL_REQUIRED" else null
         if(blocked!=null) {rejected=blocked;return false}
         rejected=null
-        return controller.request(checks)
+        val accepted=controller.request(checks)
+        HostDiagnostics.record(HostEvent.OWNERSHIP_DECISION)
+        return accepted
     }
     override fun updateHiddenTrip(turn:NextTurnMetadata,identity:DestinationIdentity):Boolean {
         checkMain();return controller.publish {navigation.update(PrivacyTripFactory.hidden(turn,identity))}
@@ -104,7 +108,7 @@ private class DeferredNavigationLifecycle(private val provider:()->NavigationMan
             override fun onStopNavigation()=handler()
         })
     }
-    override fun started()=checkNotNull(manager).navigationStarted()
+    override fun started() {checkNotNull(manager).navigationStarted();HostDiagnostics.record(HostEvent.SCREEN_ACTIVE)}
     override fun ended()=cleanup {manager?.navigationEnded()}
     override fun clearStopHandler()=cleanup {manager?.clearNavigationManagerCallback()}
     fun update(trip:androidx.car.app.navigation.model.Trip) {checkNotNull(manager).updateTrip(trip)}

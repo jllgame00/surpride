@@ -58,10 +58,12 @@ class MockNavigationService : CarAppService() {
 
 private class MockNavigationScreen(context: CarContext) : Screen(context) {
     private val emulator = Build.MODEL == "Connect on x86_64 emulator" && Build.PRODUCT == "crp_avd"
+    private var foreground=false
     private val surfaceCallback = object : SurfaceCallback {
         override fun onSurfaceAvailable(surfaceContainer: SurfaceContainer) {
             val surface = surfaceContainer.surface ?: return
-            if (!surface.isValid) return
+            try {
+            if (!foreground || !surface.isValid) return
             val canvas = try {surface.lockCanvas(null)} catch(_:Exception) {return}
             try {
                 canvas.drawColor(Color.rgb(20, 30, 40))
@@ -70,15 +72,22 @@ private class MockNavigationScreen(context: CarContext) : Screen(context) {
                 canvas.drawText("MOCK ONLY / NO GPS / NO ROUTE", 40f, canvas.height * 0.60f, paint)
             } finally { try {surface.unlockCanvasAndPost(canvas)} catch(_:Exception) {} }
             Log.i(TAG, "STATIC_SURFACE_DRAWN")
+            } finally {surface.release()}
         }
     }
 
     init {
         lifecycle.addObserver(object : DefaultLifecycleObserver {
             override fun onStart(owner: LifecycleOwner) {
+                foreground=true
                 if (emulator) carContext.getCarService(AppManager::class.java).setSurfaceCallback(surfaceCallback)
             }
+            override fun onStop(owner: LifecycleOwner) {
+                foreground=false
+                if (emulator) carContext.getCarService(AppManager::class.java).setSurfaceCallback(null)
+            }
             override fun onDestroy(owner: LifecycleOwner) {
+                foreground=false
                 if (emulator) carContext.getCarService(AppManager::class.java).setSurfaceCallback(null)
                 Log.i(TAG, "SCREEN_DESTROYED")
             }

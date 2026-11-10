@@ -5,6 +5,8 @@ import android.os.SystemClock
 import androidx.car.app.navigation.model.NavigationTemplate
 import androidx.car.app.navigation.model.RoutingInfo
 import androidx.car.app.testing.TestCarContext
+import androidx.car.app.testing.ScreenController
+import androidx.lifecycle.Lifecycle
 import androidx.car.app.testing.navigation.TestNavigationManager
 import com.surpride.navhostpoc.guidance.*
 import com.surpride.navhostpoc.ownership.*
@@ -33,9 +35,9 @@ class ActiveGuidanceIntegrationTest {
     private fun point(x:Double,y:Double=0.0)=GuidanceAccuracyFixture.point(x,y)
     private fun payload(now:Long)=GuidanceAccuracyFixture.payload(now).toString()
     private class Focus:FocusPort {
-        var lose:(()->Unit)?=null
-        override fun request(id:Long,granted:()->Unit,lost:()->Unit):Boolean {lose=lost;granted();return true}
-        override fun abandon(id:Long)=Unit
+        var lose:(()->Unit)?=null;var grant:(()->Unit)?=null;var delayed=false;var held=false
+        override fun request(id:Long,granted:()->Unit,lost:()->Unit):Boolean {lose={held=false;lost()};grant={held=true;granted()};if(!delayed) grant!!();return true}
+        override fun abandon(id:Long) {held=false}
     }
     private class Speech:VoiceSpeechPort {
         val texts=mutableListOf<String>()
@@ -46,18 +48,21 @@ class ActiveGuidanceIntegrationTest {
     }
     private fun <T> field(target:Any,name:String):T=ReflectionHelpers.getField(target,name)
     private fun call(target:Any,name:String,vararg args:ClassParameter<*>)=ReflectionHelpers.callInstanceMethod<Any?>(target,name,*args)
-    private inner class Harness:AutoCloseable {
+    private inner class Harness(realLifecycle:Boolean=false,delayedFocus:Boolean=false):AutoCloseable {
         val now=System.currentTimeMillis()
         val context=TestCarContext.createCarContext(RuntimeEnvironment.getApplication())
         val manager=context.getCarService(TestNavigationManager::class.java)
         val positions=FakeLocationProvider();val speech=Speech();val focus=Focus()
         val screen:ActiveMysteryScreen
         val adapter:NavigationOwnershipAdapter
+        var lifecycle:ScreenController?=null
         init {
             ReflectionHelpers.setStaticField(Build::class.java,"MODEL","Connect on x86_64 emulator")
             ReflectionHelpers.setStaticField(Build::class.java,"PRODUCT","crp_avd")
             File(context.cacheDir,"route-guidance.json").writeText(payload(now))
             screen=ActiveMysteryScreen(context,ActiveRoutePacket.load(context))
+            if(realLifecycle) lifecycle=ScreenController(screen).moveToState(Lifecycle.State.STARTED)
+            focus.delayed=delayedFocus
             val original=field<Any>(screen,"adapter")
             val stop=field<()->Unit>(field<Any>(original,"navigation"),"stopGuidance")
             adapter=AndroidXNavigationOwnershipAdapter({manager},focus,stop,HostIntegrationGate(true,true,true))
@@ -94,7 +99,7 @@ class ActiveGuidanceIntegrationTest {
             val coordinator=RerouteCoordinator(client,point(100.0,-900.0),"Private",SystemClock::elapsedRealtime,ready,changed)
             ReflectionHelpers.setField(screen,"reroute",coordinator)
         }
-        override fun close() {adapter.release();field<AndroidNavigationVoice>(screen,"voice").close();call(screen,"stopPosition")}
+        override fun close() {lifecycle?.moveToState(Lifecycle.State.DESTROYED);adapter.release();field<AndroidNavigationVoice>(screen,"voice").close();call(screen,"stopPosition")}
     }
     @Test fun gpsUpdatesTheRealScreenTripRoadTurnDistanceAndVoiceTogether() {
         Harness().use {h->
@@ -183,4 +188,128 @@ class ActiveGuidanceIntegrationTest {
             assertFalse(field<AndroidNavigationVoice>(h.screen,"voice").state.owned)
         }
     }
+    @Test fun realLifecycleStopWhileFocusRequestedRejectsLateGrantAndDuplicateStop() {
+        Harness(true,true).use {h->
+            assertEquals(OwnershipState.REQUESTED,h.adapter.state)
+            h.lifecycle!!.moveToState(Lifecycle.State.CREATED)
+            h.focus.grant!!();h.focus.lose!!();h.adapter.stop()
+            assertEquals(0,h.manager.navigationStartedCount);assertEquals(0,h.manager.navigationEndedCount)
+            assertFalse(h.focus.held);assertEquals(0,h.positions.subscriberCount)
+        }
+    }
+    @Test fun realLifecycleStopDuringSpeechClosesGpsVoiceTripAndLateCallbacks() {
+        Harness(true).use {h->
+            h.emit();val queued=h.positions.captureCallback()!!
+            assertEquals(1,h.speech.texts.size)
+            h.lifecycle!!.moveToState(Lifecycle.State.CREATED)
+            val trips=h.manager.tripsSent.size;val spoken=h.speech.texts.size
+            queued(h.fix(90.0));h.focus.lose!!();h.adapter.stop()
+            assertEquals(1,h.manager.navigationStartedCount);assertEquals(1,h.manager.navigationEndedCount)
+            assertFalse(h.focus.held);assertEquals(0,h.positions.subscriberCount)
+            assertEquals(trips,h.manager.tripsSent.size);assertEquals(spoken,h.speech.texts.size)
+            assertEquals(VoiceStatus.CLOSED,field<AndroidNavigationVoice>(h.screen,"voice").state.status)
+        }
+    }
+    @Test fun realLifecycleStopCancelsPendingHttpAndRejectsLateSuccess() {
+        Harness(true).use {h->
+            h.emit();val old=field<Any>(h.screen,"reroute")
+            var complete:((RouteRefreshResult)->Unit)?=null;var pending=0
+            val client=object:RouteRefreshClient {
+                override fun request(origin:RouteCoordinate,destination:RouteCoordinate,privateDestinationLabel:String,callback:(RouteRefreshResult)->Unit):RouteRefreshCall {
+                    pending++;complete=callback;return RouteRefreshCall {pending--}
+                }
+            }
+            val coordinator=RerouteCoordinator(client,point(100.0,-900.0),"Private",SystemClock::elapsedRealtime,
+                field(old,"onRouteReady"),field(old,"onStateChanged"))
+            ReflectionHelpers.setField(h.screen,"reroute",coordinator)
+            repeat(3) {h.emit(50.0,200.0)}
+            assertEquals(1,pending)
+            h.lifecycle!!.moveToState(Lifecycle.State.CREATED)
+            assertEquals(0,pending)
+            val trips=h.manager.tripsSent.size;val generation=field<Long>(h.screen,"guidanceGeneration")
+            val body=payload(h.now)
+            complete!!(RouteRefreshResult.Success(body,GuidanceParser.parse(body,h.now),h.now,h.now+3_600_000))
+            assertEquals(generation,field<Long>(h.screen,"guidanceGeneration"));assertEquals(trips,h.manager.tripsSent.size)
+            assertEquals(0,h.positions.subscriberCount);assertFalse(h.focus.held)
+        }
+    }
+    @Test fun reconnectingScreenDoesNotAutomaticallyActivateOrDuplicateListeners() {
+        Harness(true).use {h->
+            h.emit();h.lifecycle!!.moveToState(Lifecycle.State.CREATED).moveToState(Lifecycle.State.STARTED)
+            assertEquals(1,h.manager.navigationStartedCount);assertEquals(1,h.manager.navigationEndedCount)
+            assertFalse(field<Boolean>(h.screen,"pendingStart"));assertEquals(0,h.positions.subscriberCount)
+            assertFalse(field<AndroidNavigationVoice>(h.screen,"voice").state.owned);assertFalse(h.focus.held)
+        }
+    }
+
+    @Test fun surfaceLossStopsActiveScreenAndReplacementDoesNotRestartIt() {
+        Harness(true).use {h->
+            val callback=field<androidx.car.app.SurfaceCallback>(h.screen,"surfaces")
+            fun container()=androidx.car.app.SurfaceContainer(android.view.Surface(android.graphics.SurfaceTexture(0)),1200,800,160)
+            val first=container();callback.onSurfaceAvailable(first);h.emit()
+            val queued=h.positions.captureCallback()!!;val trips=h.manager.tripsSent.size;val spoken=h.speech.texts.size
+            callback.onSurfaceDestroyed(first);queued(h.fix(90.0))
+            assertFalse(first.surface!!.isValid);assertEquals(0,h.positions.subscriberCount)
+            assertEquals(1,h.manager.navigationEndedCount);assertFalse(h.focus.held)
+            callback.onSurfaceAvailable(container());call(h.screen,"paint")
+            assertEquals(1,h.manager.navigationStartedCount);assertFalse(field<Boolean>(h.screen,"pendingStart"))
+            assertEquals(trips,h.manager.tripsSent.size);assertEquals(spoken,h.speech.texts.size)
+        }
+    }
+    @Test fun queuedVoiceClickAfterUxRestrictionCannotEnableOrSpeak() {
+        Harness(true).use {h->
+            field<AndroidNavigationVoice>(h.screen,"voice").setEnabled(false)
+            ReflectionHelpers.setField(h.screen,"voiceOn",false)
+            val template=h.screen.onGetTemplate() as NavigationTemplate
+            val action=template.actionStrip!!.actions.first {it.title.toString().contains("\uc74c\uc131")}
+            ReflectionHelpers.setField(h.screen,"requiresDo",true)
+            h.adapter.environmentChanged(null,false)
+            action.onClickDelegate!!.sendClick(object:androidx.car.app.OnDoneCallback {})
+            assertFalse(field<Boolean>(h.screen,"voiceOn"));assertTrue(h.speech.texts.isEmpty())
+            assertFalse(h.focus.held);assertEquals(0,h.positions.subscriberCount)
+        }
+    }
+    @Test fun gpsUpdateWhileOfficialMenuOpenPreservesVisibleStopAndDoesNotDisclose() {
+        Harness(true).use {h->
+            h.emit();ReflectionHelpers.setField(h.screen,"controlsOpen",true)
+            h.emit(90.0)
+            val menu=h.screen.onGetTemplate() as androidx.car.app.model.ListTemplate
+            val stop=menu.singleList!!.items.first() as androidx.car.app.model.Row
+            assertEquals("\uc548\ub0b4 \uc885\ub8cc",stop.title.toString());assertFalse(field<Boolean>(h.screen,"revealed"))
+            stop.onClickDelegate!!.sendClick(object:androidx.car.app.OnDoneCallback {})
+            assertEquals(1,h.manager.navigationEndedCount);assertFalse(h.focus.held)
+            assertEquals(0,h.positions.subscriberCount)
+        }
+    }
+
+    @Test fun arrivalCandidateDuringMenuDoesNotAutoConfirmOrDisclose() {
+        Harness(true).use {h->
+            h.emit(100.0,-895.0);ReflectionHelpers.setField(h.screen,"controlsOpen",true)
+            repeat(3) {h.emit(100.0,-895.0)}
+            assertTrue(field<ArrivalGate>(h.screen,"arrival").candidate)
+            assertFalse(field<Boolean>(h.screen,"revealed"))
+            assertFalse(field<ActiveRoutePacket>(h.screen,"packet").arrivalConfirmed)
+            val menu=h.screen.onGetTemplate() as androidx.car.app.model.ListTemplate
+            assertEquals("\uc548\ub0b4 \uc885\ub8cc",(menu.singleList!!.items.first() as androidx.car.app.model.Row).title.toString())
+            assertEquals(0,h.manager.navigationEndedCount)
+        }
+    }
+    @Test fun returnModeAmbiguityWithholdsExactTurnAndNeverConfirmsArrival() {
+        Harness(true).use {h->
+            h.emit()
+            val points=listOf(point(-100.0,-100.0),point(100.0,100.0),point(-100.0,100.0),point(100.0,-100.0))
+            val route=GuidanceRoute(RouteDataSource.KAKAO_DIRECTIONS,listOf(RouteSegment("Synthetic crossing",1000,100,0,points)),
+                listOf(Maneuver(100,0,0),Maneuver(2,500,0),Maneuver(101,1000,0)),1000,100,points.last())
+            ReflectionHelpers.setField(h.screen,"route",route);ReflectionHelpers.setField(h.screen,"matcher",RouteMatcher(route))
+            ReflectionHelpers.setField(h.screen,"waypointProgress",WaypointProgress(route,0))
+            ReflectionHelpers.setField(h.screen,"returning",true)
+            h.emit(0.0,0.0)
+            assertEquals(MatchStatus.AMBIGUOUS,field<RouteMatcher>(h.screen,"matcher").state().status)
+            assertTrue(h.manager.tripsSent.last().isLoading)
+            val info=(h.screen.onGetTemplate() as NavigationTemplate).navigationInfo as RoutingInfo
+            assertTrue(info.isLoading);assertNull(info.currentStep)
+            assertFalse(field<ArrivalGate>(h.screen,"arrival").candidate)
+        }
+    }
+
 }

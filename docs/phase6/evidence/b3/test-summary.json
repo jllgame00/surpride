@@ -1,0 +1,28 @@
+{
+  "app": {
+    "tests": 200,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "nav-host-poc": {
+    "tests": 281,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "server": {
+    "tests": 102,
+    "failures": 0,
+    "skipped": 0
+  },
+  "native_unique": {
+    "app": 16,
+    "nav-host-poc": 3,
+    "new": 2,
+    "app_full_runs": 2,
+    "poc_full_runs": 2
+  },
+  "total_unique": 602,
+  "new_unique": 26
+}

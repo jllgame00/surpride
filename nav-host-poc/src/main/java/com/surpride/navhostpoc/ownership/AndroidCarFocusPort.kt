@@ -1,5 +1,7 @@
 package com.surpride.navhostpoc.ownership
 
+import com.surpride.navhostpoc.HostDiagnostics
+import com.surpride.navhostpoc.HostEvent
 import android.car.Car
 import android.car.CarAppFocusManager
 import android.content.Context
@@ -50,10 +52,12 @@ class AndroidCarFocusPort(context: Context) : FocusPort {
     override fun request(id: Long, granted: () -> Unit, lost: () -> Unit): Boolean {
         checkMain()
         if (closed) return false
-        return session.request(id, granted, lost)
+        HostDiagnostics.record(HostEvent.FOCUS_REQUEST)
+        return session.request(id, {HostDiagnostics.record(HostEvent.FOCUS_CALLBACK);granted()},
+            {HostDiagnostics.record(HostEvent.FOCUS_CALLBACK);lost()})
     }
 
-    override fun abandon(id: Long) { checkMain(); session.abandon(id) }
+    override fun abandon(id: Long) { checkMain(); HostDiagnostics.record(HostEvent.FOCUS_RELEASE);session.abandon(id) }
 
     fun close() {
         checkMain()

@@ -1,0 +1,15 @@
+{
+  "before": 0,
+  "trials": [
+    {
+      "trial": 1,
+      "invalid_surface_delta": 1
+    },
+    {
+      "trial": 2,
+      "invalid_surface_delta": 0
+    }
+  ],
+  "after": 1,
+  "active": false
+}

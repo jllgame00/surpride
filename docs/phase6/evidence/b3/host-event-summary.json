@@ -1,0 +1,19 @@
+{
+  "pid": "30837",
+  "event_counts": {
+    "REFRESH_SCHEDULED": 66,
+    "TEMPLATE_READ": 66,
+    "TEMPLATE_UPDATE": 64,
+    "SURFACE_READY": 3,
+    "FOCUS_RELEASE": 3,
+    "TERMINATED": 3
+  },
+  "update_to_template_read_ms": {
+    "n": 63,
+    "median": 0.788834,
+    "max": 41.321529
+  },
+  "focus_requested_events": 0,
+  "active_started_events": 0,
+  "voice_requested_max": 0
+}

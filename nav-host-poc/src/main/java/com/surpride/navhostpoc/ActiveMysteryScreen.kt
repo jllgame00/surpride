@@ -55,12 +55,20 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         packet?.outcome?.returnPhase==ReturnPhase.REQUESTED->"RETURN_PREPARATION_INTERRUPTED / SELECT_AGAIN"
         else->"PREPARED / NO ACTIVE GUIDANCE"
     }
+    private var surfaceEpoch=0L
+    private var surfaceLost=false
     private var surface:SurfaceContainer?=null
     private var visible:Rect?=null
     private var stable:Rect?=null
     private var renderer:RoadMapRenderer?=null
     private var lastRefresh=0L
     private var scheduled=false
+    private var immediateScheduled=false
+    private val refreshTask=Runnable {
+        scheduled=false;immediateScheduled=false
+        if(foreground) {lastRefresh=SystemClock.elapsedRealtime();paint();event(HostEvent.TEMPLATE_UPDATE);invalidate()}
+    }
+    private fun event(value:HostEvent)=HostDiagnostics.record(value)
     private var controlsOpen=false
     private val menuBack=object:OnBackPressedCallback(false) {
         override fun handleOnBackPressed() {closeControls()}
@@ -95,7 +103,7 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
     private fun newAdapter()=AndroidXNavigationOwnershipAdapter({carContext.getCarService(NavigationManager::class.java)},ReadinessFocusPort(focus) {readyForGuidance()},
         {voice.setOwnership(false);reroute?.cancel();cancelRequests();stopPosition();matcher?.unavailable("GUIDANCE_STOPPED");loadingPublished=false;result="GUIDANCE_STOPPED";refresh()},HostIntegrationGate(true,true,emulator))
     private fun acquiringOrActive()=adapter.state in listOf(OwnershipState.REQUESTED,OwnershipState.ACTIVE)
-    private fun readyForGuidance()=allowed && oem.status.routeActive==false && packet?.isFresh(System.currentTimeMillis())==true &&
+    private fun readyForGuidance()=allowed && surface?.surface?.isValid==true && oem.status.routeActive==false && packet?.isFresh(System.currentTimeMillis())==true &&
         matcher?.state()?.status==MatchStatus.ON_ROUTE && fix?.let {SystemClock.elapsedRealtime()-it.elapsedMillis in 0..5000}==true
     private val positions=PositionSession(AndroidPositionProvider(carContext.applicationContext)) {event->
         if(!subscribed || !allowed) return@PositionSession
@@ -122,7 +130,7 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
                         else->positionUnavailable(state.reason)
                     }
                 } else if(adapter.state==OwnershipState.REQUESTED && state.status!=MatchStatus.ON_ROUTE) stopForUnreliable(state.reason)
-                Log.i("SurprideActive","FIX n=$received status=${state.status} progressM=${state.progress?.traveledMeters?.toInt()} nextM=${state.progress?.remainingToManeuverMeters?.toInt()} source=${event.value.source}")
+                Log.i("SurprideActive","FIX n=$received status=${state.status} source=${event.value.source}")
             }
             is PositionEvent.Unavailable->{matcher?.unavailable(event.reason.name);arrival.invalidate();positionUnavailable(event.reason.name)}
         };refresh()
@@ -138,22 +146,42 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         maybePrepare()
         refresh();handler.postDelayed(this,1000)
     }}
-    private val surfaces=object:SurfaceCallback {
-        override fun onSurfaceAvailable(container:SurfaceContainer) {visible=null;stable=null;surface=container;paint()}
-        override fun onVisibleAreaChanged(area:Rect) {visible=Rect(area);paint()}
-        override fun onStableAreaChanged(area:Rect) {stable=Rect(area);paint()}
-        override fun onSurfaceDestroyed(container:SurfaceContainer) {surface=null;visible=null;stable=null}
+    private var surfaces:SurfaceCallback=newSurfaceCallback()
+    private fun releaseSurface(container:SurfaceContainer?) {container?.surface?.release()}
+    private fun newSurfaceCallback():SurfaceCallback {
+        val epoch=surfaceEpoch
+        return object:SurfaceCallback {
+            private fun current()=foreground && epoch==surfaceEpoch
+            override fun onSurfaceAvailable(container:SurfaceContainer) {
+                if(!current()) {if(container.surface!==surface?.surface) releaseSurface(container);return}
+                if(surface?.surface!==container.surface) releaseSurface(surface)
+                surface=container;visible=null;stable=null;surfaceLost=false
+                event(HostEvent.SURFACE_READY);paint()
+            }
+            override fun onVisibleAreaChanged(area:Rect) {if(current()) {visible=Rect(area);paint()}}
+            override fun onStableAreaChanged(area:Rect) {if(current()) {stable=Rect(area);paint()}}
+            override fun onSurfaceDestroyed(container:SurfaceContainer) {
+                if(!current()) {if(container.surface!==surface?.surface) releaseSurface(container);return}
+                // Losing visible controls retires approval/resources. A new Surface never restarts guidance.
+                releaseSurface(surface);if(container.surface!==surface?.surface) releaseSurface(container)
+                surface=null;visible=null;stable=null;surfaceLost=true
+                pendingStart=false;pendingControl=null;pendingPreparation=null
+                adapter.stop();reroute?.cancel();cancelRequests();voice.setOwnership(false);stopPosition()
+                result="SURFACE_LOST / PREPARE_AGAIN";refresh(true)
+            }
+        }
     }
+
     init {
         carContext.onBackPressedDispatcher.addCallback(this,menuBack)
         lifecycle.addObserver(object:DefaultLifecycleObserver {
         override fun onStart(owner:LifecycleOwner) {
             if(hasStarted) {focus=AndroidCarFocusPort(carContext.applicationContext);oem=PleosOemRouteMonitor(carContext.applicationContext);adapter=newAdapter()}
             hasStarted=true
-            foreground=true;renderer=RoadMapRenderer(carContext.applicationContext) {refresh()}
+            foreground=true;surfaceEpoch++;surfaces=newSurfaceCallback();renderer=RoadMapRenderer(carContext.applicationContext) {refresh()}
             voice.close();voice=AndroidNavigationVoice(carContext.applicationContext)
             voice.start {s->
-                if(s.status in listOf(VoiceStatus.FOCUS_LOST,VoiceStatus.FOCUS_DENIED,VoiceStatus.ERROR)) voiceOn=false
+                if(s.status in listOf(VoiceStatus.FOCUS_LOST,VoiceStatus.FOCUS_DENIED,VoiceStatus.TIMEOUT,VoiceStatus.ERROR)) voiceOn=false
                 Log.i("SurprideVoice","status=${s.status} enabled=${s.enabled} focus=${s.focusGranted} requested=${s.requested} started=${s.started} completed=${s.completed} errors=${s.errors} network=${s.voiceNetworkRequired} backend=${s.backend} preRoll=${s.preRoll}")
                 refresh()
             };voice.setEnabled(voiceOn)
@@ -172,15 +200,15 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         }
         override fun onStop(owner:LifecycleOwner) {
             controlsOpen=false;menuBack.isEnabled=false
-            pendingStart=false;pendingControl=null;pendingPreparation=null;foreground=false;requiresDo=null;adapter.onAppStopped();adapter.release();reroute?.cancel();cancelRequests();voice.close();stopPosition();handler.removeCallbacksAndMessages(null)
-            scheduled=false;ux.stop();oem.close();focus.close();renderer?.close();renderer=null
-            carContext.getCarService(AppManager::class.java).setSurfaceCallback(null);surface=null
+            pendingStart=false;pendingControl=null;pendingPreparation=null;foreground=false;surfaceEpoch++;requiresDo=null;event(HostEvent.FOCUS_RELEASE);adapter.onAppStopped();adapter.release();reroute?.cancel();cancelRequests();voice.close();stopPosition();handler.removeCallbacksAndMessages(null)
+            scheduled=false;immediateScheduled=false;ux.stop();oem.close();focus.close();renderer?.close();renderer=null
+            carContext.getCarService(AppManager::class.java).setSurfaceCallback(null);releaseSurface(surface);surface=null;event(HostEvent.TERMINATED)
         }
         override fun onDestroy(owner:LifecycleOwner) {pendingStart=false;pendingControl=null;adapter.release();stopPosition();Log.i("SurprideActive","DESTROYED")}
     })}
     private fun maybeStart() {
         if(pendingStart && SystemClock.elapsedRealtime()-pendingStartAt>15_000) {pendingStart=false;result="START_APPROVAL_EXPIRED"}
-        if(!pendingStart || !allowed || !focus.status.connected || !oem.status.connected || oem.status.routeActive==null) return
+        if(!pendingStart || !allowed || surface?.surface?.isValid!=true || !focus.status.connected || !oem.status.connected || oem.status.routeActive==null) return
         if(oem.status.routeActive!=false || focus.status.otherNavigationActive==true) {pendingStart=false;result="EXISTING_NAVIGATION_BLOCKED";return}
         if(ContextCompat.checkSelfPermission(carContext,Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED) {pendingStart=false;result="PRECISE_LOCATION_REQUIRED";return}
         if(route?.source!=RouteDataSource.KAKAO_DIRECTIONS) {pendingStart=false;result="LIVE_ROUTE_REQUIRED";return}
@@ -197,7 +225,7 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         if(adapter.state==OwnershipState.ACTIVE) {startPosition();publish()}
     }
     private fun startPosition() {
-        if(subscribed || !allowed || matcher==null || (confirmedArrival && pendingPreparation==null)) return
+        if(subscribed || !allowed || surfaceLost || matcher==null || (confirmedArrival && pendingPreparation==null)) return
         subscribed=true;positions.start();Log.i("SurprideActive","POSITION_SUBSCRIBED owner=${adapter.state==OwnershipState.ACTIVE}")
     }
     private fun stopPosition() {subscribed=false;positions.stop();arrival.invalidate()}
@@ -418,6 +446,7 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         pendingPreparation="RETURN";startPosition();maybePrepare();refresh(true)
     }
     override fun onGetTemplate():Template {
+        event(HostEvent.TEMPLATE_READ)
         val active=adapter.state==OwnershipState.ACTIVE && allowed
         if(controlsOpen) return NavigationControlMenu.build(allowed,voiceOn,active && arrival.candidate,
             confirmedArrival && !returning && packet?.tripOrigin!=null) {command->
@@ -433,6 +462,7 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         // Template-scoped controls belong in the app action strip, not the map pan/zoom strip.
         // The host chooses placement/visibility. No Surface click hit targets are used on API 4.
         val strip=ActionStrip.Builder().addAction(Action.Builder().setTitle(if(active) "종료·조작" else "안내 준비").setOnClickListener {
+            event(HostEvent.CONTROL_REQUEST)
             if(active) {controlsOpen=true;menuBack.isEnabled=true;refresh(true)} else controls()
         }.build())
         fun action(label:String,drawable:Int,selected:()->Unit)=Action.Builder().setTitle(label)
@@ -467,11 +497,14 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
     }
     private fun closeControls() {controlsOpen=false;menuBack.isEnabled=false;refresh(true)}
     private fun refresh(immediate:Boolean=false) {
-        if(!foreground || scheduled) return
+        if(!foreground || (scheduled && (!immediate || immediateScheduled))) return
+        if(scheduled) handler.removeCallbacks(refreshTask)
         val delay=if(immediate) 0L else (1000-(SystemClock.elapsedRealtime()-lastRefresh)).coerceAtLeast(0)
-        scheduled=true;handler.postDelayed({scheduled=false;if(foreground) {lastRefresh=SystemClock.elapsedRealtime();paint();invalidate()}},delay)
+        scheduled=true;immediateScheduled=immediate;event(HostEvent.REFRESH_SCHEDULED)
+        handler.postDelayed(refreshTask,delay)
     }
     private fun paint() {
+        if(!foreground) return
         val s=surface?.surface?.takeIf {it.isValid}?:return
         val c=try {s.lockCanvas(null)} catch(_:Exception) {return}
         try {

@@ -1,0 +1,22 @@
+[
+  {
+    "package": "com.surpride.app",
+    "sha256": "ee418391c6430e38818926f35bc379fbfeccd2d84f8483d1d1fcfe0409c5b224",
+    "installed_matches": true
+  },
+  {
+    "package": "com.surpride.navhostpoc",
+    "sha256": "12f053a80d745369b3054b823b67d97700cf71b1f5960059078824ee67bd695f",
+    "installed_matches": true
+  },
+  {
+    "package": "com.surpride.app.test",
+    "sha256": "8556f5d06d900c59fb54ef38cea28b6c90fded48f602479f194c9c80e9d43075",
+    "installed_matches": true
+  },
+  {
+    "package": "com.surpride.navhostpoc.test",
+    "sha256": "e5ea5a123bb17dd9bd3b48120e587d46aa6d31d863d1e5fe313c2ff2c0eb3562",
+    "installed_matches": true
+  }
+]

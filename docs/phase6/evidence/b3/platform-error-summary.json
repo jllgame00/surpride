@@ -1,0 +1,53 @@
+{
+  "since": "11-10 14:38:33.000",
+  "own_anr": 0,
+  "own_crash": 0,
+  "androidx_invalid_surface": 11,
+  "alerts": [
+    {
+      "kind": "androidx_invalid_surface",
+      "time": "11-10 15:00:11.743"
+    },
+    {
+      "kind": "androidx_invalid_surface",
+      "time": "11-10 15:00:14.497"
+    },
+    {
+      "kind": "androidx_invalid_surface",
+      "time": "11-10 15:00:17.322"
+    },
+    {
+      "kind": "androidx_invalid_surface",
+      "time": "11-10 15:00:20.715"
+    },
+    {
+      "kind": "androidx_invalid_surface",
+      "time": "11-10 15:00:23.031"
+    },
+    {
+      "kind": "androidx_invalid_surface",
+      "time": "11-10 15:00:24.807"
+    },
+    {
+      "kind": "androidx_invalid_surface",
+      "time": "11-10 15:00:58.992"
+    },
+    {
+      "kind": "androidx_invalid_surface",
+      "time": "11-10 15:01:01.870"
+    },
+    {
+      "kind": "androidx_invalid_surface",
+      "time": "11-10 15:01:04.433"
+    },
+    {
+      "kind": "androidx_invalid_surface",
+      "time": "11-10 15:01:06.507"
+    },
+    {
+      "kind": "androidx_invalid_surface",
+      "time": "11-10 15:06:03.245"
+    }
+  ],
+  "scope": "available logcat only; AndroidX snapshot caught exceptions in own PoC process, not OEM stack"
+}
