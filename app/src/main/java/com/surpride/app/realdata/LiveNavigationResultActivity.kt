@@ -38,7 +38,7 @@ class LiveNavigationResultActivity:AppCompatActivity() {
         SurprideUi.applyAppearance(this)
         super.onCreate(savedInstanceState)
         rating=savedInstanceState?.getInt("rating",0)?.takeIf {it in 1..5}
-        saved=savedInstanceState?.getBoolean("saved",false)?:false
+        saved=completed()
         ux=ParkedUxMonitor(applicationContext)
         WindowCompat.setDecorFitsSystemWindows(window,false)
         root=LinearLayout(this).apply {orientation=LinearLayout.VERTICAL;setBackgroundColor(ui.background)}
@@ -53,12 +53,15 @@ class LiveNavigationResultActivity:AppCompatActivity() {
     override fun onStop() {requiresDo=null;ux.stop();super.onStop()}
     override fun onDestroy() {ux.stop();super.onDestroy()}
     override fun onSaveInstanceState(outState:Bundle) {
-        outState.putInt("rating",rating?:0);outState.putBoolean("saved",saved);super.onSaveInstanceState(outState)
+        outState.putInt("rating",rating?:0);super.onSaveInstanceState(outState)
     }
+    private fun completed()=LiveNavigationStore.read(this).hasCompleted(nonce,candidateId,source,revealed,stopped,System.currentTimeMillis()) &&
+        SeoulPilotCatalog.places.any {it.id==candidateId}
     private fun valid():Boolean = LiveNavigationResultPolicy.accepts(LiveNavigationStore.read(this).pending,
         nonce,candidateId,source,revealed,stopped,System.currentTimeMillis()) &&
         SeoulPilotCatalog.places.any {it.id==candidateId}
     private fun render() {
+        saved=completed()
         root.removeAllViews()
         root.addView(ui.text("S /  오늘의 발견",32,ui.accent,true))
         root.addView(label("실제 경로 · 정차 에뮬레이터 체험 기록",20))
@@ -95,10 +98,12 @@ class LiveNavigationResultActivity:AppCompatActivity() {
             }.apply {isEnabled=rating!=null})
             result.addView(label("별도 에뮬레이터 기록으로 보관해요\n실도로 방문 인증이 아니며 경로와 위치는 저장하지 않아요",20))
         }
-        root.addView(button("출발지로 돌아가기 준비") {if(allowed) {
-            try {startActivity(android.content.Intent().setComponent(android.content.ComponentName("com.surpride.navhostpoc","androidx.car.app.activity.CarAppActivity")))}
+        root.addView(button("출발지로 돌아가기 준비") {if(allowed && (valid() || completed())) {
+            try {startActivity(android.content.Intent("com.surpride.navhostpoc.RESUME_SESSION")
+                .setComponent(android.content.ComponentName("com.surpride.navhostpoc","androidx.car.app.activity.CarAppActivity"))
+                .putExtra("session_nonce",nonce).putExtra("candidate_id",candidateId))}
             catch(_:Exception) {root.addView(ui.text("지도 안내 앱을 찾을 수 없어요",24,ui.error))}
-        }})
+        }}.apply {isEnabled=valid() || saved})
         root.addView(label("복귀 코스를 확인한 뒤 직접 시작해요\n시간 내 귀가를 보장하지 않아요",20))
         root.addView(button("결과 화면 닫기") {if(allowed) finish()})
     }

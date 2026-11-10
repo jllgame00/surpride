@@ -87,15 +87,22 @@ object LiveNavigationResultPolicy {
 }
 
 /** Separate from the DEMO controller. Only manual completion can consume a pending session. */
-class LiveNavigationJournal(pending:PendingLiveNavigation?=null,visits:List<LiveNavigationVisit> = emptyList()) {
+class LiveNavigationJournal(pending:PendingLiveNavigation?=null,visits:List<LiveNavigationVisit> = emptyList(),completed:PendingLiveNavigation?=null) {
     var pending:PendingLiveNavigation?=pending
         private set
     var visits:List<LiveNavigationVisit> = visits.takeLast(30)
         private set
+    var completed:PendingLiveNavigation?=completed
+        private set
+    fun hasCompleted(nonce:String?,candidateId:String?,source:String?,revealed:Boolean,stopped:Boolean,now:Long):Boolean =
+        pending==null && LiveNavigationResultPolicy.accepts(completed,nonce,candidateId,source,revealed,stopped,now) &&
+            visits.lastOrNull()?.let {it.candidateId==candidateId && it.rating in 1..5 &&
+                it.completedAtMillis in completed!!.preparedAtMillis..now}==true
     fun complete(nonce:String?,candidateId:String?,source:String?,revealed:Boolean,stopped:Boolean,
         rating:Int,now:Long):Boolean {
         if(rating !in 1..5 || !LiveNavigationResultPolicy.accepts(pending,nonce,candidateId,source,revealed,stopped,now)) return false
         visits=(visits+LiveNavigationVisit(pending!!.candidateId,rating,now)).takeLast(30)
+        completed=pending
         pending=null
         return true
     }

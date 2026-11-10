@@ -42,13 +42,19 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
     private var waypointProgress=packet?.let {WaypointProgress(it.route,it.requestOptions.waypoints.size)}
     private val arrival=ArrivalGate()
     private var fix:PositionFix?=null
-    private var revealed=false
+    private var revealed=packet?.outcome?.revealed?:false
     private var received=0
     private var sent=0
     private var subscribed=false
     private var pendingStart=false
     private var pendingStartAt=0L
-    private var result="PREPARED / NO ACTIVE GUIDANCE"
+    private data class ParkedControl(val packet:ActiveRoutePacket,val command:String,val selectedAt:Long)
+    private var pendingControl:ParkedControl?=null
+    private var result=when {
+        packet==null->"SESSION_RESTORE_UNAVAILABLE / PREPARE_AGAIN"
+        packet?.outcome?.returnPhase==ReturnPhase.REQUESTED->"RETURN_PREPARATION_INTERRUPTED / SELECT_AGAIN"
+        else->"PREPARED / NO ACTIVE GUIDANCE"
+    }
     private var surface:SurfaceContainer?=null
     private var visible:Rect?=null
     private var stable:Rect?=null
@@ -73,8 +79,9 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
     private var budget=startedAt?.let {packet?.budget(it)}
     private var returnEstimate=packet?.initialReturnEstimate()
     private var returning=packet?.returning?:false
-    private var returnCompleted=false
-    private var arrivedAt:Long?=null
+    private var returnCompleted=packet?.outcome?.returnPhase==ReturnPhase.COMPLETED
+    private var arrivedAt:Long?=packet?.outcome?.arrivedAt
+    private val confirmedArrival get()=packet?.arrivalConfirmed==true
     private var pendingPreparation:String?=null
     private var preparation:RouteRefreshCall?=null
     private var preparationGeneration=0L
@@ -122,6 +129,7 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
     }
     private val tick=object:Runnable {override fun run() {
         if(!foreground) return
+        applyPendingControl()
         matcher?.expire(SystemClock.elapsedRealtime())
         if(acquiringOrActive() && subscribed && matcher?.state()?.status==MatchStatus.UNKNOWN && received>0) positionUnavailable("GPS_LOST")
         if(acquiringOrActive() && packet?.isFresh(System.currentTimeMillis())!=true) stopForUnreliable("ROUTE_EXPIRED")
@@ -158,17 +166,17 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
                 maybeStart();refresh()
             }
             oem.connect {status->Log.i("SurprideActive","OEM connected=${status.connected} active=${status.routeActive} error=${status.error}");adapter.environmentChanged(if(allowed) true else null,status.routeActive);maybeStart();refresh()}
-            ux.start {val prior=requiresDo;requiresDo=it;if(it==true || (prior==false && it==null)) pendingStart=false
-                adapter.environmentChanged(if(allowed) true else null,oem.status.routeActive);if(allowed) startPosition() else stopPosition();maybeStart();refresh()}
+            ux.start {val prior=requiresDo;requiresDo=it;if(it==true || (prior==false && it==null)) {pendingStart=false;pendingControl=null}
+                adapter.environmentChanged(if(allowed) true else null,oem.status.routeActive);applyPendingControl();if(allowed) startPosition() else stopPosition();maybeStart();refresh()}
             handler.post(tick)
         }
         override fun onStop(owner:LifecycleOwner) {
             controlsOpen=false;menuBack.isEnabled=false
-            pendingStart=false;pendingPreparation=null;foreground=false;requiresDo=null;adapter.onAppStopped();adapter.release();reroute?.cancel();cancelRequests();voice.close();stopPosition();handler.removeCallbacksAndMessages(null)
+            pendingStart=false;pendingControl=null;pendingPreparation=null;foreground=false;requiresDo=null;adapter.onAppStopped();adapter.release();reroute?.cancel();cancelRequests();voice.close();stopPosition();handler.removeCallbacksAndMessages(null)
             scheduled=false;ux.stop();oem.close();focus.close();renderer?.close();renderer=null
             carContext.getCarService(AppManager::class.java).setSurfaceCallback(null);surface=null
         }
-        override fun onDestroy(owner:LifecycleOwner) {pendingStart=false;adapter.release();stopPosition();Log.i("SurprideActive","DESTROYED")}
+        override fun onDestroy(owner:LifecycleOwner) {pendingStart=false;pendingControl=null;adapter.release();stopPosition();Log.i("SurprideActive","DESTROYED")}
     })}
     private fun maybeStart() {
         if(pendingStart && SystemClock.elapsedRealtime()-pendingStartAt>15_000) {pendingStart=false;result="START_APPROVAL_EXPIRED"}
@@ -176,6 +184,7 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         if(oem.status.routeActive!=false || focus.status.otherNavigationActive==true) {pendingStart=false;result="EXISTING_NAVIGATION_BLOCKED";return}
         if(ContextCompat.checkSelfPermission(carContext,Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED) {pendingStart=false;result="PRECISE_LOCATION_REQUIRED";return}
         if(route?.source!=RouteDataSource.KAKAO_DIRECTIONS) {pendingStart=false;result="LIVE_ROUTE_REQUIRED";return}
+        if(confirmedArrival || packet?.isCurrent(carContext)!=true) {pendingStart=false;result="SESSION_ENDED_OR_CHANGED / PREPARE_AGAIN";return}
         // Waypoint support has synthetic contract coverage only; LIVE activation stays closed.
         if(packet?.requestOptions?.waypoints?.isNotEmpty()==true) {pendingStart=false;result="WAYPOINT_LIVE_NOT_VERIFIED";return}
         if(packet?.isFresh(System.currentTimeMillis())!=true) {pendingStart=false;result="ROUTE_EXPIRED / PREPARE_AGAIN";return}
@@ -188,7 +197,7 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         if(adapter.state==OwnershipState.ACTIVE) {startPosition();publish()}
     }
     private fun startPosition() {
-        if(subscribed || !allowed || matcher==null || (arrival.arrived && pendingPreparation==null)) return
+        if(subscribed || !allowed || matcher==null || (confirmedArrival && pendingPreparation==null)) return
         subscribed=true;positions.start();Log.i("SurprideActive","POSITION_SUBSCRIBED owner=${adapter.state==OwnershipState.ACTIVE}")
     }
     private fun stopPosition() {subscribed=false;positions.stop();arrival.invalidate()}
@@ -202,8 +211,9 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
     }
     private fun ensureDeparture() {
         if(startedAt==null) {
-            startedAt=System.currentTimeMillis();budget=packet?.budget(startedAt!!)
-            try {packet?.rememberStart(carContext,startedAt!!)} catch(_:Exception) {result="SESSION_CACHE_UNAVAILABLE"}
+            val at=System.currentTimeMillis()
+            try {packet!!.rememberStart(carContext,at);startedAt=at;budget=packet?.budget(at)}
+            catch(_:Exception) {adapter.stop();result="SESSION_CACHE_UNAVAILABLE / PREPARE_AGAIN";return}
         }
         voice.setOwnership(adapter.state==OwnershipState.ACTIVE)
     }
@@ -252,7 +262,8 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         return try {
             val next=packet!!.replace(carContext,value,isReturn,startedAt,
                 remainingWaypointCount=waypointProgress?.state()?.remaining?:0)
-            packet=next;route=value.route;matcher=nextMatcher;returning=isReturn;arrival.reset();returnCompleted=false
+            packet=next;route=next.route;matcher=nextMatcher;returning=isReturn;arrival.reset();returnCompleted=false
+            revealed=next.outcome.revealed;arrivedAt=next.outcome.arrivedAt
             waypointProgress=WaypointProgress(next.route,next.requestOptions.waypoints.size)
             loadingPublished=false;gpsMissingSince=null;voice.invalidateRoute();guidanceGeneration++
             Log.i("SurprideReroute","ROUTE_REPLACED source=${value.route.source} return=$isReturn segments=${value.route.segments.size} maneuvers=${value.route.maneuvers.size} owner=${adapter.state} gpsSubscribed=$subscribed")
@@ -286,7 +297,7 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
                         result="${if(isReturn) "RETURN" else "RETRY"}_READY · 직접 안내 시작 필요"
                     } else result="NEW_ROUTE_NOT_MATCHED · 위치 확인 후 재시도"
                 }
-                is RouteRefreshResult.Failure->{result="${if(isReturn) "RETURN" else "RETRY"}_FAILED / ${reply.error}";if(arrival.arrived) stopPosition()}
+                is RouteRefreshResult.Failure->{result="${if(isReturn) "RETURN" else "RETRY"}_FAILED / ${reply.error}";if(confirmedArrival) stopPosition()}
             }
             Log.i("SurprideReturn","PREPARED success=${reply is RouteRefreshResult.Success} returning=$returning autoStart=false")
             refresh(true)
@@ -311,7 +322,7 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
     }
     private fun budgetSnapshot():ReturnBudgetSnapshot? {
         val stay=if(returning) 0L else arrivedAt?.let {((packet?.budget(startedAt?:System.currentTimeMillis())?.staySeconds?:0)-(System.currentTimeMillis()-it)/1000).coerceAtLeast(0)}
-        return budget?.evaluate(System.currentTimeMillis(),if(returning || arrival.arrived) 0 else matcher?.state()?.progress?.remainingSeconds,
+        return budget?.evaluate(System.currentTimeMillis(),if(returning || confirmedArrival) 0 else matcher?.state()?.progress?.remainingSeconds,
             returnEstimate,stay?:budget!!.staySeconds)
     }
     private fun turn():NextTurnMetadata? {
@@ -341,21 +352,33 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         }
         Log.i("SurprideActive","TRIP returned=$ok updates=$sent destinations=${if(revealed && !returning) 1 else 0} state=${adapter.state}")
     }
-    private fun reveal() {if(!allowed) return;revealed=true;publish();refresh(true);Log.i("SurprideActive","DISCLOSURE explicit=true")}
+    private fun saveOutcome(action:(ActiveRoutePacket)->Unit):Boolean {
+        val current=packet?:return false
+        return try {action(current);true} catch(_:Exception) {
+            adapter.stop();result="SESSION_CACHE_UNAVAILABLE / PREPARE_AGAIN";refresh(true);false
+        }
+    }
+    private fun reveal() {
+        if(!allowed || !saveOutcome {it.rememberDisclosure(carContext)}) return
+        revealed=true;publish();refresh(true);Log.i("SurprideActive","DISCLOSURE explicit=true")
+    }
     private fun confirmArrival() {
         if(waypointProgress?.canConfirmFinalArrival(matcher?.state()?.progress)!=true) {arrival.invalidate();result="ARRIVAL_NOT_CONFIRMED";refresh(true);return}
         if(!allowed || !arrival.confirm(true,true,SystemClock.elapsedRealtime())) {result="ARRIVAL_NOT_CONFIRMED";refresh(true);return}
-        adapter.stop();revealed=true;arrivedAt=System.currentTimeMillis();returnCompleted=returning
+        adapter.stop()
+        val at=System.currentTimeMillis()
+        if(!saveOutcome {it.rememberArrival(carContext,at)}) {arrival.reset();return}
+        revealed=true;arrivedAt=at;returnCompleted=returning
         result=if(returning) "RETURN_COMPLETED / GUIDANCE_ENDED" else "ARRIVED / USER_CONFIRMED_PARKED / GUIDANCE_ENDED"
         Log.i("SurprideActive","ARRIVED confirmed=true ownerReleased=${adapter.state}");refresh(true)
     }
     private fun returnResult() {
         val currentPacket=packet?:return
-        if(!allowed || !revealed || currentPacket.nonce==null || currentPacket.candidateId==null) return
+        if(!allowed || !revealed || currentPacket.route.source!=RouteDataSource.KAKAO_DIRECTIONS || currentPacket.nonce==null || currentPacket.candidateId==null || !currentPacket.isCurrent(carContext)) return
         adapter.stop()
         try {carContext.startActivity(Intent().setComponent(ComponentName("com.surpride.app","com.surpride.app.realdata.LiveNavigationResultActivity"))
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("session_nonce",currentPacket.nonce).putExtra("candidate_id",currentPacket.candidateId)
-            .putExtra("source","DEVICE_API_EMULATOR").putExtra("arrived",arrival.arrived).putExtra("revealed",true).putExtra("stopped",true))}
+            .putExtra("source","DEVICE_API_EMULATOR").putExtra("arrived",confirmedArrival).putExtra("revealed",true).putExtra("stopped",true))}
         catch(_:Exception) {result="MAIN_APP_RESULT_UNAVAILABLE";refresh(true)}
     }
     private fun controls() {
@@ -366,30 +389,45 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
             "음성 연결" to "${voice.state.status} · ${if(voiceOn) "ON" else "OFF"}\n${voice.state.backend}",
             "재탐색·귀가" to "${reroute?.state()?.status?:"대기"} · 요청 ${reroute?.state()?.attempts?:0}\n귀가 ${budgetSnapshot()?.risk?:"UNKNOWN"}"
         ) else emptyList()
-        screenManager.push(ActiveControlsScreen(carContext,route!=null,revealed,packet?.nonce!=null && !returning,arrival.arrived && !returning && packet?.tripOrigin!=null,voiceOn,diagnostics) {command->
+        val current=packet
+        screenManager.push(ActiveControlsScreen(carContext,route!=null && !confirmedArrival,revealed,packet?.nonce!=null && !returning,confirmedArrival && !returning && packet?.tripOrigin!=null,voiceOn,diagnostics) {command->
             screenManager.pop()
+            if(current!==packet || current?.isCurrent(carContext)!=true) {result="SESSION_CHANGED / PREPARE_AGAIN";return@ActiveControlsScreen}
             when(command) {
                 "start"->{matcher?.reset();arrival.reset();gpsMissingSince=null;pendingStart=true;pendingStartAt=SystemClock.elapsedRealtime();result="EXPLICIT_OPERATOR_APPROVAL / CHECKING";maybeStart()}
-                "reveal"->{revealed=true}
+                "reveal","return"->{current?.let {pendingControl=ParkedControl(it,command,SystemClock.elapsedRealtime());applyPendingControl()}}
                 "voice"->{voiceOn=!voiceOn;voice.setEnabled(voiceOn)}
-                "record"->{handler.postDelayed({returnResult()},700)}
+                "record"->{handler.postDelayed({if(current===packet && allowed) returnResult()},700)}
                 "retry"->{pendingPreparation="RETRY";startPosition();maybePrepare()}
-                "return"->{pendingPreparation="RETURN";startPosition();maybePrepare()}
                 "back"->screenManager.popToRoot()
             }
         })
     }
+    private fun applyPendingControl() {
+        val selected=pendingControl?:return
+        if(SystemClock.elapsedRealtime()-selected.selectedAt !in 0..15_000 || selected.packet!==packet || !foreground || requiresDo==true) {
+            pendingControl=null;return
+        }
+        if(!allowed) return
+        pendingControl=null
+        if(!selected.packet.isCurrent(carContext)) {result="SESSION_CHANGED / PREPARE_AGAIN";refresh(true);return}
+        when(selected.command) {"reveal"->reveal();"return"->prepareReturn()}
+    }
+    private fun prepareReturn() {
+        if(!allowed || !saveOutcome {it.rememberReturnRequest(carContext)}) return
+        pendingPreparation="RETURN";startPosition();maybePrepare();refresh(true)
+    }
     override fun onGetTemplate():Template {
         val active=adapter.state==OwnershipState.ACTIVE && allowed
         if(controlsOpen) return NavigationControlMenu.build(allowed,voiceOn,active && arrival.candidate,
-            arrival.arrived && !returning && packet?.tripOrigin!=null) {command->
+            confirmedArrival && !returning && packet?.tripOrigin!=null) {command->
             when(command) {
                 "stop"->{adapter.stop();result="USER_STOPPED";closeControls()}
                 "map"->closeControls()
                 "reveal"->{if(allowed) {reveal();closeControls()}}
                 "voice"->{if(allowed) {voiceOn=!voiceOn;voice.setEnabled(voiceOn);closeControls()}}
                 "arrival"->{if(allowed) {confirmArrival();closeControls()}}
-                "return"->{if(allowed && arrival.arrived) {pendingPreparation="RETURN";startPosition();maybePrepare();closeControls()}}
+                "return"->{if(allowed && confirmedArrival) {prepareReturn();closeControls()}}
             }
         }
         // Template-scoped controls belong in the app action strip, not the map pan/zoom strip.
@@ -404,8 +442,8 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
             if(allowed) {voiceOn=!voiceOn;voice.setEnabled(voiceOn);refresh(true)}
         })
         if(active && arrival.candidate) strip.addAction(action("정차·도착 확인",R.drawable.ic_arrival_confirm) {confirmArrival()})
-        else if(arrival.arrived && !returning && packet?.tripOrigin!=null) strip.addAction(action("복귀 준비",R.drawable.ic_return) {
-            if(allowed) {pendingPreparation="RETURN";startPosition();maybePrepare();refresh(true)}
+        else if(confirmedArrival && !returning && packet?.tripOrigin!=null) strip.addAction(action("복귀 준비",R.drawable.ic_return) {
+            if(allowed) prepareReturn()
         })
         val b=NavigationTemplate.Builder().setActionStrip(strip.build())
         if(active && matcher?.state()?.status!=MatchStatus.ON_ROUTE) b.setNavigationInfo(RoutingInfo.Builder().setLoading(true).build())
@@ -464,7 +502,7 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
             // those dimensions are unsupported for a complete map+guidance experience.
             if(map.height()>=128*density) renderer?.render(c,map,route,fix,matcher?.state(),locationStatus,dark,surface?.dpi?:0)
             val lines=NavigationFooter.present(NavigationFooterInput(packet?.identity?.name,revealed,
-                adapter.state==OwnershipState.ACTIVE,returning,returnCompleted,arrival.arrived,arrival.candidate,
+                adapter.state==OwnershipState.ACTIVE,returning,returnCompleted,confirmedArrival,arrival.candidate,
                 preparation!=null || pendingPreparation!=null,
                 reroute?.state()?.status in listOf(RerouteStatus.LOADING,RerouteStatus.WAITING_RETRY),
                 matcher?.state()?.status,matcher?.state()?.progress,turn()?.road,voiceOn,budgetSnapshot()?.risk,result,adapter.state))

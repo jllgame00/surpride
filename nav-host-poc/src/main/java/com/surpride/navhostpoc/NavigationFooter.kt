@@ -32,6 +32,9 @@ internal object NavigationFooter {
     fun present(input:NavigationFooterInput):List<String> {
         val stopped=!input.active && (input.result.startsWith("USER_STOPPED") || input.result.startsWith("GUIDANCE_STOPPED"))
         val status=when {
+            input.result.startsWith("SESSION_RESTORE_UNAVAILABLE") || input.result.startsWith("SESSION_ENDED_OR_CHANGED") || input.result.startsWith("SESSION_CHANGED")->"저장된 경로를 복원할 수 없어요 · SURPRIDE에서 다시 준비해 주세요"
+            input.result.startsWith("SESSION_CACHE_UNAVAILABLE")->"경로 정보를 저장하지 못했어요 · 다시 준비해 주세요"
+            input.result.startsWith("RETURN_PREPARATION_INTERRUPTED")->"복귀 준비가 중단됐어요 · 정차 후 복귀 준비를 다시 선택해 주세요"
             input.ownerState==OwnershipState.ERROR->"안내 연결 오류 · 정차 후 다시 준비해 주세요"
             input.ownerState==OwnershipState.REQUESTED->"안내 연결을 확인하고 있어요"
             input.working->if(input.returning) "복귀 경로를 준비하고 있어요" else "경로를 준비하고 있어요"
@@ -57,7 +60,6 @@ internal object NavigationFooter {
             input.result.startsWith("FRESH_ON_ROUTE_GPS_REQUIRED")->"경로 위의 현재 위치를 확인하고 있어요"
             input.result.startsWith("MAIN_APP_RESULT_UNAVAILABLE")->"결과 화면을 열지 못했어요"
             input.result.startsWith("ARRIVAL_NOT_CONFIRMED")->"아직 도착을 확인할 수 없어요"
-            input.result.startsWith("SESSION_CACHE_UNAVAILABLE")->"경로 정보를 저장하지 못했어요"
             input.returnRisk==ReturnRisk.AT_RISK->"복귀 시간을 확인해 주세요 · 교통에 따라 달라져요"
             input.returning->if(input.active) "출발지로 돌아가는 중" else "복귀 경로 준비 · 안내 시작 전"
             input.revealed->"공개 · ${input.destinationName?:"목적지"}"

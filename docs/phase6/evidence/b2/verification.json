@@ -1,0 +1,176 @@
+{
+  "date": "2026-11-10",
+  "branch": "main",
+  "head": "3a88b32422c141aa8082ab8444e50313b551a2a9",
+  "result": "READY_WITH_LIMITATIONS",
+  "persistence_integrity": "VERIFIED_CONTRACT",
+  "session_restoration": "PARTIAL",
+  "destination_privacy": "PARTIAL",
+  "tests": {
+    "app": {
+      "tests": 200,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "nav-host-poc": {
+      "tests": 257,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "backend": {
+    "tests": 102,
+    "failures": 0,
+    "skipped": 0
+  },
+  "native_app": {
+    "tests": 16,
+    "final_success": true
+  },
+  "native_poc": {
+    "tests": 1,
+    "final_success": true
+  },
+  "jvm_server_total": 559,
+  "native_separate_total": 17,
+  "unique_total": 576,
+  "previous_unique_total": 527,
+  "new_jvm_server": 42,
+  "new_native": 7,
+  "new_unique_total": 49,
+  "baseline_files": 680,
+  "unchanged_baseline_files": 667,
+  "changed_tracked_files": [
+    "app/src/main/java/com/surpride/app/realdata/LiveNavigationResultActivity.kt",
+    "app/src/main/java/com/surpride/app/realdata/LiveNavigationStore.kt",
+    "app/src/main/java/com/surpride/app/realdata/PreparedRouteContract.kt",
+    "docs/phase6/B1_GUIDANCE_ACCURACY.md",
+    "docs/phase6/CODEBASE_AUDIT.md",
+    "docs/phase6/REFACTOR_PLAN.md",
+    "docs/phase6/RELEASE_RISK_REGISTER.md",
+    "nav-host-poc/build.gradle.kts",
+    "nav-host-poc/src/main/java/com/surpride/navhostpoc/ActiveMysteryScreen.kt",
+    "nav-host-poc/src/main/java/com/surpride/navhostpoc/ActiveRoutePacket.kt",
+    "nav-host-poc/src/main/java/com/surpride/navhostpoc/MockNavigationService.kt",
+    "nav-host-poc/src/main/java/com/surpride/navhostpoc/NavigationFooter.kt",
+    "nav-host-poc/src/test/java/com/surpride/navhostpoc/ActiveGuidanceIntegrationTest.kt"
+  ],
+  "known_secret_matches_changed_files_and_four_apk_entries": 0,
+  "installed_apk_sha256": {
+    "com.surpride.app": "ee418391c6430e38818926f35bc379fbfeccd2d84f8483d1d1fcfe0409c5b224",
+    "com.surpride.navhostpoc": "43bca0e6eda82deb6585c0bff21dac18ae5b402336d7ce02c959ae4d7f7193cb",
+    "com.surpride.app.test": "8556f5d06d900c59fb54ef38cea28b6c90fded48f602479f194c9c80e9d43075",
+    "com.surpride.navhostpoc.test": "d097f8abf183be6678bfa0a95a30aaa7f2d801800e4255c7509e7f993944264f"
+  },
+  "device_restoration": {
+    "private_record_hashes_verified": 5,
+    "extra_hashes_verified": 0,
+    "original_gps_restored": true,
+    "test_fixture_files_removed": true,
+    "navigation_focus_empty": true,
+    "navigation_started_automatically": 0,
+    "voice_requested_automatically": 0,
+    "rollback_private_copies_removed": true
+  },
+  "mock_host_observations": [
+    {
+      "stage": "disclosed",
+      "focus_empty": true,
+      "start_requests": 0,
+      "voice_requested": 0,
+      "packet_unchanged": true,
+      "gps_subscribe_calls": 1,
+      "ui_result": "OBSERVED_MOCK_RESTORATION"
+    },
+    {
+      "stage": "arrived",
+      "focus_empty": true,
+      "start_requests": 0,
+      "voice_requested": 0,
+      "packet_unchanged": true,
+      "gps_subscribe_calls": 0,
+      "ui_result": "PARTIAL_HOST_ERROR_OR_STATIC"
+    },
+    {
+      "stage": "return-requested",
+      "focus_empty": true,
+      "start_requests": 0,
+      "voice_requested": 0,
+      "packet_unchanged": true,
+      "gps_subscribe_calls": 0,
+      "ui_result": "PARTIAL_HOST_ERROR_OR_STATIC"
+    },
+    {
+      "stage": "prepared",
+      "focus_empty": true,
+      "start_requests": 0,
+      "voice_requested": 0,
+      "packet_unchanged": true,
+      "gps_subscribe_calls": 1,
+      "ui_result": "OBSERVED_MOCK_RESTORATION"
+    },
+    {
+      "stage": "return-ready",
+      "focus_empty": true,
+      "start_requests": 0,
+      "voice_requested": 0,
+      "packet_unchanged": true,
+      "gps_subscribe_calls": 1,
+      "ui_result": "OBSERVED_MOCK_RESTORATION"
+    },
+    {
+      "stage": "return-completed",
+      "focus_empty": true,
+      "start_requests": 0,
+      "voice_requested": 0,
+      "packet_unchanged": true,
+      "gps_subscribe_calls": 0,
+      "ui_result": "OBSERVED_MOCK_RESTORATION"
+    },
+    {
+      "stage": "expired",
+      "focus_empty": true,
+      "start_requests": 0,
+      "voice_requested": 0,
+      "packet_unchanged": true,
+      "gps_subscribe_calls": 0,
+      "ui_result": "PARTIAL_HOST_ERROR_OR_STATIC"
+    },
+    {
+      "stage": "wrong-nonce",
+      "focus_empty": true,
+      "start_requests": 0,
+      "voice_requested": 0,
+      "packet_unchanged": true,
+      "gps_subscribe_calls": 0,
+      "ui_result": "PARTIAL_HOST_ERROR_OR_STATIC"
+    }
+  ],
+  "native_issues": {
+    "instrumentation_setup_runner_crash": "runner dependency corrected; native test PASS",
+    "focus_event_timeout_attempts": 1,
+    "focus_event_timeout_ms": 5003,
+    "focus_event_timeout_root_cause": "UNCONFIRMED; process exited, no wait trace",
+    "full_app_retry": "16 PASS",
+    "host_surface_invalid": "OBSERVED; A04 remains open"
+  },
+  "review": {
+    "critical": 0,
+    "important": 1,
+    "minor": 0,
+    "important_resolved": "Control pop/UX consent loss; 2 RED tests then GREEN + complete suite"
+  },
+  "active_host_tbt_tts_focus_e2e": "BLOCKED_A04",
+  "real_car": "NOT_TESTED",
+  "screenshots": [
+    "host-prepared.png",
+    "host-disclosed.png",
+    "host-arrived.png",
+    "host-return-ready.png",
+    "host-return-completed.png",
+    "host-wrong-nonce.png",
+    "host-review-cold-1.png"
+  ]
+}

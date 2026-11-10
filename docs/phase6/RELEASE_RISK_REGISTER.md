@@ -1,5 +1,7 @@
 # SURPRIDE Phase 6A — 제출·배포 위험 등록부
 
+> 후속 상태 기록(2026-11-10, 6B-2): [B2 증거](B2_PERSISTENCE_RESTORATION.md)에 따라 R03의 A06/A03 **저장·복원 계약 수정/실패 주입/native 회귀 완료**를 기록한다. 전체 Host 복원 시연 보증은 계속 제한한다. R02/A05는 Screen stack/lifecycle 보완, R04/A04는 Surface 오류/정적 복귀 및 결과 Activity FocusEvent timeout을 추가 관찰해 미해소로 유지한다. R07/A11 물리 보존 정책과 DESTINATION_PRIVACY PARTIAL 등 다른 게이트는 해제하지 않는다. 과거 표/집계는 역사적 기록이다.
+
 > 후속 상태 기록(2026-11-10): 아래 표·검사 수는 6A 당시 기록이다. [Phase 6B-1](B1_GUIDANCE_ACCURACY.md)의 R01 업데이트는 **A01/A02 코드 계약 수정 및 정식 회귀 완료 / 실제 Host 활성 회전 카드·다양한 실경로 검증 조건 유지**다. R02는 실제 Screen 최소 통합을 보완했으나 전체 lifecycle/Binder는 PARTIAL, R04의 Host 컨트롤 문제는 재관측·미해소다. 역사적 발견 수는 재집계하지 않았으며 다른 release gate를 해제하지 않는다.
 
 2026-11-10 · **AUDIT_WITH_LIMITATIONS**

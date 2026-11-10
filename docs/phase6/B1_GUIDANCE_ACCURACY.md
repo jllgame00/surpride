@@ -1,5 +1,7 @@
 # SURPRIDE Phase 6B-1 — 안내 거리와 Geometry 무결성
 
+> 후속 구현(6B-2): [원자적 저장·세션 복원 결과](B2_PERSISTENCE_RESTORATION.md)를 추가했다. 아래 B1 당시 판정·검사 수는 보존하며 A01/A02 안전 로직은 변경하지 않았다.
+
 2026-11-10 · **READY_WITH_LIMITATIONS** · **GUIDANCE_ACCURACY = VERIFIED_CONTRACT**
 
 이 판정은 입력·거리 환산·Screen 출력 계약에 한정한다. 실제 Host 활성 회전 카드와 실음향은 이번에 끝까지 확인하지 못했다. 실차 안전성 인증, 목적지 완전 비공개 또는 배포 승인이 아니다.

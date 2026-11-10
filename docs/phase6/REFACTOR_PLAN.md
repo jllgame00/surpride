@@ -1,5 +1,7 @@
 # SURPRIDE Phase 6B — 최소·완전 개선 계획
 
+> 후속 실행 기록(2026-11-10, 6B-2): B2의 A06/A03 및 실제 Screen stack 회귀 결과를 [별도 문서](B2_PERSISTENCE_RESTORATION.md)에 기록했다. 저장/복원 계약 검증 뒤 B3에 진입 가능하나 Host 활성 전체 흐름은 미완료다. B3에서 A04 Surface/조작·결과 Activity FocusEvent timeout과 남은 A05/A13을 우선한다. 아래는 6A 당시 계획이다.
+
 > 후속 구현 기록(2026-11-10): 아래는 6A 당시 계획이다. B1(A01/A02/관련 A05)의 실행 근거는 [Phase 6B-1 결과](B1_GUIDANCE_ACCURACY.md)에 있다. 거리/무결성 계약 회귀는 완료했고 실제 Host 컨트롤 제한은 남는다. 다음 B2는 A06→A03 및 관련 복원 회귀로 진행 가능하다. B3/나머지 과제를 완료로 간주하지 않는다.
 
 2026-11-10 · Phase 6A 읽기 전용 제안 · **이번에 구현하지 않음**

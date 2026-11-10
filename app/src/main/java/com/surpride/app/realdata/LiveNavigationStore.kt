@@ -26,20 +26,34 @@ object LiveNavigationStore {
         val pending=json.optJSONObject("pending")?.let {
             PendingLiveNavigation(it.getString("nonce"),it.getString("candidate_id"),it.getLong("prepared_at_epoch_ms"))
         }
+        val completed=try {json.optJSONObject("completed")?.let {
+            val token=it.getString("nonce");val candidate=it.getString("candidate_id")
+            require(token.matches(Regex("[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}")))
+            require(SeoulPilotCatalog.places.any {place->place.id==candidate})
+            PendingLiveNavigation(token,candidate,it.getLong("prepared_at_epoch_ms"))
+        }} catch(_:Exception) {null} // A damaged receipt cannot hide the independent visit history.
         val visits=json.optJSONArray("visits")?:JSONArray()
         LiveNavigationJournal(pending,(0 until visits.length()).map {i->
             val visit=visits.getJSONObject(i)
             LiveNavigationVisit(visit.getString("candidate_id"),visit.getInt("rating"),visit.getLong("completed_at_epoch_ms"))
-        }.filter {it.rating in 1..5 && it.completedAtMillis>0 && SeoulPilotCatalog.places.any {place->place.id==it.candidateId}})
+        }.filter {it.rating in 1..5 && it.completedAtMillis>0 && SeoulPilotCatalog.places.any {place->place.id==it.candidateId}},completed)
     } catch(_:Exception) {LiveNavigationJournal()}
     private fun persist(context:Context,journal:LiveNavigationJournal):Boolean {
         val json=JSONObject()
         journal.pending?.let {json.put("pending",JSONObject().put("nonce",it.nonce).put("candidate_id",it.candidateId)
             .put("prepared_at_epoch_ms",it.preparedAtMillis))}
+        journal.completed?.takeIf {System.currentTimeMillis()-it.preparedAtMillis in 0..PreparedRouteContract.TTL_MILLIS}?.let {
+            json.put("completed",JSONObject().put("nonce",it.nonce).put("candidate_id",it.candidateId).put("prepared_at_epoch_ms",it.preparedAtMillis))
+        }
         json.put("visits",JSONArray().apply {journal.visits.forEach {visit->
             put(JSONObject().put("candidate_id",visit.candidateId).put("rating",visit.rating)
                 .put("completed_at_epoch_ms",visit.completedAtMillis))
         }})
-        return context.getSharedPreferences(PREFS,Context.MODE_PRIVATE).edit().putString("journal",json.toString()).commit()
+        val prefs=context.getSharedPreferences(PREFS,Context.MODE_PRIVATE)
+        val previous=prefs.getString("journal",null)
+        if(prefs.edit().putString("journal",json.toString()).commit()) return true
+        // A failed SharedPreferences commit may have changed its in-process map.
+        prefs.edit().putString("journal",previous).commit()
+        return false
     }
 }

@@ -146,6 +146,20 @@ class ActiveGuidanceIntegrationTest {
             assertEquals(1,h.manager.navigationEndedCount)
         }
     }
+    @Test fun ownershipLossAndNonceReplacementCannotResumeOldCallbacksOnRecreation() {
+        Harness().use {h->
+            h.emit();val queued=h.positions.captureCallback()!!;h.focus.lose!!()
+            val newBody=JSONObject(payload(h.now)).put("session_nonce","00000000-0000-4000-8000-000000000002").toString()
+            File(h.context.cacheDir,"route-guidance.json").writeText(newBody)
+            val restored=ActiveMysteryScreen(h.context,ActiveRoutePacket.load(h.context))
+            val starts=h.manager.navigationStartedCount;val trips=h.manager.tripsSent.size;val spoken=h.speech.texts.size
+            queued(h.fix(90.0))
+            assertEquals(starts,h.manager.navigationStartedCount);assertEquals(trips,h.manager.tripsSent.size)
+            assertEquals(spoken,h.speech.texts.size);assertEquals(0,h.positions.subscriberCount)
+            assertFalse(field<Boolean>(restored,"pendingStart"));assertFalse(field<Boolean>(restored,"subscribed"))
+            assertNull(field<PositionFix?>(restored,"fix"));assertFalse(field<AndroidNavigationVoice>(restored,"voice").state.owned)
+        }
+    }
     @Test fun malformedRerouteGeometryEndsGuidanceWithoutPublishingAReplacementTurn() {
         Harness().use {h->
             h.emit()

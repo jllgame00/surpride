@@ -43,10 +43,10 @@ class MockNavigationService : CarAppService() {
         return object : Session() {
             override fun onCreateScreen(intent: Intent): Screen {
                 Log.i(TAG, "HOST_CONNECTED carApi=${carContext.carAppApiLevel}")
-                return if(intent.data!=null) ActiveMysteryScreen(carContext,ActiveRoutePacket.load(carContext,intent)) else MockNavigationScreen(carContext)
+                return if(intent.data!=null || intent.action==ActiveRoutePacket.RESUME_ACTION) ActiveMysteryScreen(carContext,ActiveRoutePacket.load(carContext,intent)) else MockNavigationScreen(carContext)
             }
             override fun onNewIntent(intent:Intent) {
-                if(intent.data!=null) {
+                if(intent.data!=null || intent.action==ActiveRoutePacket.RESUME_ACTION) {
                     val screens=carContext.getCarService(androidx.car.app.ScreenManager::class.java)
                     screens.popToRoot()
                     screens.push(ActiveMysteryScreen(carContext,ActiveRoutePacket.load(carContext,intent)))

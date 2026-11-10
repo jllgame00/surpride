@@ -1,5 +1,7 @@
 # SURPRIDE Phase 6A — 전체 코드베이스 품질·안전 감사
 
+> 후속 구현 기록(2026-11-10, 6B-2): A06 원자적 저장과 A03 명시적 세션 결과/평가 영수증 복원 및 관련 A05 회귀를 구현했다. [B2 결과](B2_PERSISTENCE_RESTORATION.md)는 576 PASS, READY_WITH_LIMITATIONS / PERSISTENCE_INTEGRITY VERIFIED_CONTRACT / SESSION_RESTORATION PARTIAL이다. 실제 Host Surface/컨트롤 및 FocusEvent timeout은 남는다. 아래 당시 감사 발견 수·원문은 보존한다.
+
 > 후속 구현 기록(2026-11-10): 아래는 당시 읽기 전용 감사 기록이다. A01/A02 및 관련 A05의 수정·회귀·정차 AVD 결과는 [Phase 6B-1](B1_GUIDANCE_ACCURACY.md)에 분리했다. 당시 발견 수와 미실행 진술을 현재 구현 결과로 조용히 바꾸지 않는다. B1 판정은 READY_WITH_LIMITATIONS이며 실제 Host 활성 안내는 미검증이다.
 
 2026-11-10 · **AUDIT_WITH_LIMITATIONS** · 제품 소스·기존 테스트 변경 없음

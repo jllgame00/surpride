@@ -12,6 +12,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "0.1-host-feasibility"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     // This module is an emulator-only static UI experiment, not a distributable navigator.
     buildTypes { release { isMinifyEnabled = false } }
@@ -31,6 +32,8 @@ dependencies {
     testImplementation("org.json:json:20250517")
     testImplementation("androidx.car.app:app-testing:1.7.0")
     testImplementation("org.robolectric:robolectric:4.16.1")
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation("androidx.test:runner:1.5.2")
 }
 
 // Test-JVM-only homes keep Robolectric's Maven cache/download lock inside the workspace.
