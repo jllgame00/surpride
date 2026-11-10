@@ -73,7 +73,7 @@ class SurprideUi(private val context: Context) {
         }
     }
     fun styleButton(button:Button,primary:Boolean=false,selected:Boolean=false) = button.apply {
-        isAllCaps=false;textSize=24f;letterSpacing=0f
+        isAllCaps=false;setSingleLine(false);textSize=24f;letterSpacing=0f
         typeface=Typeface.create("sans-serif-medium",Typeface.NORMAL)
         minHeight=context.resources.getDimensionPixelSize(R.dimen.surpride_control_height);minWidth=dp(76)
         minimumHeight=minHeight;minimumWidth=minWidth

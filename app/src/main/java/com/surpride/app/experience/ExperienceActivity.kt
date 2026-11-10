@@ -34,6 +34,7 @@ class ExperienceActivity : AppCompatActivity() {
     private val accent get()=ui.accent
     private lateinit var root: LinearLayout
     private lateinit var content: LinearLayout
+    private var nextControlId=0
     private lateinit var controller: TripController
     private lateinit var store: DemoStateStore
     private lateinit var ux: ParkedUxMonitor
@@ -102,12 +103,18 @@ class ExperienceActivity : AppCompatActivity() {
 
     private fun act(action: () -> Unit) {
         if(!allowed || restoreFailed) return
+        val focused=(currentFocus as? Button)?.tag
+        val prior=controller.state
         action()
         try {store.save(controller.state);saveFailed=false} catch (_: Exception) {saveFailed=true}
         render()
+        if(focused!=null && controller.state.panel==prior.panel && controller.state.phase==prior.phase && controller.state.setupStep==prior.setupStep) {
+            root.findViewWithTag<Button>(focused)?.requestFocus()
+        }
     }
     private fun render() {
         if(!::root.isInitialized) return
+        nextControlId=0
         root.removeAllViews()
         val rail=column().apply {setPadding(dp(24),dp(32),dp(20),dp(24))}
         root.addView(ScrollView(this).apply {isFillViewport=true;addView(rail)},LinearLayout.LayoutParams(dp(if(resources.configuration.screenWidthDp<1100) 170 else 220),-1))
@@ -349,7 +356,7 @@ class ExperienceActivity : AppCompatActivity() {
     private fun card()=ui.card()
     private fun text(value: String,size: Int,color: Int,bold: Boolean=false)=ui.text(value,max(20,size),color,bold)
     private fun button(label: String,primary: Boolean=false,action: () -> Unit) = buttonRaw(label,primary) {act(action)}
-    private fun buttonRaw(label: String,primary: Boolean,action: () -> Unit)=ui.button(label,primary,action)
+    private fun buttonRaw(label: String,primary: Boolean,action: () -> Unit)=ui.button(label,primary,action).apply {tag=nextControlId++}
     private fun <T> choices(parent: LinearLayout,options: List<T>,columns: Int,label: (T)->String,selected: (T)->Boolean,choose: (T)->Unit) {
         options.chunked(columns).forEach {chunk ->
             val line=row();parent.addView(line)

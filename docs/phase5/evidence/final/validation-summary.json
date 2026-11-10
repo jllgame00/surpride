@@ -1,0 +1,569 @@
+{
+  "git": {
+    "branch": "main",
+    "head": "43c659442ea7894f2ff3835eb4c1f3843d5b204f"
+  },
+  "device": {
+    "serial": "emulator-5556",
+    "user": 10,
+    "model": "Connect on x86_64 emulator",
+    "api": "34"
+  },
+  "visual_acceptance": "PENDING_USER_REVIEW",
+  "destination_privacy": "PARTIAL",
+  "tests": {
+    "app": {
+      "tests": 196,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "nav-host-poc": {
+      "tests": 196,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "backend": {
+      "tests": 90,
+      "failures": 0
+    }
+  },
+  "instrumentation": {
+    "verified-density200-font130.log": {
+      "tests": 10,
+      "failures": 0
+    },
+    "verified-density160-font200.log": {
+      "tests": 10,
+      "failures": 0
+    },
+    "verified-density160-font100.log": {
+      "tests": 10,
+      "failures": 0
+    }
+  },
+  "activity_configurations": [
+    "UI_CONFIG fontScale=1.3 densityDpi=200 widthDp=1346 heightDp=896",
+    "UI_CONFIG fontScale=1.3 densityDpi=200 widthDp=1346 heightDp=950",
+    "UI_CONFIG fontScale=2.0 densityDpi=160 widthDp=1682 heightDp=1120",
+    "UI_CONFIG fontScale=2.0 densityDpi=160 widthDp=1682 heightDp=1210"
+  ],
+  "installed_apks": {
+    "com.surpride.app": {
+      "sha256": "54041f8986e5166ffc00cfa957f48b85dfd5ba2f09e99c2105938badd4415d64",
+      "matches_built_apk": true
+    },
+    "com.surpride.navhostpoc": {
+      "sha256": "60d0a5dc9d3094da4c3ba590565c9518236dfb12a0acb27963b82ad16fb7d47c",
+      "matches_built_apk": true
+    }
+  },
+  "runtime_events": {
+    "hidden_active": true,
+    "explicit_reveal_active": true,
+    "reroute_success": true,
+    "reroute_failure": true,
+    "arrival_confirmations": 2,
+    "return_prepared_without_auto_start": true,
+    "return_replaced": true
+  },
+  "exit_history": {
+    "com.surpride.app": {
+      "crash": 0,
+      "native_crash": 0,
+      "anr": 0,
+      "other_observed_exits": 16
+    },
+    "com.surpride.navhostpoc": {
+      "crash": 0,
+      "native_crash": 0,
+      "anr": 0,
+      "other_observed_exits": 2
+    },
+    "com.android.car.templates.host": {
+      "crash": 0,
+      "native_crash": 0,
+      "anr": 0,
+      "other_observed_exits": 0
+    }
+  },
+  "known_secret_scan": {
+    "known_local_credentials_compared": true,
+    "nonignored_source_match": false,
+    "apk_entry_match": false
+  },
+  "screenshots": [
+    {
+      "file": "01-launch-baseline.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "02-launch-transition.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "03-home-baseline.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "04-oem-foreground-transition.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "05-oem-foreground-transition.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "06-natural-input.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "07-ime-open-baseline.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "08-conditions-baseline.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "09-conditions-font130.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F10-natural-input.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F11-ime-no-fullscreen.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F12-ime-korean-composition.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F13-ime-back-preserved.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F14-start-final.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F15-home-final.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F16-conditions-final.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F17-narrow-conditions-font130.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "F17b-host-window-clipped-1920.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "F18-density200-font130-conditions.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F19-density200-font130-ime.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F20-font200-conditions.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F21-font200-ime.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F22-density120-start.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F23-density120-dark-start.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F24-natural-empty-error-dark.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F25-natural-corrected-dark.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F26-real-route-loading.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F27-real-oneway-ready.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F28-real-roundtrip-ready.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F29-handoff-transition.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F30-navigation-entry.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F31-host-controls-check.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F32-host-static-check.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F33-host-static-restarted.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F34-host-experiment-menu.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F35-active-screen-from-menu.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F36-parked-start-controls.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F37-permission-prepared-map.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F38-guidance-permission-controls.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F39-controls-touch-check.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F40-precise-permission-blocked.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F41-location-permission-dialog.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F42-active-secret-map.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F43-active-controls.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F44-explicit-reveal-guidance-retained.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F45-gps-loss-safe-loading.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F46-gps-loss-stopped.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F47-reroute-observation.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F48-reroute-success.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F49-server-off-reroute-loading.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F50-server-off-reroute-result.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F51-reroute-network-failure-stopped.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F52-dark-start-default.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F53-server-unavailable-main.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F54-main-network-error-confirmed.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F55-network-recovered-ready.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F56-return-entry-transition.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F57-secret-guidance-recovered.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F58-user-cancel-stopped.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F59-arrival-approach-secret.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F60-arrival-candidate-still-secret.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F61-parked-arrival-confirm-menu.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F62-arrived-destination-revealed.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F63-arrived-review-return-controls.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F64-live-rating-unselected.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F65-rating-saved.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F66-return-navigation-entry.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F67-return-requested.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F68-return-prepared-no-auto-start.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F69-return-start-checking.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F70-return-arrival-candidate.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F70-return-status-check.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F70b-return-before-retry.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F70c-return-retry-controls.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F71-return-confirm-menu.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F71b-return-start-retried.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F72-return-start-stable.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F73-return-active-verified.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F74-return-recovery-controls.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F75-return-reprepared.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F76-return-recovery-active.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F77-return-confirm-controls.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F78-return-completed.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F79-mood-records.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F80-record-detail.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "F81-restored-start.png",
+      "width": 2560,
+      "height": 1440
+    }
+  ],
+  "review": {
+    "before": 5,
+    "after": 6,
+    "added_once": true,
+    "rating": 4
+  },
+  "crash_buffer": {
+    "target_java_fatal_processes": [],
+    "other_java_fatal_processes": [],
+    "system_native_fatal_lines": 136
+  },
+  "return_replay_limit": "Overlapping return road geometry produced ambiguous/reversed matching and safe stop during position-only replay. Recovered through existing current-location route preparation; explicit restart and parked arrival confirmation completed.",
+  "token_contrast": {
+    "values": {
+      "ink_on_surface": 16.15,
+      "muted_on_surface": 7.11,
+      "error_on_surface": 6.92,
+      "on_accent_on_accent_fill": 13.04
+    },
+    "values-night": {
+      "ink_on_surface": 13.34,
+      "muted_on_surface": 6.75,
+      "error_on_surface": 8.18,
+      "on_accent_on_accent_fill": 13.04
+    }
+  },
+  "restoration": {
+    "no_backup/surpride-demo-v1.bin": true,
+    "shared_prefs/live_navigation_emulator.xml": true,
+    "shared_prefs/appearance.xml": true,
+    "original_emulator_gps_coordinate_restored": true,
+    "font_scale": "1.0",
+    "wm_size": "Physical size: 2560x1440",
+    "wm_density": "Physical density: 160",
+    "location_enabled": "true"
+  },
+  "final_guidance": "Explicit outbound and return confirmations released ownership to STOPPED; app then force-stopped for private-data restoration.",
+  "unique_tests_passed": 492,
+  "final_proxy_listening": false,
+  "final_nonignored_source_secret_scan": "No known local credential match after documentation update.",
+  "status": "READY_WITH_LIMITATIONS"
+}

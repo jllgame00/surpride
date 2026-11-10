@@ -91,5 +91,12 @@ class NavigationFooterTest {
         assertTrue(complete.first().contains("출발지"))
     }
 
+    @Test fun completedReturnDoesNotOfferUnavailableReviewOrAnotherReturn() {
+        val lines=NavigationFooter.present(NavigationFooterInput(returning=true,returnCompleted=true,arrived=true))
+        assertTrue(lines.first().contains("출발지"))
+        assertFalse(lines.last().contains("평가"))
+        assertFalse(lines.last().contains("복귀"))
+    }
+
     private fun progress()=RouteProgress(200.0,3200.0,400.0,0,720)
 }

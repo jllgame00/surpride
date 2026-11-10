@@ -1,0 +1,456 @@
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 5390): OEM connected=true active=false error=null
+I/SurprideActive( 2058): FOCUS connected=false otherActive=null error=null
+I/SurprideActive( 2058): FOCUS connected=true otherActive=null error=null
+I/SurprideActive( 2058): OEM connected=false active=null error=null
+I/SurprideActive( 2058): OEM connected=true active=null error=null
+I/SurprideActive( 2058): OEM connected=true active=false error=null
+I/SurprideActive( 2058): OEM connected=true active=false error=null
+I/SurprideActive( 2058): OEM connected=true active=false error=null
+I/SurprideActive( 2058): OEM connected=true active=false error=null
+I/SurprideActive( 2058): OEM connected=true active=false error=null
+I/SurprideActive( 2058): OEM connected=true active=false error=null
+I/SurprideActive( 2058): OEM connected=true active=false error=null
+I/SurprideActive( 2058): OEM connected=true active=false error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): OEM connected=true active=null error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): OEM connected=true active=null error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): OEM connected=true active=null error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): START_REQUEST accepted=true state=REQUESTED reason=AWAITING_GRANT
+I/SurprideActive(21536): FOCUS connected=true otherActive=false error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): DISCLOSURE explicit=true
+I/SurprideReroute(21536): LOADING_TRIP returned=true owner=ACTIVE
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): OEM connected=true active=null error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): START_REQUEST accepted=true state=REQUESTED reason=AWAITING_GRANT
+I/SurprideActive(21536): FOCUS connected=true otherActive=false error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=false error=null
+I/SurprideReroute(21536): LOADING_TRIP returned=true owner=ACTIVE
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideReroute(21536): state=LOADING attempts=1 error=null owner=ACTIVE
+I/SurprideReroute(21536): state=READY attempts=0 error=null owner=ACTIVE
+I/SurprideReroute(21536): ROUTE_REPLACED source=KAKAO_DIRECTIONS return=false segments=15 maneuvers=16 owner=ACTIVE gpsSubscribed=true
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideReroute(21536): LOADING_TRIP returned=true owner=ACTIVE
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideReroute(21536): state=LOADING attempts=1 error=null owner=ACTIVE
+I/SurprideReroute(21536): state=WAITING_RETRY attempts=1 error=NETWORK owner=ACTIVE
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideReroute(21536): state=LOADING attempts=2 error=null owner=ACTIVE
+I/SurprideReroute(21536): state=FAILED attempts=2 error=NETWORK owner=ACTIVE
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): DESTROYED
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): OEM connected=true active=null error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): OEM connected=true active=null error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): START_REQUEST accepted=true state=REQUESTED reason=AWAITING_GRANT
+I/SurprideActive(21536): FOCUS connected=true otherActive=false error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=false error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): OEM connected=true active=null error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): START_REQUEST accepted=true state=REQUESTED reason=AWAITING_GRANT
+I/SurprideActive(21536): FOCUS connected=true otherActive=false error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): ARRIVED confirmed=true ownerReleased=STOPPED
+I/SurprideActive(21536): FOCUS connected=true otherActive=false error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): OEM connected=true active=null error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): OEM connected=true active=null error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): OEM connected=true active=null error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideReroute(21536): ROUTE_REPLACED source=KAKAO_DIRECTIONS return=true segments=21 maneuvers=22 owner=STOPPED gpsSubscribed=true
+I/SurprideReturn(21536): PREPARED success=true returning=true autoStart=false
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): OEM connected=true active=null error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): OEM connected=true active=null error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): OEM connected=true active=null error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): OEM connected=true active=null error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): START_REQUEST accepted=true state=REQUESTED reason=AWAITING_GRANT
+I/SurprideActive(21536): FOCUS connected=true otherActive=false error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideReroute(21536): LOADING_TRIP returned=true owner=ACTIVE
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): OEM connected=true active=null error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideReroute(21536): ROUTE_REPLACED source=KAKAO_DIRECTIONS return=true segments=1 maneuvers=2 owner=STOPPED gpsSubscribed=true
+I/SurprideReturn(21536): PREPARED success=true returning=true autoStart=false
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): OEM connected=true active=null error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): START_REQUEST accepted=true state=REQUESTED reason=AWAITING_GRANT
+I/SurprideActive(21536): FOCUS connected=true otherActive=false error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): FOCUS connected=true otherActive=null error=null
+I/SurprideActive(21536): ARRIVED confirmed=true ownerReleased=STOPPED
+I/SurprideActive(21536): FOCUS connected=true otherActive=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=true active=false error=null
+I/SurprideActive(21536): OEM connected=false active=null error=null
+I/SurprideActive(21536): FOCUS connected=false otherActive=null error=null
+I/SurprideActive(21536): TRIP returned=true updates=1 destinations=0 state=ACTIVE
+I/SurprideActive(21536): TRIP returned=true updates=39 destinations=0 state=ACTIVE
+I/SurprideActive(21536): TRIP returned=true updates=36 destinations=1 state=ACTIVE
+I/SurprideActive(21536): TRIP returned=true updates=56 destinations=1 state=ACTIVE

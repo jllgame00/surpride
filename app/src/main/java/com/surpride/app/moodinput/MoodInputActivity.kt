@@ -87,6 +87,7 @@ class MoodInputActivity:AppCompatActivity() {
             setPadding(dp(16),dp(16),dp(16),dp(16))
             backgroundTintList=null;background=ui.shape(ui.raised,12)
             inputType=android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
+            imeOptions=imeOptions or android.view.inputmethod.EditorInfo.IME_FLAG_NO_FULLSCREEN
             filters=arrayOf(InputFilter.LengthFilter(1000));isSaveEnabled=false;setText(draft.input)
             addTextChangedListener(object:TextWatcher {
                 override fun beforeTextChanged(s:CharSequence?,start:Int,count:Int,after:Int){}
@@ -106,7 +107,7 @@ class MoodInputActivity:AppCompatActivity() {
         left.addView(label("음성이 인식되지 않으면 직접 입력하거나 조건을 선택해 주세요",20,muted))
         status=label(message,20,accent).apply {accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE};left.addView(status)
         extraction=label("",22,ink);left.addView(extraction)
-        left.addView(label("입력한 문장과 음성은 저장하거나 외부 AI에 보내지 않아요. 기분은 취향 분류이며 건강 진단이 아닙니다",20,muted))
+        left.addView(label("문장·음성은 저장하거나 외부 AI에 보내지 않아요.\n기분 분류는 건강 진단이 아닙니다",20,muted))
 
         right.addView(ui.text("2  추천 조건 확인",28,ink,true))
         summary=label("",24);right.addView(summary)

@@ -74,6 +74,7 @@ internal object NavigationFooter {
         }
         val road=if(trusted) input.road?.takeIf {it.isNotBlank()} else null
         val detail=when {
+            input.returnCompleted->"안내가 끝났어요 · 안전하게 마무리해 주세요"
             input.arrived->"평가 또는 복귀를 직접 선택해 주세요"
             input.working->"준비 후 안내는 직접 시작해 주세요"
             input.rerouting->"새 경로 확인 전까지 회전 안내를 기다려 주세요"
