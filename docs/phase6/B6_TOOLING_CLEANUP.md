@@ -148,3 +148,14 @@ user가 언급한 `emulator-5556`에 명시적으로 `adb -s emulator-5556 get-s
 **Phase 6C 제출 준비 진입 권고:** 제한을 명시한 정적·추천·계약 증거 정리에는 진입 가능하다. 지정된 정차 AVD를 준비하면 변경된 APK의 계측31을 다시 실행하고 합계를 갱신해야 한다. 그 전에는 이번 전체706 실행 완료로 발표하지 않는다. ignore된 문서·증거의 추적 방법을 검토하고, 제출 자료가 HOST_ACTIVE BLOCKED와 개인정보/캐시/보존 PARTIAL을 숨기지 않게 한다. 실차·상용 배포 준비 완료 판정은 하지 않는다.
 
 미검증: native 계측 재실행·실제 serial provisioning/GPS·Host ACTIVE·실차·실음향·장시간. 기존 제한을 유지하며 커밋·Push하지 않았다.
+
+## 9. 반복 요청 재확인 — main/e999b81
+
+현재 HEAD는 **`e999b810768262a1490c36464cdac5fc5d493f5b`**, 시작 status는 clean이다. 위 1절의 d68a89b는 최초 B6 작업 당시 기록이며 현재 HEAD로 가정하지 않았다. A15/A16 구현과 테스트는 이미 현재 저장소에 반영·커밋되어 있어 중복 이동·수정을 하지 않았다. 이번 재확인에서는 제품 코드와 기존 테스트를 변경하지 않고 이 절과 [별도 증거](evidence/b6/recheck-e999b81.json)만 추가했다. 기존 내용을 덮어쓰거나 Git 이력을 변경하지 않았다.
+
+- JVM 두 task에 `--rerun`을 지정해 app231/PoC308을 다시 실행했다. failure/error/skip 각각0. 서버도 **136 PASS**를 다시 확인했다. 이번 실제 통과는 **675개**, 최초 B6 대비 신규30개를 두 번 세지 않았으며 이번 추가 테스트는0개다.
+- 두 debug APK·계측 APK 빌드 및 두 release Kotlin 컴파일 성공. Gradle **57초 / 162 tasks: 2 executed, 160 up-to-date**. 제품 APK의 모든 DEX에 두 test 대역 descriptor가 없음을 재검사했다.
+- 다시 명시적으로 조회한 `emulator-5556`은 **device not found**다. 다른 기기로 전환하지 않았고 설치·실행·GPS·데이터 변경은 하지 않았다. 계측31은 여전히 B5 통과 이력이며 이번 전체706 재실행 완료라고 표현하지 않는다.
+- **추적 상태 변경:** 현재 이 B6 보고서는 이미 Git 추적 중이다. 따라서 `.gitignore:59 /docs/phase*/`가 있어도 이번 추가는 status에 표시된다. 새 `docs/phase6/evidence/b6/recheck-e999b81.json`은 그 규칙에 가려진다. ignore bytes는 보존했다.
+
+재확인 종료 시 HEAD는 e999b81 그대로이고 추적 변경은 이 보고서뿐이다. source·기존 검사·사용자 자료를 보존했으며 commit·push·staging은 하지 않았다. **READY_WITH_LIMITATIONS**, 제한을 명시한 Phase6C 자료 준비 진입 가능 판정을 유지한다. HOST_ACTIVE BLOCKED와 DESTINATION_PRIVACY/CACHE_POLICY/DATA_RETENTION PARTIAL, 실차·상용 미검증은 변함없다.
