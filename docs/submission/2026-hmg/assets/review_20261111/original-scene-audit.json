@@ -1,0 +1,123 @@
+[
+  {
+    "scene": 1,
+    "start_seconds": 0,
+    "end_seconds": 8,
+    "source": "docs/phase5/evidence/final/F14-start-final.png",
+    "matching_original_render_psnr_db": 41.16154026528274,
+    "source_sha256": "9c775e7b97b662b8eb559e114919aa53ca97987f1252b09c74403e5064591e5b",
+    "crop_box": [
+      853,
+      91,
+      2560,
+      1303
+    ],
+    "classification": "Phase 5C"
+  },
+  {
+    "scene": 2,
+    "start_seconds": 8,
+    "end_seconds": 20,
+    "source": "docs/phase5/evidence/final/F16-conditions-final.png",
+    "matching_original_render_psnr_db": 41.23103307565558,
+    "source_sha256": "9ddfd0001e15ca593261ab2c1951eefe1bf99043771a98a10531ca75e53f6cef",
+    "crop_box": [
+      853,
+      91,
+      2560,
+      1303
+    ],
+    "classification": "Phase 5C"
+  },
+  {
+    "scene": 3,
+    "start_seconds": 20,
+    "end_seconds": 34,
+    "source": "docs/phase5/evidence/final/F25-natural-corrected-dark.png",
+    "matching_original_render_psnr_db": 40.69962079774566,
+    "source_sha256": "83586570ebe9cf100e224b2aa2f2fb7ba8276a12fbac1c086270da8c69361d6f",
+    "crop_box": [
+      853,
+      91,
+      2560,
+      1303
+    ],
+    "classification": "Phase 5C"
+  },
+  {
+    "scene": 4,
+    "start_seconds": 34,
+    "end_seconds": 44,
+    "source": "docs/phase5/evidence/final/F16-conditions-final.png",
+    "matching_original_render_psnr_db": 41.137372112844375,
+    "source_sha256": "9ddfd0001e15ca593261ab2c1951eefe1bf99043771a98a10531ca75e53f6cef",
+    "crop_box": [
+      853,
+      91,
+      2560,
+      1303
+    ],
+    "classification": "Phase 5C"
+  },
+  {
+    "scene": 5,
+    "start_seconds": 44,
+    "end_seconds": 60,
+    "source": "docs/phase5/evidence/final/F28-real-roundtrip-ready.png",
+    "matching_original_render_psnr_db": 39.90272867420622,
+    "source_sha256": "5db166cf9602327b077c5fc65be89c9c085ff143fcac174c2de9952577272b22",
+    "crop_box": [
+      853,
+      91,
+      2560,
+      1303
+    ],
+    "classification": "Phase 5C"
+  },
+  {
+    "scene": 6,
+    "start_seconds": 60,
+    "end_seconds": 74,
+    "source": null,
+    "matching_original_render_psnr_db": 41.84083528147826,
+    "classification": "설명 그래픽"
+  },
+  {
+    "scene": 7,
+    "start_seconds": 74,
+    "end_seconds": 86,
+    "source": "docs/phase5/evidence/before/16-arrival-reveal-rating.png",
+    "matching_original_render_psnr_db": 40.87613385925057,
+    "source_sha256": "64cfc270cbc05ba91f986cd01360a0a96de802458e0e5335d619ba6f0f759aa2",
+    "crop_box": [
+      853,
+      91,
+      2560,
+      1303
+    ],
+    "classification": "Phase 5A 이전"
+  },
+  {
+    "scene": 8,
+    "start_seconds": 86,
+    "end_seconds": 98,
+    "source": "docs/phase5/evidence/before/12-mood-map.png",
+    "matching_original_render_psnr_db": 40.84357938514099,
+    "source_sha256": "9b44e477ad38e6015362498ea049a5e7307320033198dbd0ffdbebd69e0c71bd",
+    "crop_box": [
+      853,
+      91,
+      2560,
+      1303
+    ],
+    "classification": "Phase 5A 이전"
+  },
+  {
+    "scene": 9,
+    "start_seconds": 98,
+    "end_seconds": 109.95,
+    "source": null,
+    "matching_original_render_psnr_db": 41.712461121726236,
+    "classification": "설명 그래픽"
+  }
+]

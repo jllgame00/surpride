@@ -4,7 +4,9 @@
         <item name="colorPrimaryVariant">@color/surpride_surface</item>
         <item name="colorOnPrimary">@color/surpride_on_accent</item>
         <item name="colorSecondary">@color/surpride_accent</item>
-        <item name="colorOnSecondary">@color/surpride_background</item>
+        <item name="colorOnSecondary">@color/surpride_on_accent</item>
+        <item name="android:colorAccent">@color/surpride_accent</item>
+        <item name="colorControlActivated">@color/surpride_accent</item>
         <item name="colorSurface">@color/surpride_surface</item>
         <item name="colorOnSurface">@color/surpride_ink</item>
         <item name="android:colorBackground">@color/surpride_background</item>

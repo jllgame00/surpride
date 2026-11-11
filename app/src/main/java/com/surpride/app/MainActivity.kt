@@ -52,9 +52,6 @@ class MainActivity : AppCompatActivity() {
         findViewById<View>(R.id.experience_start).setOnClickListener {
             startActivity(android.content.Intent(this, com.surpride.app.experience.ExperienceActivity::class.java))
         }
-        (findViewById<View>(R.id.launch_art) as android.widget.FrameLayout).addView(
-            com.surpride.app.experience.ExperienceArt(this,com.surpride.app.experience.core.Mood.HEALING),
-            android.widget.FrameLayout.LayoutParams(-1,-1))
         ui.styleButton(findViewById(R.id.experience_start),primary=true)
         parkedUx=com.surpride.app.experience.ParkedUxMonitor(applicationContext)
         findViewById<android.widget.Button>(R.id.appearance).apply {

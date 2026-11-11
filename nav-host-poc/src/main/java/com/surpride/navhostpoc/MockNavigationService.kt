@@ -66,7 +66,7 @@ private class MockNavigationScreen(context: CarContext) : Screen(context) {
             if (!foreground || !surface.isValid) return
             val canvas = try {surface.lockCanvas(null)} catch(_:Exception) {return}
             try {
-                canvas.drawColor(Color.rgb(20, 30, 40))
+                canvas.drawColor(Color.rgb(17, 18, 20))
                 val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE; textSize = 32f }
                 // Blank schematic surface, never an actual map/road or a route.
                 canvas.drawText("MOCK ONLY / NO GPS / NO ROUTE", 40f, canvas.height * 0.60f, paint)

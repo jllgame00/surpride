@@ -68,7 +68,7 @@ internal class DynamicNavigationScreen(context:CarContext):Screen(context) {
     private fun detachSurface() {
         if(!ownsSurface) return
         val target=surface?.surface
-        if(target?.isValid==true) try {val canvas=target.lockCanvas(null);try {canvas.drawColor(Color.rgb(10,24,24))} finally {target.unlockCanvasAndPost(canvas)}} catch(_:Exception) {}
+        if(target?.isValid==true) try {val canvas=target.lockCanvas(null);try {canvas.drawColor(Color.rgb(17,18,20))} finally {target.unlockCanvasAndPost(canvas)}} catch(_:Exception) {}
         carContext.getCarService(AppManager::class.java).setSurfaceCallback(null);ownsSurface=false;surface=null
     }
     private fun pause() {ticker?.let(handler::removeCallbacks);ticker=null;simulator?.pause()}
@@ -137,13 +137,13 @@ internal class DynamicNavigationScreen(context:CarContext):Screen(context) {
         if(!target.isValid) return
         val canvas=try {target.lockCanvas(null)} catch(_:Exception) {return}
         try {
-            canvas.drawColor(Color.rgb(10,24,24))
+            canvas.drawColor(Color.rgb(17,18,20))
             val bounds=Rect(0,0,canvas.width,canvas.height)
             visible?.takeIf {!it.isEmpty}?.let {bounds.intersect(it)}
             stable?.takeIf {!it.isEmpty}?.let {bounds.intersect(it)}
             bounds.inset(28,28)
             if(bounds.width()<150 || bounds.height()<150) return
-            val paint=Paint(Paint.ANTI_ALIAS_FLAG).apply {color=Color.rgb(215,242,139);textSize=(bounds.width()/32f).coerceIn(20f,34f)}
+            val paint=Paint(Paint.ANTI_ALIAS_FLAG).apply {color=Color.rgb(242,242,242);textSize=(bounds.width()/32f).coerceIn(20f,34f)}
             val view=simulator?.presentation()?.takeIf {allowed}
             val saved=canvas.save();canvas.clipRect(bounds)
             val x=bounds.left.toFloat();var y=bounds.top+paint.textSize
@@ -170,7 +170,7 @@ internal class DynamicNavigationScreen(context:CarContext):Screen(context) {
                             val py=(area.centerY()-(p.northMeters-(minY+maxY)/2)*scale).toFloat()
                             if(i==0) path.moveTo(px,py) else path.lineTo(px,py)
                         }
-                        paint.color=Color.rgb(215,242,139);paint.style=Paint.Style.STROKE;paint.strokeWidth=10f
+                        paint.color=Color.rgb(242,242,242);paint.style=Paint.Style.STROKE;paint.strokeWidth=10f
                         canvas.drawPath(path,paint)
                     }
                 }

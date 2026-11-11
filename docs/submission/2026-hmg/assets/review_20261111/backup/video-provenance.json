@@ -1,0 +1,125 @@
+{
+  "duration_seconds": 110,
+  "size": [
+    1920,
+    1080
+  ],
+  "fps": 20,
+  "audio": false,
+  "continuous_run": false,
+  "scenes": [
+    {
+      "scene": 1,
+      "start_seconds": 0,
+      "seconds": 8,
+      "source": "docs/phase5/evidence/final/F14-start-final.png",
+      "badge": "기존 정차 앱 검증 캡처 · 앱 영역 발췌",
+      "source_sha256": "9c775e7b97b662b8eb559e114919aa53ca97987f1252b09c74403e5064591e5b",
+      "crop_box": [
+        853,
+        91,
+        2560,
+        1303
+      ]
+    },
+    {
+      "scene": 2,
+      "start_seconds": 8,
+      "seconds": 12,
+      "source": "docs/phase5/evidence/final/F16-conditions-final.png",
+      "badge": "실제 앱 UI · Phase 5C 검증 기록",
+      "source_sha256": "9ddfd0001e15ca593261ab2c1951eefe1bf99043771a98a10531ca75e53f6cef",
+      "crop_box": [
+        853,
+        91,
+        2560,
+        1303
+      ]
+    },
+    {
+      "scene": 3,
+      "start_seconds": 20,
+      "seconds": 14,
+      "source": "docs/phase5/evidence/final/F25-natural-corrected-dark.png",
+      "badge": "실제 앱 UI · 규칙 기반 해석 / 자유 대화 LLM 아님",
+      "source_sha256": "83586570ebe9cf100e224b2aa2f2fb7ba8276a12fbac1c086270da8c69361d6f",
+      "crop_box": [
+        853,
+        91,
+        2560,
+        1303
+      ]
+    },
+    {
+      "scene": 4,
+      "start_seconds": 34,
+      "seconds": 10,
+      "source": "docs/phase5/evidence/final/F16-conditions-final.png",
+      "badge": "실제 앱 UI · 개별 실행 캡처 편집",
+      "source_sha256": "9ddfd0001e15ca593261ab2c1951eefe1bf99043771a98a10531ca75e53f6cef",
+      "crop_box": [
+        853,
+        91,
+        2560,
+        1303
+      ]
+    },
+    {
+      "scene": 5,
+      "start_seconds": 44,
+      "seconds": 16,
+      "source": "docs/phase5/evidence/final/F28-real-roundtrip-ready.png",
+      "badge": "이전 실제 API 준비 화면 · Phase 5C / 현재 실행 아님",
+      "source_sha256": "5db166cf9602327b077c5fc65be89c9c085ff143fcac174c2de9952577272b22",
+      "crop_box": [
+        853,
+        91,
+        2560,
+        1303
+      ]
+    },
+    {
+      "scene": 6,
+      "start_seconds": 60,
+      "seconds": 14,
+      "source": null,
+      "badge": "구조 설명 · 활성 내비게이션 화면 또는 주행 재현 아님"
+    },
+    {
+      "scene": 7,
+      "start_seconds": 74,
+      "seconds": 12,
+      "source": "docs/phase5/evidence/before/16-arrival-reveal-rating.png",
+      "badge": "DEMO 모의 도착·공개·평가 UI · 이전 검증 캡처",
+      "source_sha256": "64cfc270cbc05ba91f986cd01360a0a96de802458e0e5335d619ba6f0f759aa2",
+      "crop_box": [
+        853,
+        91,
+        2560,
+        1303
+      ]
+    },
+    {
+      "scene": 8,
+      "start_seconds": 86,
+      "seconds": 12,
+      "source": "docs/phase5/evidence/before/12-mood-map.png",
+      "badge": "DEMO 기분 개념도 · LIVE 방문 기록과 분리",
+      "source_sha256": "9b44e477ad38e6015362498ea049a5e7307320033198dbd0ffdbebd69e0c71bd",
+      "crop_box": [
+        853,
+        91,
+        2560,
+        1303
+      ]
+    },
+    {
+      "scene": 9,
+      "start_seconds": 98,
+      "seconds": 12,
+      "source": null,
+      "badge": "향후 개발 계획 · 실차 / 상용 운영 미검증"
+    }
+  ],
+  "movie_sha256": "b8c08955be85e987530d6ec0b456e1a5148b962da585aef50a3d846ebd543a92"
+}

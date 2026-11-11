@@ -3,9 +3,6 @@ package com.surpride.app.experience
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.graphics.Color
-import android.graphics.Typeface
-import android.graphics.drawable.GradientDrawable
 import android.view.Gravity
 import android.view.View
 import android.widget.*
@@ -162,7 +159,7 @@ class ExperienceActivity : AppCompatActivity() {
                 })
             });return
         }
-        if(saveFailed) content.addView(text("기기 저장을 완료하지 못했어요. 현재 시연은 유지되지만 재시작 시 복원이 제한될 수 있습니다.",16,accent))
+        if(saveFailed) content.addView(text("기기 저장을 완료하지 못했어요. 현재 시연은 유지되지만 재시작 시 복원이 제한될 수 있습니다.",16,ui.error))
         when(controller.state.panel) {
             ExperiencePanel.HOME -> home()
             ExperiencePanel.MAP -> moodMap()
@@ -183,8 +180,10 @@ class ExperienceActivity : AppCompatActivity() {
         title("어디로 갈지는, 잠시 비밀로","목적지는 몰라도, 가는 길은 즐겁게.")
         val split=row();content.addView(split,LinearLayout.LayoutParams(-1,0,1f))
         val artCard=card();split.addView(artCard,LinearLayout.LayoutParams(0,-1,1.2f))
-        artCard.addView(text("오늘의 기분, 새로운 장면",20,accent))
-        artCard.addView(ExperienceArt(this,controller.state.preferences.mood),LinearLayout.LayoutParams(-1,0,1f))
+        artCard.addView(text("오늘의 기분",20,muted))
+        artCard.addView(text(controller.state.preferences.mood.label,56,ink,true))
+        artCard.addView(text(timeSummary(controller.state.preferences),28,muted))
+        artCard.addView(text("기분과 시간으로\n드라이브를 준비해요",32,ink))
         val intro=card();split.addView(ScrollView(this).apply {isFillViewport=true;addView(intro)},LinearLayout.LayoutParams(0,-1,1f).apply {leftMargin=dp(24)})
         intro.addView(text("오늘은 어떤 마음인가요?",28,ink,true))
         intro.addView(text("기분과 시간을 골라 보세요. 이름을 남겨 둔 코스를 준비해요.",24,muted))
@@ -216,7 +215,7 @@ class ExperienceActivity : AppCompatActivity() {
         val split=row();content.addView(split,LinearLayout.LayoutParams(-1,0,1f))
         val form=column();split.addView(ScrollView(this).apply {isFillViewport=true;addView(form)},LinearLayout.LayoutParams(0,-1,1.7f))
         form.addView(button("문장으로 조건 수정",false){openMoodInput()})
-        if(s.error!=null) form.addView(text(s.error,18,accent))
+        if(s.error!=null) form.addView(text(s.error,18,ui.error))
         when(s.setupStep) {
             0 -> {
                 form.addView(text("오늘의 기분",23,ink,true))
@@ -230,7 +229,7 @@ class ExperienceActivity : AppCompatActivity() {
             1 -> {
                 form.addView(text("얼마나 멀리 떠나볼까요?",23,ink,true))
                 choices(form,TravelScope.entries,2,{"${it.label}\n${it.note}"},{it==p.scope}) {v -> prefs(p.copy(scope=v,availableMinutes=v.defaultMinutes,returnByEpochMillis=null))}
-                form.addView(text("시간 기준",23,ink,true).apply {setPadding(0,dp(18),0,0)})
+                form.addView(text("시간 기준",23,ink,true).apply {setPadding(0,dp(20),0,0)})
                 choices(form,listOf(false,true),2,{if(it) "귀가 희망 시각" else "사용 가능 시간"},{it==(p.returnByEpochMillis!=null)}) {v -> prefs(if(v) p.copy(availableMinutes=null,returnByEpochMillis=System.currentTimeMillis()+p.scope.defaultMinutes*60_000L) else p.copy(availableMinutes=p.scope.defaultMinutes,returnByEpochMillis=null))}
                 val slots=listOf(30,60,90,180,2880)
                 choices(form,slots,3,{minutes -> if(p.returnByEpochMillis!=null) deadlineLabel(System.currentTimeMillis()+minutes*60_000L) else duration(minutes)}, {minutes -> if(p.returnByEpochMillis!=null) false else p.availableMinutes==minutes}) {v -> prefs(if(p.returnByEpochMillis!=null) p.copy(returnByEpochMillis=System.currentTimeMillis()+v*60_000L) else p.copy(availableMinutes=v))}
@@ -258,7 +257,9 @@ class ExperienceActivity : AppCompatActivity() {
         title("비밀 코스가 준비됐어요","목적지는 아직 비밀입니다 · 가상 코스 체험")
         val split=row();content.addView(split,LinearLayout.LayoutParams(-1,0,1f))
         val visual=card();split.addView(visual,LinearLayout.LayoutParams(0,-1,1f))
-        visual.addView(text("도착의 이름만 남겨 두었어요",20,accent));visual.addView(ExperienceArt(this,controller.state.preferences.mood),LinearLayout.LayoutParams(-1,0,1f))
+        visual.addView(text("DEMO 코스 · 가상 시간",20,muted))
+        visual.addView(text("약 ${view.totalMinutes}분",56,ink,true))
+        visual.addView(text("목적지는 도착 후 공개",28,muted))
         val detail=card();split.addView(ScrollView(this).apply {isFillViewport=true;addView(detail)},LinearLayout.LayoutParams(0,-1,1f).apply {leftMargin=dp(24)})
         detail.addView(text("약 ${view.totalMinutes}분",32,ink,true))
         detail.addView(text(if(controller.state.preferences.returnToStart) "왕복 · 이동과 체류, 여유 시간 포함" else "편도 · 이동과 체류, 여유 시간 포함",20,muted))
@@ -303,7 +304,6 @@ class ExperienceActivity : AppCompatActivity() {
         content.addView(ScrollView(this).apply {isFillViewport=true;addView(card().apply {
             addView(text(destination.name,34,accent,true));addView(text(destination.description,19,muted))
             addView(text(controller.presentation().reason,22,ink))
-            addView(ExperienceArt(this@ExperienceActivity,s.preferences.mood,revealed=true),LinearLayout.LayoutParams(-1,dp(160)))
             if(s.phase==TripPhase.REVEALED) {
                 addView(text("이 도착 경험은 어땠나요?",23,ink,true))
                 choices(this,(1..5).toList(),5,{"$it 점"},{it==s.rating}){v -> controller.rate(v)}
@@ -319,8 +319,8 @@ class ExperienceActivity : AppCompatActivity() {
         title("내 마음이 머문 장면들","기분별 체험 기록 · 실제 지리 지도나 방문 인증이 아닙니다")
         val split=row();content.addView(split,LinearLayout.LayoutParams(-1,0,1f))
         val map=card();split.addView(map,LinearLayout.LayoutParams(0,-1,1f))
-        map.addView(text("여섯 기분의 기록",20,accent));map.addView(ExperienceArt(this,controller.state.preferences.mood,controller.state.history),LinearLayout.LayoutParams(-1,0,1f))
-        val list=column();split.addView(ScrollView(this).apply {addView(list)},LinearLayout.LayoutParams(0,-1,1f).apply {leftMargin=dp(18)})
+        map.addView(text("여섯 기분의 기록",20,accent));map.addView(ExperienceArt(this,controller.state.history),LinearLayout.LayoutParams(-1,0,1f))
+        val list=column();split.addView(ScrollView(this).apply {addView(list)},LinearLayout.LayoutParams(0,-1,1f).apply {leftMargin=dp(24)})
         val live=com.surpride.app.realdata.LiveNavigationStore.read(this).visits
         if(live.isNotEmpty()) list.addView(card().apply {
             addView(text("실제 경로 체험 기록",28,ink,true))

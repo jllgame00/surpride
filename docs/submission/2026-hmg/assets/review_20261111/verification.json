@@ -1,0 +1,87 @@
+{
+  "status": "PASS",
+  "duration_seconds": 110,
+  "decoded_frames": 3300,
+  "expected_transitions": [
+    210,
+    450,
+    720,
+    1080,
+    1380,
+    1620,
+    1950,
+    2190,
+    2460,
+    2790,
+    3000
+  ],
+  "scene_assignment_mismatches": [],
+  "full_decode_errors": "",
+  "quality": [
+    {
+      "scene": 1,
+      "psnr_db": 46.83152837066599
+    },
+    {
+      "scene": 2,
+      "psnr_db": 44.50475281722666
+    },
+    {
+      "scene": 3,
+      "psnr_db": 45.54280013535582
+    },
+    {
+      "scene": 4,
+      "psnr_db": 44.300865391167754
+    },
+    {
+      "scene": 5,
+      "psnr_db": 45.852425696175956
+    },
+    {
+      "scene": 6,
+      "psnr_db": 45.46460772405604
+    },
+    {
+      "scene": 7,
+      "psnr_db": 42.208996039570096
+    },
+    {
+      "scene": 8,
+      "psnr_db": 47.01611730797793
+    },
+    {
+      "scene": 9,
+      "psnr_db": 43.61954199553786
+    },
+    {
+      "scene": 10,
+      "psnr_db": 46.01702016345154
+    },
+    {
+      "scene": 11,
+      "psnr_db": 47.28170945674098
+    },
+    {
+      "scene": 12,
+      "psnr_db": 46.89396566670887
+    }
+  ],
+  "layout": {
+    "text_boxes_checked": 130,
+    "all_inside_safe_area": true
+  },
+  "protected_files": 1327,
+  "protected_file_changes": [],
+  "original_and_backup_identical": true,
+  "current_apk_matches_local_latest_debug": true,
+  "current_apk_sha256": "b26e9a35877bb7d82e3623dd7bf9aa58a1fdeee40c4e66390bb9fa3f52293242",
+  "movie_sha256": "5f972084aff027fe118401a32e2bbe92e4bed124dc9333cc22299ccd824b6386",
+  "old_duration_seconds": 109.95,
+  "old_decoded_frames": 2199,
+  "app_crop_equals_lossless_render": true,
+  "report_links_checked": 47,
+  "broken_report_links": [],
+  "subtitles_checked": 12,
+  "preview_source": "decoded final MP4 frames"
+}

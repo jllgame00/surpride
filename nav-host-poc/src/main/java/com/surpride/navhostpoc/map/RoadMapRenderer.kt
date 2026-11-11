@@ -49,7 +49,7 @@ class RoadMapRenderer(context: Context, private val onChanged: () -> Unit) : Aut
         try {
             canvas.clipRect(bounds)
             canvas.translate(bounds.left.toFloat(), bounds.top.toFloat())
-            canvas.drawColor(if (darkMode) Color.rgb(30, 34, 38) else Color.rgb(230, 233, 231))
+            canvas.drawColor(if (darkMode) Color.rgb(17, 18, 20) else Color.rgb(240, 240, 238))
             val width = bounds.width(); val height = bounds.height()
             val unit = min(width / 900f, height / 520f).coerceIn(0.85f, 2.5f)
             val density = if (surfaceDpi > 0) surfaceDpi / 160f else displayMetrics.density
@@ -180,9 +180,9 @@ class RoadMapRenderer(context: Context, private val onChanged: () -> Unit) : Aut
         val metrics = paint.fontMetrics
         val box = RectF(x, y, x + paint.measureText(shown) + pad * 2,
             y + metrics.descent - metrics.ascent + pad * 2)
-        paint.color = if(darkMode) Color.rgb(21,40,39) else Color.WHITE
+        paint.color = if(darkMode) Color.rgb(29,31,33) else Color.WHITE
         canvas.drawRoundRect(box, 4f*density, 4f*density, paint)
-        paint.color = if(darkMode) Color.rgb(235,241,225) else Color.rgb(25,35,30)
+        paint.color = if(darkMode) Color.rgb(242,242,242) else Color.rgb(28,28,28)
         canvas.drawText(shown, x + pad, y + pad - metrics.ascent, paint)
     }
 

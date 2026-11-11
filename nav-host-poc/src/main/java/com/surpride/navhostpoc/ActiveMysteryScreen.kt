@@ -521,9 +521,8 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
         val c=try {s.lockCanvas(null)} catch(_:Exception) {return}
         try {
             val dark=carContext.isDarkMode
-            val background=if(dark) Color.rgb(10,24,24) else Color.rgb(246,247,242)
-            val ink=if(dark) Color.rgb(235,241,225) else Color.rgb(25,35,30)
-            val accent=if(dark) Color.rgb(215,242,139) else Color.rgb(63,95,39)
+            val background=if(dark) Color.rgb(17,18,20) else Color.rgb(240,240,238)
+            val ink=if(dark) Color.rgb(242,242,242) else Color.rgb(28,28,28)
             c.drawColor(background)
             val area=Rect(0,0,c.width,c.height)
             visible?.takeIf {!it.isEmpty}?.let {if(!area.intersect(it)) return};stable?.takeIf {!it.isEmpty}?.let {if(!area.intersect(it)) return}
@@ -556,9 +555,11 @@ internal class ActiveMysteryScreen(context:CarContext,private var packet:ActiveR
             try {
                 c.clipRect(footer)
                 p.color=background;c.drawRect(footer,p)
+                p.color=if(dark) Color.rgb(57,59,61) else Color.rgb(202,202,200)
+                p.strokeWidth=density;c.drawLine(footer.left.toFloat(),footer.top.toFloat(),footer.right.toFloat(),footer.top.toFloat(),p)
                 var y=footer.top+layout.padding-metrics.ascent
                 lines.take(layout.rows).forEachIndexed {index,value->
-                    p.color=if(index==0) accent else ink
+                    p.color=if(index==2) {if(dark) Color.rgb(163,163,163) else Color.rgb(98,98,98)} else ink
                     p.textSize=if(index==2) 24f*scale else 28f*scale
                     val width=(footer.width()-layout.padding*2).coerceAtLeast(0f)
                     val text=android.text.TextUtils.ellipsize(value,android.text.TextPaint(p),width,android.text.TextUtils.TruncateAt.END)

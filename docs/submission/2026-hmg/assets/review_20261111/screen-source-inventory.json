@@ -1,0 +1,2002 @@
+[
+  {
+    "path": "docs/phase5/evidence/before/01-launch.png",
+    "classification": "Phase 5A 이전",
+    "sha256": "92d375b87716febdf61a9429db44b606110899f9db4ae9f1d465905f9dd214cd",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/before/02-home.png",
+    "classification": "Phase 5A 이전",
+    "sha256": "7440326ea9caacaa9e1e3f64923c4a72f2e367ad8b6457d833a5af58c8b065d7",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/before/03-conditions.png",
+    "classification": "Phase 5A 이전",
+    "sha256": "2f3ca7ce48924a287f9ba1cc869efc847b3cb45d0e75c698965629fa389381d7",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/before/04-natural-input.png",
+    "classification": "Phase 5A 이전",
+    "sha256": "cef4bd2039c45b22252f367af151ea30c223affbd5ac82e1afe4b1ca31a1853b",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/before/05-condition-confirm.png",
+    "classification": "Phase 5A 이전",
+    "sha256": "77c6d8f496548b329495757d21a65531fa2660fcf7b07d95355e899cafa517d8",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/before/06-time-settings.png",
+    "classification": "Phase 5A 이전",
+    "sha256": "8f5034d548308c5fc4959817dad4cdd8f570224c4a85557d2cc97c923fb56c52",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/before/07-companion-settings.png",
+    "classification": "Phase 5A 이전",
+    "sha256": "495430095514bc1623ea99174a162645683d3e43c0bb8511b13a6b0a53a224c5",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/before/08-planning.png",
+    "classification": "Phase 5A 이전",
+    "sha256": "86afb78b232288db386f15628c8319355bf65a3a8bdbb3586c8778de73854da8",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/before/09-course-ready.png",
+    "classification": "Phase 5A 이전",
+    "sha256": "edc7108434d79389462659f52e72cedc7267ecd7ccaef5cc73f94c468cc017ad",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/before/10-demo-guidance.png",
+    "classification": "Phase 5A 이전",
+    "sha256": "d17b3fb6bcd8f2a99144673bee6174951562fbf0349a6bc315ee4986e84a840c",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/before/11-immediate-reveal-rating.png",
+    "classification": "Phase 5A 이전",
+    "sha256": "751b1a0ee87b351989597d911c6fcb42225c99f0279f777243210931101fabd9",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/before/12-mood-map.png",
+    "classification": "Phase 5A 이전",
+    "sha256": "9b44e477ad38e6015362498ea049a5e7307320033198dbd0ffdbebd69e0c71bd",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [
+      8
+    ],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/before/13-natural-reopened.png",
+    "classification": "Phase 5A 이전",
+    "sha256": "97973ee1f1778ea00e835cddb31ec4e67c7df4919ca78d66e45804fc255123ea",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/before/14-empty-input-error.png",
+    "classification": "Phase 5A 이전",
+    "sha256": "331232a2328bbff0aceb447c314def27a8d43bdcfc90b078d7e69c1bb1c06db8",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/before/15-arrival-gate.png",
+    "classification": "Phase 5A 이전",
+    "sha256": "3d57f444185796ec763d1b596186167d88e658a3e2a4372d7955ec8d3b18e1a3",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/before/16-arrival-reveal-rating.png",
+    "classification": "Phase 5A 이전",
+    "sha256": "64cfc270cbc05ba91f986cd01360a0a96de802458e0e5335d619ba6f0f759aa2",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [
+      7
+    ],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/before/17-map-stopped-revealed.png",
+    "classification": "Phase 5A 이전",
+    "sha256": "d74f5f84def504b084bb87fdad06fa5f011925ad9e87fe6db4a69b36cda4b28d",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/01-launch-light.png",
+    "classification": "Phase 5B",
+    "sha256": "b72ef088c7ec8b2e379b2bddc801e98dcb2330524f9ea7b6a18a1b566e0784ce",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/02-home-light.png",
+    "classification": "Phase 5B",
+    "sha256": "a2fffc58ccb87ffcbd3bf0e4a8e7d19008a87761425007ccff7816a9758e0f04",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/03-conditions-light.png",
+    "classification": "Phase 5B",
+    "sha256": "0cf84531ade5b9fb0f5fd1e88f8606816ac8ed344bf556bb059c31b59e89aa65",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/04-natural-light.png",
+    "classification": "Phase 5B",
+    "sha256": "1c32f502ca453a14e4f6cec9c04b693a028c5ca078e7c84358dbfceedad2568b",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/05-conditions-interpreted-light.png",
+    "classification": "Phase 5B",
+    "sha256": "32b4ab80df60e3ecfb812477ecdce666b77475def9ef7cde221b6aad442b6436",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/06-interpretation-rechecked-light.png",
+    "classification": "Phase 5B",
+    "sha256": "f50f9dc4aeb523e93a75d6f74417f160ee755d22bd606f18de897da56700009a",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/07-time-light.png",
+    "classification": "Phase 5B",
+    "sha256": "f4cfa1f394d1a2001f9c5e8400be1c63c13a2d59ca0920b556817967c1a30d6f",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/08-course-ready-light.png",
+    "classification": "Phase 5B",
+    "sha256": "2dac1acde61af192e6d3823a8555ad069a3d8cab6c350c19a17e885070f59144",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/09-system-night-command-unchanged.png",
+    "classification": "Phase 5B",
+    "sha256": "448fa5fb7de04e76093aaf6d1bc72d6c7bf0e485d815ae139a58d4aa1564fd6b",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/10-real-course-empty.png",
+    "classification": "Phase 5B",
+    "sha256": "b0b77d86a57777bc88b527d034f5e298e431a7d02e9b1692c7e9c1b54e31ca2c",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/11-real-route-loading.png",
+    "classification": "Phase 5B",
+    "sha256": "1f4d7275f2a51a971166b3dc9f5788da47e67b7d702091d246455ddacbe6c832",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/12-real-route-ready.png",
+    "classification": "Phase 5B",
+    "sha256": "1ca2568d3513245374beb623cde44fafc0376b8a20b786b65223b40759f2f66f",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/13-navigation-prepared.png",
+    "classification": "Phase 5B",
+    "sha256": "4f4bcfb90030fee84186756cbb7346b50e42fea7f081735beb31a8f208e7c32e",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/14-position-received-inactive.png",
+    "classification": "Phase 5B",
+    "sha256": "af04485003fd71cd4ab15d05f1dc52ad1e4c1ff27a718b0fed18aaee2fab023a",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/15-explicit-start-controls.png",
+    "classification": "Phase 5B",
+    "sha256": "ef7829c85d7d9f1cb6df3c53608cad614b3f09944cea476a636e1bfd4e72d470",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/16-host-controls-attempt.png",
+    "classification": "Phase 5B",
+    "sha256": "62782ad657c5b58bfdf6b870d1efb1130fc0f834055a6c8e3bbb49a012aa889a",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/17-active-map-stage2.png",
+    "classification": "Phase 5B",
+    "sha256": "f9f5b47662c8a36c488a64c0716d15700b43a45304608e1f6eec85b5aa92b347",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/18-debug-sdk-separated.png",
+    "classification": "Phase 5B",
+    "sha256": "6e4f4aef1421db76d45175f323b69738f0fbeb6dc42e13922cee0cf5fb88bb1e",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/19-home-returned.png",
+    "classification": "Phase 5B",
+    "sha256": "975c4d079d9ccf244fd287b4f114363ccf09651c52b27927a0c334aef11603c7",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/20-home-resumed.png",
+    "classification": "Phase 5B",
+    "sha256": "6b0835894357632f4574a8170e8d1ea2b705bb315b2ebc616862dd8b478cd7bd",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/21-demo-guidance.png",
+    "classification": "Phase 5B",
+    "sha256": "38c792a4b93bf298bb56f63c18c285fbd1db9d1f945f663780c90a284d9a592e",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/22-destination-revealed.png",
+    "classification": "Phase 5B",
+    "sha256": "8a56fe14c4a8320582a19d3e97c69754484acc503e7769f348b9158e01ddde8b",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/23-mood-records.png",
+    "classification": "Phase 5B",
+    "sha256": "cd0392ed8035b7cd99ad74be6223b9872cd8937729b2643cf2a15148a7363080",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/24-record-screen-current.png",
+    "classification": "Phase 5B",
+    "sha256": "f8faa07963d0b96d97c53e34bd111b474c18935c4e5f7dbfff6bbe4363a90f22",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/25-launch-dark.png",
+    "classification": "Phase 5B",
+    "sha256": "4664fdd73701f3185488816c228afe5ed5f753cb038f04be6eaba298307a4c68",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/26-home-dark.png",
+    "classification": "Phase 5B",
+    "sha256": "804d9dbcf93a8554900cb6cc791a6e0addb8d9879bdf63cc88c88664119c7f2b",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/27-records-dark.png",
+    "classification": "Phase 5B",
+    "sha256": "014985abaa53e653ef1b4afab25c5c48e4c14ca744f4751b565176e1451140eb",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/28-record-detail-dark.png",
+    "classification": "Phase 5B",
+    "sha256": "afdb54309e21fc94fd4ff43fe2343d61bf40e6239ce58ad091a16876d627608b",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/29-natural-dark-focus-only.png",
+    "classification": "Phase 5B",
+    "sha256": "1c09ea1438beb38d52d58db66b646e0fbe86690d715b49024f65798e071227b2",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/30-start-menu-updated.png",
+    "classification": "Phase 5B",
+    "sha256": "d87db6f809a0c439ded636f14f37f4be364681ebb0c3d890f0072d0fa2cd3189",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/31-navigation-start-confirmation.png",
+    "classification": "Phase 5B",
+    "sha256": "582e61e22fffccb4b8f7b6f345a289f9a4639086795a8c0005db5228c78a4a27",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/32-active-same-screen-controls.png",
+    "classification": "Phase 5B",
+    "sha256": "b24c2359c1b9a8fbb7e88c72b0609818d7b0251ad63c8a3e830246507454dce2",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/33-after-menu-voice.png",
+    "classification": "Phase 5B",
+    "sha256": "0ff2b5f1a8fb420482157f45407690dec981ec0069af38edc86ff72a47695d8f",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/34-session-stopped.png",
+    "classification": "Phase 5B",
+    "sha256": "2cd30724212c96e1716541696cb255d12f44f82dfe65e8551c66d5209755c074",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F01-oem-window-transition.png",
+    "classification": "Phase 5B",
+    "sha256": "2f27f5ccd88f9364eaa37540368c320d94e678caffb5d5d797069a411ba16c73",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F02-home-dark.png",
+    "classification": "Phase 5B",
+    "sha256": "cca0c30d3a455526b3b26a1b9adfd0bd093d7920f5d6765f04b51bbbcfcc7252",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F03-natural-dark.png",
+    "classification": "Phase 5B",
+    "sha256": "734118d97af16808debe01ec78de2761b2a539d8582aa036c7a153df5ab98320",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F04-partial-edit-confirmed.png",
+    "classification": "Phase 5B",
+    "sha256": "9b8dbf4d7454b2bdbd31b74271bdaea09a633be78802ea9bbbe7c2dfe42a344f",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F05-conditions-restored.png",
+    "classification": "Phase 5B",
+    "sha256": "b4ac4c7d21b31932aaba4699d2ab859d0854c86cd3c22671e8d5723a6f68454a",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F06-conditions-large-font.png",
+    "classification": "Phase 5B",
+    "sha256": "910afe23f39f2aeb57b9cfa49101274af16f0f0886c3082a08dffc95071f276e",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F07-navigation-entry.png",
+    "classification": "Phase 5B",
+    "sha256": "e5d558917dd2f57b2ffffb9308b262d78e44ebd4af8dfb1271e88d06e028eb43",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F08-active-secret-map.png",
+    "classification": "Phase 5B",
+    "sha256": "2513129ea51c43dac0420e33483bc73bfda45f0151257f90bd4819acab2ec4b0",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F09-reroute-state.png",
+    "classification": "Phase 5B",
+    "sha256": "d90f7816d4f0cd265176915b06cef2ccad27c7f0c87aceffcb2e5f0aef3914ed",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F10-reroute-result.png",
+    "classification": "Phase 5B",
+    "sha256": "d984a48508cb37329bd2c25de8a461fcd41c18ab3de7a4ff264ec2360a65595c",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F11-arrival-candidate.png",
+    "classification": "Phase 5B",
+    "sha256": "ed53691144827add2a2904ad34c86057f1ab583959f804e53944bc47880d2f3f",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F12-arrival-controls.png",
+    "classification": "Phase 5B",
+    "sha256": "d7511f4786e3b7efe101852197888306172813094a1d08eef5da6b4480f90dcb",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F13-menu-stable-voice-off.png",
+    "classification": "Phase 5B",
+    "sha256": "81810643f06e9fbbe2b2d16fd4a6a86cc2d9a83287b27be3b5f6e693c3359372",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F14-arrival-control-stable.png",
+    "classification": "Phase 5B",
+    "sha256": "deede2f7d59a4349a33321dbe8f0baa9d427d2a3375a4566b49d8f328777a914",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F15-near-arrival-voice.png",
+    "classification": "Phase 5B",
+    "sha256": "85c700fa848166fe33fa67bbe73a8cd3a36726aa8028a931f293e575037e3b58",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F16-before-arrival-confirm.png",
+    "classification": "Phase 5B",
+    "sha256": "b0580dc33e9e2e1c61f23ab522ffd63101e99d1c4584d6b7fd3641c95bc58e42",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F17-arrived-revealed.png",
+    "classification": "Phase 5B",
+    "sha256": "c244b4c9ccfea6dbb5f3c2ac43cfef61d4c2f3d17cba1984bd26e24cafa7c489",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F18-post-arrival-actions.png",
+    "classification": "Phase 5B",
+    "sha256": "850fcbb1dbf48420a8d5b069a6d5ec580b8b321ff61457ebe9afcccb2e881059",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F19-live-result-revealed.png",
+    "classification": "Phase 5B",
+    "sha256": "2f8a11d068b2e35a763c9f98bacd12d1487a1977e063c6c5bd4d3ad6bb4d9864",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F20-live-result-saved.png",
+    "classification": "Phase 5B",
+    "sha256": "1d435cecb6c23cb8966b70310b9d8798c3048658fae8db4de84f0abe1c39217a",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F21-return-controls.png",
+    "classification": "Phase 5B",
+    "sha256": "1aa5128538da40691d0a59972cdd97370b4a71204413d5107752f9fa3993d76f",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F22-return-prepared.png",
+    "classification": "Phase 5B",
+    "sha256": "d512b69748a18f25f0739183ba05d03f94661ee413b18762be67e0367cbc5d8a",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F23-return-start-confirmation.png",
+    "classification": "Phase 5B",
+    "sha256": "51594455187faf28d19c0aaa9ec1b1b6e6a597053e2760d67264f559f874221c",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F24-return-active.png",
+    "classification": "Phase 5B",
+    "sha256": "74631d6ddd2a69e53c9157e8e7aaa6ea81b002313fae3c1a6f042c1b7483e2a1",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F25-return-arrival-candidate.png",
+    "classification": "Phase 5B",
+    "sha256": "ac7597980af04208fdcee67f79655d79a1895dbe6d579b01552763288df79623",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F26-return-arrival-menu.png",
+    "classification": "Phase 5B",
+    "sha256": "7bdbc4919fbb4c31baaee5522d977fec3374a4e372b44ef630c639c1a13a28a9",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F27-return-completed.png",
+    "classification": "Phase 5B",
+    "sha256": "b181679a0c8e93ec51b6a3526af0b275b7235b87c84e49c87fe32bb5aa4f0a86",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F28-mood-selection-dark.png",
+    "classification": "Phase 5B",
+    "sha256": "b1b1f9e7795c660139c9c56c5faf1e3afaf8ce24216d89ddb680506edffb379a",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F29-real-course-ready-final.png",
+    "classification": "Phase 5B",
+    "sha256": "96fbaf792ed405acc280a6c1ea8f2322ff88e22314b7da3964de7d4f1bd0cf1d",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F30-launch-dark-final.png",
+    "classification": "Phase 5B",
+    "sha256": "89e1f620a2c1330ac3cd8b87e916e8a50dc635ae143eb5828c1a81e87240173b",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F31-home-dark-final.png",
+    "classification": "Phase 5B",
+    "sha256": "77f1232497e86489095003002531a95a2a35f2413d2e5396fa864a4f79b712f8",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F32-mood-records-final.png",
+    "classification": "Phase 5B",
+    "sha256": "689a17b02d52ec7dadf648dbc24a476c8886f3a1c39c5995ffe155b12991e7bf",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F33-record-detail-final.png",
+    "classification": "Phase 5B",
+    "sha256": "1fa3b2ef1dcd5d405e13e3b895a10fc2bbea000d6eba8872844c689d91386c22",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F34-launch-system-light-final.png",
+    "classification": "Phase 5B",
+    "sha256": "1d2afb407fd9d4c510308a76b37b52a72a0381fd85c0d10248773c8fd46bbe67",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/after/F35-conditions-light-final.png",
+    "classification": "Phase 5B",
+    "sha256": "b63fb87abe15361471ed88ee2706c84869fb055ffcd51d9a32a055f4e99c3114",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/01-launch-baseline.png",
+    "classification": "Phase 5C",
+    "sha256": "52e5ec49ee1ae3cb5af74aafba1c4393f62e9e47a70779d3fb6cd194cc8be9d1",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/02-launch-transition.png",
+    "classification": "Phase 5C",
+    "sha256": "8e6e6a5cc10cfe8cfcd85547a928b9d77a0f007db256e39e2e335cca9d9cb03b",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/03-home-baseline.png",
+    "classification": "Phase 5C",
+    "sha256": "c937ea898035066759f5299d1d6d31fb8cdd2955ca609a10b7b3affc06d42caf",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/04-oem-foreground-transition.png",
+    "classification": "Phase 5C",
+    "sha256": "0fc4f0bba5c3ef6a798f93a038f1c2e042b773ed0aef9cef98a1c3ff7f33545a",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/05-oem-foreground-transition.png",
+    "classification": "Phase 5C",
+    "sha256": "0fc4f0bba5c3ef6a798f93a038f1c2e042b773ed0aef9cef98a1c3ff7f33545a",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/06-natural-input.png",
+    "classification": "Phase 5C",
+    "sha256": "b4c661ab255b7abc5ab83ea10d0f645d57a93393332b80c9824b92863929d378",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/07-ime-open-baseline.png",
+    "classification": "Phase 5C",
+    "sha256": "4866006ff19da704256dac64abd34fb23dd8bb12f2fd1f0d5b318c83ce77e83b",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/08-conditions-baseline.png",
+    "classification": "Phase 5C",
+    "sha256": "e9497640127f94b15047698b9a8546483c482884363604446db08e26f449901c",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/09-conditions-font130.png",
+    "classification": "Phase 5C",
+    "sha256": "e4f6bc89bdf45057a5206771fc482ae7599e8974cb5ecc3be8cc00cf3a321c16",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F10-natural-input.png",
+    "classification": "Phase 5C",
+    "sha256": "7c1359f22189214c7e60f28d6ddadd2edd422bd8c63be74ccf3f58023a3db3b5",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F11-ime-no-fullscreen.png",
+    "classification": "Phase 5C",
+    "sha256": "7bb1960f5830f492e8e37c633332c46fd5d28271f91f5afd6e3e3a29e33644f5",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F12-ime-korean-composition.png",
+    "classification": "Phase 5C",
+    "sha256": "3244425e7462d9e7688d12a5fefc7b5219f17b3d0ce898adc9514b026d32a72f",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F13-ime-back-preserved.png",
+    "classification": "Phase 5C",
+    "sha256": "75cb6d518e7eeacea139190b3999d5ee7ba9652d2c12e8da9cd1ab3430c6d2a0",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F14-start-final.png",
+    "classification": "Phase 5C",
+    "sha256": "9c775e7b97b662b8eb559e114919aa53ca97987f1252b09c74403e5064591e5b",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [
+      1
+    ],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F15-home-final.png",
+    "classification": "Phase 5C",
+    "sha256": "1dad876b13c8160145bbcffadadcf680fd3240b5edd96d78586140c5f337fc80",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F16-conditions-final.png",
+    "classification": "Phase 5C",
+    "sha256": "9ddfd0001e15ca593261ab2c1951eefe1bf99043771a98a10531ca75e53f6cef",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [
+      2,
+      4
+    ],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F17-narrow-conditions-font130.png",
+    "classification": "Phase 5C",
+    "sha256": "2cc7488acda3e271fb8048fef9fbfb2973dace6a535d84c5dde3f825b31db85f",
+    "size": [
+      1920,
+      1080
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F17b-host-window-clipped-1920.png",
+    "classification": "Phase 5C",
+    "sha256": "17fec5350985ea157c053638621ae83c4fa72163a08144b7ee9b1642955a6700",
+    "size": [
+      1920,
+      1080
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F18-density200-font130-conditions.png",
+    "classification": "Phase 5C",
+    "sha256": "ea17442b288e25770cd927dfa8c3dce666581bbd6214f41257d79ab263a14d73",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F19-density200-font130-ime.png",
+    "classification": "Phase 5C",
+    "sha256": "3eb48b8fadd8c400c25442a9de543e3fc79424e7e5f8fa46c4689bba5a0939fb",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F20-font200-conditions.png",
+    "classification": "Phase 5C",
+    "sha256": "39328bfc1f654ca6cef76cfc0857d1c31d60b6a4ea8b837b842c8cebd0a65e38",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F21-font200-ime.png",
+    "classification": "Phase 5C",
+    "sha256": "833b4489d74694aecc3d5fe44d7f9a41114dd0c57cd82037d04a743ea2e1a73f",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F22-density120-start.png",
+    "classification": "Phase 5C",
+    "sha256": "8c6a7799c1e5e87b28df89f5e9d3ca3f18f1f60bd62b6e1a3d3d72bac7db501a",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F23-density120-dark-start.png",
+    "classification": "Phase 5C",
+    "sha256": "8c8fa155f010de2b9abdc774597f46fbdc3bc3ada4ba610f37025513c9130209",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F24-natural-empty-error-dark.png",
+    "classification": "Phase 5C",
+    "sha256": "a944ff7a904ceb750a37142b98c927f08807a147cd4f3f5573a7f6e549dd8159",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F25-natural-corrected-dark.png",
+    "classification": "Phase 5C",
+    "sha256": "83586570ebe9cf100e224b2aa2f2fb7ba8276a12fbac1c086270da8c69361d6f",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [
+      3
+    ],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F26-real-route-loading.png",
+    "classification": "Phase 5C",
+    "sha256": "5fd3c077384a5550e5ecb306b40621fb7ddbc3fcb332aeb9a8d63411ed2f3d2e",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F27-real-oneway-ready.png",
+    "classification": "Phase 5C",
+    "sha256": "5c94b7222384fc327aea6ebf8081ef9f8c15eecb7610a32d72b4061cd91fb1df",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F28-real-roundtrip-ready.png",
+    "classification": "Phase 5C",
+    "sha256": "5db166cf9602327b077c5fc65be89c9c085ff143fcac174c2de9952577272b22",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [
+      5
+    ],
+    "new_scenes": [
+      7
+    ]
+  },
+  {
+    "path": "docs/phase5/evidence/final/F29-handoff-transition.png",
+    "classification": "Phase 5C",
+    "sha256": "93001df7f7f722d4bd1b964a9ba2d628d6a733e59d7fdbeb9221382796e85634",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F30-navigation-entry.png",
+    "classification": "Phase 5C",
+    "sha256": "3073779e6e7104d96b794c49ff68c9c5db106f672b63d153e419fa98dcbae1c4",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F31-host-controls-check.png",
+    "classification": "Phase 5C",
+    "sha256": "6f973804481fda58a179053eca3e69983e9769843a2009d5af4b520b2de1c8a6",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F32-host-static-check.png",
+    "classification": "Phase 5C",
+    "sha256": "b808670a145ca46b0a180f29effafdc8d18b646fbf90f84c7f4430153b06701a",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F33-host-static-restarted.png",
+    "classification": "Phase 5C",
+    "sha256": "d87c19d84b00a5ba4954f018076cce32484b4b4a625ca528ac13a14f6cc964c2",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F34-host-experiment-menu.png",
+    "classification": "Phase 5C",
+    "sha256": "b368597208d5b5a503685155e8cc2240139e4f26c5f466535dced0f65703f125",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F35-active-screen-from-menu.png",
+    "classification": "Phase 5C",
+    "sha256": "ab120a9797538ce279a7afb6685ecbb82410bb4e7efa5741c9fe7060fcb3e0cf",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F36-parked-start-controls.png",
+    "classification": "Phase 5C",
+    "sha256": "7dd744a8ccb0109221d76361664bafb39abd1170e800d2c2bfa85a0093b755e0",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F37-permission-prepared-map.png",
+    "classification": "Phase 5C",
+    "sha256": "93090638bca3aff75afb5f426bd09d0172fa8b2e85885e5e57dbeead257494d8",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F38-guidance-permission-controls.png",
+    "classification": "Phase 5C",
+    "sha256": "f6c50ef0fa50b6c2fc8014d11ab787b83c57ec6d05b1b54c784d136b0012470a",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F39-controls-touch-check.png",
+    "classification": "Phase 5C",
+    "sha256": "c7502a00b75b323e38b724a0bad7cf0f0b4696d69e5f04d3c64b10f9a29c06eb",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F40-precise-permission-blocked.png",
+    "classification": "Phase 5C",
+    "sha256": "8c974ee9c52d24d56c7018d9a7beeae222ccc0c2e29c6ac783e8014a627ac2a6",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F41-location-permission-dialog.png",
+    "classification": "Phase 5C",
+    "sha256": "578e77c0bc76791a26a3fcf38bb64c7454d6ad2acbbf8324cdcfd696ce55c3c8",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F42-active-secret-map.png",
+    "classification": "Phase 5C",
+    "sha256": "eaa617dde7515de26d44a8502647fa1eda6bf93812dd5682c9c8d65e82cd2fd2",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F43-active-controls.png",
+    "classification": "Phase 5C",
+    "sha256": "8bd3686aea443de37375b98a9c6c2bbafa16911150f3c5c860b1cf027902baab",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F44-explicit-reveal-guidance-retained.png",
+    "classification": "Phase 5C",
+    "sha256": "f2e03c82eb43d022c3212b27ac2060f1e6f725b1c2cc39e30147ceda1a8d182f",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F45-gps-loss-safe-loading.png",
+    "classification": "Phase 5C",
+    "sha256": "66e514eeb3cce0d2f9c1d323f4b78359a22280a72ac4d206d79cc53ee7f11987",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F46-gps-loss-stopped.png",
+    "classification": "Phase 5C",
+    "sha256": "fbe44b352df3faa6fadf701facbf5aa514d5a757069f68654ef9d9630d2cdaad",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F47-reroute-observation.png",
+    "classification": "Phase 5C",
+    "sha256": "d76a991e2cde20400e34b34d193b76bdcdf554bba6b9166267d728493e795958",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F48-reroute-success.png",
+    "classification": "Phase 5C",
+    "sha256": "234fc53d306bb059fb5434f2ff40518064608db1949a1555c2f7e1f68fa720db",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F49-server-off-reroute-loading.png",
+    "classification": "Phase 5C",
+    "sha256": "b719562cb196d2888088828530017fa76df14ce246d18a8d5336566adc15e505",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F50-server-off-reroute-result.png",
+    "classification": "Phase 5C",
+    "sha256": "8cb25a855ba16e5fcd3edf91be5902700bd017af81563b167db8bd9d77d90ea8",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F51-reroute-network-failure-stopped.png",
+    "classification": "Phase 5C",
+    "sha256": "d745d2c2d334e6da9d590c881661d45bc0d799b76af261543d090d737797dfd2",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F52-dark-start-default.png",
+    "classification": "Phase 5C",
+    "sha256": "9fc91c93a57f982bc20617e8084d3ea244909b3cbb7b0735395b031ea595894b",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F53-server-unavailable-main.png",
+    "classification": "Phase 5C",
+    "sha256": "58c934b574af9be76a920db64768ec7397cbfa1bac6257d88ad359d955f8044c",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F54-main-network-error-confirmed.png",
+    "classification": "Phase 5C",
+    "sha256": "12c651e81f8c3c07e170860dc105b7264408cfab0b0ef777b3ee11f991fba1c3",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F55-network-recovered-ready.png",
+    "classification": "Phase 5C",
+    "sha256": "ee30fc0bfb3974f7ac4ab0fd482132de6a888eda2f2f90ef5c015e4f2b7db2c3",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F56-return-entry-transition.png",
+    "classification": "Phase 5C",
+    "sha256": "58ed140d19b4dc033246590b45409d1037bd5c7debbdd628d684461e9f43b1e4",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F57-secret-guidance-recovered.png",
+    "classification": "Phase 5C",
+    "sha256": "9ebadf0251b5c1414fdc05d62db577c5c2b1a7cf37419f49ef4ca0bd50edf555",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F58-user-cancel-stopped.png",
+    "classification": "Phase 5C",
+    "sha256": "b1193cbe63d92e943f81fdd5eb0002ab28e6947e30f60537227b63bd47f25326",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F59-arrival-approach-secret.png",
+    "classification": "Phase 5C",
+    "sha256": "9993867b062b1c8d5c7631fcdb827c461430526ae5f0fbc468c2e3eacc4fccb2",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F60-arrival-candidate-still-secret.png",
+    "classification": "Phase 5C",
+    "sha256": "33e109a99905779ff50a276d8ad4faf1c381d001a9d4a370332a175799a67736",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F61-parked-arrival-confirm-menu.png",
+    "classification": "Phase 5C",
+    "sha256": "cff00aae7ecc6740c570ab30ddc45ac7cb0419585de2bb07796a8e729941c322",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F62-arrived-destination-revealed.png",
+    "classification": "Phase 5C",
+    "sha256": "3e5bbbd57c8f7d54a81540d5e5e2f61a4cac7c3072a88e9f22f7f2c4f13fc7bc",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F63-arrived-review-return-controls.png",
+    "classification": "Phase 5C",
+    "sha256": "b2a9c6d43d967198503f831032b2ec0df15409ced57fba2f8371d3f90bbf10a1",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F64-live-rating-unselected.png",
+    "classification": "Phase 5C",
+    "sha256": "795fe5b1dd5c42fdb180b255c3d8fe2071883dfda59661629faa2760bb22df41",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": [
+      9
+    ]
+  },
+  {
+    "path": "docs/phase5/evidence/final/F65-rating-saved.png",
+    "classification": "Phase 5C",
+    "sha256": "faaa3106d5f5b825c1ee807a4841afcba7724e746f95dfd42f8bbf0883115629",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F66-return-navigation-entry.png",
+    "classification": "Phase 5C",
+    "sha256": "66cd1b1fb5667492de6394165c82ddb8deb1400eb7af7a7a027882c37d8c5c3f",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F67-return-requested.png",
+    "classification": "Phase 5C",
+    "sha256": "77811301027a652cb1b495fade1fd773852b3ba44e86664dd799dc7450c9b9ca",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F68-return-prepared-no-auto-start.png",
+    "classification": "Phase 5C",
+    "sha256": "408b4d32c1ab62992406c3409ffd281e3b6e50612d12bdd55c7e2723ac4f37bd",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F69-return-start-checking.png",
+    "classification": "Phase 5C",
+    "sha256": "e7447e9b2c2d9669bdc68ef1b0851fb0a33606df264930f7cba404b0fae4e6ee",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F70-return-arrival-candidate.png",
+    "classification": "Phase 5C",
+    "sha256": "e4a4c6b6a6789d0c52482876738c9fd1bb53fa3de4e1b52390b76b0ad981085c",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F70-return-status-check.png",
+    "classification": "Phase 5C",
+    "sha256": "fdcd5946c9a11d9ff76d21c252e463a3dfcb3a92efa9ce244b09cbff3fadb166",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F70b-return-before-retry.png",
+    "classification": "Phase 5C",
+    "sha256": "6b6d53524d5159002cf3373677e16734b1b5f13a7985c1acb7fa9db60c5e8ebb",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F70c-return-retry-controls.png",
+    "classification": "Phase 5C",
+    "sha256": "a71300b708e39e608ee22a3f6d9e28798059c6d3236505570795b0f977cf87a4",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F71-return-confirm-menu.png",
+    "classification": "Phase 5C",
+    "sha256": "db346fd58db83d95882b6a58a816a52db15c970e3aba62ab5525317493041a99",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F71b-return-start-retried.png",
+    "classification": "Phase 5C",
+    "sha256": "8d7ee1684760734b40259d67719b7a6dbf7da61ae36b43212128df40f2f59780",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F72-return-start-stable.png",
+    "classification": "Phase 5C",
+    "sha256": "3470c7f2ecac7ae32de5b24b5972040968853668a60e9aff699b2cb188b2e7b4",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F73-return-active-verified.png",
+    "classification": "Phase 5C",
+    "sha256": "8d00b03e7a09d62e3d9d82221574e55ae5a1a9d0f222141e9dd3a87ee2772635",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F74-return-recovery-controls.png",
+    "classification": "Phase 5C",
+    "sha256": "807fedfc1aa47a6a3eb1216878b9ff49c8dc023534b52a2a4aa4e0d17f10354d",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F75-return-reprepared.png",
+    "classification": "Phase 5C",
+    "sha256": "80c91b701742a83659778acf97fbfcd2824c7f2b66df4ce23022ca2763ff5ced",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F76-return-recovery-active.png",
+    "classification": "Phase 5C",
+    "sha256": "e41387337782a1e36e90e7bb44eafaeaffcd09360c72432a1bb3a929cc9b46a5",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F77-return-confirm-controls.png",
+    "classification": "Phase 5C",
+    "sha256": "217313eaff060b19e102b359af2b46da605d3f3f92b5b8b4e469168d589a6457",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F78-return-completed.png",
+    "classification": "Phase 5C",
+    "sha256": "82d0ccacf8b1e62d82d92701085bc181bcf3ce6bf3c85150ce9a76acf2887f89",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F79-mood-records.png",
+    "classification": "Phase 5C",
+    "sha256": "061cdb7d0827d859276079dda5d1f44036143062518ec82c3cffd17fa596b1f7",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F80-record-detail.png",
+    "classification": "Phase 5C",
+    "sha256": "e83865d9eb4cf921a2e85cad3a390a2577eee66d6feffafcff941eb9cbb5786e",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/phase5/evidence/final/F81-restored-start.png",
+    "classification": "Phase 5C",
+    "sha256": "c765ef57dbffe8f301994b4dd1ed03bf97605df49b8c0cf8b81078f0b5666303",
+    "size": [
+      2560,
+      1440
+    ],
+    "old_scenes": [],
+    "new_scenes": []
+  },
+  {
+    "path": "docs/submission/2026-hmg/assets/review_20261111/current-01-launch.png",
+    "classification": "현재 빌드",
+    "sha256": "940688923566dfd38b40f83c29a814b28a68c816729b445d8422e7994449147d",
+    "size": [
+      2560,
+      1440
+    ],
+    "captured_at": "2026-11-11T14:06:22.087551+09:00",
+    "new_scenes": [
+      2
+    ]
+  },
+  {
+    "path": "docs/submission/2026-hmg/assets/review_20261111/current-02-home.png",
+    "classification": "현재 빌드",
+    "sha256": "dcb8739e894cf1996fa441cb1455d14ca0469aa65d811b1c8106e5c69bdb356d",
+    "size": [
+      2560,
+      1440
+    ],
+    "captured_at": "2026-11-11T14:06:42.232793+09:00",
+    "new_scenes": [
+      3
+    ]
+  },
+  {
+    "path": "docs/submission/2026-hmg/assets/review_20261111/current-03-conditions.png",
+    "classification": "현재 빌드",
+    "sha256": "ac6a6f7ef7be13ed92d8be7552976964600499db6596f383cd424491ba213676",
+    "size": [
+      2560,
+      1440
+    ],
+    "captured_at": "2026-11-11T14:07:02.018085+09:00",
+    "new_scenes": [
+      4
+    ]
+  },
+  {
+    "path": "docs/submission/2026-hmg/assets/review_20261111/current-04-natural-input.png",
+    "classification": "현재 빌드",
+    "sha256": "2b56fc0a6523cd2be4281c180873d74d0f479e786cb129865e80cf654f439131",
+    "size": [
+      2560,
+      1440
+    ],
+    "captured_at": "2026-11-11T14:07:15.797973+09:00",
+    "new_scenes": [
+      5
+    ]
+  },
+  {
+    "path": "docs/submission/2026-hmg/assets/review_20261111/current-05-mood-records.png",
+    "classification": "현재 빌드",
+    "sha256": "3c796f8b6bba65ce647db74c82f7a8ec1867f9f856deb47361a2ba283eb38976",
+    "size": [
+      2560,
+      1440
+    ],
+    "captured_at": "2026-11-11T14:09:09.369021+09:00",
+    "new_scenes": [
+      10
+    ]
+  },
+  {
+    "path": "docs/submission/2026-hmg/assets/review_20261111/current-06-record-detail.png",
+    "classification": "현재 빌드",
+    "sha256": "8d0e8a6e723d3672f2e7b2ee48e887f580ec8b47b14377c79d99df5acf0c685c",
+    "size": [
+      2560,
+      1440
+    ],
+    "captured_at": "2026-11-11T14:09:32.629062+09:00",
+    "new_scenes": [
+      11
+    ]
+  },
+  {
+    "path": "docs/submission/2026-hmg/assets/review_20261111/current-07-natural-interpreted.png",
+    "classification": "현재 빌드",
+    "sha256": "9dd6a2a07fc69e13742ca560d0c2389c9856d433cd729675d952b93c8053d8e7",
+    "size": [
+      2560,
+      1440
+    ],
+    "captured_at": "2026-11-11T14:14:59.366016+09:00",
+    "new_scenes": [
+      6
+    ]
+  }
+]

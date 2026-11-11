@@ -1,0 +1,61 @@
+{
+  "verified_on_kst": "2026-11-11",
+  "head": "40ca62877e60deb353e476648c9b08ab558a90fc",
+  "baseline_tracked_files_preserved": 735,
+  "existing_tracked_changes": [],
+  "gitignore_preserved": true,
+  "new_publication_files_ignored": [],
+  "files": [
+    {
+      "path": "docs/submission/2026-hmg/assets/SURPRIDE_preliminary_prototype_110s.mp4",
+      "bytes": 1152282,
+      "sha256": "b8c08955be85e987530d6ec0b456e1a5148b962da585aef50a3d846ebd543a92"
+    },
+    {
+      "path": "docs/submission/2026-hmg/assets/SURPRIDE_preliminary_prototype_110s.srt",
+      "bytes": 1270,
+      "sha256": "a8bfe4e817e48cda4824875ce5453d1a5f13bd4e1608794d9f3a1d5e90fed840"
+    },
+    {
+      "path": "docs/submission/2026-hmg/DEMO_STORYBOARD.md",
+      "bytes": 5807,
+      "sha256": "462dae0ee25acd26da0c835bda7fcab0cc0c6b75285ab8d422238fa50031e54a"
+    },
+    {
+      "path": "docs/submission/2026-hmg/evidence/release-security-summary.json",
+      "bytes": 4371,
+      "sha256": "025ca79cd4db9f24407c7b1f15bba9fb0c260e48bcf295d28eb176cc00f14060"
+    },
+    {
+      "path": "docs/submission/2026-hmg/evidence/video-provenance.json",
+      "bytes": 3477,
+      "sha256": "6c26105beeac1491ac3951bd1a036e39d251ec64d52f13b75492ea67732a9fc9"
+    },
+    {
+      "path": "docs/submission/2026-hmg/FINAL_SUBMISSION_MANIFEST.md",
+      "bytes": 6345,
+      "sha256": "85c052b01c5f32d62bce23fcb2ee762e5641246fa865ee465c84bd06010cb199"
+    },
+    {
+      "path": "docs/submission/2026-hmg/GITHUB_RELEASE_READINESS.md",
+      "bytes": 8287,
+      "sha256": "fc7763b88b406d74330688e1a9aad2ad540ec27be1e6db899268caf2e8273af5"
+    },
+    {
+      "path": "docs/submission/2026-hmg/PRELIMINARY_SUBMISSION_CHECKLIST.md",
+      "bytes": 4999,
+      "sha256": "40d1104b3469df11ea8b394b9ab287cb5a4132103a492510a05ef4ec10e9e71e"
+    },
+    {
+      "path": "docs/submission/2026-hmg/PROPOSAL_IMPLEMENTATION_REVIEW.md",
+      "bytes": 9490,
+      "sha256": "465135f2e550ea485dc71cd370b83146007bbf1776abaaa0d28173b2f0417493"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7762,
+      "sha256": "433925e7dad8330157524f38b34cee6c982921c0551911026b357ddb3ca3cbe5"
+    }
+  ],
+  "scope": "This manifest does not hash itself. Local working tree only; no remote upload/commit."
+}

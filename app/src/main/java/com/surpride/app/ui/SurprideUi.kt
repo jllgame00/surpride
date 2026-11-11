@@ -7,6 +7,7 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.graphics.drawable.StateListDrawable
 import android.view.Gravity
+import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -45,13 +46,15 @@ class SurprideUi(private val context: Context) {
         setLineSpacing(dp(4).toFloat(),1.15f);setPadding(0,dp(4),0,dp(8))
         ViewCompat.setAccessibilityHeading(this,heading)
     }
-    fun shape(fill:Int,radius:Int=16,stroke:Int=divider)=GradientDrawable().apply {
+    fun shape(fill:Int,radius:Int=4,stroke:Int=divider)=GradientDrawable().apply {
         setColor(fill);cornerRadius=dp(radius).toFloat();setStroke(dp(1),stroke)
     }
     fun card()=LinearLayout(context).apply {
         orientation=LinearLayout.VERTICAL
         val padding=context.resources.getDimensionPixelSize(R.dimen.surpride_card_padding)
-        setPadding(padding,padding,padding,padding);background=shape(surface)
+        setPadding(padding,padding,padding,padding)
+        addView(View(context).apply {setBackgroundColor(divider);importantForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_NO},
+            LinearLayout.LayoutParams(-1,dp(1)).apply {bottomMargin=dp(20)})
         layoutParams=LinearLayout.LayoutParams(-1,-2).apply {topMargin=dp(8);bottomMargin=dp(8)}
     }
     fun button(value:String,primary:Boolean=false,action:()->Unit)=Button(context).apply {
@@ -59,7 +62,7 @@ class SurprideUi(private val context: Context) {
         layoutParams=LinearLayout.LayoutParams(-1,-2).apply {topMargin=dp(8);bottomMargin=dp(4)}
     }
     fun styleDialog(dialog:androidx.appcompat.app.AlertDialog) {
-        dialog.window?.setBackgroundDrawable(shape(surface,16))
+        dialog.window?.setBackgroundDrawable(shape(surface))
         dialog.findViewById<TextView>(android.R.id.message)?.apply {textSize=24f;setTextColor(ink)}
         dialog.findViewById<TextView>(androidx.appcompat.R.id.alertTitle)?.apply {textSize=28f;setTextColor(ink)}
         listOf(android.content.DialogInterface.BUTTON_POSITIVE,android.content.DialogInterface.BUTTON_NEGATIVE,
@@ -83,12 +86,12 @@ class SurprideUi(private val context: Context) {
         val states=arrayOf(intArrayOf(-android.R.attr.state_enabled),intArrayOf(android.R.attr.state_selected),intArrayOf())
         setTextColor(ColorStateList(states,intArrayOf(disabled,accent,if(primary) onAccent else ink)))
         val surfaces=StateListDrawable().apply {
-            addState(intArrayOf(-android.R.attr.state_enabled),shape(raised,12))
-            addState(intArrayOf(android.R.attr.state_focused),shape(if(primary) accentFill else raised,12,context.getColor(R.color.surpride_focus)).apply {setStroke(dp(3),context.getColor(R.color.surpride_focus))})
-            addState(intArrayOf(android.R.attr.state_selected),shape(raised,12,accent).apply {setStroke(dp(2),accent)})
-            addState(intArrayOf(),shape(if(primary) accentFill else surface,12,if(primary) accentFill else divider))
+            addState(intArrayOf(-android.R.attr.state_enabled),shape(raised))
+            addState(intArrayOf(android.R.attr.state_focused),shape(if(primary) accentFill else raised,stroke=if(primary) onAccent else accent).apply {setStroke(dp(3),if(primary) onAccent else accent)})
+            addState(intArrayOf(android.R.attr.state_selected),shape(raised,stroke=accent).apply {setStroke(dp(2),accent)})
+            addState(intArrayOf(),shape(if(primary) accentFill else surface,stroke=if(primary) accentFill else divider))
         }
-        background=RippleDrawable(ColorStateList.valueOf(0x229AB1A5),surfaces,shape(ink,12))
+        background=RippleDrawable(ColorStateList.valueOf(0x22808080),surfaces,shape(ink))
         isSelected=selected
         setCompoundDrawablesRelativeWithIntrinsicBounds(if(selected) R.drawable.ic_selection_check else 0,0,0,0)
         compoundDrawablePadding=dp(8)

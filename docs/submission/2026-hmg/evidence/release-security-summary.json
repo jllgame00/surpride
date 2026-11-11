@@ -1,0 +1,121 @@
+{
+  "verified_on_kst": "2026-11-11",
+  "start_branch": "main",
+  "start_head": "40ca62877e60deb353e476648c9b08ab558a90fc",
+  "start_status": "clean",
+  "existing_product_test_build_configuration_changed": false,
+  "github": {
+    "repository_url": "https://github.com/jllgame00/surpride",
+    "visibility": "public",
+    "visibility_changed": false,
+    "reviewer_invited": false,
+    "remote_main_matches_start_head": true,
+    "remote_ref_metadata": [
+      {
+        "kind": "branches",
+        "name": "main",
+        "sha": "40ca62877e60deb353e476648c9b08ab558a90fc",
+        "present_in_local_reachable_history": true
+      }
+    ],
+    "git_ls_remote": "schannel SEC_E_NO_CREDENTIALS; read-only public REST fallback"
+  },
+  "release": {
+    "main_build": "SUCCESS; unsigned; 11 seconds",
+    "main_unsigned_apk": "app/build/outputs/apk/release/app-release-unsigned.apk",
+    "main_unsigned_apk_bytes": 20286940,
+    "main_unsigned_apk_sha256": "fa6d288ee7dc78b78df4da348993c9ceef6ad17f40dd3216272cef57add6b41b",
+    "poc_build": "FAILED lintVitalRelease: Instantiatable, CarAppActivity, AndroidManifest.xml:29",
+    "initial_offline_build": "FAILED missing cached lint-gradle32.5.1; retried normal dependency resolution",
+    "lint_suppressed": false,
+    "signatures": [
+      {
+        "path": "app/build/outputs/apk/debug/app-debug.apk",
+        "signature_valid": true,
+        "android_debug_certificate": true
+      },
+      {
+        "path": "app/build/outputs/apk/release/app-release-unsigned.apk",
+        "signature_valid": false,
+        "android_debug_certificate": false
+      },
+      {
+        "path": "nav-host-poc/build/outputs/apk/debug/nav-host-poc-debug.apk",
+        "signature_valid": true,
+        "android_debug_certificate": true
+      }
+    ],
+    "release_runtime_verified": false,
+    "apk_submission": "NOT_READY",
+    "release_proxy_configuration": "null; development loopback credentials unavailable"
+  },
+  "security": {
+    "reachable_commits": 31,
+    "reachable_objects": 1650,
+    "blobs": 903,
+    "blob_bytes": 264636069,
+    "office_containers_in_history": 0,
+    "known_literal_and_pattern_findings": [],
+    "apk_results": [
+      {
+        "path": "app/build/outputs/apk/debug/app-debug.apk",
+        "findings": []
+      },
+      {
+        "path": "app/build/outputs/apk/release/app-release-unsigned.apk",
+        "findings": []
+      },
+      {
+        "path": "nav-host-poc/build/outputs/apk/debug/nav-host-poc-debug.apk",
+        "findings": []
+      }
+    ],
+    "distinct_git_author_emails_present": 2,
+    "scope_limits": [
+      "reachable refs only; no unreachable/remote deleted objects",
+      "known configured values plus five high-confidence patterns; not all unknown secrets",
+      "no image/video/PDF OCR; Git author emails counted without emitting identities"
+    ]
+  },
+  "image_metadata": {
+    "png_files_metadata_inspected": 300,
+    "gps_exif_present": 0,
+    "potential_descriptive_metadata_fields": 0,
+    "scope": "Metadata only; not OCR; six source app captures plus nine output scenes manually reviewed"
+  },
+  "video": {
+    "duration_seconds": 109.95,
+    "width": 1920,
+    "height": 1080,
+    "codec": "h264",
+    "fps": "20/1",
+    "audio_streams": 0,
+    "bytes": 1152282
+  },
+  "historical_tests": {
+    "b6_jvm_server_pass": 675,
+    "b5_native_pass": 31,
+    "catalog": 706,
+    "phase6c_test_rerun": false
+  },
+  "official_sources": {
+    "submission": "https://appdevchallenge.auto-hmg.io/guide/submission",
+    "faq": "https://appdevchallenge.auto-hmg.io/faq",
+    "judging": "https://appdevchallenge.auto-hmg.io/guide/judging-awards",
+    "schedule": "https://appdevchallenge.auto-hmg.io/guide/schedule",
+    "blank_docx": "https://appdevchallenge.auto-hmg.io/downloads/contest-application-consent.docx",
+    "blank_docx_sha256": "07be893d58b0e96ab7788f0d189d6829f0e59a2cee4bc18cb90ec37eeda2f5fd",
+    "blank_docx_deadline_text": "2026-11-15 23:59",
+    "named_reviewer_account": "UNVERIFIED; not found in inspected official material"
+  },
+  "no_operations": [
+    "commit",
+    "push",
+    "email submission",
+    "public/private switch",
+    "collaborator invitation",
+    "remote deployment",
+    "device install/launch/GPS",
+    "real vehicle driving"
+  ]
+}

@@ -1,0 +1,280 @@
+{
+  "movie": "docs/submission/2026-hmg/assets/SURPRIDE_preliminary_latestUI_110s.mp4",
+  "movie_sha256": "5f972084aff027fe118401a32e2bbe92e4bed124dc9333cc22299ccd824b6386",
+  "duration_seconds": 110,
+  "fps": 30,
+  "frames": 3300,
+  "size": [
+    1920,
+    1080
+  ],
+  "audio": false,
+  "continuous_run": false,
+  "editorial_palette": [
+    "#121212",
+    "#252525",
+    "#F3F0E9"
+  ],
+  "app_pixels_recolored": false,
+  "current_apk_sha256": "b26e9a35877bb7d82e3623dd7bf9aa58a1fdeee40c4e66390bb9fa3f52293242",
+  "scenes": [
+    {
+      "scene": 1,
+      "start_seconds": 0,
+      "end_seconds": 7,
+      "seconds": 7,
+      "title": "SURPRIDE",
+      "caption": "오늘의 기분과 여유 시간에서 시작하는 드라이브 경험.",
+      "source": null,
+      "classification": "설명 그래픽",
+      "render_sha256": "4c5ce34f6a27985507c1d29aaaf7c35315b1387ea3cdc4c78958d7dc410bf677"
+    },
+    {
+      "scene": 2,
+      "start_seconds": 7,
+      "end_seconds": 15,
+      "seconds": 8,
+      "title": "기분 따라,\n조금 낯선 곳으로",
+      "caption": "SURPRIDE는 목적지 검색보다 기분과 시간을 먼저 묻습니다.",
+      "source": "docs/submission/2026-hmg/assets/review_20261111/current-01-launch.png",
+      "classification": "현재 빌드 · 2026.11.11 새 캡처",
+      "source_sha256": "940688923566dfd38b40f83c29a814b28a68c816729b445d8422e7994449147d",
+      "crop_box": [
+        853,
+        90,
+        2535,
+        1300
+      ],
+      "display_box": [
+        699,
+        146,
+        1817,
+        950
+      ],
+      "pixel_treatment": "crop and proportional resize only; no recolor, retouch, masking or UI overlays",
+      "render_sha256": "e19ba700b0b05d770a5d2f3080570c69d0b20fc1507e0288f818553ded3cfd55"
+    },
+    {
+      "scene": 3,
+      "start_seconds": 15,
+      "end_seconds": 24,
+      "seconds": 9,
+      "title": "나에게 맞는\n출발을 준비",
+      "caption": "정차 상태에서 조건 선택과 문장 입력으로 드라이브를 준비합니다.",
+      "source": "docs/submission/2026-hmg/assets/review_20261111/current-02-home.png",
+      "classification": "현재 빌드 · 2026.11.11 새 캡처",
+      "source_sha256": "dcb8739e894cf1996fa441cb1455d14ca0469aa65d811b1c8106e5c69bdb356d",
+      "crop_box": [
+        853,
+        90,
+        2535,
+        1300
+      ],
+      "display_box": [
+        699,
+        146,
+        1817,
+        950
+      ],
+      "pixel_treatment": "crop and proportional resize only; no recolor, retouch, masking or UI overlays",
+      "render_sha256": "4f5b5e9408ab939c1f64227ed83e170260574a907a47017a630309b62410506d"
+    },
+    {
+      "scene": 4,
+      "start_seconds": 24,
+      "end_seconds": 36,
+      "seconds": 12,
+      "title": "마음과 취향을\n조건으로",
+      "caption": "원하는 분위기를 고르고, 이용 시간과 복귀 조건을 함께 고려합니다.",
+      "source": "docs/submission/2026-hmg/assets/review_20261111/current-03-conditions.png",
+      "classification": "현재 빌드 · 2026.11.11 새 캡처",
+      "source_sha256": "ac6a6f7ef7be13ed92d8be7552976964600499db6596f383cd424491ba213676",
+      "crop_box": [
+        853,
+        90,
+        2535,
+        1300
+      ],
+      "display_box": [
+        699,
+        146,
+        1817,
+        950
+      ],
+      "pixel_treatment": "crop and proportional resize only; no recolor, retouch, masking or UI overlays",
+      "render_sha256": "1b04a6850f5a24a914e442d4e5818963ac9c194d49fddb552c589149151eb093"
+    },
+    {
+      "scene": 5,
+      "start_seconds": 36,
+      "end_seconds": 46,
+      "seconds": 10,
+      "title": "문장으로\n조건 정리",
+      "caption": "문장을 해석한 뒤 조건을 직접 확인하고 수정할 수 있습니다.",
+      "source": "docs/submission/2026-hmg/assets/review_20261111/current-04-natural-input.png",
+      "classification": "현재 빌드 · 2026.11.11 새 캡처",
+      "source_sha256": "2b56fc0a6523cd2be4281c180873d74d0f479e786cb129865e80cf654f439131",
+      "crop_box": [
+        853,
+        90,
+        2535,
+        1300
+      ],
+      "display_box": [
+        699,
+        146,
+        1817,
+        950
+      ],
+      "pixel_treatment": "crop and proportional resize only; no recolor, retouch, masking or UI overlays",
+      "render_sha256": "ecdccf86ea462c872be325016d12a0891f0cf0d5dfcb50247d8d37c0e716e512"
+    },
+    {
+      "scene": 6,
+      "start_seconds": 46,
+      "end_seconds": 54,
+      "seconds": 8,
+      "title": "해석 결과를\n직접 확인",
+      "caption": "내장 텍스트 예문을 현재 앱에서 실제 해석한 결과입니다. 음성 인식은 아닙니다.",
+      "source": "docs/submission/2026-hmg/assets/review_20261111/current-07-natural-interpreted.png",
+      "classification": "현재 빌드 · 내장 텍스트 예문으로 해석",
+      "source_sha256": "9dd6a2a07fc69e13742ca560d0c2389c9856d433cd729675d952b93c8053d8e7",
+      "crop_box": [
+        853,
+        90,
+        2535,
+        1300
+      ],
+      "display_box": [
+        699,
+        146,
+        1817,
+        950
+      ],
+      "pixel_treatment": "crop and proportional resize only; no recolor, retouch, masking or UI overlays",
+      "render_sha256": "386ae1f3397ba59305e7a4c40fcd117a857a799ca475a7b47b5f68c3f90913e0"
+    },
+    {
+      "scene": 7,
+      "start_seconds": 54,
+      "end_seconds": 65,
+      "seconds": 11,
+      "title": "이름은 잠시,\n비밀로",
+      "caption": "준비 화면에서 목적지 이름을 감추고, 코스의 시간과 거리를 보여 줍니다.",
+      "source": "docs/phase5/evidence/final/F28-real-roundtrip-ready.png",
+      "classification": "Phase 5C · 과거 실제 API 준비 기록",
+      "source_sha256": "5db166cf9602327b077c5fc65be89c9c085ff143fcac174c2de9952577272b22",
+      "crop_box": [
+        853,
+        90,
+        2535,
+        1300
+      ],
+      "display_box": [
+        699,
+        146,
+        1817,
+        950
+      ],
+      "pixel_treatment": "crop and proportional resize only; no recolor, retouch, masking or UI overlays",
+      "render_sha256": "9c998c6d4fa2c5e7c9265aded1e3db88e9ebf4a2328cb17cf917c7dd162ac118"
+    },
+    {
+      "scene": 8,
+      "start_seconds": 65,
+      "end_seconds": 73,
+      "seconds": 8,
+      "title": "안내로 잇기 위한 구조",
+      "caption": "지도·GPS 연동은 구현했으며, 현재 Host 활성 안내는 검증 보류 상태입니다.",
+      "source": null,
+      "classification": "설명 그래픽",
+      "render_sha256": "05fa386d1882f3d910fe8f99d9c4527de04116b57f1effc296d95353cdd08430"
+    },
+    {
+      "scene": 9,
+      "start_seconds": 73,
+      "end_seconds": 82,
+      "seconds": 9,
+      "title": "도착 뒤,\n경험을 남기다",
+      "caption": "과거 정차 검증의 공개·평가 화면입니다. 실도로 방문 인증은 아닙니다.",
+      "source": "docs/phase5/evidence/final/F64-live-rating-unselected.png",
+      "classification": "Phase 5C · 기존 정차 평가 UI",
+      "source_sha256": "795fe5b1dd5c42fdb180b255c3d8fe2071883dfda59661629faa2760bb22df41",
+      "crop_box": [
+        853,
+        90,
+        2535,
+        1300
+      ],
+      "display_box": [
+        699,
+        146,
+        1817,
+        950
+      ],
+      "pixel_treatment": "crop and proportional resize only; no recolor, retouch, masking or UI overlays",
+      "render_sha256": "349cf02cfefdca9aafc990fa390371a23bdb678860ebee8a5ebf6b021e114e72"
+    },
+    {
+      "scene": 10,
+      "start_seconds": 82,
+      "end_seconds": 93,
+      "seconds": 11,
+      "title": "내 마음이\n머문 장면들",
+      "caption": "기분 개념도와 실제 경로 체험 기록을 구분해 다시 살펴봅니다.",
+      "source": "docs/submission/2026-hmg/assets/review_20261111/current-05-mood-records.png",
+      "classification": "현재 빌드 · 2026.11.11 새 캡처",
+      "source_sha256": "3c796f8b6bba65ce647db74c82f7a8ec1867f9f856deb47361a2ba283eb38976",
+      "crop_box": [
+        853,
+        90,
+        2535,
+        1300
+      ],
+      "display_box": [
+        699,
+        146,
+        1817,
+        950
+      ],
+      "pixel_treatment": "crop and proportional resize only; no recolor, retouch, masking or UI overlays",
+      "render_sha256": "f2d83312a5b7d9eeb1f9a3bb9e8d528853ca14930b34316dffc4268b3a372a29"
+    },
+    {
+      "scene": 11,
+      "start_seconds": 93,
+      "end_seconds": 100,
+      "seconds": 7,
+      "title": "기록에도\n분명한 맥락",
+      "caption": "현재 기록 상세도 에뮬레이터 체험이며 실제 방문 인증이 아님을 표시합니다.",
+      "source": "docs/submission/2026-hmg/assets/review_20261111/current-06-record-detail.png",
+      "classification": "현재 빌드 · 2026.11.11 새 캡처",
+      "source_sha256": "8d0e8a6e723d3672f2e7b2ee48e887f580ec8b47b14377c79d99df5acf0c685c",
+      "crop_box": [
+        853,
+        90,
+        2535,
+        1300
+      ],
+      "display_box": [
+        699,
+        146,
+        1817,
+        950
+      ],
+      "pixel_treatment": "crop and proportional resize only; no recolor, retouch, masking or UI overlays",
+      "render_sha256": "50f39ce9c6b98526b00f295faff45ace32210ac958adb53df15df91a7f6617d8"
+    },
+    {
+      "scene": 12,
+      "start_seconds": 100,
+      "end_seconds": 110,
+      "seconds": 10,
+      "title": "다음 장면을 향해.",
+      "caption": "앞으로 공식 Host 안내·음성·실제 경관 후보 검증을 보완합니다.",
+      "source": null,
+      "classification": "설명 그래픽",
+      "render_sha256": "2ad63bb15164df78b05740c023cd7c60f46246b3e5422781a74a3dab04c82cd7"
+    }
+  ]
+}

@@ -85,7 +85,7 @@ class MoodInputActivity:AppCompatActivity() {
             contentDescription="기분과 드라이브 조건 입력"
             minLines=3;maxLines=5;gravity=Gravity.TOP
             setPadding(dp(16),dp(16),dp(16),dp(16))
-            backgroundTintList=null;background=ui.shape(ui.raised,12)
+            backgroundTintList=null;background=ui.shape(ui.raised)
             inputType=android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
             imeOptions=imeOptions or android.view.inputmethod.EditorInfo.IME_FLAG_NO_FULLSCREEN
             filters=arrayOf(InputFilter.LengthFilter(1000));isSaveEnabled=false;setText(draft.input)

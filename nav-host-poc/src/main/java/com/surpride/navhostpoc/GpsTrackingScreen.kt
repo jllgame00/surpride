@@ -127,18 +127,18 @@ internal class GpsTrackingScreen(context:CarContext):Screen(context) {
     }
     private fun detach() {
         if(!ownsSurface) return
-        surface?.surface?.takeIf {it.isValid}?.let {s->try {val c=s.lockCanvas(null);try {c.drawColor(Color.rgb(10,24,24))} finally {s.unlockCanvasAndPost(c)}} catch(_:Exception) {}}
+        surface?.surface?.takeIf {it.isValid}?.let {s->try {val c=s.lockCanvas(null);try {c.drawColor(Color.rgb(17,18,20))} finally {s.unlockCanvasAndPost(c)}} catch(_:Exception) {}}
         carContext.getCarService(AppManager::class.java).setSurfaceCallback(null);surface=null;ownsSurface=false
     }
     private fun paint() {
         val s=surface?.surface?.takeIf {it.isValid}?:return
         val canvas=try {s.lockCanvas(null)} catch(_:Exception) {return}
         try {
-            canvas.drawColor(Color.rgb(10,24,24))
+            canvas.drawColor(Color.rgb(17,18,20))
             val area=Rect(0,0,canvas.width,canvas.height)
             visible?.takeIf {!it.isEmpty}?.let {area.intersect(it)};stable?.takeIf {!it.isEmpty}?.let {area.intersect(it)};area.inset(32,32)
             val save=canvas.save();canvas.clipRect(area)
-            val p=Paint(Paint.ANTI_ALIAS_FLAG).apply {color=Color.rgb(215,242,139);textSize=(area.width()/34f).coerceIn(20f,32f)}
+            val p=Paint(Paint.ANTI_ALIAS_FLAG).apply {color=Color.rgb(242,242,242);textSize=(area.width()/34f).coerceIn(20f,32f)}
             var y=area.top+p.textSize
             fun line(text:String) {val value=android.text.TextUtils.ellipsize(text,android.text.TextPaint(p),area.width().toFloat(),android.text.TextUtils.TruncateAt.END);canvas.drawText(value.toString(),area.left.toFloat(),y,p);y+=p.textSize*1.4f}
             line("GPS API / EMULATOR · PARKED EXPERIMENT")

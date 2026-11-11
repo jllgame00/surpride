@@ -1,11 +1,6 @@
 package com.surpride.app.realdata
 
-import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Path
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ScrollView
@@ -69,7 +64,6 @@ class LiveNavigationResultActivity:AppCompatActivity() {
         val result=ui.card();root.addView(result)
         if(saved) {
             result.addView(ui.text("오늘의 경험을 기록했어요",36,ui.accent,true))
-            result.addView(JourneyMark(this),LinearLayout.LayoutParams(-1,dp(88)))
             result.addView(label("기분 지도에서 다시 만나 보세요\n실제 방문 인증과는 다른 에뮬레이터 평가입니다",24))
         } else if(!valid()) {
             result.addView(ui.text("지금은 결과를 확인할 수 없어요",28,ui.error,true))
@@ -77,7 +71,6 @@ class LiveNavigationResultActivity:AppCompatActivity() {
         } else {
             val place=SeoulPilotCatalog.places.first {it.id==candidateId}
             result.addView(ui.text(place.name,36,ui.accent,true))
-            result.addView(JourneyMark(this),LinearLayout.LayoutParams(-1,dp(88)))
             result.addView(label(if(intent.getBooleanExtra("arrived",false)) "도착을 확인하고 만난 목적지" else "직접 공개한 목적지 · 도착 확인 전",24))
             result.addView(label("${place.type}\n선택한 드라이브 조건으로 준비한 실제 장소입니다",24))
             result.addView(label("차량 진입·주차·운영시간은 확인이 필요해요",20))
@@ -111,19 +104,4 @@ class LiveNavigationResultActivity:AppCompatActivity() {
     private fun button(value:String,primary:Boolean=false,action:()->Unit)=ui.button(value,primary,action)
     private fun dp(value:Int)=ui.dp(value)
 
-    /** Static brand curve only; not a geographic route or an interactive Surface. */
-    private class JourneyMark(context:Context):View(context) {
-        private val ui=SurprideUi(context)
-        private val paint=Paint(Paint.ANTI_ALIAS_FLAG)
-        init {importantForAccessibility=IMPORTANT_FOR_ACCESSIBILITY_NO}
-        override fun onDraw(canvas:Canvas) {
-            super.onDraw(canvas)
-            val start=width*.04f;val end=width*.94f;val y=height*.5f
-            paint.color=ui.accent;paint.strokeWidth=ui.dp(4).toFloat();paint.style=Paint.Style.STROKE;paint.strokeCap=Paint.Cap.ROUND
-            canvas.drawPath(Path().apply {moveTo(start,y);cubicTo(width*.28f,height*.95f,width*.63f,height*.05f,end,y)},paint)
-            paint.style=Paint.Style.FILL
-            canvas.drawCircle(start,y,ui.dp(6).toFloat(),paint)
-            canvas.drawCircle(end,y,ui.dp(8).toFloat(),paint)
-        }
-    }
 }

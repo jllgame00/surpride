@@ -1,15 +1,15 @@
 <resources>
-    <color name="surpride_background">#0A1818</color>
-    <color name="surpride_surface">#152827</color>
-    <color name="surpride_raised">#203532</color>
-    <color name="surpride_ink">#EBF1E1</color>
-    <color name="surpride_muted">#9AB1A5</color>
-    <color name="surpride_disabled">#9AB1A5</color>
-    <color name="surpride_accent">#D7F28B</color>
-    <color name="surpride_accent_fill">#D7F28B</color>
-    <color name="surpride_on_accent">#19231E</color>
-    <color name="surpride_divider">#2D4138</color>
-    <color name="surpride_focus">#EBF1E1</color>
+    <color name="surpride_background">#111214</color>
+    <color name="surpride_surface">#1D1F21</color>
+    <color name="surpride_raised">#292B2D</color>
+    <color name="surpride_ink">#F2F2F2</color>
+    <color name="surpride_muted">#A3A3A3</color>
+    <color name="surpride_disabled">#A3A3A3</color>
+    <color name="surpride_accent">#F2F2F2</color>
+    <color name="surpride_accent_fill">#F2F2F2</color>
+    <color name="surpride_on_accent">#1C1C1C</color>
+    <color name="surpride_divider">#393B3D</color>
+    <color name="surpride_focus">#F2F2F2</color>
     <color name="surpride_warning">#F2CF85</color>
     <color name="surpride_error">#F3ABA3</color>
 </resources>
