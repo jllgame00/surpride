@@ -70,17 +70,17 @@ class MoodInputActivity:AppCompatActivity() {
             val bars=insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout() or WindowInsetsCompat.Type.ime())
             v.setPadding(bars.left+dp(32),bars.top+dp(20),bars.right+dp(32),bars.bottom+dp(20));insets
         }
-        root.addView(ui.text("말로 정리하는 드라이브",32,ink,true))
-        root.addView(label("SURPRIDE · 정차 중 입력 · 기기 안에서 규칙으로 조건을 정리해요",20,muted))
+        root.addView(ui.text("한 문장으로 준비",40,ink,true))
+        root.addView(label("01 입력 → 02 해석 확인 · 정차 중 이용",20,muted))
         val columns=LinearLayout(this)
         root.addView(columns,LinearLayout.LayoutParams(-1,0,1f).apply {topMargin=dp(12);bottomMargin=dp(16)})
-        val left=ui.card()
-        val right=ui.card()
+        val left=LinearLayout(this).apply {orientation=LinearLayout.VERTICAL;setPadding(0,dp(16),dp(24),0)}
+        val right=LinearLayout(this).apply {orientation=LinearLayout.VERTICAL;setPadding(dp(24),dp(16),0,0)}
         columns.addView(ScrollView(this).apply {isFillViewport=true;addView(left)},LinearLayout.LayoutParams(0,-1,1.1f))
         columns.addView(ScrollView(this).apply {isFillViewport=true;addView(right)},LinearLayout.LayoutParams(0,-1,1f).apply {leftMargin=dp(24)})
-        left.addView(ui.text("1  마음과 시간 이야기",28,ink,true))
+        left.addView(ui.text("01  마음과 시간",32,ink,true))
         input=EditText(this).apply {
-            setTextColor(ink);setHintTextColor(muted);textSize=24f
+            setTextColor(ink);setHintTextColor(muted);textSize=30f
             hint="예: 강을 보며 쉬고 싶어. 한 시간 반, 집으로 돌아와야 해"
             contentDescription="기분과 드라이브 조건 입력"
             minLines=3;maxLines=5;gravity=Gravity.TOP
@@ -98,21 +98,23 @@ class MoodInputActivity:AppCompatActivity() {
                 }
                 override fun afterTextChanged(s:Editable?){}
             })
-        };left.addView(input,LinearLayout.LayoutParams(-1,dp(180)).apply {topMargin=dp(12);bottomMargin=dp(12)})
-        left.addView(button("문장 해석") {analyze()})
+        };left.addView(input,LinearLayout.LayoutParams(-1,dp(240)).apply {topMargin=dp(12);bottomMargin=dp(12)})
+        left.addView(button("문장 해석") {analyze()}.apply {minHeight=dp(104);textSize=32f})
         val voiceActions=LinearLayout(this)
         voiceActions.addView(button("음성 입력") {startVoice()},LinearLayout.LayoutParams(0,-2,1f).apply {rightMargin=dp(8)})
         voiceActions.addView(button("입력 취소") {voice?.cancel();requests?.cancel();message="입력을 취소했어요. 현재 조건은 유지됩니다";update()},LinearLayout.LayoutParams(0,-2,1f))
         left.addView(voiceActions)
-        left.addView(label("음성이 인식되지 않으면 직접 입력하거나 조건을 선택해 주세요",20,muted))
-        status=label(message,20,accent).apply {accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE};left.addView(status)
-        extraction=label("",22,ink);left.addView(extraction)
-        left.addView(label("문장·음성은 저장하거나 외부 AI에 보내지 않아요.\n기분 분류는 건강 진단이 아닙니다",20,muted))
+        status=label(message,24,accent).apply {accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE};left.addView(status)
+        extraction=label("",24,muted)
+        left.addView(label("문장·음성은 저장·외부 전송하지 않습니다.\n기분 분류는 건강 진단이 아닙니다",20,muted))
 
-        right.addView(ui.text("2  추천 조건 확인",28,ink,true))
-        summary=label("",24);right.addView(summary)
-        right.addView(label("출발 전 확인",24,ink))
-        hints=label("",20,muted);right.addView(hints)
+        right.addView(ui.text("02  적용할 조건",36,ink,true))
+        summary=label("",30);right.addView(summary)
+        right.addView(extraction)
+        right.addView(label("날씨·주차·차량 진입은 미확인입니다",24,muted))
+        hints=label("",24,muted).apply {visibility=android.view.View.GONE}
+        right.addView(button("출발 전 확인") {hints.visibility=if(hints.visibility==android.view.View.VISIBLE) android.view.View.GONE else android.view.View.VISIBLE})
+        right.addView(hints)
         val corrections=LinearLayout(this).apply {orientation=LinearLayout.VERTICAL;visibility=android.view.View.GONE}
         val correctionToggle=button("조건 직접 수정"){}
         correctionToggle.setOnClickListener {

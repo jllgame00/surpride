@@ -58,23 +58,23 @@ class LiveNavigationResultActivity:AppCompatActivity() {
     private fun render() {
         saved=completed()
         root.removeAllViews()
-        root.addView(ui.text("S /  오늘의 발견",32,ui.accent,true))
+        root.addView(ui.text("S /  오늘의 발견",24,ui.muted))
         root.addView(label("실제 경로 · 정차 에뮬레이터 체험 기록",20))
         if(!allowed) {root.addView(label("안전하게 정차한 뒤 결과를 확인해 주세요",28));return}
-        val result=ui.card();root.addView(result)
+        val result=LinearLayout(this).apply {orientation=LinearLayout.VERTICAL;setPadding(0,dp(40),0,dp(24))};root.addView(result)
         if(saved) {
-            result.addView(ui.text("오늘의 경험을 기록했어요",36,ui.accent,true))
+            result.addView(ui.text("오늘의 경험을 기록했어요",56,ui.ink,true))
             result.addView(label("기분 지도에서 다시 만나 보세요\n실제 방문 인증과는 다른 에뮬레이터 평가입니다",24))
         } else if(!valid()) {
-            result.addView(ui.text("지금은 결과를 확인할 수 없어요",28,ui.error,true))
+            result.addView(ui.text("지금은 결과를 확인할 수 없어요",44,ui.error,true))
             result.addView(label("세션이 만료되었거나 이미 저장됐어요\n목적지 공개와 안내 종료가 확인되어야 평가할 수 있어요",24))
         } else {
             val place=SeoulPilotCatalog.places.first {it.id==candidateId}
-            result.addView(ui.text(place.name,36,ui.accent,true))
+            result.addView(ui.text(place.name,72,ui.ink,true).apply {setPadding(0,dp(16),0,dp(32))})
             result.addView(label(if(intent.getBooleanExtra("arrived",false)) "도착을 확인하고 만난 목적지" else "직접 공개한 목적지 · 도착 확인 전",24))
             result.addView(label("${place.type}\n선택한 드라이브 조건으로 준비한 실제 장소입니다",24))
             result.addView(label("차량 진입·주차·운영시간은 확인이 필요해요",20))
-            result.addView(label("이번 드라이브 체험은 어땠나요?",28))
+            result.addView(label("이 장면은 어땠나요",36).apply {setPadding(0,dp(32),0,dp(16))})
             if(saveError) result.addView(ui.text("기록을 저장하지 못했어요 · 다시 시도해 주세요",24,ui.error))
             val choices=LinearLayout(this)
             (1..5).forEach {value->choices.addView(button("$value 점") {
@@ -100,7 +100,7 @@ class LiveNavigationResultActivity:AppCompatActivity() {
         root.addView(label("복귀 코스를 확인한 뒤 직접 시작해요\n시간 내 귀가를 보장하지 않아요",20))
         root.addView(button("결과 화면 닫기") {if(allowed) finish()})
     }
-    private fun label(value:String,size:Int)=ui.text(value,size)
+    private fun label(value:String,size:Int)=ui.text(value,maxOf(26,size))
     private fun button(value:String,primary:Boolean=false,action:()->Unit)=ui.button(value,primary,action)
     private fun dp(value:Int)=ui.dp(value)
 

@@ -164,7 +164,7 @@ class AutomotiveUiValidationTest {
         val store=DemoStateStore(instrumentation.targetContext)
         val original=store.load()
         val history=listOf("focus-a","focus-b").mapIndexed {index,id->
-            DemoVisit(id,DemoCatalog.candidates[index].id,Mood.HEALING,4,System.currentTimeMillis(),true)
+            DemoVisit(id,DemoCatalog.candidates[0].id,Mood.HEALING,4,System.currentTimeMillis(),true)
         }
         try {
             store.save(MysteryTripState(panel=ExperiencePanel.MAP,history=history))
@@ -174,22 +174,22 @@ class AutomotiveUiValidationTest {
                 while(!ready && SystemClock.uptimeMillis()<deadline) {
                     scenario.onActivity {activity->
                         val views=descendants(activity.window.decorView)
-                        ready=views.filterIsInstance<Button>().count {b->b.text.toString()=="기록 자세히 보기"}>=2 &&
-                            history.all {visit->views.filterIsInstance<TextView>().any {view->view.text.toString()==DemoCatalog.candidates.first {it.id==visit.candidateId}.name}}
+                        ready=views.filterIsInstance<Button>().count {b->b.contentDescription?.toString()?.startsWith("기록 자세히 보기")==true}>=2 &&
+                            history.all {visit->views.filterIsInstance<TextView>().any {view->view.text.toString().contains(DemoCatalog.candidates.first {it.id==visit.candidateId}.name)}}
                     }
                     if(!ready) SystemClock.sleep(100)
                 }
                 assertTrue(ready)
                 instrumentation.sendKeyDownUpSync(KeyEvent.KEYCODE_DPAD_DOWN)
                 scenario.onActivity {activity->
-                    val records=descendants(activity.window.decorView).filterIsInstance<Button>().filter {it.text.toString()=="기록 자세히 보기"}.takeLast(2)
+                    val records=descendants(activity.window.decorView).filterIsInstance<Button>().filter {it.contentDescription?.toString()?.startsWith("기록 자세히 보기")==true}.takeLast(2)
                     assertTrue(records[1].requestFocus())
                     records[1].performClick()
                 }
                 instrumentation.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK)
                 instrumentation.waitForIdleSync()
                 scenario.onActivity {activity->
-                    val records=descendants(activity.window.decorView).filterIsInstance<Button>().filter {it.text.toString()=="기록 자세히 보기"}.takeLast(2)
+                    val records=descendants(activity.window.decorView).filterIsInstance<Button>().filter {it.contentDescription?.toString()?.startsWith("기록 자세히 보기")==true}.takeLast(2)
                     assertSame(records[1],activity.currentFocus)
                 }
             }

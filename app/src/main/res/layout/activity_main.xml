@@ -1,142 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/start_screen"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/surpride_background">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="32dp">
+<?xml version='1.0' encoding='utf-8'?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/start_screen" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/surpride_background">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="32dp">
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
             <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="S /" android:textSize="40sp" android:fontFamily="sans-serif-medium" android:textColor="@color/surpride_accent" />
             <Button android:id="@+id/appearance" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="16dp" android:text="화면 표시" />
             <Button android:id="@+id/debug_toggle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="개발 진단" android:visibility="gone" />
         </LinearLayout>
         <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/launch_brand"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="16dp">
-            <ScrollView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:fillViewport="true">
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center_vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:accessibilityHeading="true"
-            android:gravity="center"
-            android:text="@string/app_name"
-            android:textColor="@color/surpride_ink"
-            android:textSize="56sp"
-            android:fontFamily="sans-serif-medium" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:gravity="start"
-            android:text="@string/start_tagline"
-            android:textColor="@color/surpride_ink"
-            android:textSize="36sp" />
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:text="기분과 시간에 맞춰 여정을 준비해요.\n도착의 이름은 조금 나중에 만나세요." android:textSize="24sp" android:textColor="@color/surpride_muted" />
-        <Button
-            android:id="@+id/experience_start"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:minHeight="76dp"
-            android:text="드라이브 준비"
-            android:textSize="24sp" />
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="정차 에뮬레이터용 · 가상 체험과 실제 경로 준비를 구분해요" android:textSize="20sp" android:textColor="@color/surpride_muted" />
+            <LinearLayout android:id="@+id/launch_brand" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:padding="24dp">
+                <ScrollView android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center_vertical">
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/app_name" android:textSize="224sp" android:fontFamily="sans-serif-medium" android:textColor="@color/surpride_ink" android:accessibilityHeading="true" android:maxLines="1" android:autoSizeTextType="uniform" android:autoSizeMinTextSize="96sp" android:autoSizeMaxTextSize="224sp" android:autoSizeStepGranularity="4sp" />
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="40dp" android:text="목적지는 몰라도,&#10;가는 길은 즐겁게." android:textSize="48sp" android:fontFamily="sans-serif-medium" android:textColor="@color/surpride_ink" android:lineSpacingExtra="8dp" />
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:text="오늘의 기분과 여유 시간.&#10;그 안에서 만날, 조금 낯선 장면." android:textSize="28sp" android:textColor="@color/surpride_muted" android:lineSpacingExtra="8dp" />
+                        <Button android:id="@+id/experience_start" android:layout_width="640dp" android:layout_height="wrap_content" android:layout_marginTop="40dp" android:minHeight="104dp" android:text="드라이브 준비" android:textSize="32sp" />
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:text="정차 에뮬레이터용 · DEMO 체험과 실제 경로 준비" android:textSize="24sp" android:textColor="@color/surpride_muted" />
+                    </LinearLayout>
+                </ScrollView>
             </LinearLayout>
+            <ScrollView android:id="@+id/vehicle_panel" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:fillViewport="true" android:visibility="gone">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:accessibilityHeading="true" android:text="@string/vehicle_panel_title" android:textColor="@color/surpride_ink" android:textSize="24sp" android:textStyle="bold" />
+                    <TextView android:id="@+id/vehicle_diagnostics" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:lineSpacingExtra="4dp" android:textColor="@color/surpride_ink" android:textSize="16sp" />
+                    <Button android:id="@+id/vehicle_refresh" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/vehicle_refresh" />
+                    <Button android:id="@+id/vehicle_stop" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/vehicle_stop" />
+                </LinearLayout>
             </ScrollView>
-        </LinearLayout>
-
-        <ScrollView
-            android:id="@+id/vehicle_panel"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fillViewport="true"
-            android:visibility="gone">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:accessibilityHeading="true"
-                    android:text="@string/vehicle_panel_title"
-                    android:textColor="@color/surpride_ink"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/vehicle_diagnostics"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:lineSpacingExtra="4dp"
-                    android:textColor="@color/surpride_ink"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/vehicle_refresh"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/vehicle_refresh" />
-
-                <Button
-                    android:id="@+id/vehicle_stop"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/vehicle_stop" />
-            </LinearLayout>
-        </ScrollView>
-        <ScrollView
-            android:id="@+id/navigation_panel"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:visibility="gone">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/navigation_panel_title"
-                    android:textColor="@color/surpride_ink"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/navigation_diagnostics"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/surpride_ink"
-                    android:textSize="16sp" />
-                <Button android:id="@+id/navigation_refresh" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/navigation_refresh" />
-                <Button android:id="@+id/navigation_request" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/navigation_request" />
-                <Button android:id="@+id/navigation_cancel" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/navigation_cancel" />
-                <Button android:id="@+id/navigation_show" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/navigation_show" />
-                <Button android:id="@+id/navigation_history" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/navigation_history" />
-                <Button android:id="@+id/navigation_stop" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/navigation_stop" />
-            </LinearLayout>
-        </ScrollView>
+            <ScrollView android:id="@+id/navigation_panel" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:visibility="gone">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/navigation_panel_title" android:textColor="@color/surpride_ink" android:textSize="22sp" android:textStyle="bold" />
+                    <TextView android:id="@+id/navigation_diagnostics" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/surpride_ink" android:textSize="16sp" />
+                    <Button android:id="@+id/navigation_refresh" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/navigation_refresh" />
+                    <Button android:id="@+id/navigation_request" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/navigation_request" />
+                    <Button android:id="@+id/navigation_cancel" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/navigation_cancel" />
+                    <Button android:id="@+id/navigation_show" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/navigation_show" />
+                    <Button android:id="@+id/navigation_history" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/navigation_history" />
+                    <Button android:id="@+id/navigation_stop" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/navigation_stop" />
+                </LinearLayout>
+            </ScrollView>
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

@@ -63,8 +63,8 @@ class SurprideUi(private val context: Context) {
     }
     fun styleDialog(dialog:androidx.appcompat.app.AlertDialog) {
         dialog.window?.setBackgroundDrawable(shape(surface))
-        dialog.findViewById<TextView>(android.R.id.message)?.apply {textSize=24f;setTextColor(ink)}
-        dialog.findViewById<TextView>(androidx.appcompat.R.id.alertTitle)?.apply {textSize=28f;setTextColor(ink)}
+        dialog.findViewById<TextView>(android.R.id.message)?.apply {textSize=28f;setTextColor(ink)}
+        dialog.findViewById<TextView>(androidx.appcompat.R.id.alertTitle)?.apply {textSize=36f;setTextColor(ink)}
         listOf(android.content.DialogInterface.BUTTON_POSITIVE,android.content.DialogInterface.BUTTON_NEGATIVE,
             android.content.DialogInterface.BUTTON_NEUTRAL).forEach {which->
             dialog.getButton(which)?.let {styleButton(it,primary=which==android.content.DialogInterface.BUTTON_POSITIVE)}
@@ -76,11 +76,11 @@ class SurprideUi(private val context: Context) {
         }
     }
     fun styleButton(button:Button,primary:Boolean=false,selected:Boolean=false) = button.apply {
-        isAllCaps=false;setSingleLine(false);textSize=24f;letterSpacing=0f
+        isAllCaps=false;setSingleLine(false);textSize=if(primary) 32f else 28f;letterSpacing=0f
         typeface=Typeface.create("sans-serif-medium",Typeface.NORMAL)
-        minHeight=context.resources.getDimensionPixelSize(R.dimen.surpride_control_height);minWidth=dp(76)
+        minHeight=dp(if(primary) 104 else 88);minWidth=dp(76)
         minimumHeight=minHeight;minimumWidth=minWidth
-        setPadding(dp(16),dp(12),dp(16),dp(12));gravity=Gravity.CENTER
+        setPadding(dp(24),dp(16),dp(24),dp(16));gravity=Gravity.CENTER
         backgroundTintList=null;stateListAnimator=null;elevation=0f
         val disabled=context.getColor(R.color.surpride_disabled)
         val states=arrayOf(intArrayOf(-android.R.attr.state_enabled),intArrayOf(android.R.attr.state_selected),intArrayOf())
@@ -89,7 +89,7 @@ class SurprideUi(private val context: Context) {
             addState(intArrayOf(-android.R.attr.state_enabled),shape(raised))
             addState(intArrayOf(android.R.attr.state_focused),shape(if(primary) accentFill else raised,stroke=if(primary) onAccent else accent).apply {setStroke(dp(3),if(primary) onAccent else accent)})
             addState(intArrayOf(android.R.attr.state_selected),shape(raised,stroke=accent).apply {setStroke(dp(2),accent)})
-            addState(intArrayOf(),shape(if(primary) accentFill else surface,stroke=if(primary) accentFill else divider))
+            addState(intArrayOf(),shape(if(primary) accentFill else android.graphics.Color.TRANSPARENT,stroke=if(primary) accentFill else android.graphics.Color.TRANSPARENT))
         }
         background=RippleDrawable(ColorStateList.valueOf(0x22808080),surfaces,shape(ink))
         isSelected=selected

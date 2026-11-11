@@ -2,7 +2,7 @@
     <dimen name="surpride_space_unit">4dp</dimen>
     <dimen name="surpride_page_inset">32dp</dimen>
     <dimen name="surpride_card_padding">24dp</dimen>
-    <dimen name="surpride_control_height">76dp</dimen>
+    <dimen name="surpride_control_height">104dp</dimen>
     <dimen name="surpride_control_radius">4dp</dimen>
     <dimen name="surpride_card_radius">0dp</dimen>
     <dimen name="surpride_type_body">24sp</dimen>
