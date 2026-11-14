@@ -1,3 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <application android:networkSecurityConfig="@xml/nav_proxy_network_security" />
+    <application android:networkSecurityConfig="@xml/nav_proxy_network_security">
+        <activity android:name=".ReplayPreviewActivity" android:exported="true"
+            android:theme="@android:style/Theme.Material.NoActionBar" />
+    </application>
 </manifest>

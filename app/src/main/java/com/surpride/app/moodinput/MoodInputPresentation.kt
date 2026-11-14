@@ -4,9 +4,23 @@ import com.surpride.app.experience.core.DrivePreferences
 import com.surpride.app.experience.core.PlaceCategory
 import com.surpride.app.moodinput.core.InterpretationIssue
 import com.surpride.app.moodinput.core.MoodInterpretation
+import java.text.DateFormat
+import java.util.Date
 
 /** Finite preference-only copy: no destination, coordinates, utterance or provider payload input. */
 internal object MoodInputPresentation {
+    fun focusSummary(p:DrivePreferences):String {
+        val time=buildList {
+            p.availableMinutes?.let {add("${it}분")}
+            p.returnByEpochMillis?.let {add("귀가 ${DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(Date(it))}")}
+        }.joinToString(" · ").ifEmpty {"시간 미지정"}
+        return "${p.mood.label} · $time\n장소·풍경 ${categories(p.categories).ifEmpty {"특별한 조건 없음"}}"
+    }
+
+    fun secondarySummary(p:DrivePreferences):String=
+        "${p.companion.label} · ${p.scope.label} · ${if(p.returnToStart) "왕복" else "편도"}\n"+
+            "제외 ${categories(p.excludedCategories).ifEmpty {"없음"}} · 우연 ${randomness(p.randomness)}"
+
     fun extraction(result:MoodInterpretation?):String {
         if(result==null) return "문장을 해석하면 바뀐 조건만 여기에 보여 드려요"
         if(!result.canApply) return result.issues.joinToString("\n") {issue(it)}

@@ -77,9 +77,9 @@ class LiveNavigationResultActivity:AppCompatActivity() {
             result.addView(label("이 장면은 어땠나요",36).apply {setPadding(0,dp(32),0,dp(16))})
             if(saveError) result.addView(ui.text("기록을 저장하지 못했어요 · 다시 시도해 주세요",24,ui.error))
             val choices=LinearLayout(this)
-            (1..5).forEach {value->choices.addView(button("$value 점") {
+            (1..5).forEach {value->choices.addView(ui.ratingButton(value,rating==value) {
                 if(allowed && valid()) {rating=value;render()}
-            }.apply {ui.styleButton(this,selected=rating==value)},LinearLayout.LayoutParams(0,-2,1f).apply {setMargins(dp(4),0,dp(4),0)})}
+            },LinearLayout.LayoutParams(0,-2,1f).apply {setMargins(dp(8),dp(8),dp(8),dp(8))})}
             result.addView(choices)
             result.addView(button(if(rating==null) "평가를 선택해 주세요" else "이 경험 기록하기",true) {
                 val selected=rating

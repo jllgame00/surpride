@@ -10,6 +10,30 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class MoodInputPresentationTest {
+    @Test fun focusSummaryShowsBothTimeRestrictions() {
+        val at=1794376800000L
+        val p=DrivePreferences(availableMinutes=180,returnByEpochMillis=at)
+        val date=java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.SHORT,java.text.DateFormat.SHORT).format(java.util.Date(at))
+        val text=MoodInputPresentation.focusSummary(p)
+        assertTrue(text.contains("180분"))
+        assertTrue("The deadline must remain visible alongside available minutes",text.contains("귀가 $date"))
+    }
+    @Test fun focusedSummaryLeadsWithMoodTimeAndScenery() {
+        val p=DrivePreferences(mood=Mood.HEALING,availableMinutes=90,categories=setOf(PlaceCategory.WATER))
+        val primary=MoodInputPresentation.focusSummary(p)
+        assertTrue(primary.startsWith("힐링 · 90분\n"))
+        assertTrue(primary.contains(PlaceCategory.WATER.label))
+        val secondary=MoodInputPresentation.secondarySummary(p)
+        assertFalse(secondary.contains("90분"))
+        assertFalse(secondary.contains(PlaceCategory.WATER.label))
+    }
+    @Test fun missingTimeIsNotPresentedAsAConfiguredDeadline() {
+        val p=DrivePreferences(availableMinutes=null,returnByEpochMillis=null)
+        assertTrue(MoodInputPresentation.focusSummary(p).contains("시간 미지정"))
+        val at=1794376800000L
+        val date=java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.SHORT,java.text.DateFormat.SHORT).format(java.util.Date(at))
+        assertTrue(MoodInputPresentation.focusSummary(p.copy(returnByEpochMillis=at)).contains("귀가 $date"))
+    }
     @Test fun unmentionedFieldsDoNotBecomeDefaultsInExtraction() {
         val text = MoodInputPresentation.extraction(MoodInterpretation(PreferencePatch(mood = Mood.COMFORT)))
         assertTrue(text.contains("위로"))

@@ -39,6 +39,12 @@ class SurprideUi(private val context: Context) {
     val divider get()=context.getColor(R.color.surpride_divider)
     val error get()=context.getColor(R.color.surpride_error)
     val warning get()=context.getColor(R.color.surpride_warning)
+    val developerToolsShown get()=context.applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE!=0 &&
+        context.getSharedPreferences("appearance",Context.MODE_PRIVATE).getBoolean("developer_tools",false)
+    fun setDeveloperToolsShown(show:Boolean) {
+        if(context.applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE!=0)
+            context.getSharedPreferences("appearance",Context.MODE_PRIVATE).edit().putBoolean("developer_tools",show).apply()
+    }
     fun dp(value:Int)=(value*context.resources.displayMetrics.density+.5f).toInt()
     fun text(value:String,size:Int=24,color:Int=ink,heading:Boolean=false)=TextView(context).apply {
         text=value;textSize=size.toFloat();setTextColor(color)
@@ -59,7 +65,13 @@ class SurprideUi(private val context: Context) {
     }
     fun button(value:String,primary:Boolean=false,action:()->Unit)=Button(context).apply {
         text=value;styleButton(this,primary);setOnClickListener {action()}
-        layoutParams=LinearLayout.LayoutParams(-1,-2).apply {topMargin=dp(8);bottomMargin=dp(4)}
+        layoutParams=LinearLayout.LayoutParams(if(primary) -2 else -1,-2).apply {topMargin=dp(8);bottomMargin=dp(4)}
+    }
+    fun ratingButton(value:Int,selected:Boolean,action:()->Unit)=android.widget.RadioButton(context).apply {
+        text="$value 점";buttonDrawable=null;styleButton(this,selected=selected)
+        textSize=32f;minHeight=dp(112);minimumHeight=dp(112);isChecked=selected
+        contentDescription="만족도 ${value}점, 5점 만점"
+        setOnClickListener {action()}
     }
     fun styleDialog(dialog:androidx.appcompat.app.AlertDialog) {
         dialog.window?.setBackgroundDrawable(shape(surface))
@@ -80,6 +92,7 @@ class SurprideUi(private val context: Context) {
         typeface=Typeface.create("sans-serif-medium",Typeface.NORMAL)
         minHeight=dp(if(primary) 104 else 88);minWidth=dp(76)
         minimumHeight=minHeight;minimumWidth=minWidth
+        maxWidth=if(primary) dp(640) else Int.MAX_VALUE
         setPadding(dp(24),dp(16),dp(24),dp(16));gravity=Gravity.CENTER
         backgroundTintList=null;stateListAnimator=null;elevation=0f
         val disabled=context.getColor(R.color.surpride_disabled)

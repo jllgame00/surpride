@@ -179,7 +179,7 @@ class RealRouteActivity:AppCompatActivity() {
         val header=LinearLayout(this).apply {orientation=LinearLayout.HORIZONTAL;gravity=Gravity.CENTER_VERTICAL}
         root.addView(header)
         header.addView(label("S /  비밀 코스 준비",32,true),LinearLayout.LayoutParams(0,-2,1f))
-        if(diagnosticsEnabled) header.addView(button(if(session.diagnosticsExpanded) "진단 닫기" else "개발 진단") {
+        if(diagnosticsEnabled && ui.developerToolsShown) header.addView(button(if(session.diagnosticsExpanded) "진단 닫기" else "개발 진단") {
             session.diagnosticsExpanded=!session.diagnosticsExpanded
         },LinearLayout.LayoutParams(-2,-2).apply {leftMargin=dp(16)})
         header.addView(ui.button("조건 화면으로") {finish()},LinearLayout.LayoutParams(-2,-2).apply {leftMargin=dp(16)})
@@ -258,7 +258,7 @@ class RealRouteActivity:AppCompatActivity() {
                 course.addView(label("경로 서버에 연결할 수 없으면 알려드려요\n안내는 사용자가 직접 시작할 때만 활성화돼요",20))
             }
         }
-        if(diagnosticsEnabled && session.diagnosticsExpanded) renderDiagnostics(left,right)
+        if(diagnosticsEnabled && ui.developerToolsShown && session.diagnosticsExpanded) renderDiagnostics(left,right)
     }
     /** Debug-only detail retains validation tools without exposing raw contracts in product UI. */
     private fun renderDiagnostics(left:LinearLayout,right:LinearLayout) {
@@ -322,7 +322,7 @@ class RealRouteActivity:AppCompatActivity() {
         RouteError.UNSUPPORTED_OPTIONS->"현재 경로 서비스가 지원하지 않는 조건이에요"
         RouteError.API,RouteError.INVALID_RESPONSE->"경로 정보를 올바르게 받지 못했어요"
     }
-    private fun label(value:String,size:Int,bold:Boolean=false)=ui.text(value,size,if(bold) ui.accent else ui.ink,bold)
+    private fun label(value:String,size:Int,bold:Boolean=false)=ui.text(value,maxOf(24,size),if(bold) ui.accent else ui.ink,bold)
     private fun button(value:String,primary:Boolean=false,action:()->Unit)=ui.button(value,primary) {act(action)}.apply {isEnabled=!session.busy}
     private fun dp(value:Int)=ui.dp(value)
     companion object {

@@ -1,7 +1,6 @@
 package com.surpride.app.moodinput
 
 import android.content.Intent
-import android.content.pm.ApplicationInfo
 import android.os.*
 import android.text.*
 import android.util.Log
@@ -17,8 +16,6 @@ import com.surpride.app.experience.core.*
 import com.surpride.app.moodinput.core.*
 import com.surpride.app.moodinput.voice.*
 import com.surpride.app.ui.SurprideUi
-import java.text.DateFormat
-import java.util.Date
 import java.util.concurrent.Executors
 import com.surpride.app.experience.core.Companion as DriveCompanion
 
@@ -35,6 +32,9 @@ class MoodInputActivity:AppCompatActivity() {
     private lateinit var status:TextView
     private lateinit var extraction:TextView
     private lateinit var summary:TextView
+    private lateinit var secondarySummary:TextView
+    private lateinit var extractionToggle:Button
+    private var extractionExpanded=false
     private lateinit var hints:TextView
     private var debugDetails:TextView?=null
     private lateinit var applyButton:Button
@@ -109,7 +109,10 @@ class MoodInputActivity:AppCompatActivity() {
         left.addView(label("문장·음성은 저장·외부 전송하지 않습니다.\n기분 분류는 건강 진단이 아닙니다",20,muted))
 
         right.addView(ui.text("02  적용할 조건",36,ink,true))
-        summary=label("",30);right.addView(summary)
+        summary=ui.text("",36,ink,true);right.addView(summary)
+        secondarySummary=label("",26,muted);right.addView(secondarySummary)
+        extractionToggle=button("해석 내용 보기") {extractionExpanded=!extractionExpanded;update()}
+        right.addView(extractionToggle)
         right.addView(extraction)
         right.addView(label("날씨·주차·차량 진입은 미확인입니다",24,muted))
         hints=label("",24,muted).apply {visibility=android.view.View.GONE}
@@ -154,7 +157,7 @@ class MoodInputActivity:AppCompatActivity() {
         }
         corrections.addView(button("처음 조건으로 되돌리기") {choose {draft.initial!!};message="처음 선택한 조건으로 되돌렸어요";update()})
 
-        if(applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE!=0) {
+        if(ui.developerToolsShown) {
             val details=LinearLayout(this).apply {orientation=LinearLayout.VERTICAL;visibility=android.view.View.GONE}
             val toggle=button("개발용 입력 예시·진단"){}
             toggle.setOnClickListener {if(allowed) {details.visibility=if(details.visibility==android.view.View.VISIBLE) android.view.View.GONE else android.view.View.VISIBLE}}
@@ -165,15 +168,15 @@ class MoodInputActivity:AppCompatActivity() {
             details.addView(button("수정 예시 · 두 시간, 혼자") {input.setText("시간은 두 시간으로 바꿔줘. 혼자 갈 거야.")})
             debugDetails=label("",18,muted);details.addView(debugDetails)
         }
-        val footer=LinearLayout(this)
+        val footer=LinearLayout(this).apply {gravity=Gravity.END or Gravity.CENTER_VERTICAL;setPadding(0,dp(16),0,0)}
         root.addView(footer,LinearLayout.LayoutParams(-1,-2))
         applyButton=button("이 조건으로 계속",true) {
             if(validForApply()) {
                 setResult(RESULT_OK,Intent().putExtra(PreferenceInputContract.EXTRA,PreferenceInputContract.encode(draft.preferences)))
                 draft.input="";finish()
             }
-        };footer.addView(applyButton,LinearLayout.LayoutParams(0,-2,1.5f).apply {rightMargin=dp(16)})
-        footer.addView(button("적용하지 않고 닫기") {setResult(RESULT_CANCELED);finish()},LinearLayout.LayoutParams(0,-2,1f))
+        };footer.addView(applyButton,LinearLayout.LayoutParams(-2,-2).apply {rightMargin=dp(16)})
+        footer.addView(button("적용하지 않고 닫기") {setResult(RESULT_CANCELED);finish()},LinearLayout.LayoutParams(-2,-2))
         update()
     }
     override fun onStart() {
@@ -255,9 +258,11 @@ class MoodInputActivity:AppCompatActivity() {
         val result=draft.interpretation;val p=draft.preferences
         extraction.text=MoodInputPresentation.extraction(result)
         extraction.setTextColor(if(result?.canApply==false) ui.error else ink)
-        summary.text=MoodInputPresentation.summary(p)+p.returnByEpochMillis?.let {
-            "\n귀가 희망 ${DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT).format(Date(it))}"
-        }.orEmpty()
+        extraction.visibility=if(result?.canApply==false || result!=null && extractionExpanded) android.view.View.VISIBLE else android.view.View.GONE
+        extractionToggle.visibility=if(result?.canApply==true) android.view.View.VISIBLE else android.view.View.GONE
+        extractionToggle.text=if(extractionExpanded) "해석 내용 접기" else "해석 내용 보기"
+        summary.text=MoodInputPresentation.focusSummary(p)
+        secondarySummary.text=MoodInputPresentation.secondarySummary(p)
         hints.text=SafePreparationPolicy.hints(p).joinToString("\n"){it.label.removeSuffix(".")}+
             "\n날씨·주차·차량 진입·주행 가능 거리는 미확인입니다"
         choices.forEach {choice->
@@ -276,7 +281,7 @@ class MoodInputActivity:AppCompatActivity() {
         }
     }
     private fun hideKeyboard() {input.clearFocus();getSystemService(InputMethodManager::class.java)?.hideSoftInputFromWindow(input.windowToken,0)}
-    private fun label(value:String,size:Int,color:Int=ink)=ui.text(value,size,color).apply {setPadding(0,dp(8),0,dp(8))}
+    private fun label(value:String,size:Int,color:Int=ink)=ui.text(value,maxOf(24,size),color).apply {setPadding(0,dp(8),0,dp(8))}
     private fun button(value:String,primary:Boolean=false,action:()->Unit)=ui.button(value,primary) {if(allowed) action()}.also {actions+=it}
     private fun <T> rows(parent:LinearLayout,values:List<T>,count:Int,title:(T)->String,isSelected:(T)->Boolean,selected:(T)->Unit) {
         values.chunked(count).forEach {chunk->val row=LinearLayout(this);parent.addView(row)

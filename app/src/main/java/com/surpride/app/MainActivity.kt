@@ -58,17 +58,26 @@ class MainActivity : AppCompatActivity() {
             ui.styleButton(this)
             setOnClickListener {
                 if(com.surpride.app.experience.core.ParkedInteractionPolicy.allows(requiresDo)) {
-                    val choices=arrayOf("차량 설정 따르기","밝은 화면","어두운 화면")
+                    val choices=listOf("차량 설정 따르기","밝은 화면","어두운 화면")+
+                        if(diagnosticsEnabled) listOf(if(ui.developerToolsShown) "개발 도구 숨기기" else "개발 도구 표시") else emptyList()
                     androidx.appcompat.app.AlertDialog.Builder(this@MainActivity).setTitle("화면 표시")
-                        .setItems(choices) {_,index->
-                            if(com.surpride.app.experience.core.ParkedInteractionPolicy.allows(requiresDo))
-                                com.surpride.app.ui.SurprideUi.setAppearance(this@MainActivity,listOf(-1,1,2)[index])
+                        .setItems(choices.toTypedArray()) {_,index->
+                            if(com.surpride.app.experience.core.ParkedInteractionPolicy.allows(requiresDo)) {
+                                if(index<3) com.surpride.app.ui.SurprideUi.setAppearance(this@MainActivity,listOf(-1,1,2)[index])
+                                else {
+                                    val show=!ui.developerToolsShown
+                                    val debug=findViewById<android.widget.Button>(R.id.debug_toggle)
+                                    if(!show && diagnosticsVisible) debug.performClick()
+                                    ui.setDeveloperToolsShown(show)
+                                    debug.visibility=if(show) View.VISIBLE else View.GONE
+                                }
+                            }
                         }.show().also(ui::styleDialog)
                 }
             }
         }
         val toggle=findViewById<android.widget.Button>(R.id.debug_toggle)
-        toggle.visibility=if(diagnosticsEnabled) View.VISIBLE else View.GONE
+        toggle.visibility=if(ui.developerToolsShown) View.VISIBLE else View.GONE
         ui.styleButton(toggle)
         toggle.setOnClickListener {
             if(!com.surpride.app.experience.core.ParkedInteractionPolicy.allows(requiresDo)) return@setOnClickListener

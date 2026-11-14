@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -123,7 +124,7 @@ class ExperienceActivity : AppCompatActivity() {
         rail.addView(nav("코스",controller.state.panel==ExperiencePanel.TRIP){showTrip()})
         rail.addView(nav("기분 기록",controller.state.panel==ExperiencePanel.MAP){controller.openMap()})
         rail.addView(Space(this),LinearLayout.LayoutParams(0,1,1f))
-        if(applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE!=0) {
+        if(ui.developerToolsShown) {
             rail.addView(buttonRaw("코스 진단",false) {
                 val score=controller.state.plan?.score
                 showRecord("코스 진단",if(score==null) "아직 체험 코스가 없습니다" else "추천 점수 ${score.total}\n기분 ${score.mood} / 장소 ${score.place} / 동행 ${score.companion}\n날씨·계절·실제 주행 거리 미검증")
@@ -204,7 +205,7 @@ class ExperienceActivity : AppCompatActivity() {
         val s=controller.state;val p=s.preferences
         title("당신에게 맞는 드라이브","${s.setupStep+1} / 3  ·  선택해서 준비하는 나만의 코스")
         content.addView(text("${p.mood.label} · ${timeSummary(p)} · ${p.companion.label} · ${if(p.returnToStart) "왕복" else "편도"}",26,muted))
-        val form=column()
+        val form=column().apply {setPadding(0,0,0,dp(24))}
         content.addView(ScrollView(this).apply {isFillViewport=true;addView(form)},LinearLayout.LayoutParams(-1,0,1f))
         form.addView(button("문장으로 조건 수정",false){openMoodInput()})
         if(s.error!=null) form.addView(text(s.error,18,ui.error))
@@ -237,9 +238,20 @@ class ExperienceActivity : AppCompatActivity() {
                 form.addView(text("주행 가능 거리·날씨·계절 적합성 미확인\nSOC로 거리를 추정하지 않습니다.",24,muted))
             }
         }
-        val footer=row();content.addView(footer)
-        if(s.setupStep>0) footer.addView(button("이전 조건",false){controller.setupStep(s.setupStep-1)},LinearLayout.LayoutParams(0,-2,1f))
-        footer.addView(button(if(s.setupStep==2) "비밀 코스 준비" else "다음 조건",true){if(s.setupStep==2) controller.beginPlanning() else controller.setupStep(s.setupStep+1)},LinearLayout.LayoutParams(0,-2,2f))
+        val footer=row().apply {setPadding(0,dp(16),0,0)};content.addView(footer)
+        if(s.setupStep>0) footer.addView(button("이전 조건",false){controller.setupStep(s.setupStep-1)},LinearLayout.LayoutParams(-2,-2))
+        footer.addView(Space(this),LinearLayout.LayoutParams(0,1,1f))
+        val next=button(if(s.setupStep==2) "비밀 코스 준비" else "다음 조건",true){if(s.setupStep==2) controller.beginPlanning() else controller.setupStep(s.setupStep+1)}
+        footer.addView(next)
+        // Cross the scroll/footer boundary directly instead of consuming another D-pad press to scroll padding.
+        form.touchables.filterIsInstance<Button>().lastOrNull()?.let {last->
+            last.id=View.generateViewId()
+            val boundary=if(last.parent===form) listOf(last) else (last.parent as ViewGroup).touchables.filterIsInstance<Button>()
+            boundary.forEach {button->button.setOnKeyListener {_,key,event->
+                key==android.view.KeyEvent.KEYCODE_DPAD_DOWN && event.action==android.view.KeyEvent.ACTION_DOWN && next.requestFocus()
+            }}
+            next.nextFocusUpId=last.id
+        }
     }
     private fun ready() {
         val view=controller.presentation()
@@ -296,7 +308,9 @@ class ExperienceActivity : AppCompatActivity() {
         body.addView(text(controller.presentation().reason,28,ink).apply {setPadding(0,dp(24),0,dp(32))})
         if(s.phase==TripPhase.REVEALED) {
             body.addView(text("이 장면은 어땠나요",36,ink,true))
-            choices(body,(1..5).toList(),5,{"$it 점"},{it==s.rating}){v -> controller.rate(v)}
+            val ratings=row();body.addView(ratings)
+            (1..5).forEach {v->ratings.addView(ui.ratingButton(v,v==s.rating){act {controller.rate(v)}}.apply {tag=nextControlId++},
+                LinearLayout.LayoutParams(0,-2,1f).apply {setMargins(dp(8),dp(8),dp(8),dp(8))})}
             body.addView(button(if(s.rating==null) "평가를 고르면 저장할 수 있어요" else "평가와 체험 기록 저장",true){controller.complete()}.apply {isEnabled=s.rating!=null})
         } else {
             body.addView(text("${s.rating} / 5 · ${if(s.arrived) "모의 도착 후 기록" else "미리 공개 후 기록"}",28,muted))
