@@ -1,0 +1,174 @@
+﻿{
+    "checked_on":  "2026-11-15",
+    "status":  "READY_FOR_PARKED_DEMO",
+    "github_uploaded":  false,
+    "git_head":  "ed667693d829150d3791c1b3547ae15ae6ec7c7d",
+    "uncommitted_source_changes":  true,
+    "team":  "SURPRIDE",
+    "root_cause":  "R8 output moved CollectionsKt__MutableCollectionsJVMKt to default-package kg while its superclass CollectionsKt__IterablesKt remained non-public kotlin.collections.h. ART raised IllegalAccessError in ProcessLifecycleInitializer.dependencies.",
+    "retrace":  "PASS; retained original APK, full stack and matching mapping privately",
+    "fix":  {
+                "file":  "app/build.gradle.kts",
+                "optimization_enabled":  true,
+                "optimized_packages":  [
+                                           "androidx.**",
+                                           "kotlinx.**"
+                                       ],
+                "excluded_package":  "kotlin.**",
+                "nature":  "Scoped mitigation; R8 compiler itself and its exact faulty internal pass were not fixed.",
+                "product_logic_or_sdk_changed":  false
+            },
+    "comparison":  [
+                       {
+                           "case":  "A_original_ON",
+                           "classes":  8512,
+                           "access_violations":  1,
+                           "startup":  "FAIL",
+                           "signature":  "original Release"
+                       },
+                       {
+                           "case":  "B_optimization_OFF",
+                           "classes":  12990,
+                           "access_violations":  0,
+                           "startup":  "PASS",
+                           "signature":  "diagnostic only"
+                       },
+                       {
+                           "case":  "C_ON_without_kotlin",
+                           "classes":  9999,
+                           "access_violations":  0,
+                           "startup":  "PASS",
+                           "full_demo":  "PASS",
+                           "signature":  "diagnostic only"
+                       },
+                       {
+                           "case":  "FINAL_user_resigned",
+                           "classes":  9999,
+                           "access_violations":  0,
+                           "startup":  "PASS",
+                           "full_demo":  "PASS",
+                           "signature":  "same original Release certificate"
+                       }
+                   ],
+    "apk":  {
+                "path":  "apk/SURPRIDE_서프라이드_release.apk",
+                "source":  "app/release/app-release.apk",
+                "bytes":  23325144,
+                "sha256":  "0728796d2523525e13f49308e40a7a4545ff67c8c223d6eb1117a3ec7cdf6f18",
+                "package":  "com.surpride.app",
+                "version_code":  1,
+                "version_name":  "1.0",
+                "min_sdk":  28,
+                "target_sdk":  37,
+                "automotive_required":  true,
+                "debuggable":  false,
+                "signature_v2":  true,
+                "original_release_certificate_match":  true,
+                "zipalign_P16_4":  "PASS",
+                "source_installed_submission_hashes_equal":  true
+            },
+    "runtime":  {
+                    "startup":  true,
+                    "conditions":  true,
+                    "recommendation":  true,
+                    "simulated_drive":  true,
+                    "arrival":  true,
+                    "reveal":  true,
+                    "rating_saved":  true,
+                    "restart":  true,
+                    "history_restored":  true,
+                    "developer_diagnostics_hidden":  true,
+                    "parked_ux_maintained":  true,
+                    "health":  {
+                                   "app_fatal_after_start":  0,
+                                   "app_anr_after_start":  0,
+                                   "process_running":  true
+                               },
+                    "scenario":  "ADVENTURE/CAMPING/NEARBY/180min/solo/roundtrip; synthetic demo-camp; rating4",
+                    "device":  "Pleos Connect2.1.0/API34/user10/emulator-5560",
+                    "signing":  "User original Release certificate; diagnostic key not used for this APK"
+                },
+    "tests":  {
+                  "jvm":  {
+                              "app":  {
+                                          "tests":  234,
+                                          "failures":  0,
+                                          "errors":  0,
+                                          "skipped":  0
+                                      },
+                              "nav-host-poc":  {
+                                                   "tests":  309,
+                                                   "failures":  0,
+                                                   "errors":  0,
+                                                   "skipped":  0
+                                               }
+                          },
+                  "backend_passed":  136,
+                  "backend_existing_warnings":  1,
+                  "jvm_backend_total":  679,
+                  "native":  {
+                                 "unique_passed":  42,
+                                 "completion_events":  43,
+                                 "duplicate_repeats":  1,
+                                 "failures":  0,
+                                 "ignored":  0,
+                                 "first_run_system_aborted":  true,
+                                 "first_run_completed":  13,
+                                 "retry_completed":  30,
+                                 "scope":  "Debug native regression on isolated diagnostic AVD; all 42 unique tests covered across interrupted and resumed runs."
+                             }
+              },
+    "build":  "PASS",
+    "lint":  {
+                 "errors":  0,
+                 "warnings":  49
+             },
+    "security":  {
+                     "zip_entries":  795,
+                     "known_credentials_checked":  1,
+                     "known_secret_or_pattern_matches":  0,
+                     "git_author_email_matches":  0,
+                     "embedded_key_files":  0,
+                     "scope":  "Known configured credential literals (UTF-8/UTF-16LE), representative key patterns and Git author email literals; not proof of absence of all unknown PII or secrets.",
+                     "private_release_key_accessed_by_agent":  false
+                 },
+    "video":  {
+                  "path":  "SURPRIDE_서프라이드_demo_110s.mp4",
+                  "bytes":  3387657,
+                  "sha256":  "cb7a072b307ccdf85eb125e6b6711769faed22615a0037d2bcab098ce66a85cb",
+                  "duration_seconds":  110,
+                  "resolution":  [
+                                     1920,
+                                     1080
+                                 ],
+                  "bottom_captions":  false,
+                  "original_preserved":  true
+              },
+    "screenshots":  {
+                        "start":  "release-hotfix-20261115/start.png",
+                        "restored_history":  "release-hotfix-20261115/restored-history.png",
+                        "treatment":  "App-only crop [853,90,2535,1300] of actual 2560x1440 screenshots; no recoloring or compositing; OEM location area excluded."
+                    },
+    "limits":  {
+                   "release_live_proxy":  "DISABLED",
+                   "host_active":  "BLOCKED",
+                   "destination_privacy":  "PARTIAL",
+                   "stt":  "PARTIAL",
+                   "verified_scenic_waypoints":  0,
+                   "real_vehicle":  "UNVERIFIED",
+                   "commercial_deployment":  "UNVERIFIED",
+                   "native_16kb_elf_compatibility":  "UNVERIFIED; existing JNA lint warning"
+               },
+    "review":  "Fresh read-only review: no actionable finding in scoped hotfix and artifact checker.",
+    "preservation":  {
+                         "original_user_avd_not_started":  true,
+                         "existing_apps_uninstalled":  false,
+                         "existing_data_cleared":  false,
+                         "previous_failed_apk_and_mapping_backed_up":  true,
+                         "diagnostic_preferences_restored_by_hash":  true,
+                         "committed_or_pushed":  false,
+                         "protected_source_media_files_unchanged":  797,
+                         "final_trial_stopped_normally":  true
+                     },
+    "git_would_preserve_apk_bytes":  true
+}

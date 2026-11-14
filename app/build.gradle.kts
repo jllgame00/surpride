@@ -23,7 +23,8 @@ android {
         release {
             optimization {
                 enable = true
-                packageScope = setOf("androidx.**", "kotlin.**", "kotlinx.**")
+                // shortcut: AGP 9.5.1 breaks Kotlin facade access; restore after a verified R8 fix.
+                packageScope = setOf("androidx.**", "kotlinx.**")
             }
         }
     }
