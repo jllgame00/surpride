@@ -4,15 +4,15 @@
 
 Android Automotive / Pleos Connect용 정차 프로토타입입니다. 장소 검색 대신 **기분·시간·풍경 선호·동행 조건**에서 시작하고, **목적지와 도로 경로를 함께 평가**합니다. 왕복 시간 조건, 도착 후 목적지 공개·평가, 다음 추천에 반영하는 기록으로 짧은 드라이브 경험을 연결합니다. 목적지 공개·평가는 현재 DEMO와 개별 LIVE 결과 화면 검증 범위이며, 실제 주행 전체 흐름의 완성을 뜻하지 않습니다.
 
-심사 자료: [서명 Release APK](apk/SURPRIDE_서프라이드_release.apk) · [최신 무자막 110초 소개 영상](SURPRIDE_서프라이드_demo_110s.mp4) · [실제 경로 GPS Replay](docs/submission/2026-hmg/assets/SURPRIDE_live_route_replay.mp4). **정차 DEMO용 Release APK는 서명·설치·전체 체험·기록 복원 검증 완료입니다.**
+심사 자료: [서명 Release APK](apk/압구정현대아파트_서프라이드_release.apk) · [최신 무자막 110초 소개 영상](압구정현대아파트_서프라이드_demo_110s.mp4) · [실제 경로 GPS Replay](docs/submission/2026-hmg/assets/SURPRIDE_live_route_replay.mp4). **정차 DEMO용 Release APK는 서명·설치·전체 체험·기록 복원 검증 완료입니다.**
 
 ## 최상위 제출 파일
 
-| 항목 | 위치·상태 |
-|---|---|
-| 최신 무자막 영상 | [SURPRIDE_서프라이드_demo_110s.mp4](SURPRIDE_서프라이드_demo_110s.mp4) — 루트에 배치 완료, 아직 미커밋·미업로드 |
-| APK 제출 폴더 | [apk/](apk/) — 검증된 signed Release APK와 기존 `.gitkeep` 보존 |
-| 최종 APK | [apk/SURPRIDE_서프라이드_release.apk](apk/SURPRIDE_서프라이드_release.apk) — 사용자 확인 최종 팀명 **SURPRIDE**, 정차 DEMO 실행 검증 완료 |
+| 항목             | 위치·상태                                                                                                                                                   |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 최신 무자막 영상 | [압구정현대아파트\_서프라이드\_demo_110s.mp4](압구정현대아파트_서프라이드_demo_110s.mp4) — 루트에 배치 완료, 아직 미커밋·미업로드                           |
+| APK 제출 폴더    | [apk/](apk/) — 검증된 signed Release APK와 기존 `.gitkeep` 보존                                                                                             |
+| 최종 APK         | [apk/압구정현대아파트\_서프라이드\_release.apk](apk/압구정현대아파트_서프라이드_release.apk) — 사용자 확인 최종 팀명 **SURPRIDE**, 정차 DEMO 실행 검증 완료 |
 
 루트 영상은 기존 assets 무자막 원본을 재인코딩 없이 복사했습니다. **110.000초 / 1920×1080 / H.264 / 30fps / 3,300프레임 / 무음 / 3,387,657 bytes (약 3.23 MiB)**입니다. 자막 스트림0개, 전체 디코딩 오류0개, 모든 프레임의 하단 자막 영역이 비어 있음을 재확인했습니다. 앱 내부 글자·장면 제목·DEBUG PREVIEW와 검증 제한 표시는 유지한 **하단 설명 자막 없는 버전**입니다. 자막 포함 v2로 대체하지 않았습니다.
 
@@ -26,14 +26,14 @@ GitHub 반영 후 위 영상 파일 페이지에서 **Download raw**로 내려�
 
 ## 현재 실행 범위
 
-| 기능 | 구현·확인 범위 | 실행 조건·남은 검증 |
-|---|---|---|
-| 기분 기반 추천·DEMO | 기분/시간/취향/동행 설정, 가상 코스 추천, 모의 도착·공개·평가 | 메인 Release/Debug 단독, 지원되는 정차 환경. 제출 Release의 저장·재시작·기록 복원 검증 완료. 실제 장소 방문 아님 |
-| 자연어 입력 | 한국어 문장에서 규칙 기반으로 조건 추출·검토·부분 수정 | 자유 대화형 LLM 아님. **STT PARTIAL**: SDK·제어 연결은 구현했으나 실제 음성의 최종 인식 결과 수신 검증은 미완료 |
-| 실제 Kakao 경로·LIVE 추천 | 개발용 공개 출발지·서울 후보 5곳, Kakao Directions 프록시 연동, 경로·목적지 통합 평가, LIVE 평가 기반 최근 후보 제외 | Debug + 로컬 프록시·키·단기 인증 필요. API 오류를 MOCK 성공으로 대체하지 않음 |
-| OSM 지도·GPS Replay | 실제 Kakao geometry 위 GPS matching·거리/회전 안내·카메라 추적을 정차 에뮬레이터에서 촬영 | 별도 PoC Debug Preview. 공식 Host 활성 안내·실차 주행과 구분 |
-| 내비게이션 PoC | 재탐색·TTS·복귀·복원·ownership 코드 및 계약 회귀 | 별도 APK/공식 Host 필요. **HOST_ACTIVE BLOCKED**, 현재 ACTIVE 시연 불가 |
-| 기록 | DEMO 체험 기록과 LIVE 평가 기록을 분리해 목록·상세 표시 | 실제 지리 기반 감정 지도·실도로 방문 인증은 아님 |
+| 기능                      | 구현·확인 범위                                                                                                       | 실행 조건·남은 검증                                                                                              |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| 기분 기반 추천·DEMO       | 기분/시간/취향/동행 설정, 가상 코스 추천, 모의 도착·공개·평가                                                        | 메인 Release/Debug 단독, 지원되는 정차 환경. 제출 Release의 저장·재시작·기록 복원 검증 완료. 실제 장소 방문 아님 |
+| 자연어 입력               | 한국어 문장에서 규칙 기반으로 조건 추출·검토·부분 수정                                                               | 자유 대화형 LLM 아님. **STT PARTIAL**: SDK·제어 연결은 구현했으나 실제 음성의 최종 인식 결과 수신 검증은 미완료  |
+| 실제 Kakao 경로·LIVE 추천 | 개발용 공개 출발지·서울 후보 5곳, Kakao Directions 프록시 연동, 경로·목적지 통합 평가, LIVE 평가 기반 최근 후보 제외 | Debug + 로컬 프록시·키·단기 인증 필요. API 오류를 MOCK 성공으로 대체하지 않음                                    |
+| OSM 지도·GPS Replay       | 실제 Kakao geometry 위 GPS matching·거리/회전 안내·카메라 추적을 정차 에뮬레이터에서 촬영                            | 별도 PoC Debug Preview. 공식 Host 활성 안내·실차 주행과 구분                                                     |
+| 내비게이션 PoC            | 재탐색·TTS·복귀·복원·ownership 코드 및 계약 회귀                                                                     | 별도 APK/공식 Host 필요. **HOST_ACTIVE BLOCKED**, 현재 ACTIVE 시연 불가                                          |
+| 기록                      | DEMO 체험 기록과 LIVE 평가 기록을 분리해 목록·상세 표시                                                              | 실제 지리 기반 감정 지도·실도로 방문 인증은 아님                                                                 |
 
 **Phase 7B/7C 최신 UI**는 무채색 밝은/어두운 화면, 큰 글자와 명확한 주 행동, 단계별 조건 선택, 자연어 핵심 요약, 체크 상태가 구분되는 5점 평가, 기록 목록·상세를 적용했습니다. 조건 하단 버튼 간격·D-pad 포커스·확대 글자·CarIME 접근성을 보완했습니다. 개발 진단은 **Debug에서만 ‘화면 표시 → 개발 도구 표시’**로 켤 수 있으며 제출 Release에서는 표시되지 않습니다. 지도에는 도로·경로의 의미색과 OSM 저작권 표기를 유지합니다.
 
@@ -98,28 +98,28 @@ adb -s emulator-5556 shell am start --user 10 -W -n com.surpride.app/.MainActivi
 
 위 serial은 예시입니다. 기기가 없으면 멈추세요. 다른 기기 선택·데이터 초기화·서명 충돌을 해결하려는 기존 앱 삭제를 하지 않습니다. UX 제한 상태가 미확인되면 조작이 차단될 수 있습니다.
 
-| 시연 모드 | 준비 | 확인할 흐름 |
-|---|---|---|
-| DEMO | 메인 Debug APK, 정차 Pleos AVD. 서버·API 키 불필요 | 시작 → 기분·조건 입력 → 가상 코스 준비 → 모의 도착 → 목적지 공개·평가 → 기록 |
-| LIVE 추천·경로 평가 | 위 설치 + 앞 절의 live 서버·프로비저닝. 개발 도구 표시 켜기 | ‘실제 장소·경로 검증’ → 검증 조건/시간 설정 → ‘서버 프록시로 경로 평가’. LIVE_API/MOCK 출처 확인. 공개 출발지·진입/주차 UNKNOWN 표기 유지 |
-| GPS Replay Preview | 별도 PoC Debug APK + 신선한 공개 시험 경로 + 명시한 에뮬레이터 GPS 입력 | 아래 녹화 자료로 지도·경로·거리·회전 진행 확인. 메인 DEMO에서 자동 시작하지 않음 |
+| 시연 모드           | 준비                                                                    | 확인할 흐름                                                                                                                               |
+| ------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| DEMO                | 메인 Debug APK, 정차 Pleos AVD. 서버·API 키 불필요                      | 시작 → 기분·조건 입력 → 가상 코스 준비 → 모의 도착 → 목적지 공개·평가 → 기록                                                              |
+| LIVE 추천·경로 평가 | 위 설치 + 앞 절의 live 서버·프로비저닝. 개발 도구 표시 켜기             | ‘실제 장소·경로 검증’ → 검증 조건/시간 설정 → ‘서버 프록시로 경로 평가’. LIVE_API/MOCK 출처 확인. 공개 출발지·진입/주차 UNKNOWN 표기 유지 |
+| GPS Replay Preview  | 별도 PoC Debug APK + 신선한 공개 시험 경로 + 명시한 에뮬레이터 GPS 입력 | 아래 녹화 자료로 지도·경로·거리·회전 진행 확인. 메인 DEMO에서 자동 시작하지 않음                                                          |
 
 GPS Replay 개발 도구는 `backend.nav_poc --request-public-route`로 공개 시험 경로를 준비하고 `backend.active_replay`로 공식 에뮬레이터 GPS를 입력합니다. 각 명령에 `--serial`을 지정해야 하며, 실제 외부 API 호출·private 경로 파일 변경·GPS 위치 변경을 수행합니다. Preview 진입점은 Debug 전용 `com.surpride.navhostpoc/.ReplayPreviewActivity`이고 화면의 **‘Preview 종료’**로 종료합니다. 이 도구 이름의 `active_replay`는 Host 활성 안내 성공을 의미하지 않습니다. 대상·기존 데이터·GPS 복원 절차를 확인한 별도 개발 시험으로 실행하며, 재현 조건과 종료·복원 증거는 [GPS Replay 보고서](docs/submission/2026-hmg/assets/SURPRIDE_live_route_replay_REPORT.ko.txt)를 참고하세요. 공식 Host를 사용하는 LIVE 활성 지도 안내는 **현재 ACTIVE 시연 금지**입니다.
 
 ## Release APK 다운로드 및 실행
 
-**정차 DEMO용 서명 Release APK 준비 완료 — READY_FOR_PARKED_DEMO.** [SURPRIDE_서프라이드_release.apk 다운로드](apk/SURPRIDE_서프라이드_release.apk). 사용자가 수정된 코드에 **기존과 동일한 Release Keystore로 재서명**했고, 이 파일을 실제 Pleos에 설치해 전체 DEMO를 검증했습니다. 원본·설치본·제출 사본의 SHA-256이 모두 같습니다. GitHub 업로드·commit·push는 아직 수행하지 않았습니다.
+**정차 DEMO용 서명 Release APK 준비 완료 — READY_FOR_PARKED_DEMO.** [SURPRIDE\_서프라이드\_release.apk 다운로드](apk/SURPRIDE_서프라이드_release.apk). 사용자가 수정된 코드에 **기존과 동일한 Release Keystore로 재서명**했고, 이 파일을 실제 Pleos에 설치해 전체 DEMO를 검증했습니다. 원본·설치본·제출 사본의 SHA-256이 모두 같습니다. GitHub 업로드·commit·push는 아직 수행하지 않았습니다.
 
-| 항목 | 확인 결과 |
-|---|---|
-| 파일 | `apk/SURPRIDE_서프라이드_release.apk`, **23,325,144 bytes (약22.24 MiB)** |
-| 패키지·버전 | `com.surpride.app`, versionCode1/versionName1.0, minSdk28/target37, Automotive 필수, x86_64 포함 |
-| 서명·정렬 | `apksigner verify` exit0, **v2 PASS**, 기존 Release 인증서 일치·Debug 인증서 아님, `zipalign -c -P 16 4` PASS |
-| 실제 시험 | 별도 `SURPRIDE_Release_Verification` AVD, **emulator-5560 / Pleos Connect2.1.0 / API34 / user10**, 원본 화면2560×1440 |
-| 전체 DEMO | 시작·무채색 UI·기분/장소/시간 선택·추천·가상 진행·모의 도착·공개·4점 저장·재시작·기록 복원 **PASS** |
-| 진단·안정성 | 실제 Release의 개발 진단 메뉴 비노출 확인. 검증 구간의 앱 fatal crash0·ANR0, 재시작 후 프로세스 정상 유지 |
-| 지원 범위 | 서버·Kakao 키 없이 정차 DEMO, 규칙 기반 텍스트 조건 정리, DEMO 평가·기록. 실제 장소 방문 인증은 아님 |
-| 기존 제한 | **Release LIVE 프록시 비활성 / HOST_ACTIVE BLOCKED / STT PARTIAL / DESTINATION_PRIVACY PARTIAL** 유지. 실차·상용 배포는 미검증 |
+| 항목        | 확인 결과                                                                                                                      |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| 파일        | `apk/SURPRIDE_서프라이드_release.apk`, **23,325,144 bytes (약22.24 MiB)**                                                      |
+| 패키지·버전 | `com.surpride.app`, versionCode1/versionName1.0, minSdk28/target37, Automotive 필수, x86_64 포함                               |
+| 서명·정렬   | `apksigner verify` exit0, **v2 PASS**, 기존 Release 인증서 일치·Debug 인증서 아님, `zipalign -c -P 16 4` PASS                  |
+| 실제 시험   | 별도 `SURPRIDE_Release_Verification` AVD, **emulator-5560 / Pleos Connect2.1.0 / API34 / user10**, 원본 화면2560×1440          |
+| 전체 DEMO   | 시작·무채색 UI·기분/장소/시간 선택·추천·가상 진행·모의 도착·공개·4점 저장·재시작·기록 복원 **PASS**                            |
+| 진단·안정성 | 실제 Release의 개발 진단 메뉴 비노출 확인. 검증 구간의 앱 fatal crash0·ANR0, 재시작 후 프로세스 정상 유지                      |
+| 지원 범위   | 서버·Kakao 키 없이 정차 DEMO, 규칙 기반 텍스트 조건 정리, DEMO 평가·기록. 실제 장소 방문 인증은 아님                           |
+| 기존 제한   | **Release LIVE 프록시 비활성 / HOST_ACTIVE BLOCKED / STT PARTIAL / DESTINATION_PRIVACY PARTIAL** 유지. 실차·상용 배포는 미검증 |
 
 ```text
 SHA-256  0728796d2523525e13f49308e40a7a4545ff67c8c223d6eb1117a3ec7cdf6f18
@@ -141,12 +141,12 @@ adb -s emulator-5560 shell am start --user 10 -W -n com.surpride.app/.MainActivi
 
 수정 전 signed Release의 `IllegalAccessError`를 재현하고 동일 mapping으로 retrace했습니다. 최적화된 DEX에서 기본 패키지의 `kg`가 비공개 `kotlin.collections.h`를 상속해 `ProcessLifecycleInitializer.dependencies()` 초기화가 실패했습니다. Kotlin facade를 최적화 범위에서 제외한 최소 수정으로 해결했습니다. **AndroidX·kotlinx 최적화는 유지**하며 앱의 추천·저장·안전 로직, SDK 버전·권한은 변경하지 않았습니다.
 
-| 비교 | DEX 접근 위반 | 실제 실행 |
-|---|---|---|
-| 기존 최적화 ON | 1건 / 8,512클래스 | 시작 실패 재현 |
-| 진단 최적화 OFF | 0건 / 12,990클래스 | 시작·정차 입력 정상 |
-| ON + Kotlin만 제외 | 0건 / 9,999클래스 | 진단 Release 전체 DEMO 정상 |
-| 사용자 동일 키 재서명본 | 0건 / 9,999클래스 | 실제 설치·전체 DEMO·재시작·기록 복원 정상 |
+| 비교                    | DEX 접근 위반      | 실제 실행                                 |
+| ----------------------- | ------------------ | ----------------------------------------- |
+| 기존 최적화 ON          | 1건 / 8,512클래스  | 시작 실패 재현                            |
+| 진단 최적화 OFF         | 0건 / 12,990클래스 | 시작·정차 입력 정상                       |
+| ON + Kotlin만 제외      | 0건 / 9,999클래스  | 진단 Release 전체 DEMO 정상               |
+| 사용자 동일 키 재서명본 | 0건 / 9,999클래스  | 실제 설치·전체 DEMO·재시작·기록 복원 정상 |
 
 이는 확인된 컴파일 결과를 피하는 **범위를 좁힌 완화책**입니다. R8 자체 또는 정확한 내부 최적화 패스를 수정했다고 주장하지 않습니다. `scripts/check-release-dex-access.py`는 실제 APK의 접근 불가능한 superclass를 검사하며, 기존 실패 APK를 거부하고 수정 APK를 통과시키는 회귀를 확인했습니다.
 
@@ -160,18 +160,18 @@ Native 구성은 기존 의존성 그대로입니다. JNA5.13.0의 `x86_64/libjn
 
 아래 수치는 **단계별 증거**입니다. 이번 hotfix에서는 JVM 전체를 강제 재실행했고, backend·Android 회귀와 실제 최종 서명 APK의 전체 DEMO를 검증했습니다. 진단용 서명과 최종 Release 서명을 구분합니다.
 
-| 근거 | 확인된 결과 | 해석 범위 |
-|---|---|---|
-| 2026-11-15 hotfix 자동 검사 | 앱 JVM234 + PoC JVM309 + backend136 = **679 PASS**, 실패·오류·skip0. Lint 오류0/경고49 | 최적화 범위 수정 후 새로 실행. DEX 회귀는 기존 실패본 거부·수정본 통과 확인 |
-| 2026-11-15 Android 회귀 | **고유42 PASS**, 완료43회·중복1회, 실패·무시0. 첫 실행은13개 뒤 가상장치 종료로 중단, 복구 후 남은 클래스30개 통과 | 격리 AVD의 Debug 계측 검사. 한 번의 전체42 실행이 끝났다고 표시하지 않음. 재시도 전 설정 파일은 해시 일치 복원 |
-| 2026-11-15 최종 signed Release | 동일 Release 인증서·v2·정렬·실제 설치·전체 DEMO·저장·재시작·복원 PASS, 검증 구간 앱 crash0/ANR0 | 제출 파일과 실제 설치본의 SHA-256 일치. 실차/활성 Host 검증과 구분 |
-| 2026-11-15 수정 전 서명 APK | v2 서명·user10 설치 PASS였으나 시작 시 IllegalAccessError | 수정 전 실패 이력 보존. 현재 제출 APK와 다른 파일 |
-| 2026-11-14 메인 Release 준비 | Release 조립·Lint 성공(오류0/경고49), Debug JVM **234 PASS**, ZIP 정렬 PASS, 서명 FAIL | unsigned 산출물의 정적 검증. signed Release 설치·DEMO 실행은 UNVERIFIED |
-| Phase 7C UI 검증 | 앱 JVM **234** + PoC JVM **308** + backend **136** = **678 PASS** | 해당 단계 전체 JVM/서버 검사. 과거 B6의 675를 대체하는 UI 단계 기록 |
-| Phase 7C 에뮬레이터 계측 | 메인 **42** + PoC **3** = 고유 **45 PASS** | 기본 환경 검사. 확대 환경은 각각17개, 합계 **34회 반복**으로 고유 수에 더하지 않음 |
-| Phase 7C 기타 | 빌드 스크립트 **4검사 그룹 PASS**, Debug 제품·테스트 APK 빌드/설치 해시 확인 | 서명 Release 실행·실차 검증을 뜻하지 않음 |
-| 2026-11-13 GPS Replay | backend replay/guidance/serial **55 PASS**, Preview·지도·추적·안내 **83 PASS**, PoC Debug 빌드 성공 | 관련 검사 부분 실행. 위 전체 수에 합산하지 않음 |
-| 110초 v2 영상 | 자막 포함판: 자막16개·장면 출처 대조. 루트 무자막판: 110.000초/3,300프레임, 전체 디코딩 오류0, 자막 스트림0·하단 자막 없음·원본과 SHA-256 일치 재확인 | 영상 제작/파일 검증이며 제품 E2E 검사 수에 포함하지 않음 |
+| 근거                           | 확인된 결과                                                                                                                                           | 해석 범위                                                                                                      |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| 2026-11-15 hotfix 자동 검사    | 앱 JVM234 + PoC JVM309 + backend136 = **679 PASS**, 실패·오류·skip0. Lint 오류0/경고49                                                                | 최적화 범위 수정 후 새로 실행. DEX 회귀는 기존 실패본 거부·수정본 통과 확인                                    |
+| 2026-11-15 Android 회귀        | **고유42 PASS**, 완료43회·중복1회, 실패·무시0. 첫 실행은13개 뒤 가상장치 종료로 중단, 복구 후 남은 클래스30개 통과                                    | 격리 AVD의 Debug 계측 검사. 한 번의 전체42 실행이 끝났다고 표시하지 않음. 재시도 전 설정 파일은 해시 일치 복원 |
+| 2026-11-15 최종 signed Release | 동일 Release 인증서·v2·정렬·실제 설치·전체 DEMO·저장·재시작·복원 PASS, 검증 구간 앱 crash0/ANR0                                                       | 제출 파일과 실제 설치본의 SHA-256 일치. 실차/활성 Host 검증과 구분                                             |
+| 2026-11-15 수정 전 서명 APK    | v2 서명·user10 설치 PASS였으나 시작 시 IllegalAccessError                                                                                             | 수정 전 실패 이력 보존. 현재 제출 APK와 다른 파일                                                              |
+| 2026-11-14 메인 Release 준비   | Release 조립·Lint 성공(오류0/경고49), Debug JVM **234 PASS**, ZIP 정렬 PASS, 서명 FAIL                                                                | unsigned 산출물의 정적 검증. signed Release 설치·DEMO 실행은 UNVERIFIED                                        |
+| Phase 7C UI 검증               | 앱 JVM **234** + PoC JVM **308** + backend **136** = **678 PASS**                                                                                     | 해당 단계 전체 JVM/서버 검사. 과거 B6의 675를 대체하는 UI 단계 기록                                            |
+| Phase 7C 에뮬레이터 계측       | 메인 **42** + PoC **3** = 고유 **45 PASS**                                                                                                            | 기본 환경 검사. 확대 환경은 각각17개, 합계 **34회 반복**으로 고유 수에 더하지 않음                             |
+| Phase 7C 기타                  | 빌드 스크립트 **4검사 그룹 PASS**, Debug 제품·테스트 APK 빌드/설치 해시 확인                                                                          | 서명 Release 실행·실차 검증을 뜻하지 않음                                                                      |
+| 2026-11-13 GPS Replay          | backend replay/guidance/serial **55 PASS**, Preview·지도·추적·안내 **83 PASS**, PoC Debug 빌드 성공                                                   | 관련 검사 부분 실행. 위 전체 수에 합산하지 않음                                                                |
+| 110초 v2 영상                  | 자막 포함판: 자막16개·장면 출처 대조. 루트 무자막판: 110.000초/3,300프레임, 전체 디코딩 오류0, 자막 스트림0·하단 자막 없음·원본과 SHA-256 일치 재확인 | 영상 제작/파일 검증이며 제품 E2E 검사 수에 포함하지 않음                                                       |
 
 Phase 7C 집계 출처는 로컬 `docs/phase7c/FINAL_UI_POLISH.md`와 `docs/phase7c/evidence/validation-summary.json`입니다. `docs/phase*/`는 현재 Git 제외 대상이므로 GitHub에서 이 원본을 열람할 수 있다고 가정하지 않습니다. GPS Replay와 v2의 공개 예정 근거는 아래 보고서·출처 원장에 있습니다. **전체 목록706을 최신 코드로 모두 통과했다는 표현은 사용하지 않습니다.**
 
@@ -190,12 +190,12 @@ Phase 7C 집계 출처는 로컬 `docs/phase7c/FINAL_UI_POLISH.md`와 `docs/phas
 
 ## GitHub 업로드 준비 상태
 
-| 구분 | 파일·상태 |
-|---|---|
-| 이번에 정리한 업로드 대상 | `apk/SURPRIDE_서프라이드_release.apk`, 루트 영상, `README.md`, `.gitignore`, `app/build.gradle.kts`, `scripts/check-release-dex-access.py`, 최신 hotfix 보고서·앱 영역 캡처. 아직 stage·commit·push하지 않음 |
-| 추가 선별 반영 필요 | 위 링크의 자막 포함 v2·SRT·제작 보고서·GPS Replay·출처 원장은 현재 로컬 미추적 자료. README만 업로드하면 해당 GitHub 링크를 열 수 없음 |
-| 로컬 보존 전용 | assets의 동일 무자막 원본, `app/release/`의 서명 APK·mapping·메타데이터, `.gradle/` 제작·시험 AVD·검사 자료, `docs/phase*/`, 빌드 산출물·환경파일·서명키. Git 제외 유지 |
-| APK | 실제 검증한 `apk/SURPRIDE_서프라이드_release.apk` 한 파일만 `.gitignore` 예외로 추적 가능. 원본·빌드 출력·진단 APK·서명키는 제외 유지 |
+| 구분                      | 파일·상태                                                                                                                                                                                                            |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 이번에 정리한 업로드 대상 | `apk/압구정현대아파트_서프라이드_release.apk`, 루트 영상, `README.md`, `.gitignore`, `app/build.gradle.kts`, `scripts/check-release-dex-access.py`, 최신 hotfix 보고서·앱 영역 캡처. 아직 stage·commit·push하지 않음 |
+| 추가 선별 반영 필요       | 위 링크의 자막 포함 v2·SRT·제작 보고서·GPS Replay·출처 원장은 현재 로컬 미추적 자료. README만 업로드하면 해당 GitHub 링크를 열 수 없음                                                                               |
+| 로컬 보존 전용            | assets의 동일 무자막 원본, `app/release/`의 서명 APK·mapping·메타데이터, `.gradle/` 제작·시험 AVD·검사 자료, `docs/phase*/`, 빌드 산출물·환경파일·서명키. Git 제외 유지                                              |
+| APK                       | 실제 검증한 `apk/압구정현대아파트_서프라이드_release.apk` 한 파일만 `.gitignore` 예외로 추적 가능. 원본·빌드 출력·진단 APK·서명키는 제외 유지                                                                        |
 
 Git LFS 도구는 설치되어 있으나 현재 `.gitattributes`의 LFS 규칙과 LFS 추적 파일은 없습니다. 루트 영상은 약3.23 MiB이므로 일반 Git/웹 업로드 용량 범위에 들어 LFS가 필요하지 않습니다. GitHub는 웹 업로드 **25 MiB**, 일반 Git 개별 파일 **100 MiB** 제한을 두고, **50 MiB 초과**에는 경고합니다. [GitHub 공식 용량 안내](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github).
 
